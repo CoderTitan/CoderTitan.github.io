@@ -193,6 +193,7 @@ date: 2018-05-10 14:14:02
 - [URLTeam](https://www.urlteam.org/)
 - [shareditor](http://www.shareditor.com/)
 - [reuixiy](https://reuixiy.github.io/)
+- [前端知识博客](http://blog.poetries.top/categories/)
 - [美团技术团队博客](https://tech.meituan.com/)
 - [一个不错的博客](https://blog.ibireme.com/)
 
