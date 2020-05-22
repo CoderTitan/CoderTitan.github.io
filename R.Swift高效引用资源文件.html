@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+  <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "a85a9be2"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Swift,R.Swift,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="在iOS中当我们引用一张图片的时候, 我们需要创建一个UIImage对象去引用图片 当我们需要解析json或者plist文件的时候, 通常以Bundle.main的方式去解析  12let oldImage = UIImage(named: &quot;yellow-image&quot;)let jsonData = Bundle.main.path(forResource: &quot;menuList&quot;, ofType">
+<meta name="keywords" content="Swift,R.Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R.Swift高效引用资源文件">
+<meta property="og:url" content="https://titanjun.top/R.Swift高效引用资源文件.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:description" content="在iOS中当我们引用一张图片的时候, 我们需要创建一个UIImage对象去引用图片 当我们需要解析json或者plist文件的时候, 通常以Bundle.main的方式去解析  12let oldImage = UIImage(named: &quot;yellow-image&quot;)let jsonData = Bundle.main.path(forResource: &quot;menuList&quot;, ofType">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-ff2333e6b4159280.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-37ec65a7e32ca6c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2020-05-21T02:41:31.924Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="R.Swift高效引用资源文件">
+<meta name="twitter:description" content="在iOS中当我们引用一张图片的时候, 我们需要创建一个UIImage对象去引用图片 当我们需要解析json或者plist文件的时候, 通常以Bundle.main的方式去解析  12let oldImage = UIImage(named: &quot;yellow-image&quot;)let jsonData = Bundle.main.path(forResource: &quot;menuList&quot;, ofType">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4122543-ff2333e6b4159280.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":3,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://titanjun.top/R.Swift高效引用资源文件.html">
+
+
+
+
+
+  <title>R.Swift高效引用资源文件 | TitanKing</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6dd8cf28eb4a5f6451fa0cd10918824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/CoderTitan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TitanKing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="/navigation/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br>
+            
+            导航
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/R.Swift高效引用资源文件.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">R.Swift高效引用资源文件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T15:15:47+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/入坑指南/" itemprop="url" rel="index">
+                    <span itemprop="name">入坑指南</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/R.Swift高效引用资源文件.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/R.Swift高效引用资源文件.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/R.Swift高效引用资源文件.html" class="leancloud_visitors" data-flag-title="R.Swift高效引用资源文件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,623 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>在iOS中当我们引用一张图片的时候, 我们需要创建一个<code>UIImage</code>对象去引用图片</li>
+<li>当我们需要解析<code>json</code>或者<code>plist</code>文件的时候, 通常以<code>Bundle.main</code>的方式去解析</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> oldImage = <span class="type">UIImage</span>(named: <span class="string">"yellow-image"</span>)</span><br><span class="line"><span class="keyword">let</span> jsonData = <span class="type">Bundle</span>.main.path(forResource: <span class="string">"menuList"</span>, ofType: <span class="string">"json"</span>)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<ul>
+<li>这里得到的<code>oldImage</code>和<code>jsonData</code>都是<code>Optional</code>类型, 那么这样就会有一个问题: 如果以上文件名字修改了或者输错了, 那么得到的结果就是空的, 后期处理的时候就可能会程序崩溃或者没有数据</li>
+<li>而且类似方法接受的都是字符串对象, 所以即使传入的错误的字符串, 编译程序的时候也不会报错</li>
+<li>为了完美的解决上面的问题, 这里介绍一个搞笑引用资源文件的框架<a href="https://github.com/mac-cain13/R.swift" target="_blank" rel="noopener"><code>R.Swift</code></a></li>
+</ul>
+<h3 id="什么是R-Swift"><a href="#什么是R-Swift" class="headerlink" title="什么是R.Swift"></a>什么是<code>R.Swift</code></h3><ul>
+<li><a href="https://github.com/mac-cain13/R.swift" target="_blank" rel="noopener"><code>R.Swift</code></a>是一款基于<code>Swift</code>平台，针对<code>iOS</code>以及<code>tvOS</code>开发的资源引用框架</li>
+<li>它所针对的问题，就是类似于上面提到的一样，避免使用字符串来构造某些资源实例</li>
+<li><code>R.Swift</code>能够使用类似语法<code>R.资源类型.资源名称</code>来对某资源进行引用构建</li>
+<li><code>R.Swift</code>有着动态生成代码的机制, 它具有以下优点：<ul>
+<li>代码自动补全：就像输入其他的代码一样，<code>R.Swift</code>支持<code>IDE</code>的代码自动补全</li>
+<li>自动检测: 可以自动检测代码是否存在问题, 当我们的资源文件名修改的时候, 这是就会提示资源引用错误</li>
+</ul>
+</li>
+</ul>
+<h3 id="安装和配置R-Swift"><a href="#安装和配置R-Swift" class="headerlink" title="安装和配置R.Swift"></a>安装和配置<a href="https://github.com/mac-cain13/R.swift" target="_blank" rel="noopener"><code>R.Swift</code></a></h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ul>
+<li>使用<code>CocoaPods</code>来对<code>R.Swift</code>进行安装</li>
+<li>在你的<code>Podfile</code>文件中添加如下代码, 并在终端运行<code>pod install</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;R.swift&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h4><ol>
+<li>如下图所示, 添加一个<code>New Run Script Phase</code></li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-ff2333e6b4159280.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<ol start="2">
+<li>将<code>Run Script</code>拖动到<code>Check Pods Manifest.lock</code>的下面, 并添加脚本</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;$PODS_ROOT/R.swift/rswift&quot; generate &quot;$SRCROOT&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-37ec65a7e32ca6c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<ol start="3">
+<li><code>Command+B</code>编译项目，在项目代码目录下，会生成一个<code>R.generated.swift</code> 的文件，将它拖如项目中</li>
+</ol>
+<div class="note warning"><p>注意：</p></div>
+
+<ul>
+<li>不要勾选<code>Copy items if needed</code>选项，因为每次编译都会生成新的<code>R.generated.swift</code>文件，<code>copy</code>的话，旧的<code>R.generated.swift</code>将不会被覆盖</li>
+<li>每当我们修改了资源，我们需要<code>Command + B</code>来编译一下项目从而让<code>R.Swift</code>自动进行配置更新</li>
+<li>这里是坐着录得一个如何导入和配置<code>R.Swift</code>的<a href="https://vimeo.com/122888912" target="_blank" rel="noopener">视频教程</a></li>
+</ul>
+<ol start="4">
+<li>配置到此完成，这里我们可以看一下<code>R.generated.swift</code>文件的基本内容, 下面我们可以构建自己的项目了</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">R</span>: <span class="title">Rswift</span>.<span class="title">Validatable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">fileprivate</span> <span class="keyword">static</span> <span class="keyword">let</span> applicationLocale = hostingBundle.preferredLocalizations.first.flatMap(<span class="type">Locale</span>.<span class="keyword">init</span>) ?? <span class="type">Locale</span>.current</span><br><span class="line">  <span class="keyword">fileprivate</span> <span class="keyword">static</span> <span class="keyword">let</span> hostingBundle = <span class="type">Bundle</span>(<span class="keyword">for</span>: <span class="type">R</span>.<span class="type">Class</span>.<span class="keyword">self</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">validate</span><span class="params">()</span></span> <span class="keyword">throws</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> intern.validate()</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  <span class="comment">/// This `R.file` struct is generated, and contains static references to 1 files.</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">file</span> </span>&#123;</span><br><span class="line">    <span class="comment">/// Resource file `menuList.json`.</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> menuListJson = <span class="type">Rswift</span>.<span class="type">FileResource</span>(bundle: <span class="type">R</span>.hostingBundle, name: <span class="string">"menuList"</span>, pathExtension: <span class="string">"json"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// `bundle.url(forResource: "menuList", withExtension: "json")`</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">menuListJson</span><span class="params">(<span class="number">_</span>: Void = <span class="params">()</span></span></span>) -&gt; <span class="type">Foundation</span>.<span class="type">URL?</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> fileResource = <span class="type">R</span>.file.menuListJson</span><br><span class="line">      <span class="keyword">return</span> fileResource.bundle.url(forResource: fileResource)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  <span class="comment">/// This `R.image` struct is generated, and contains static references to 3 images.</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">image</span> </span>&#123;</span><br><span class="line">    <span class="comment">/// Image `blueimage`.</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> blueimage = <span class="type">Rswift</span>.<span class="type">ImageResource</span>(bundle: <span class="type">R</span>.hostingBundle, name: <span class="string">"blueimage"</span>)</span><br><span class="line">    <span class="comment">/// Image `computers`.</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> computers = <span class="type">Rswift</span>.<span class="type">ImageResource</span>(bundle: <span class="type">R</span>.hostingBundle, name: <span class="string">"computers"</span>)</span><br><span class="line">    <span class="comment">/// Image `yellow-image`.</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> yellowImage = <span class="type">Rswift</span>.<span class="type">ImageResource</span>(bundle: <span class="type">R</span>.hostingBundle, name: <span class="string">"yellow-image"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// `UIImage(named: "blueimage", bundle: ..., traitCollection: ...)`</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">blueimage</span><span class="params">(compatibleWith traitCollection: UIKit.UITraitCollection? = <span class="literal">nil</span>)</span></span> -&gt; <span class="type">UIKit</span>.<span class="type">UIImage?</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="type">UIKit</span>.<span class="type">UIImage</span>(resource: <span class="type">R</span>.image.blueimage, compatibleWith: traitCollection)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// `UIImage(named: "computers", bundle: ..., traitCollection: ...)`</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">computers</span><span class="params">(compatibleWith traitCollection: UIKit.UITraitCollection? = <span class="literal">nil</span>)</span></span> -&gt; <span class="type">UIKit</span>.<span class="type">UIImage?</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="type">UIKit</span>.<span class="type">UIImage</span>(resource: <span class="type">R</span>.image.computers, compatibleWith: traitCollection)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// `UIImage(named: "yellow-image", bundle: ..., traitCollection: ...)`</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">yellowImage</span><span class="params">(compatibleWith traitCollection: UIKit.UITraitCollection? = <span class="literal">nil</span>)</span></span> -&gt; <span class="type">UIKit</span>.<span class="type">UIImage?</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="type">UIKit</span>.<span class="type">UIImage</span>(resource: <span class="type">R</span>.image.yellowImage, compatibleWith: traitCollection)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/// This `R.nib` struct is generated, and contains static references to 2 nibs.</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">nib</span> </span>&#123;</span><br><span class="line">    <span class="comment">/// Nib `ImageFontController`.</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> imageFontController = _R.nib._ImageFontController()</span><br><span class="line">    <span class="comment">/// Nib `NibTableViewCell`.</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> nibTableViewCell = _R.nib._NibTableViewCell()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// `UINib(name: "ImageFontController", in: bundle)`</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">imageFontController</span><span class="params">(<span class="number">_</span>: Void = <span class="params">()</span></span></span>) -&gt; <span class="type">UIKit</span>.<span class="type">UINib</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="type">UIKit</span>.<span class="type">UINib</span>(resource: <span class="type">R</span>.nib.imageFontController)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// `UINib(name: "NibTableViewCell", in: bundle)`</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">nibTableViewCell</span><span class="params">(<span class="number">_</span>: Void = <span class="params">()</span></span></span>) -&gt; <span class="type">UIKit</span>.<span class="type">UINib</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="type">UIKit</span>.<span class="type">UINib</span>(resource: <span class="type">R</span>.nib.nibTableViewCell)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  <span class="comment">/// This `R.storyboard` struct is generated, and contains static references to 3 storyboards.</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">storyboard</span> </span>&#123;</span><br><span class="line">    <span class="comment">/// Storyboard `LaunchScreen`.</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> launchScreen = _R.storyboard.launchScreen()</span><br><span class="line">    <span class="comment">/// Storyboard `Main`.</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> main = _R.storyboard.main()</span><br><span class="line">    <span class="comment">/// Storyboard `NibHome`.</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> nibHome = _R.storyboard.nibHome()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// `UIStoryboard(name: "LaunchScreen", bundle: ...)`</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">launchScreen</span><span class="params">(<span class="number">_</span>: Void = <span class="params">()</span></span></span>) -&gt; <span class="type">UIKit</span>.<span class="type">UIStoryboard</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="type">UIKit</span>.<span class="type">UIStoryboard</span>(resource: <span class="type">R</span>.storyboard.launchScreen)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// `UIStoryboard(name: "Main", bundle: ...)`</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">(<span class="number">_</span>: Void = <span class="params">()</span></span></span>) -&gt; <span class="type">UIKit</span>.<span class="type">UIStoryboard</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="type">UIKit</span>.<span class="type">UIStoryboard</span>(resource: <span class="type">R</span>.storyboard.main)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// `UIStoryboard(name: "NibHome", bundle: ...)`</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">nibHome</span><span class="params">(<span class="number">_</span>: Void = <span class="params">()</span></span></span>) -&gt; <span class="type">UIKit</span>.<span class="type">UIStoryboard</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="type">UIKit</span>.<span class="type">UIStoryboard</span>(resource: <span class="type">R</span>.storyboard.nibHome)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">fileprivate</span> <span class="keyword">init</span>() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="R-Swift的使用"><a href="#R-Swift的使用" class="headerlink" title="R.Swift的使用"></a><code>R.Swift</code>的使用</h3><h4 id="Images-图片"><a href="#Images-图片" class="headerlink" title="Images - 图片"></a><code>Images</code> - 图片</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//传统方式</span></span><br><span class="line"><span class="keyword">let</span> oldImage = <span class="type">UIImage</span>(named: <span class="string">"yellow-image"</span>)</span><br><span class="line">oldImageView.image = oldImage</span><br><span class="line"></span><br><span class="line"><span class="comment">//R.Swift方式</span></span><br><span class="line"><span class="keyword">let</span> newImage = <span class="type">R</span>.image.yellowImage()</span><br><span class="line">newImageView.image = newImage</span><br></pre></td></tr></table></figure>
+<h4 id="Custom-fonts-字体"><a href="#Custom-fonts-字体" class="headerlink" title="Custom fonts - 字体"></a><code>Custom fonts</code> - 字体</h4><p>这里需要注意的一点是, 字体的引用需要引入一个<code>ttf</code>格式的字体文件, 不然无法编译除类似<code>acmeLight</code>的函数</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//传统方式</span></span><br><span class="line"><span class="keyword">let</span> lightFontTitle = <span class="type">UIFont</span>(name: <span class="string">"Acme-Light"</span>, size: <span class="number">22</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//R.Swift方式</span></span><br><span class="line"><span class="keyword">let</span> lightFontTitle = <span class="type">R</span>.font.acmeLight(size: <span class="number">22</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="Resource-files-数据文件"><a href="#Resource-files-数据文件" class="headerlink" title="Resource files - 数据文件"></a><code>Resource files</code> - 数据文件</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//传统方式</span></span><br><span class="line"><span class="keyword">let</span> jsonData = <span class="type">Bundle</span>.main.path(forResource: <span class="string">"menuList"</span>, ofType: <span class="string">"json"</span>)</span><br><span class="line"><span class="keyword">let</span> jsonUrl1 = <span class="type">Bundle</span>.main.url(forResource: <span class="string">"menuList"</span>, withExtension: <span class="string">"json"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//R.Swift方式</span></span><br><span class="line"><span class="keyword">let</span> jsonData2 = <span class="type">R</span>.file.menuListJson.path()</span><br><span class="line"><span class="keyword">let</span> newUrl = <span class="type">R</span>.file.menuListJson()</span><br></pre></td></tr></table></figure>
+<h4 id="Storyboards"><a href="#Storyboards" class="headerlink" title="Storyboards"></a><code>Storyboards</code></h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//传统方式</span></span><br><span class="line"><span class="keyword">let</span> nibVC1 = <span class="type">UIStoryboard</span>(name: <span class="string">"NibHome"</span>, bundle: <span class="literal">nil</span>).instantiateInitialViewController() ?? <span class="type">UIViewController</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> storyboard = <span class="type">UIStoryboard</span>(name: <span class="string">"Main"</span>, bundle: <span class="literal">nil</span>)</span><br><span class="line"><span class="keyword">let</span> initialTabBarController = storyboard.instantiateInitialViewController() <span class="keyword">as</span>? <span class="type">UITabBarController</span></span><br><span class="line"><span class="keyword">let</span> settingsController = storyboard.instantiateViewController(withIdentifier: <span class="string">"settingsController"</span>) <span class="keyword">as</span>? <span class="type">SettingsControllerSettingsController</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//R.Swift方式</span></span><br><span class="line"><span class="keyword">let</span> nibVC = <span class="type">R</span>.storyboard.nibHome().instantiateInitialViewController() ?? <span class="type">UIViewController</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> storyboard = <span class="type">R</span>.storyboard.main()</span><br><span class="line"><span class="keyword">let</span> initialTabBarController = <span class="type">R</span>.storyboard.main.initialViewController()</span><br><span class="line"><span class="keyword">let</span> settingsController = <span class="type">R</span>.storyboard.main.settingsController()</span><br></pre></td></tr></table></figure>
+<h4 id="Nibs"><a href="#Nibs" class="headerlink" title="Nibs"></a><code>Nibs</code></h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//传统方式</span></span><br><span class="line"><span class="keyword">let</span> nameOfNib = <span class="string">"CustomView"</span></span><br><span class="line"><span class="keyword">let</span> customViewNib = <span class="type">UINib</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</span><br><span class="line"><span class="keyword">let</span> rootViews = customViewNib.instantiate(withOwner: <span class="literal">nil</span>, options: <span class="literal">nil</span>)</span><br><span class="line"><span class="keyword">let</span> customView = rootViews[<span class="number">0</span>] <span class="keyword">as</span>? <span class="type">CustomView</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nibName: <span class="string">"CustomView"</span>, bundle: <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//R.Swift方式</span></span><br><span class="line"><span class="keyword">let</span> nameOfNib = <span class="type">R</span>.nib.customView.name</span><br><span class="line"><span class="keyword">let</span> customViewNib = <span class="type">R</span>.nib.customView()</span><br><span class="line"><span class="keyword">let</span> rootViews = <span class="type">R</span>.nib.customView.instantiate(withOwner: <span class="literal">nil</span>)</span><br><span class="line"><span class="keyword">let</span> customView = <span class="type">R</span>.nib.customView.firstView(owner: <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> viewControllerWithNib = <span class="type">CustomViewController</span>(nib: <span class="type">R</span>.nib.customView)</span><br></pre></td></tr></table></figure>
+<h4 id="Reusable-table-view-cells-cell复用"><a href="#Reusable-table-view-cells-cell复用" class="headerlink" title="Reusable table view cells - cell复用"></a><code>Reusable table view cells</code> - cell复用</h4><p>这里是<code>UITableViewCell</code>的注册和使用为例, <code>UICollectionViewCell</code>亦同理</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//传统方式</span></span><br><span class="line"><span class="keyword">let</span> cellNib = <span class="type">UINib</span>(nibName: <span class="string">"NibTableViewCell"</span>, bundle: <span class="literal">nil</span>)</span><br><span class="line">tableView.register(cellNib, forCellReuseIdentifier: <span class="string">"NibTableViewCell"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(<span class="number">_</span> tableView: UITableView, cellForRowAt indexPath: IndexPath)</span></span> -&gt; <span class="type">UITableViewCell</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> cell = tableView.dequeueReusableCell(withIdentifier: <span class="string">"NibTableViewCell"</span>, <span class="keyword">for</span>: indexPath)</span><br><span class="line">    cell?.leftLabel.text = dataArr[indexPath.row]</span><br><span class="line">    <span class="keyword">return</span> cell ?? <span class="type">UITableViewCell</span>()</span><br><span class="line">&#125;</span><br><span class="line">         </span><br><span class="line"></span><br><span class="line"><span class="comment">//R.Swift方式</span></span><br><span class="line">tableView.register(<span class="type">R</span>.nib.nibTableViewCell(), forCellReuseIdentifier: <span class="type">R</span>.nib.nibTableViewCell.name)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(<span class="number">_</span> tableView: UITableView, cellForRowAt indexPath: IndexPath)</span></span> -&gt; <span class="type">UITableViewCell</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> cell = tableView.dequeueReusableCell(withIdentifier: <span class="type">R</span>.nib.nibTableViewCell.name, <span class="keyword">for</span>: indexPath) <span class="keyword">as</span>? <span class="type">NibTableViewCell</span></span><br><span class="line">    cell?.leftLabel.text = dataArr[indexPath.row]</span><br><span class="line">    <span class="keyword">return</span> cell ?? <span class="type">UITableViewCell</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>更多关于<code>R.Swift</code>的使用可参考<a href="https://github.com/mac-cain13/R.swift/blob/master/Documentation/Examples.md#images" target="_blank" rel="noopener">官方文档<code>Examples.md</code></a></p>
+</blockquote>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:17px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+    
+    
+      <div>
+        
+      </div>
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+
+	<div>欢迎您扫一扫下面的微信公众号，订阅我的博客！</div>
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="TitanKing wechat" style="width: 200px; max-width: 100%;">
+    
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpeg" alt="TitanKing 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="TitanKing 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    TitanKing
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://titanjun.top/R.Swift高效引用资源文件.html" title="R.Swift高效引用资源文件">https://titanjun.top/R.Swift高效引用资源文件.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+            <a href="/tags/R-Swift/" rel="tag"><i class="fa fa-tag"></i> R.Swift</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div style="color: rgba(0, 0, 0, 0.75); font-size:15px; letter-spacing:3px">(&gt;看完记得五星好评哦&lt;)</div>
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/MongoDB的安装及基本命令和pymongo的使用.html" rel="prev" title="MongoDB的安装及基本命令和pymongo的使用">
+                <i class="fa fa-chevron-left"></i> MongoDB的安装及基本命令和pymongo的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Mac环境下MySQL的安装和基本命令的使用.html" rel="next" title="Mac环境下MySQL的安装和基本命令的使用">
+                Mac环境下MySQL的安装和基本命令的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-hoofoo-share-title">分享到：</div>
+<div class="-hoofoo-share-buttons">
+    <div class="-mob-share-weibo -hoofoo-share-weibo -hoofoo-share-ui-button"><i class="fa fa-weibo" aria-hidden="true"></i></div>
+    <div class="-mob-share-weixin -hoofoo-share-weixin -hoofoo-share-ui-button"><i class="fa fa-weixin" aria-hidden="true"></i></div>
+    <div class="-mob-share-qq -hoofoo-share-qq -hoofoo-share-ui-button"><i class="fa fa-qq" aria-hidden="true"></i></div>
+    <div class="-mob-share-twitter -hoofoo-share-twitter -hoofoo-share-ui-button"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+    <div class="-hoofoo-share-more -hoofoo-share-ui-button -mob-share-open"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
+</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-renren"><p>人人网</p></li>
+        <li class="-mob-share-kaixin"><p>开心网</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=24fc497bb07bc"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/" class="site-author-image" rel="start" style="border:none">
+                <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="TitanKing">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">TitanKing</p>
+              <p class="site-description motion-element" itemprop="description">我还年轻，我渴望上路。带着最初的激情，追寻着最初的梦想，感受着最初的体验，我们上路吧!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">154</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CoderTitan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005056052774133/home?from=page_100505&mod=TAB&is_all=1#place" target="_blank" title="新浪微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>新浪微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/5bd5e9ed569e" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/ShmilyCoder" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a7a64ae6fb9a0636323fd06/posts" target="_blank" title="稀土掘金">
+                      
+                        <i class="fa fa-fw fa-database"></i>稀土掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:quanjunt@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/CoderTitan" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是R-Swift"><span class="nav-number">1.</span> <span class="nav-text">什么是R.Swift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装和配置R-Swift"><span class="nav-number">2.</span> <span class="nav-text">安装和配置R.Swift</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置信息"><span class="nav-number">2.2.</span> <span class="nav-text">配置信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R-Swift的使用"><span class="nav-number">3.</span> <span class="nav-text">R.Swift的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Images-图片"><span class="nav-number">3.1.</span> <span class="nav-text">Images - 图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Custom-fonts-字体"><span class="nav-number">3.2.</span> <span class="nav-text">Custom fonts - 字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Resource-files-数据文件"><span class="nav-number">3.3.</span> <span class="nav-text">Resource files - 数据文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Storyboards"><span class="nav-number">3.4.</span> <span class="nav-text">Storyboards</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nibs"><span class="nav-number">3.5.</span> <span class="nav-text">Nibs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reusable-table-view-cells-cell复用"><span class="nav-number">3.6.</span> <span class="nav-text">Reusable table view cells - cell复用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+  
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站总访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<span>|</span>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共295.7k字</span>
+</div>
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'CoderTitan',
+            repo: 'CoderTitan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '218676a3ad406ae623f3974be77590653ee351d5',
+            
+                client_id: '47d71683076aa93948d8'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'm7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz',
+        appKey: '7X31Wl5lm6BXqgtV9k3sm7yI',
+        placeholder: '在这里说点什么吧...',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("m7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz", "7X31Wl5lm6BXqgtV9k3sm7yI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 10998,
+    el: 'wpac-rating',
+    color: 'f79533'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript">
+    //微信二维码点击背景关闭
+    $('body').delegate('.-mob-share-weixin-qrcode-bg','click', function(){
+         $(".-mob-share-weixin-qrcode-close").trigger("click");
+    }); 
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<script type="text/javascript" src="/source/js/src/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init();</script>
+
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

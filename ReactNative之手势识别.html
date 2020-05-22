@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+  <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "a85a9be2"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PanResponder,onPress,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="keywords" content="PanResponder,onPress">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactNative之手势识别">
+<meta property="og:url" content="https://titanjun.top/ReactNative之手势识别.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ReactNative/ReactNative.jpeg?x-oss-process=style/titanjun">
+<meta property="og:updated_time" content="2020-05-21T02:41:31.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactNative之手势识别">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ReactNative/ReactNative.jpeg?x-oss-process=style/titanjun">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":3,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://titanjun.top/ReactNative之手势识别.html">
+
+
+
+
+
+  <title>ReactNative之手势识别 | TitanKing</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6dd8cf28eb4a5f6451fa0cd10918824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/CoderTitan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TitanKing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="/navigation/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br>
+            
+            导航
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/ReactNative之手势识别.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ReactNative之手势识别</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-10T12:21:32+08:00">
+                2019-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ReactNaive/" itemprop="url" rel="index">
+                    <span itemprop="name">ReactNaive</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/ReactNative之手势识别.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/ReactNative之手势识别.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/ReactNative之手势识别.html" class="leancloud_visitors" data-flag-title="ReactNative之手势识别">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,449 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ReactNative/ReactNative.jpeg?x-oss-process=style/titanjun" alt="ReactNative"></p>
+<a id="more"></a>
+<ul>
+<li>移动开发中最重要的就是交互, 说到交互, 就不得不说触摸事件</li>
+<li>在<code>iOS</code>中有单击, 双击, 长按, 拖拽等触摸操作</li>
+<li>在<code>React Native</code>中点击手势都有其对应的组件, 每个组件都可以用来包裹视图来响应用户的点击事件</li>
+</ul>
+<h2 id="TouchableWithoutFeedback"><a href="#TouchableWithoutFeedback" class="headerlink" title="TouchableWithoutFeedback"></a>TouchableWithoutFeedback</h2><ul>
+<li>响应用户的点击事件, 点击操作时, 组件没有任何视觉反馈,看起来像<code>Web</code>效果而不是原生的效果<code>Native</code></li>
+<li>是单节点组件, 只能包含一个组件, 如果你希望包含多个子组件，用一个View来包装它们</li>
+<li>该控件除非你不得不使用，否则请不要使用该组件</li>
+</ul>
+<h3 id="属性方法"><a href="#属性方法" class="headerlink" title="属性方法"></a>属性方法</h3><ul>
+<li><p><code>accessibilityComponentType</code>:   <code>View.AccessibilityComponentType</code><br>  设置可访问的组件类型</p>
+</li>
+<li><p><code>accessibilityTraits</code>: <code>View.AccessibilityTraits,[View.AccessibilityTraits]</code><br>  设置访问特征</p>
+</li>
+<li><p><code>accessible</code>: <code>bool</code><br>  设置当前组件是否可以访问</p>
+</li>
+<li><p><code>delayLongPress</code>: <code>number</code><br>  设置延迟的时间，单位为毫秒。从<code>onPressIn</code>方法开始，到<code>onLongPress</code>被调用这一段时间</p>
+</li>
+<li><p><code>delayPressIn</code>: <code>number</code><br>  设置延迟的时间，单位为毫秒，从用户触摸控件开始到<code>onPressIn</code>被调用这一段时间</p>
+</li>
+<li><p><code>delayPressOut</code>: <code>number</code><br>  设置延迟的时间，单位为毫秒，从用户触摸事件释放开始到<code>onPressOut</code>被调用这一段时间</p>
+</li>
+<li><p><code>onLayout</code>: <code>function</code><br>  当组件加载或者改组件的布局发生变化的时候调用, 调用传入的参数为<code>{nativeEvent:{layout:{x,y,width,height}}}</code></p>
+</li>
+<li><p><code>onLongPress</code>: <code>function</code><br>  当用户长时间按压组件(长按效果)的时候调用该方法</p>
+</li>
+<li><p><code>onPress</code>: <code>function</code><br>  当用户点击的时候调用(触摸结束)。 但是如果事件被取消了就不会调用。(例如:当前被滑动事件所替代)</p>
+</li>
+<li><p><code>onPressIn</code>: <code>function</code><br>  用户开始触摸组件回调方法</p>
+</li>
+<li><p><code>onPressOut</code>: <code>function</code><br>  用户完成触摸组件之后回调方法</p>
+</li>
+<li><p><code>pressRetentionOffset</code>: <code>{top:number,left:number,bottom:number,right:number}</code><br>  该设置当视图滚动禁用的情况下，可以定义当手指距离组件的距离; 当大于该距离该组件会失去响应;当少于该距离的时候，该组件会重新进行响应</p>
+</li>
+</ul>
+<blockquote>
+<p>该组件我们一般不会直接进行使用，下面三种<code>Touchable*</code>系列组件对于该组件的属性方法都可以进行使用</p>
+</blockquote>
+<h2 id="TouchableOpacity"><a href="#TouchableOpacity" class="headerlink" title="TouchableOpacity"></a>TouchableOpacity</h2><p>该组件封装了响应触摸事件。当点击按下的时候，该组件的透明度会降低。该组件使用过程中并不会改变视图的层级关系，而且我们可以非常容易的添加到应用并且不会产生额外的异常错误</p>
+<h3 id="属性方法-1"><a href="#属性方法-1" class="headerlink" title="属性方法"></a>属性方法</h3><ul>
+<li><code>TouchableWithoutFeedback</code>的所有 属性，这边<code>TouchableOpacity</code>组件全部可以进行使用</li>
+<li><code>activeOpacity</code>:  <code>number</code>—设置当用户触摸的时候，组件的透明度(取值0-1)</li>
+</ul>
+<h2 id="TouchableHighlight"><a href="#TouchableHighlight" class="headerlink" title="TouchableHighlight"></a>TouchableHighlight</h2><p>当手指点击按下的时候，该视图的不透明度会进行降低同时会看到相应的颜色(视图变暗或者变亮)。如果我们去查看该组件的源代码会发现，该底层实现是添加了一个新的视图</p>
+<h3 id="属性方法-2"><a href="#属性方法-2" class="headerlink" title="属性方法"></a>属性方法</h3><ul>
+<li>所有<code>TouchableWithoutFeedback</code>的属性</li>
+<li><code>activeOpacity</code>: <code>number</code>—该用来设置视图在进行触摸的时候，要要显示的不透明度(通常在0-1之间)</li>
+<li><code>onHideUnderlay</code>: <code>function</code>—当底层被隐藏的时候调用</li>
+<li><code>onShowUnderlay</code>: <code>function</code>—当底层显示的时候调用</li>
+<li><code>underlayColor</code>: 当触摸或者点击控件的时候显示出的颜色</li>
+</ul>
+<h2 id="TouchableNativeFeedback"><a href="#TouchableNativeFeedback" class="headerlink" title="TouchableNativeFeedback"></a>TouchableNativeFeedback</h2><ul>
+<li>仅限<code>Android</code>平台</li>
+<li>在<code>Android</code>设备上，这个组件利用原生状态来渲染触摸的反馈</li>
+<li>目前它只支持一个单独的<code>View</code>实例作为子节点</li>
+</ul>
+<h3 id="属性方法-3"><a href="#属性方法-3" class="headerlink" title="属性方法"></a>属性方法</h3><ul>
+<li>所有<code>TouchableWithoutFeedback</code>的属性</li>
+<li><code>background</code>: 决定在触摸反馈的时候显示什么类型的背景</li>
+</ul>
+<h2 id="PanResponder"><a href="#PanResponder" class="headerlink" title="PanResponder"></a>PanResponder</h2><h3 id="相关介绍"><a href="#相关介绍" class="headerlink" title="相关介绍"></a>相关介绍</h3><p><code>PanResponder</code>类可以将多点触摸操作协调成一个手势。它使得一个单点触摸可以接受更多的触摸操作，也可以用于识别简单的多点触摸手势</p>
+<blockquote>
+<p>手势处理</p>
+</blockquote>
+<p><code>React Native</code>框架底层的手势响应系统提供了响应处理器，<code>PanResponder</code>将这些手势响应处理器再次进行封装，以便开发者更容易对手势进行处理，更容易预测用户的手势，对每一个手势响应处理器，<code>PanResponder</code>除了为其提供代表触摸行为的原生事件外，还提供了一个新的手势状态对象用来详细描述手势的状态</p>
+<blockquote>
+<p>基本思想是：</p>
+</blockquote>
+<p>监视屏幕上指定大小、位置的矩形区域，当用手指按压这个区域中的某点后，开发者会收到这个事件，当按压后拖动手指时，会收到手势引发的各类事件，当手指离开这个矩形区域时，开发者也会收到相应的事件</p>
+<blockquote>
+<p>注意事项：</p>
+</blockquote>
+<ul>
+<li>开发者可以任意指定监视矩形区域的大小，但在这个区域里，只有第一个按下的事件会上报和继续监视处理，如果第一个手指按下还没有离开，接着第二个手指又来按下了，那么对第二个手指的各种触摸事件无法捕获</li>
+<li>开发者可以在屏幕上指定多个监视矩形区域，但是不能同时监视多个矩形区域的不同触摸事件</li>
+<li>监视区域会阻止被监视区域覆盖的组件接收触摸事件，比如监视区域覆盖了一个按钮，那么就无法通过按这个按钮来触发其对应的事件，只能在<code>PanResponder</code>监视器的事件处理中对触摸行为进行处理</li>
+</ul>
+<h3 id="使用操作"><a href="#使用操作" class="headerlink" title="使用操作"></a>使用操作</h3><p>利用<code>PanResponder</code>实现监视器有以下几个步骤：</p>
+<h4 id="指定监视区域"><a href="#指定监视区域" class="headerlink" title="指定监视区域"></a>指定监视区域</h4><p>如果监视区域有多个，一定不能重叠，否则都失效</p>
+<h4 id="定义监视器相关变量"><a href="#定义监视器相关变量" class="headerlink" title="定义监视器相关变量"></a>定义监视器相关变量</h4><p>指向监视器的变量（必须有）、指向监视器监视区域的变量（可以有）、记录监视区域左上角顶点坐标的两个数值变量（可以有）、上一次触摸点的横纵坐标变量（可以有）</p>
+<h4 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h4><p>准备监视器的事件处理函数</p>
+<h4 id="建立监视器"><a href="#建立监视器" class="headerlink" title="建立监视器"></a>建立监视器</h4><p><code>PanResponder.create(config)</code></p>
+<p>相关事件监听</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回值为布尔值, 如果返回值为 true，则表示这个 View 能够响应滑动手势, 两者有一个为true即可响应</span></span><br><span class="line">onMoveShouldSetPanResponder: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line">onMoveShouldSetPanResponderCapture: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回值为布尔值, 如果返回值为 true，则表示这个 View 能够响应触摸手势, 两者有一个为true即可响应</span></span><br><span class="line">onStartShouldSetPanResponder: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line">onStartShouldSetPanResponderCapture: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当前有其他的东西成为响应器并且没有释放它。如果视图正在响应，会触发该方法</span></span><br><span class="line">onPanResponderReject: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"><span class="comment">// 最近一次的移动距离.如:(获取x轴方向的移动距离 gestureState.dx)</span></span><br><span class="line">onPanResponderGrant: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"><span class="comment">// 开始按下时的响应事件</span></span><br><span class="line">onPanResponderStart: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"><span class="comment">// 结束按下时的响应事件</span></span><br><span class="line">onPanResponderEnd: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"><span class="comment">// 用户手指离开屏幕时，调用该方法</span></span><br><span class="line">onPanResponderRelease: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"><span class="comment">// 用户滑动手指时，调用该方法</span></span><br><span class="line">onPanResponderMove: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 另一个组件已经成为了新的响应者，所以当前手势将被取消</span></span><br><span class="line">onPanResponderTerminate: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"><span class="comment">// 如果回调函数返回为 true，则表示同意释放响应者角色 同时会回调onResponderTerminate函数，通知组件事件响应处理被终止了</span></span><br><span class="line">onPanResponderTerminationRequest: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回一个布尔值，决定当前组件是否应该阻止原生组件成为JS响应者（暂只支持android）</span></span><br><span class="line">onShouldBlockNativeResponder: <span class="function">(<span class="params">e, gestureState</span>) =&gt;</span> &#123;...&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="监视器与监视区域关联"><a href="#监视器与监视区域关联" class="headerlink" title="监视器与监视区域关联"></a>监视器与监视区域关联</h4><p><code>{…this.watcher.panHandlers}</code></p>
+<p>实例：点击、拖动选择百分百参数 比如说播放器的音量大小</p>
+<h4 id="参数event-e"><a href="#参数event-e" class="headerlink" title="参数event(e)"></a>参数<code>event</code>(<code>e</code>)</h4><p>获取触摸的位置在被响应的 View 中的相对坐标，<code>evt.nativeEvent.locationX</code></p>
+<ul>
+<li><code>nativeEvent</code><ul>
+<li><code>changedTouches</code> - 在上一次事件之后，所有发生变化的触摸事件的数组集合（即上一次事件后，所有移动过的触摸点）</li>
+<li><code>identifier</code> - 触摸点的ID</li>
+<li><code>locationX</code> - 触摸点相对于父元素的横坐标</li>
+<li><code>locationY</code> - 触摸点相对于父元素的纵坐标</li>
+<li><code>pageX</code> - 触摸点相对于根元素的横坐标</li>
+<li><code>pageY</code> - 触摸点相对于根元素的纵坐标</li>
+<li><code>target</code> - 触摸点所在的元素ID</li>
+<li><code>timestamp</code> - 触摸事件的时间戳，可用于移动速度的计算</li>
+<li><code>touches</code> - 当前屏幕上的所有触摸点的集合</li>
+</ul>
+</li>
+</ul>
+<h4 id="gestureState对象"><a href="#gestureState对象" class="headerlink" title="gestureState对象"></a><code>gestureState</code>对象</h4><ul>
+<li><code>stateID</code> – 触摸状态的ID。在屏幕上有至少一个触摸点的情况下，这个ID会一直有效。</li>
+<li><code>moveX</code> - 最近一次移动时的屏幕横坐标</li>
+<li><code>moveY</code> - 最近一次移动时的屏幕纵坐标</li>
+<li><code>x0</code> - 当响应器产生时的屏幕坐标</li>
+<li><code>y0</code> - 当响应器产生时的屏幕坐标</li>
+<li><code>dx</code> - 从触摸操作开始时的累计横向路程</li>
+<li><code>dy</code> - 从触摸操作开始时的累计纵向路程</li>
+<li><code>vx</code> - 当前的横向移动速度</li>
+<li><code>vy</code> - 当前的纵向移动速度</li>
+<li><code>numberActiveTouches</code> - 当前在屏幕上的有效触摸点的数量</li>
+</ul>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><p>相关代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">            backColor: <span class="string">'red'</span>,</span><br><span class="line">            left: <span class="number">0</span>,</span><br><span class="line">            top: <span class="number">100</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    componentWillMount() &#123;</span><br><span class="line">        <span class="keyword">this</span>._panResponse = PanResponder.create(&#123;</span><br><span class="line">            onStartShouldSetPanResponder: <span class="function"><span class="params">()</span> =&gt;</span> <span class="literal">true</span>,</span><br><span class="line">            onStartShouldSetPanResponderCapture: <span class="function"><span class="params">()</span> =&gt;</span> <span class="literal">false</span>,</span><br><span class="line">            onMoveShouldSetPanResponder: <span class="function"><span class="params">()</span> =&gt;</span> <span class="literal">true</span>,</span><br><span class="line">            onPanResponderGrant: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>._top = <span class="keyword">this</span>.state.top</span><br><span class="line">                <span class="keyword">this</span>._left = <span class="keyword">this</span>.state.left</span><br><span class="line">                <span class="keyword">this</span>.setState(&#123; <span class="attr">backColor</span>: <span class="string">'red'</span> &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            onPanResponderMove: <span class="function">(<span class="params">event, ges</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">`event = <span class="subst">$&#123;event&#125;</span>, guesture = <span class="subst">$&#123;ges&#125;</span>`</span>)</span><br><span class="line">                <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">                    top: <span class="keyword">this</span>._top + ges.dy,</span><br><span class="line">                    left: <span class="keyword">this</span>._left + ges.dx,</span><br><span class="line">                    backColor: <span class="string">'blue'</span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            onPanResponderRelease: <span class="function">(<span class="params">event, ges</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">                    backColor: <span class="string">'orange'</span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;View style=&#123;styles.container&#125;&gt;</span><br><span class="line">                &lt;View </span><br><span class="line">                    &#123;...this._panResponse.panHandlers&#125;</span><br><span class="line">                    style=&#123;&#123;</span><br><span class="line">                        position: <span class="string">'absolute'</span>,</span><br><span class="line">                        backgroundColor: <span class="keyword">this</span>.state.backColor,</span><br><span class="line">                        left: <span class="keyword">this</span>.state.left,</span><br><span class="line">                        top: <span class="keyword">this</span>.state.top,</span><br><span class="line">                        width: <span class="number">50</span>, </span><br><span class="line">                        height: <span class="number">50</span></span><br><span class="line">                    &#125;&#125;</span><br><span class="line">                /&gt;</span><br><span class="line">            &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:17px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+    
+    
+      <div>
+        
+      </div>
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+
+	<div>欢迎您扫一扫下面的微信公众号，订阅我的博客！</div>
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="TitanKing wechat" style="width: 200px; max-width: 100%;">
+    
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpeg" alt="TitanKing 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="TitanKing 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    TitanKing
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://titanjun.top/ReactNative之手势识别.html" title="ReactNative之手势识别">https://titanjun.top/ReactNative之手势识别.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PanResponder/" rel="tag"><i class="fa fa-tag"></i> PanResponder</a>
+          
+            <a href="/tags/onPress/" rel="tag"><i class="fa fa-tag"></i> onPress</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div style="color: rgba(0, 0, 0, 0.75); font-size:15px; letter-spacing:3px">(&gt;看完记得五星好评哦&lt;)</div>
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Flutter之基础Widget.html" rel="prev" title="Flutter之基础Widget">
+                <i class="fa fa-chevron-left"></i> Flutter之基础Widget
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Flutter开发之Dart的数据类型02.html" rel="next" title="Flutter开发之Dart的数据类型02">
+                Flutter开发之Dart的数据类型02 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-hoofoo-share-title">分享到：</div>
+<div class="-hoofoo-share-buttons">
+    <div class="-mob-share-weibo -hoofoo-share-weibo -hoofoo-share-ui-button"><i class="fa fa-weibo" aria-hidden="true"></i></div>
+    <div class="-mob-share-weixin -hoofoo-share-weixin -hoofoo-share-ui-button"><i class="fa fa-weixin" aria-hidden="true"></i></div>
+    <div class="-mob-share-qq -hoofoo-share-qq -hoofoo-share-ui-button"><i class="fa fa-qq" aria-hidden="true"></i></div>
+    <div class="-mob-share-twitter -hoofoo-share-twitter -hoofoo-share-ui-button"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+    <div class="-hoofoo-share-more -hoofoo-share-ui-button -mob-share-open"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
+</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-renren"><p>人人网</p></li>
+        <li class="-mob-share-kaixin"><p>开心网</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=24fc497bb07bc"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/" class="site-author-image" rel="start" style="border:none">
+                <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="TitanKing">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">TitanKing</p>
+              <p class="site-description motion-element" itemprop="description">我还年轻，我渴望上路。带着最初的激情，追寻着最初的梦想，感受着最初的体验，我们上路吧!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">154</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CoderTitan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005056052774133/home?from=page_100505&mod=TAB&is_all=1#place" target="_blank" title="新浪微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>新浪微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/5bd5e9ed569e" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/ShmilyCoder" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a7a64ae6fb9a0636323fd06/posts" target="_blank" title="稀土掘金">
+                      
+                        <i class="fa fa-fw fa-database"></i>稀土掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:quanjunt@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/CoderTitan" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TouchableWithoutFeedback"><span class="nav-number">1.</span> <span class="nav-text">TouchableWithoutFeedback</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性方法"><span class="nav-number">1.1.</span> <span class="nav-text">属性方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TouchableOpacity"><span class="nav-number">2.</span> <span class="nav-text">TouchableOpacity</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性方法-1"><span class="nav-number">2.1.</span> <span class="nav-text">属性方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TouchableHighlight"><span class="nav-number">3.</span> <span class="nav-text">TouchableHighlight</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性方法-2"><span class="nav-number">3.1.</span> <span class="nav-text">属性方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TouchableNativeFeedback"><span class="nav-number">4.</span> <span class="nav-text">TouchableNativeFeedback</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性方法-3"><span class="nav-number">4.1.</span> <span class="nav-text">属性方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PanResponder"><span class="nav-number">5.</span> <span class="nav-text">PanResponder</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相关介绍"><span class="nav-number">5.1.</span> <span class="nav-text">相关介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用操作"><span class="nav-number">5.2.</span> <span class="nav-text">使用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#指定监视区域"><span class="nav-number">5.2.1.</span> <span class="nav-text">指定监视区域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义监视器相关变量"><span class="nav-number">5.2.2.</span> <span class="nav-text">定义监视器相关变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件处理"><span class="nav-number">5.2.3.</span> <span class="nav-text">事件处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立监视器"><span class="nav-number">5.2.4.</span> <span class="nav-text">建立监视器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监视器与监视区域关联"><span class="nav-number">5.2.5.</span> <span class="nav-text">监视器与监视区域关联</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数event-e"><span class="nav-number">5.2.6.</span> <span class="nav-text">参数event(e)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gestureState对象"><span class="nav-number">5.2.7.</span> <span class="nav-text">gestureState对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用示例"><span class="nav-number">5.3.</span> <span class="nav-text">使用示例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+  
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站总访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<span>|</span>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共295.7k字</span>
+</div>
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'CoderTitan',
+            repo: 'CoderTitan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '218676a3ad406ae623f3974be77590653ee351d5',
+            
+                client_id: '47d71683076aa93948d8'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'm7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz',
+        appKey: '7X31Wl5lm6BXqgtV9k3sm7yI',
+        placeholder: '在这里说点什么吧...',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("m7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz", "7X31Wl5lm6BXqgtV9k3sm7yI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 10998,
+    el: 'wpac-rating',
+    color: 'f79533'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript">
+    //微信二维码点击背景关闭
+    $('body').delegate('.-mob-share-weixin-qrcode-bg','click', function(){
+         $(".-mob-share-weixin-qrcode-close").trigger("click");
+    }); 
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<script type="text/javascript" src="/source/js/src/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init();</script>
+
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

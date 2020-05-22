@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+  <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "a85a9be2"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Flutter,Widget,Dart,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="keywords" content="Flutter,Widget,Dart">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter中App的主题和导航">
+<meta property="og:url" content="https://titanjun.top/Flutter中App的主题和导航.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_appbar.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/tabbar_scroll.png">
+<meta property="og:updated_time" content="2020-05-21T02:41:31.913Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter中App的主题和导航">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_appbar.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":3,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://titanjun.top/Flutter中App的主题和导航.html">
+
+
+
+
+
+  <title>Flutter中App的主题和导航 | TitanKing</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6dd8cf28eb4a5f6451fa0cd10918824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/CoderTitan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TitanKing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="/navigation/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br>
+            
+            导航
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/Flutter中App的主题和导航.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flutter中App的主题和导航</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-05T21:01:11+08:00">
+                2019-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flutter笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Flutter中App的主题和导航.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/Flutter中App的主题和导航.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/Flutter中App的主题和导航.html" class="leancloud_visitors" data-flag-title="Flutter中App的主题和导航">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,800 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_appbar.png" alt="image"></p>
+<a id="more"></a>
+<ul>
+<li><code>Flutter</code>一切皆<code>Widget</code>的核心思想, 为我们提供了两种主题风格</li>
+<li><code>CupertinoApp</code>: 一个封装了很多<code>iOS</code>风格的小部件，一般作为顶层<code>widget</code>使用</li>
+<li><code>MaterialApp</code>: 一个封装了很多安卓风格的小部件，一般作为顶层<code>widget</code>使用, 下面我们先看下这个<code>Widget</code></li>
+</ul>
+<h2 id="MaterialApp"><a href="#MaterialApp" class="headerlink" title="MaterialApp"></a>MaterialApp</h2><p>这里我们先看看<code>MaterialApp</code>的构造函数和相关函数</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MaterialApp(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 导航主键, GlobalKey&lt;NavigatorState&gt;</span></span><br><span class="line">    <span class="keyword">this</span>.navigatorKey,</span><br><span class="line">    <span class="comment">// 主页, Widget</span></span><br><span class="line">    <span class="keyword">this</span>.home,</span><br><span class="line">    <span class="comment">// 路由</span></span><br><span class="line">    <span class="keyword">this</span>.routes = <span class="keyword">const</span> &lt;<span class="built_in">String</span>, WidgetBuilder&gt;&#123;&#125;,</span><br><span class="line">    <span class="comment">// 初始化路由, String</span></span><br><span class="line">    <span class="keyword">this</span>.initialRoute,</span><br><span class="line">    <span class="comment">// 构造路由, RouteFactory</span></span><br><span class="line">    <span class="keyword">this</span>.onGenerateRoute,</span><br><span class="line">    <span class="comment">// 为止路由, RouteFactory</span></span><br><span class="line">    <span class="keyword">this</span>.onUnknownRoute,</span><br><span class="line">    <span class="comment">// 导航观察器</span></span><br><span class="line">    <span class="keyword">this</span>.navigatorObservers = <span class="keyword">const</span> &lt;NavigatorObserver&gt;[],</span><br><span class="line">    <span class="comment">// widget的构建</span></span><br><span class="line">    <span class="keyword">this</span>.builder,</span><br><span class="line">    <span class="comment">// APP的名字</span></span><br><span class="line">    <span class="keyword">this</span>.title = <span class="string">''</span>,</span><br><span class="line">    <span class="comment">// GenerateAppTitle, 每次在WidgetsApp构建时都会重新生成</span></span><br><span class="line">    <span class="keyword">this</span>.onGenerateTitle,</span><br><span class="line">    <span class="comment">// 背景颜色</span></span><br><span class="line">    <span class="keyword">this</span>.color,</span><br><span class="line">    <span class="comment">// 主题, ThemeData</span></span><br><span class="line">    <span class="keyword">this</span>.theme,</span><br><span class="line">    <span class="comment">// app语言支持, Locale</span></span><br><span class="line">    <span class="keyword">this</span>.locale,</span><br><span class="line">    <span class="comment">// 多语言代理, Iterable&lt;LocalizationsDelegate&lt;dynamic&gt;&gt;</span></span><br><span class="line">    <span class="keyword">this</span>.localizationsDelegates,</span><br><span class="line">    <span class="comment">// flutter.widgets.widgetsApp.localeListResolutionCallback</span></span><br><span class="line">    <span class="keyword">this</span>.localeListResolutionCallback,</span><br><span class="line">    <span class="comment">// flutter.widgets.widgetsApp.localeResolutionCallback</span></span><br><span class="line">    <span class="keyword">this</span>.localeResolutionCallback,</span><br><span class="line">    <span class="comment">// 支持的多语言, Iterable&lt;Locale&gt;</span></span><br><span class="line">    <span class="keyword">this</span>.supportedLocales = <span class="keyword">const</span> &lt;Locale&gt;[Locale(<span class="string">'en'</span>, <span class="string">'US'</span>)],</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 是否显示网格</span></span><br><span class="line">    <span class="keyword">this</span>.debugShowMaterialGrid = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 是否打开性能监控，覆盖在屏幕最上面</span></span><br><span class="line">    <span class="keyword">this</span>.showPerformanceOverlay = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 是否打开栅格缓存图像的检查板</span></span><br><span class="line">    <span class="keyword">this</span>.checkerboardRasterCacheImages = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 是否打开显示到屏幕外位图的图层的检查面板</span></span><br><span class="line">    <span class="keyword">this</span>.checkerboardOffscreenLayers = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 是否打开覆盖图，显示框架报告的可访问性信息 显示边框</span></span><br><span class="line">    <span class="keyword">this</span>.showSemanticsDebugger = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 是否显示右上角的Debug标签</span></span><br><span class="line">    <span class="keyword">this</span>.debugShowCheckedModeBanner = <span class="keyword">true</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>需要注意的几点</p></div>
+
+<ul>
+<li>如果<code>home</code>首页指定了，<code>routes</code>里面就不能有<code>&#39;/&#39;</code>的根路由了，会报错，<code>/</code>指定的根路由就多余了</li>
+<li>如果没有<code>home</code>指定具体的页面，那<code>routes</code>里面就有<code>/</code>来指定根路由</li>
+<li>路由的顺序按照下面的规则来：<ul>
+<li>1、如果有<code>home</code>，就会从<code>home</code>进入</li>
+<li>2、如果没有<code>home</code>，有<code>routes</code>，并且<code>routes</code>指定了入口<code>&#39;/&#39;</code>，就会从<code>routes</code>的<code>/</code>进入</li>
+<li>3、如果上面两个都没有，或者路由达不到，如果有<code>onGenerateRoute</code>，就会进入生成的路由</li>
+<li>4、如果连上面的生成路由也没有，就会走到<code>onUnknownRoute</code>，不明所以的路由，比如网络连接失败，可以进入断网的页面</li>
+</ul>
+</li>
+</ul>
+<h3 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h3><ul>
+<li>声明程序中有哪个通过<code>Navigation.of(context).pushNamed</code>跳转的路由</li>
+<li>参数以键值对的形式传递<ul>
+<li><code>key</code>:路由名字</li>
+<li><code>value</code>:对应的<code>Widget</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">routes: &#123;</span><br><span class="line">  <span class="string">'/home'</span>: (BuildContext content) =&gt; Home(),</span><br><span class="line">  <span class="string">'/mine'</span>: (BuildContext content) =&gt; Mine(),</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="initialRoute"><a href="#initialRoute" class="headerlink" title="initialRoute"></a>initialRoute</h3><ul>
+<li>初始化路由, 当用户进入程序时，自动打开对应的路由(home还是位于一级)</li>
+<li>传入的是上面<code>routes</code>的<code>key</code>, 跳转的是对应的<code>Widget</code>（如果该<code>Widget</code>有<code>Scaffold.AppBar</code>,并不做任何修改，左上角有返回键）</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">routes: &#123;</span><br><span class="line">  <span class="string">'/home'</span>: (BuildContext content) =&gt; Home(),</span><br><span class="line">  <span class="string">'/mine'</span>: (BuildContext content) =&gt; Mine(),</span><br><span class="line">&#125;,</span><br><span class="line">initialRoute: <span class="string">'/mine'</span>,</span><br></pre></td></tr></table></figure>
+<h3 id="onGenerateRoute"><a href="#onGenerateRoute" class="headerlink" title="onGenerateRoute"></a>onGenerateRoute</h3><p>当通过<code>Navigation.of(context).pushNamed</code>跳转路由时，<br>在<code>routes</code>查找不到时，会调用该方法</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">onGenerateRoute: (RouteSettings setting) &#123;</span><br><span class="line">  <span class="keyword">return</span> MaterialPageRoute(</span><br><span class="line">    settings: setting,</span><br><span class="line">    builder: (BuildContext content) =&gt; Text(<span class="string">'生成一个路由'</span>)</span><br><span class="line">  );</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="onUnknownRoute"><a href="#onUnknownRoute" class="headerlink" title="onUnknownRoute"></a>onUnknownRoute</h3><p>未知路由, 效果跟<code>onGenerateRoute</code>一样, 在未设置<code>onGenerateRoute</code>的情况下, 才会去调用<code>onUnknownRoute</code></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">onUnknownRoute: (RouteSettings setting) &#123;</span><br><span class="line">  <span class="keyword">return</span> MaterialPageRoute(</span><br><span class="line">    settings: setting,</span><br><span class="line">    builder: (BuildContext content) =&gt; Text(<span class="string">'这是一个未知路由'</span>)</span><br><span class="line">  );</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="navigatorObservers"><a href="#navigatorObservers" class="headerlink" title="navigatorObservers"></a>navigatorObservers</h3><ul>
+<li>路由观察器，当调用<code>Navigator</code>的相关方法时，会回调相关的操作</li>
+<li>比如<code>push</code>，<code>pop</code>，<code>remove</code>，<code>replace</code>是可以拿到当前路由和后面路由的信息</li>
+<li>获取路由的名字: <code>route.settings.name</code></li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// navigatorObservers: [HomeObserver()],</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 继承NavigatorObserver</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HomeObserver</span> <span class="keyword">extends</span> <span class="title">NavigatorObserver</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> didPush(Route route, Route previousRoute) &#123;</span><br><span class="line">    <span class="keyword">super</span>.didPush(route, previousRoute);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取路由的名字</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'name = <span class="subst">$&#123;route.settings.name&#125;</span>'</span>);</span><br><span class="line">    <span class="comment">// 获取返回的内容</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'reaule = <span class="subst">$&#123;route.currentResult&#125;</span>'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="builder"><a href="#builder" class="headerlink" title="builder"></a>builder</h3><p>如果设置了这个参数, 那么将会优先渲染这个<code>builder</code>, 而不会在走路由</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">builder: (BuildContext content, Widget widget) =&gt; Text(<span class="string">'builder'</span>),</span><br></pre></td></tr></table></figure>
+<h3 id="title"><a href="#title" class="headerlink" title="title"></a>title</h3><ul>
+<li>设备用于识别用户的应用程序的单行描述</li>
+<li>在<code>Android</code>上，标题显示在任务管理器的应用程序快照上方，当用户按下“最近的应用程序”按钮时会显示这些快照</li>
+<li>在<code>iOS</code>上，无法使用此值。来自应用程序的<code>Info.plist</code>的<code>CFBundleDisplayName</code>在任何时候都会被引用，否则就会引用<code>CFBundleName</code></li>
+<li>要提供初始化的标题，可以用<code>onGenerateTitle</code></li>
+</ul>
+<h2 id="CupertinoApp"><a href="#CupertinoApp" class="headerlink" title="CupertinoApp"></a>CupertinoApp</h2><p>用于创建<code>iOS</code>风格应用的顶层组件, 相关属性和<code>MaterialApp</code>相比只是少了<code>theme</code>和<code>debugShowMaterialGrid</code>, 其他属性都一样, 如下所示</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CupertinoApp(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="keyword">this</span>.navigatorKey,</span><br><span class="line">    <span class="keyword">this</span>.home,</span><br><span class="line">    <span class="keyword">this</span>.routes = <span class="keyword">const</span> &lt;<span class="built_in">String</span>, WidgetBuilder&gt;&#123;&#125;,</span><br><span class="line">    <span class="keyword">this</span>.initialRoute,</span><br><span class="line">    <span class="keyword">this</span>.onGenerateRoute,</span><br><span class="line">    <span class="keyword">this</span>.onUnknownRoute,</span><br><span class="line">    <span class="keyword">this</span>.navigatorObservers = <span class="keyword">const</span> &lt;NavigatorObserver&gt;[],</span><br><span class="line">    <span class="keyword">this</span>.builder,</span><br><span class="line">    <span class="keyword">this</span>.title = <span class="string">''</span>,</span><br><span class="line">    <span class="keyword">this</span>.onGenerateTitle,</span><br><span class="line">    <span class="keyword">this</span>.color,</span><br><span class="line">    <span class="keyword">this</span>.locale,</span><br><span class="line">    <span class="keyword">this</span>.localizationsDelegates,</span><br><span class="line">    <span class="keyword">this</span>.localeListResolutionCallback,</span><br><span class="line">    <span class="keyword">this</span>.localeResolutionCallback,</span><br><span class="line">    <span class="keyword">this</span>.supportedLocales = <span class="keyword">const</span> &lt;Locale&gt;[Locale(<span class="string">'en'</span>, <span class="string">'US'</span>)],</span><br><span class="line">    <span class="keyword">this</span>.showPerformanceOverlay = <span class="keyword">false</span>,</span><br><span class="line">    <span class="keyword">this</span>.checkerboardRasterCacheImages = <span class="keyword">false</span>,</span><br><span class="line">    <span class="keyword">this</span>.checkerboardOffscreenLayers = <span class="keyword">false</span>,</span><br><span class="line">    <span class="keyword">this</span>.showSemanticsDebugger = <span class="keyword">false</span>,</span><br><span class="line">    <span class="keyword">this</span>.debugShowCheckedModeBanner = <span class="keyword">true</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>使用示例如下</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> CupertinoApp(</span><br><span class="line">  title: <span class="string">'Cupertino App'</span>,</span><br><span class="line">  color: Colors.red,</span><br><span class="line">  home: CupertinoPageScaffold(</span><br><span class="line">    backgroundColor: Colors.yellow,</span><br><span class="line">    resizeToAvoidBottomInset: <span class="keyword">true</span>,</span><br><span class="line">    navigationBar: CupertinoNavigationBar(</span><br><span class="line">      middle: Text(<span class="string">'Cupertino App Bar'</span>),</span><br><span class="line">      backgroundColor: Colors.blue,</span><br><span class="line">    ),</span><br><span class="line">    child: Center(</span><br><span class="line">      child: Container(</span><br><span class="line">        child: Text(<span class="string">'Hello World'</span>),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="CupertinoPageScaffold"><a href="#CupertinoPageScaffold" class="headerlink" title="CupertinoPageScaffold"></a>CupertinoPageScaffold</h2><p>一个<code>iOS</code>风格的页面的基本布局结构。包含内容和导航栏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const CupertinoPageScaffold(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    // 设置导航栏, 后面会详解</span><br><span class="line">    this.navigationBar,</span><br><span class="line">    // 设置内容页面的背景色</span><br><span class="line">    this.backgroundColor = CupertinoColors.white,</span><br><span class="line">    // 子widget是否应该自动调整自身大小以适应底部安全距离</span><br><span class="line">    this.resizeToAvoidBottomInset = true,</span><br><span class="line">    @required this.child,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="navigationBar"><a href="#navigationBar" class="headerlink" title="navigationBar"></a>navigationBar</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CupertinoNavigationBar(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">//导航栏左侧组件</span></span><br><span class="line">    <span class="keyword">this</span>.leading,</span><br><span class="line">    <span class="comment">//是否显示左边组件, 好像无效</span></span><br><span class="line">    <span class="keyword">this</span>.automaticallyImplyLeading = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">//是否显示中间组件, 好像无效</span></span><br><span class="line">    <span class="keyword">this</span>.automaticallyImplyMiddle = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">//导航栏左侧组件的右边的文本, 好像无效</span></span><br><span class="line">    <span class="keyword">this</span>.previousPageTitle,</span><br><span class="line">    <span class="comment">// 导航栏中间组件</span></span><br><span class="line">    <span class="keyword">this</span>.middle,</span><br><span class="line">    <span class="comment">// 导航栏右侧组件    </span></span><br><span class="line">    <span class="keyword">this</span>.backgroundColor = _kDefaultNavBarBackgroundColor,</span><br><span class="line">    <span class="comment">// 设置左右组件的内边距, EdgeInsetsDirectional</span></span><br><span class="line">    <span class="keyword">this</span>.padding,</span><br><span class="line">    <span class="comment">//左侧默认组件和左侧组件右边文本的颜色</span></span><br><span class="line">    <span class="keyword">this</span>.actionsForegroundColor = CupertinoColors.activeBlue,</span><br><span class="line">    <span class="keyword">this</span>.transitionBetweenRoutes = <span class="keyword">true</span>,</span><br><span class="line">    <span class="keyword">this</span>.heroTag = _defaultHeroTag,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>使用示例</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> CupertinoApp(</span><br><span class="line">  title: <span class="string">'Cupertino App'</span>,</span><br><span class="line">  color: Colors.red,</span><br><span class="line">  debugShowCheckedModeBanner: <span class="keyword">false</span>,</span><br><span class="line">  home: CupertinoPageScaffold(</span><br><span class="line">    backgroundColor: Colors.yellow,</span><br><span class="line">    resizeToAvoidBottomInset: <span class="keyword">true</span>,</span><br><span class="line">    navigationBar: CupertinoNavigationBar(</span><br><span class="line">      leading: Icon(Icons.person),</span><br><span class="line">      automaticallyImplyLeading: <span class="keyword">false</span>,</span><br><span class="line">      automaticallyImplyMiddle: <span class="keyword">false</span>,</span><br><span class="line">      previousPageTitle: <span class="string">'返回'</span>,</span><br><span class="line">      middle: Text(<span class="string">'Cupertino App Bar'</span>),</span><br><span class="line">      trailing: Icon(Icons.money_off),</span><br><span class="line">      border: Border.all(),</span><br><span class="line">      backgroundColor: Colors.white,</span><br><span class="line">      padding: EdgeInsetsDirectional.fromSTEB(<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>),</span><br><span class="line">      actionsForegroundColor: Colors.red,</span><br><span class="line">      transitionBetweenRoutes: <span class="keyword">false</span>,</span><br><span class="line">      heroTag: Text(<span class="string">'data'</span>),</span><br><span class="line">    ),</span><br><span class="line">    child: Center(</span><br><span class="line">      child: Container(</span><br><span class="line">        child: Text(<span class="string">'Hello World'</span>),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="Scaffold"><a href="#Scaffold" class="headerlink" title="Scaffold"></a>Scaffold</h2><ul>
+<li><code>Scaffold</code>通常被用作<code>MaterialApp</code>的子<code>Widget</code>(安卓风格)，它会填充可用空间，占据整个窗口或设备屏幕</li>
+<li><code>Scaffold</code>提供了大多数应用程序都应该具备的功能，例如顶部的<code>appBar</code>，底部的<code>bottomNavigationBar</code>，隐藏的侧边栏<code>drawer</code>等</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Scaffold(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 显示在界面顶部的一个AppBar</span></span><br><span class="line">    <span class="keyword">this</span>.appBar,</span><br><span class="line">    <span class="comment">// 当前界面所显示的主要内容Widget</span></span><br><span class="line">    <span class="keyword">this</span>.body,</span><br><span class="line">    <span class="comment">// 悬浮按钮, 默认在右下角位置显示</span></span><br><span class="line">    <span class="keyword">this</span>.floatingActionButton,</span><br><span class="line">    <span class="comment">// 设置悬浮按钮的位置</span></span><br><span class="line">    <span class="keyword">this</span>.floatingActionButtonLocation,</span><br><span class="line">    <span class="comment">// 悬浮按钮出现消失的动画</span></span><br><span class="line">    <span class="keyword">this</span>.floatingActionButtonAnimator,</span><br><span class="line">    <span class="comment">// 在底部呈现一组button，显示于[bottomNavigationBar]之上，[body]之下</span></span><br><span class="line">    <span class="keyword">this</span>.persistentFooterButtons,</span><br><span class="line">    <span class="comment">// 一个垂直面板，显示于左侧，初始处于隐藏状态</span></span><br><span class="line">    <span class="keyword">this</span>.drawer,</span><br><span class="line">    <span class="comment">// 一个垂直面板，显示于右侧，初始处于隐藏状态</span></span><br><span class="line">    <span class="keyword">this</span>.endDrawer,</span><br><span class="line">    <span class="comment">// 出现于底部的一系列水平按钮</span></span><br><span class="line">    <span class="keyword">this</span>.bottomNavigationBar,</span><br><span class="line">    <span class="comment">// 底部的持久化提示框</span></span><br><span class="line">    <span class="keyword">this</span>.bottomSheet,</span><br><span class="line">    <span class="comment">// 背景色</span></span><br><span class="line">    <span class="keyword">this</span>.backgroundColor,</span><br><span class="line">    <span class="comment">// 重新计算布局空间大小</span></span><br><span class="line">    <span class="keyword">this</span>.resizeToAvoidBottomPadding = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">// 是否显示到底部, 默认为true将显示到顶部状态栏</span></span><br><span class="line">    <span class="keyword">this</span>.primary = <span class="keyword">true</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="appBar"><a href="#appBar" class="headerlink" title="appBar"></a>appBar</h3><p>设置导航栏, 接受一个抽象类<code>PreferredSizeWidget</code>, 这里使用其子类<code>AppBar</code>进行设置, 后面会详解</p>
+<h3 id="floatingActionButton"><a href="#floatingActionButton" class="headerlink" title="floatingActionButton"></a>floatingActionButton</h3><ul>
+<li>设置一个悬浮按钮, 默认在右下角位置显示, 这里使用<code>FloatingActionButton</code>设置</li>
+<li><code>FloatingActionButton</code>是<code>Material</code>设计规范中的一种特殊<code>Button</code>，通常悬浮在页面的某一个位置作为某种常用动作的快捷入口, 后面会详解</li>
+</ul>
+<h3 id="floatingActionButtonLocation"><a href="#floatingActionButtonLocation" class="headerlink" title="floatingActionButtonLocation"></a>floatingActionButtonLocation</h3><p>设置悬浮按钮的位置, 接受一个抽象类<code>FloatingActionButtonLocation</code></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 右下角, 距离底部有一点距离, 默认值</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> FloatingActionButtonLocation endFloat = _EndFloatFabLocation();</span><br><span class="line"><span class="comment">// 中下方, 距离底部有一点距离</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> FloatingActionButtonLocation centerFloat = _CenterFloatFabLocation();</span><br><span class="line"><span class="comment">// 右下角, 距离底部没有间距</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> FloatingActionButtonLocation endDocked = _EndDockedFloatingActionButtonLocation();</span><br><span class="line"><span class="comment">// 中下方, 距离底部没有间距</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> FloatingActionButtonLocation centerDocked = _CenterDockedFloatingActionButtonLocation();</span><br></pre></td></tr></table></figure>
+<h2 id="FloatingActionButton"><a href="#FloatingActionButton" class="headerlink" title="FloatingActionButton"></a>FloatingActionButton</h2><p>在<code>Material Design</code>中，一般用来处理界面中最常用，最基础的用户动作。它一般出现在屏幕内容的前面，通常是一个圆形，中间有一个图标, 有以下几种构造函数</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> FloatingActionButton(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="keyword">this</span>.child,</span><br><span class="line">    <span class="comment">// 文字解释, 按钮呗长按时显示</span></span><br><span class="line">    <span class="keyword">this</span>.tooltip,</span><br><span class="line">    <span class="comment">// 前景色</span></span><br><span class="line">    <span class="keyword">this</span>.foregroundColor,</span><br><span class="line">    <span class="comment">// 背景色</span></span><br><span class="line">    <span class="keyword">this</span>.backgroundColor,</span><br><span class="line">    <span class="comment">// hero效果使用的tag,系统默认会给所有FAB使用同一个tag,方便做动画效果</span></span><br><span class="line">    <span class="keyword">this</span>.heroTag = <span class="keyword">const</span> _DefaultHeroTag(),</span><br><span class="line">    <span class="comment">// 未点击时阴影值，默认6.0</span></span><br><span class="line">    <span class="keyword">this</span>.elevation = <span class="number">6.0</span>,</span><br><span class="line">    <span class="comment">// 点击时阴影值，默认12.0</span></span><br><span class="line">    <span class="keyword">this</span>.highlightElevation = <span class="number">12.0</span>,</span><br><span class="line">    <span class="comment">// 点击事件监听</span></span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.onPressed,</span><br><span class="line">    <span class="comment">// 是否为“mini”类型，默认为false</span></span><br><span class="line">    <span class="keyword">this</span>.mini = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 设置阴影, 设置shape时，默认的elevation将会失效,默认为CircleBorder</span></span><br><span class="line">    <span class="keyword">this</span>.shape = <span class="keyword">const</span> CircleBorder(),</span><br><span class="line">    <span class="comment">// 剪切样式</span></span><br><span class="line">    <span class="keyword">this</span>.clipBehavior = Clip.none,</span><br><span class="line">    <span class="comment">// 设置点击区域大小的样式, MaterialTapTargetSize的枚举值</span></span><br><span class="line">    <span class="keyword">this</span>.materialTapTargetSize,</span><br><span class="line">    <span class="comment">// 是否为”extended”类型</span></span><br><span class="line">    <span class="keyword">this</span>.isExtended = <span class="keyword">false</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="mini"><a href="#mini" class="headerlink" title="mini"></a>mini</h3><ul>
+<li>是否为<code>mini</code>类型，默认为<code>false</code></li>
+<li><code>FloatingActionButton</code>分为三种类型：<code>regular</code>, <code>mini</code>, <code>extended</code></li>
+<li><code>regular</code>和<code>mini</code>两种类型通过默认的构造方法实现, 只有图片</li>
+<li>大小限制如下</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> BoxConstraints _kSizeConstraints = <span class="keyword">const</span> BoxConstraints.tightFor(</span><br><span class="line">  width: <span class="number">56.0</span>,</span><br><span class="line">  height: <span class="number">56.0</span>,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> BoxConstraints _kMiniSizeConstraints = <span class="keyword">const</span> BoxConstraints.tightFor(</span><br><span class="line">  width: <span class="number">40.0</span>,</span><br><span class="line">  height: <span class="number">40.0</span>,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> BoxConstraints _kExtendedSizeConstraints = <span class="keyword">const</span> BoxConstraints(</span><br><span class="line">  minHeight: <span class="number">48.0</span>,</span><br><span class="line">  maxHeight: <span class="number">48.0</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="isExtended"><a href="#isExtended" class="headerlink" title="isExtended"></a>isExtended</h3><ul>
+<li>是否为<code>extended</code>类型, 设置为<code>true</code>即可</li>
+<li>除此之外, 还可以使用<code>extended</code>构造函数创建该类型</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">FloatingActionButton.extended(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="keyword">this</span>.tooltip,</span><br><span class="line">    <span class="keyword">this</span>.foregroundColor,</span><br><span class="line">    <span class="keyword">this</span>.backgroundColor,</span><br><span class="line">    <span class="keyword">this</span>.heroTag = <span class="keyword">const</span> _DefaultHeroTag(),</span><br><span class="line">    <span class="keyword">this</span>.elevation = <span class="number">6.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.highlightElevation = <span class="number">12.0</span>,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.onPressed,</span><br><span class="line">    <span class="keyword">this</span>.shape = <span class="keyword">const</span> StadiumBorder(),</span><br><span class="line">    <span class="keyword">this</span>.isExtended = <span class="keyword">true</span>,</span><br><span class="line">    <span class="keyword">this</span>.materialTapTargetSize,</span><br><span class="line">    <span class="keyword">this</span>.clipBehavior = Clip.none,</span><br><span class="line">    <span class="comment">// 设置图片</span></span><br><span class="line">    <span class="meta">@required</span> Widget icon,</span><br><span class="line">    <span class="comment">// 设置文字</span></span><br><span class="line">    <span class="meta">@required</span> Widget label,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>从参数上看差异并不大，只是把默认构造方法中的<code>child</code>换成了<code>icon</code>和<code>label</code>，不过通过下面的代码可以看到，传入的<code>label</code>和<code>icon</code>也是用来构建<code>child</code>的，不过使用的是<code>Row</code>来做一层包装而已</p>
+<h2 id="AppBar"><a href="#AppBar" class="headerlink" title="AppBar"></a>AppBar</h2><p><code>AppBar</code>是一个<code>Material</code>风格的导航栏，它可以设置标题、导航栏菜单、底部<code>Tab</code>等</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">AppBar(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 导航栏左侧weidget</span></span><br><span class="line">    <span class="keyword">this</span>.leading,</span><br><span class="line">    <span class="comment">// 如果leading为null，是否自动实现默认的leading按钮</span></span><br><span class="line">    <span class="keyword">this</span>.automaticallyImplyLeading = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">// 导航栏标题</span></span><br><span class="line">    <span class="keyword">this</span>.title,</span><br><span class="line">    <span class="comment">// 导航栏右侧按钮, 接受一个数组</span></span><br><span class="line">    <span class="keyword">this</span>.actions,</span><br><span class="line">    <span class="comment">// 一个显示在AppBar下方的控件，高度和AppBar高度一样，可以实现一些特殊的效果，该属性通常在SliverAppBar中使用</span></span><br><span class="line">    <span class="keyword">this</span>.flexibleSpace,</span><br><span class="line">    <span class="comment">// 一个AppBarBottomWidget对象, 设置TabBar</span></span><br><span class="line">    <span class="keyword">this</span>.bottom,</span><br><span class="line">    <span class="comment">//中控件的z坐标顺序，默认值为4，对于可滚动的SliverAppBar，当 SliverAppBar和内容同级的时候，该值为0，当内容滚动 SliverAppBar 变为 Toolbar 的时候，修改elevation的值</span></span><br><span class="line">    <span class="keyword">this</span>.elevation = <span class="number">4.0</span>,</span><br><span class="line">    <span class="comment">// 背景颜色，默认值为 ThemeData.primaryColor。改值通常和下面的三个属性一起使用</span></span><br><span class="line">    <span class="keyword">this</span>.backgroundColor,</span><br><span class="line">    <span class="comment">// 状态栏的颜色, 黑白两种, 取值: Brightness.dark</span></span><br><span class="line">    <span class="keyword">this</span>.brightness,</span><br><span class="line">    <span class="comment">// 设置导航栏上图标的颜色、透明度、和尺寸信息</span></span><br><span class="line">    <span class="keyword">this</span>.iconTheme,</span><br><span class="line">    <span class="comment">// 设置导航栏上文字样式</span></span><br><span class="line">    <span class="keyword">this</span>.textTheme,</span><br><span class="line">    <span class="comment">// 导航栏的内容是否显示在顶部, 状态栏的下面</span></span><br><span class="line">    <span class="keyword">this</span>.primary = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">// 标题是否居中显示，默认值根据不同的操作系统，显示方式不一样</span></span><br><span class="line">    <span class="keyword">this</span>.centerTitle,</span><br><span class="line">    <span class="comment">// 标题间距，如果希望title占用所有可用空间，请将此值设置为0.0</span></span><br><span class="line">    <span class="keyword">this</span>.titleSpacing = NavigationToolbar.kMiddleSpacing,</span><br><span class="line">    <span class="comment">// 应用栏的工具栏部分透明度</span></span><br><span class="line">    <span class="keyword">this</span>.toolbarOpacity = <span class="number">1.0</span>,</span><br><span class="line">    <span class="comment">// 底部导航栏的透明度设置</span></span><br><span class="line">    <span class="keyword">this</span>.bottomOpacity = <span class="number">1.0</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="leading"><a href="#leading" class="headerlink" title="leading"></a>leading</h3><p>导航栏左侧<code>weidget</code></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> Widget leading;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例</span></span><br><span class="line">leading: Icon(Icons.home),</span><br></pre></td></tr></table></figure>
+<h3 id="actions"><a href="#actions" class="headerlink" title="actions"></a>actions</h3><p>导航栏右侧按钮, 接受一个数组</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="built_in">List</span>&lt;Widget&gt; actions;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例</span></span><br><span class="line">actions: &lt;Widget&gt;[</span><br><span class="line">    Icon(Icons.add),</span><br><span class="line">    Icon(Icons.home),</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+<h3 id="brightness"><a href="#brightness" class="headerlink" title="brightness"></a>brightness</h3><p>状态栏的颜色, 黑白两种</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 状态栏白色</span></span><br><span class="line">brightness: Brightness.dark,</span><br><span class="line"><span class="comment">// 状态栏黑色</span></span><br><span class="line">brightness: Brightness.light,</span><br></pre></td></tr></table></figure>
+<h3 id="iconTheme"><a href="#iconTheme" class="headerlink" title="iconTheme"></a>iconTheme</h3><p>设置导航栏上图标的颜色、透明度、和尺寸信息</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> IconThemeData(&#123;<span class="keyword">this</span>.color, <span class="built_in">double</span> opacity, <span class="keyword">this</span>.size&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例</span></span><br><span class="line">iconTheme: IconThemeData(color: Colors.white, opacity: <span class="number">0.56</span>, size: <span class="number">30</span>),</span><br></pre></td></tr></table></figure>
+<h2 id="TabBar"><a href="#TabBar" class="headerlink" title="TabBar"></a>TabBar</h2><ul>
+<li>在<code>AppBar</code>中通过<code>bottom</code>属性来添加一个导航栏底部<code>tab</code>按钮组, 接受一个<code>PreferredSizeWidget</code>类型</li>
+<li><code>PreferredSizeWidget</code>是一个抽象类, 这里我们使用<code>TabBar</code></li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TabBar</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> <span class="keyword">implements</span> <span class="title">PreferredSizeWidget</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> TabBar(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 数组,显示的标签内容,一般使用Tab对象,当然也可以是其他的Widget</span></span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.tabs,</span><br><span class="line">    <span class="comment">// TabController对象</span></span><br><span class="line">    <span class="keyword">this</span>.controller,</span><br><span class="line">    <span class="comment">// 是否可滚动</span></span><br><span class="line">    <span class="keyword">this</span>.isScrollable = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 指示器颜色</span></span><br><span class="line">    <span class="keyword">this</span>.indicatorColor,</span><br><span class="line">    <span class="comment">// 指示器高度</span></span><br><span class="line">    <span class="keyword">this</span>.indicatorWeight = <span class="number">2.0</span>,</span><br><span class="line">    <span class="comment">// 指示器内边距</span></span><br><span class="line">    <span class="keyword">this</span>.indicatorPadding = EdgeInsets.zero,</span><br><span class="line">    <span class="comment">// 设置选中的样式decoration，例如边框等</span></span><br><span class="line">    <span class="keyword">this</span>.indicator,</span><br><span class="line">    <span class="comment">// 指示器大小, 枚举值TabBarIndicatorSize</span></span><br><span class="line">    <span class="keyword">this</span>.indicatorSize,</span><br><span class="line">    <span class="comment">// 选中文字颜色</span></span><br><span class="line">    <span class="keyword">this</span>.labelColor,</span><br><span class="line">    <span class="comment">// 选中文字样式</span></span><br><span class="line">    <span class="keyword">this</span>.labelStyle,</span><br><span class="line">    <span class="comment">// 文字内边距</span></span><br><span class="line">    <span class="keyword">this</span>.labelPadding,</span><br><span class="line">    <span class="comment">// 未选中文字颜色</span></span><br><span class="line">    <span class="keyword">this</span>.unselectedLabelColor,</span><br><span class="line">    <span class="comment">// 未选中文字样式</span></span><br><span class="line">    <span class="keyword">this</span>.unselectedLabelStyle,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Tab的构造函数</span></span><br><span class="line"><span class="keyword">const</span> Tab(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 文本</span></span><br><span class="line">    <span class="keyword">this</span>.text,</span><br><span class="line">    <span class="comment">// 图标</span></span><br><span class="line">    <span class="keyword">this</span>.icon,</span><br><span class="line">    <span class="comment">// 子widget</span></span><br><span class="line">    <span class="keyword">this</span>.child,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>效果如下</p>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/tabbar_scroll.png" alt="image"></p>
+<p>相关代码如下</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; args) =&gt; runApp(NewApp());</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewApp</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  State&lt;StatefulWidget&gt; createState() &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement createState</span></span><br><span class="line">    <span class="keyword">return</span> App();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">NewApp</span>&gt; <span class="title">with</span> <span class="title">SingleTickerProviderStateMixin</span> </span>&#123;</span><br><span class="line">  <span class="built_in">List</span> tabs = [<span class="string">'语文'</span>, <span class="string">'数学'</span>, <span class="string">'英语'</span>, <span class="string">'政治'</span>, <span class="string">'历史'</span>, <span class="string">'地理'</span>, <span class="string">'物理'</span>, <span class="string">'化学'</span>, <span class="string">'生物'</span>];</span><br><span class="line">  TabController _tabController;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> initState() &#123;</span><br><span class="line">    <span class="keyword">super</span>.initState();</span><br><span class="line">    _tabController = TabController(initialIndex: <span class="number">0</span>, length: tabs.length, vsync: <span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">        home: Scaffold(</span><br><span class="line">            appBar: AppBar(</span><br><span class="line">              title: Text(<span class="string">'CoderTitan'</span>),</span><br><span class="line">              backgroundColor: Colors.blueAccent,</span><br><span class="line">              brightness: Brightness.dark,</span><br><span class="line">              centerTitle: <span class="keyword">true</span>,</span><br><span class="line">              bottom: TabBar(</span><br><span class="line">                controller: _tabController,</span><br><span class="line">                tabs: tabs.map((e) =&gt; Tab(text: e)).toList(),</span><br><span class="line">                isScrollable: <span class="keyword">true</span>,</span><br><span class="line">                indicatorColor: Colors.red,</span><br><span class="line">                indicatorWeight: <span class="number">2</span>,</span><br><span class="line">                indicatorSize: TabBarIndicatorSize.label,</span><br><span class="line">                labelColor: Colors.orange,</span><br><span class="line">                unselectedLabelColor: Colors.white,</span><br><span class="line">                labelStyle: TextStyle(fontSize: <span class="number">18</span>, color: Colors.orange),</span><br><span class="line">                unselectedLabelStyle: TextStyle(fontSize: <span class="number">15</span>, color: Colors.white),</span><br><span class="line">              ),</span><br><span class="line">            ),</span><br><span class="line">            body: TabBarView(</span><br><span class="line">              controller: _tabController,</span><br><span class="line">              children: tabs.map((e) &#123;</span><br><span class="line">                <span class="keyword">return</span> Container(</span><br><span class="line">                  alignment: Alignment.center,</span><br><span class="line">                  child: Text(e, style:TextStyle(fontSize: <span class="number">50</span>)),</span><br><span class="line">                );</span><br><span class="line">              &#125;).toList(),</span><br><span class="line">            ),</span><br><span class="line">        ),</span><br><span class="line">        debugShowCheckedModeBanner: <span class="keyword">false</span>,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="BottomNavigationBar"><a href="#BottomNavigationBar" class="headerlink" title="BottomNavigationBar"></a>BottomNavigationBar</h2><ul>
+<li>在<code>Scaffold</code>中有一个属性<code>bottomNavigationBar</code>用于设置最底部的<code>tabbar</code>导航栏</li>
+<li>使用<code>Material</code>组件库提供的<code>BottomNavigationBar</code>和<code>BottomNavigationBarItem</code>两个<code>Widget</code>来实现Material风格的底部导航栏</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">BottomNavigationBar(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 子widget数组</span></span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.items,</span><br><span class="line">    <span class="comment">// 每一个item的点击事件</span></span><br><span class="line">    <span class="keyword">this</span>.onTap,</span><br><span class="line">    <span class="comment">// 当前选中的索引</span></span><br><span class="line">    <span class="keyword">this</span>.currentIndex = <span class="number">0</span>,</span><br><span class="line">    <span class="comment">// 类型</span></span><br><span class="line">    BottomNavigationBarType type,</span><br><span class="line">    <span class="comment">// 文字颜色</span></span><br><span class="line">    <span class="keyword">this</span>.fixedColor,</span><br><span class="line">    <span class="comment">// 图片大小</span></span><br><span class="line">    <span class="keyword">this</span>.iconSize = <span class="number">24.0</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="items"><a href="#items" class="headerlink" title="items"></a>items</h3><p>包含所有子<code>Widget</code>的数组</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="built_in">List</span>&lt;BottomNavigationBarItem&gt; items;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> BottomNavigationBarItem(&#123;</span><br><span class="line">    <span class="comment">// 未选中图片</span></span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.icon,</span><br><span class="line">    <span class="comment">// 标题</span></span><br><span class="line">    <span class="keyword">this</span>.title,</span><br><span class="line">    <span class="comment">// 选中的图片</span></span><br><span class="line">    Widget activeIcon,</span><br><span class="line">    <span class="comment">// 背景色</span></span><br><span class="line">    <span class="keyword">this</span>.backgroundColor,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://flutterchina.club/widgets/cupertino/" target="_blank" rel="noopener">Cupertino (iOS风格) Widgets</a></li>
+<li><a href="https://flutterchina.club/widgets/material/" target="_blank" rel="noopener">Material (安卓风格) Widgets</a></li>
+<li><a href="https://book.flutterchina.club/chapter5/material_scaffold.html" target="_blank" rel="noopener">Scaffold、TabBar和AppBar</a></li>
+</ul>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:17px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+    
+    
+      <div>
+        
+      </div>
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+
+	<div>欢迎您扫一扫下面的微信公众号，订阅我的博客！</div>
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="TitanKing wechat" style="width: 200px; max-width: 100%;">
+    
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpeg" alt="TitanKing 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="TitanKing 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    TitanKing
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://titanjun.top/Flutter中App的主题和导航.html" title="Flutter中App的主题和导航">https://titanjun.top/Flutter中App的主题和导航.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flutter/" rel="tag"><i class="fa fa-tag"></i> Flutter</a>
+          
+            <a href="/tags/Widget/" rel="tag"><i class="fa fa-tag"></i> Widget</a>
+          
+            <a href="/tags/Dart/" rel="tag"><i class="fa fa-tag"></i> Dart</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div style="color: rgba(0, 0, 0, 0.75); font-size:15px; letter-spacing:3px">(&gt;看完记得五星好评哦&lt;)</div>
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Flutter之可滑动Widget.html" rel="prev" title="Flutter之可滑动Widget">
+                <i class="fa fa-chevron-left"></i> Flutter之可滑动Widget
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Flutter之容器类Widget.html" rel="next" title="Flutter之容器类Widget">
+                Flutter之容器类Widget <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-hoofoo-share-title">分享到：</div>
+<div class="-hoofoo-share-buttons">
+    <div class="-mob-share-weibo -hoofoo-share-weibo -hoofoo-share-ui-button"><i class="fa fa-weibo" aria-hidden="true"></i></div>
+    <div class="-mob-share-weixin -hoofoo-share-weixin -hoofoo-share-ui-button"><i class="fa fa-weixin" aria-hidden="true"></i></div>
+    <div class="-mob-share-qq -hoofoo-share-qq -hoofoo-share-ui-button"><i class="fa fa-qq" aria-hidden="true"></i></div>
+    <div class="-mob-share-twitter -hoofoo-share-twitter -hoofoo-share-ui-button"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+    <div class="-hoofoo-share-more -hoofoo-share-ui-button -mob-share-open"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
+</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-renren"><p>人人网</p></li>
+        <li class="-mob-share-kaixin"><p>开心网</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=24fc497bb07bc"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/" class="site-author-image" rel="start" style="border:none">
+                <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="TitanKing">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">TitanKing</p>
+              <p class="site-description motion-element" itemprop="description">我还年轻，我渴望上路。带着最初的激情，追寻着最初的梦想，感受着最初的体验，我们上路吧!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">154</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CoderTitan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005056052774133/home?from=page_100505&mod=TAB&is_all=1#place" target="_blank" title="新浪微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>新浪微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/5bd5e9ed569e" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/ShmilyCoder" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a7a64ae6fb9a0636323fd06/posts" target="_blank" title="稀土掘金">
+                      
+                        <i class="fa fa-fw fa-database"></i>稀土掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:quanjunt@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/CoderTitan" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MaterialApp"><span class="nav-number">1.</span> <span class="nav-text">MaterialApp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#routes"><span class="nav-number">1.1.</span> <span class="nav-text">routes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#initialRoute"><span class="nav-number">1.2.</span> <span class="nav-text">initialRoute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#onGenerateRoute"><span class="nav-number">1.3.</span> <span class="nav-text">onGenerateRoute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#onUnknownRoute"><span class="nav-number">1.4.</span> <span class="nav-text">onUnknownRoute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#navigatorObservers"><span class="nav-number">1.5.</span> <span class="nav-text">navigatorObservers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#builder"><span class="nav-number">1.6.</span> <span class="nav-text">builder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#title"><span class="nav-number">1.7.</span> <span class="nav-text">title</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CupertinoApp"><span class="nav-number">2.</span> <span class="nav-text">CupertinoApp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CupertinoPageScaffold"><span class="nav-number">3.</span> <span class="nav-text">CupertinoPageScaffold</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#navigationBar"><span class="nav-number">4.</span> <span class="nav-text">navigationBar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scaffold"><span class="nav-number">5.</span> <span class="nav-text">Scaffold</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#appBar"><span class="nav-number">5.1.</span> <span class="nav-text">appBar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#floatingActionButton"><span class="nav-number">5.2.</span> <span class="nav-text">floatingActionButton</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#floatingActionButtonLocation"><span class="nav-number">5.3.</span> <span class="nav-text">floatingActionButtonLocation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FloatingActionButton"><span class="nav-number">6.</span> <span class="nav-text">FloatingActionButton</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mini"><span class="nav-number">6.1.</span> <span class="nav-text">mini</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isExtended"><span class="nav-number">6.2.</span> <span class="nav-text">isExtended</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AppBar"><span class="nav-number">7.</span> <span class="nav-text">AppBar</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#leading"><span class="nav-number">7.1.</span> <span class="nav-text">leading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#actions"><span class="nav-number">7.2.</span> <span class="nav-text">actions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brightness"><span class="nav-number">7.3.</span> <span class="nav-text">brightness</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iconTheme"><span class="nav-number">7.4.</span> <span class="nav-text">iconTheme</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TabBar"><span class="nav-number">8.</span> <span class="nav-text">TabBar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BottomNavigationBar"><span class="nav-number">9.</span> <span class="nav-text">BottomNavigationBar</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#items"><span class="nav-number">9.1.</span> <span class="nav-text">items</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">10.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+  
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站总访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<span>|</span>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共295.7k字</span>
+</div>
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'CoderTitan',
+            repo: 'CoderTitan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '218676a3ad406ae623f3974be77590653ee351d5',
+            
+                client_id: '47d71683076aa93948d8'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'm7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz',
+        appKey: '7X31Wl5lm6BXqgtV9k3sm7yI',
+        placeholder: '在这里说点什么吧...',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("m7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz", "7X31Wl5lm6BXqgtV9k3sm7yI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 10998,
+    el: 'wpac-rating',
+    color: 'f79533'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript">
+    //微信二维码点击背景关闭
+    $('body').delegate('.-mob-share-weixin-qrcode-bg','click', function(){
+         $(".-mob-share-weixin-qrcode-close").trigger("click");
+    }); 
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<script type="text/javascript" src="/source/js/src/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init();</script>
+
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

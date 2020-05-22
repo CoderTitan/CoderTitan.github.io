@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+  <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "a85a9be2"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Swift5.1.2,weak,unowned,内存管理,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="keywords" content="Swift5.1.2,weak,unowned,内存管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Swift的内存管理">
+<meta property="og:url" content="https://titanjun.top/浅谈Swift的内存管理.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/weak.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/weak1.png">
+<meta property="og:updated_time" content="2020-05-21T02:41:31.940Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈Swift的内存管理">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":3,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://titanjun.top/浅谈Swift的内存管理.html">
+
+
+
+
+
+  <title>浅谈Swift的内存管理 | TitanKing</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6dd8cf28eb4a5f6451fa0cd10918824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/CoderTitan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TitanKing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="/navigation/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br>
+            
+            导航
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/浅谈Swift的内存管理.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浅谈Swift的内存管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-01T00:00:00+08:00">
+                2020-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/浅谈Swift的内存管理.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/浅谈Swift的内存管理.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/浅谈Swift的内存管理.html" class="leancloud_visitors" data-flag-title="浅谈Swift的内存管理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,394 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  19 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun" alt="Swift"></p>
+<a id="more"></a>
+<ul>
+<li>原文博客地址: <a href="https://www.titanjun.top/浅谈Swift的内存管理.html" target="_blank" rel="noopener">浅谈Swift的内存管理</a></li>
+<li>2020年的第一篇博客, 算是2020年开了个好头, 希望能够继续坚持下去, 继续记录分享更多更高质量的文章</li>
+<li>今年期待已久的<code>Swift5.0</code>稳定版就已经发布了, 感兴趣的小伙伴可看我的这篇博客:<a href="https://www.titanjun.top/Swift%205.0%E6%96%B0%E7%89%B9%E6%80%A7%E6%9B%B4%E6%96%B0.html" target="_blank" rel="noopener">Swift 5.0新特性更新</a></li>
+<li>这篇博客可主要分享<code>Swift</code>的内存管理的相关介绍和剖析, 测试环境: <code>Xcode 11.2.1</code>, <code>Swift 5.1.2</code></li>
+</ul>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><ul>
+<li>和<code>OC</code>一样, 在<code>Swift</code>中也是采用基于引用计数的<code>ARC</code>内存管理方案(针对堆空间的内存管理)</li>
+<li>在<code>Swift</code>的<code>ARC</code>中有三种引用<ul>
+<li>强引用(<code>strong reference</code>)：默认情况下，代码中涉及到的引用都是强引用</li>
+<li>弱引用(<code>weak reference</code>)：通过<code>weak</code>定义弱引用</li>
+<li>无主引用(<code>unowned reference</code>)：通过<code>unowned</code>定义无主引用</li>
+</ul>
+</li>
+</ul>
+<h3 id="weak"><a href="#weak" class="headerlink" title="weak"></a>weak</h3><ul>
+<li>弱引用(<code>weak reference</code>)：通过<code>weak</code>定义弱引用<ul>
+<li>必须是可选类型的<code>var</code>，因为实例销毁后，<code>ARC</code>会自动将弱引用设置为<code>nil</code></li>
+<li><code>ARC</code>自动给弱引用设置<code>nil</code>时，不会触发属性观察</li>
+</ul>
+</li>
+<li>在介绍<code>weak</code>弱引用之前, 先看一下下面一段代码</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="keyword">deinit</span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"Animal deinit"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> animal = <span class="type">Animal</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"will deinit"</span>)</span><br><span class="line">test()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"did deinit"</span>)</span><br></pre></td></tr></table></figure>
+<p>上面这段代码中在<code>test</code>函数调用结束之后, 该作用的内存就会被回收, <code>animal</code>对象自然就会被销毁, 毫无疑问上面的输出结果应该是</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">will <span class="keyword">deinit</span></span><br><span class="line"><span class="type">Animal</span> <span class="keyword">deinit</span></span><br><span class="line">did <span class="keyword">deinit</span></span><br></pre></td></tr></table></figure>
+<p>同样下面这段代码, 同样也是在<code>a1</code>对象被置为<code>nil</code>的时候内存会被回收, 对象就会被销毁</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a1: <span class="type">Animal?</span> = <span class="type">Animal</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"will deinit"</span>)</span><br><span class="line">a1 = <span class="literal">nil</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"did deinit"</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>下面是一个被<code>weak</code>修饰的弱引用对象, </li>
+<li>我们都知道, 被<code>weak</code>修饰的弱引用对象, 在对象销毁的时候, 会被自动置为<code>nil</code></li>
+<li>所以被<code>weak</code>修饰的弱引用对象必须是可选类型的<code>var</code>, 两个条件缺一不可</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">weak</span> <span class="keyword">var</span> a2: <span class="type">Animal?</span> = <span class="type">Animal</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下两种方式都会报错的</span></span><br><span class="line"><span class="keyword">weak</span> <span class="keyword">var</span> a2: <span class="type">Animal</span> = <span class="type">Animal</span>()</span><br><span class="line"><span class="keyword">weak</span> <span class="keyword">let</span> a2: <span class="type">Animal?</span> = <span class="type">Animal</span>()</span><br></pre></td></tr></table></figure>
+<h3 id="unowned"><a href="#unowned" class="headerlink" title="unowned"></a>unowned</h3><ul>
+<li>无主引用(<code>unowned reference</code>)：通过<code>unowned</code>定义无主引用</li>
+<li>不会产生强引用，实例销毁后仍然存储着实例的内存地址(类似于OC中的<code>unsafe_unretained</code>）</li>
+<li>试图在实例销毁后访问无主引用，会产生运行时错误（如下野指针)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Fatal error: Attempted to read an unowned reference but object 0x0 was already deallocate</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>需要注意的是</p></div>
+
+<p><code>weak</code>、<code>unowned</code>只能用在类实例上面, 如下所示</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 该协议表示只能被类遵守, AnyObject代表所有的类实例</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Liveable</span>: <span class="title">AnyObject</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">weak</span> <span class="keyword">var</span> p0: <span class="type">Person?</span></span><br><span class="line"><span class="keyword">weak</span> <span class="keyword">var</span> p1: <span class="type">AnyObject?</span></span><br><span class="line"><span class="comment">// 所有能遵循Liveable协议的肯定都是类</span></span><br><span class="line"><span class="keyword">weak</span> <span class="keyword">var</span> p2: <span class="type">Liveable?</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">unowned</span> <span class="keyword">var</span> p10: <span class="type">Person?</span></span><br><span class="line"><span class="keyword">unowned</span> <span class="keyword">var</span> p11: <span class="type">AnyObject?</span></span><br><span class="line"><span class="keyword">unowned</span> <span class="keyword">var</span> p12: <span class="type">Liveable?</span></span><br></pre></td></tr></table></figure>
+<h2 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h2><ul>
+<li><code>weak</code>、<code>unowned</code>都能解决循环引用的问题，<code>unowned</code>要比<code>weak</code>少一些性能消耗</li>
+<li>在生命周期中可能会变为<code>nil</code>的使用<code>weak</code></li>
+<li>初始化赋值后再也不会变为<code>nil</code>的使用<code>unowne</code></li>
+<li>说道循环引用就自然想到了闭包</li>
+</ul>
+<h3 id="闭包的循环引用"><a href="#闭包的循环引用" class="headerlink" title="闭包的循环引用"></a>闭包的循环引用</h3><p>闭包表达式默认会对用到的外层对象产生额外的强引用（对外层对象进行了<code>retain</code>操作）, 看一下下面的代码中<code>deinit</code>会被调用吗?</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fn: (() -&gt; ())?</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">run</span><span class="params">()</span></span> &#123; <span class="built_in">print</span>(<span class="string">"run"</span>) &#125;</span><br><span class="line">    <span class="keyword">deinit</span> &#123; <span class="built_in">print</span>(<span class="string">"deinit"</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="type">Person</span>()</span><br><span class="line">    p.fn = &#123; </span><br><span class="line">        p.run()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>上面代码中, <code>p</code>对象强引用着<code>fn</code>闭包, <code>fn</code>闭包也强引用着<code>p</code>对象, 自然就造成了循环引用问题</li>
+<li>最后没有任何输出结果, 我们看一下上述代码的汇编执行过程</li>
+</ul>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/weak.png" alt="weak"></p>
+<ul>
+<li>从上面汇编代码可以看出, 整个过程经历了</li>
+<li>一次<code>init</code>引用计数为: 1</li>
+<li>一次<code>retain</code>引用计数会加(1), 结果为: 2</li>
+<li>一次<code>release</code>引用计数会减(1), 结果为: 1</li>
+<li>那么最后的引用计数就是1, 所以<code>p</code>对象肯定没有被释放</li>
+<li>下面是使用解决循环引用的情况<ul>
+<li>在闭包表达式的捕获列表里, 声明<code>weak</code>或<code>unowned</code>引用，用以解决循环引用问题</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用weak</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="type">Person</span>()</span><br><span class="line">    p.fn = &#123; [<span class="keyword">weak</span> p] <span class="keyword">in</span></span><br><span class="line">        p?.run()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用unowned</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="type">Person</span>()</span><br><span class="line">    p.fn = &#123; [<span class="keyword">unowned</span> p] <span class="keyword">in</span></span><br><span class="line">        p.run()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>上述两种方式都可以解决循环引用的问题, 运行后就发现<code>Person</code>对象调用了<code>deinit</code></li>
+<li>这里我们再看一下汇编代码如下, 从下面汇编代码中可以很明显看到, 引用计数最后为0, 对象被释放</li>
+</ul>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/weak1.png" alt="weak"></p>
+<div class="note success"><p>下面这段代码其实是等价的</p></div>
+
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="type">Person</span>()</span><br><span class="line">    p.fn = &#123; [<span class="keyword">unowned</span> p] <span class="keyword">in</span></span><br><span class="line">        p.run()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 和上面等价代码</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="type">Person</span>()</span><br><span class="line">    p.fn = &#123; [<span class="keyword">unowned</span> ownedP = p, <span class="keyword">weak</span> weakP = p] <span class="keyword">in</span></span><br><span class="line">        ownedP.run()</span><br><span class="line">        <span class="comment">// weakP?.run()</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>特别注意点</p></div>
+
+<p>这里要区分捕获列表和参数列表, 下面看看<code>fn</code>有参数的情况下</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fn: ((<span class="type">Int</span>) -&gt; ())?</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">run</span><span class="params">()</span></span> &#123; <span class="built_in">print</span>(<span class="string">"run"</span>) &#125;</span><br><span class="line">    <span class="keyword">deinit</span> &#123; <span class="built_in">print</span>(<span class="string">"deinit"</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="type">Person</span>()</span><br><span class="line">    p.fn = &#123;</span><br><span class="line">        (num) <span class="keyword">in</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"num = \(num)"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么闭包的参数列表和捕获列表同时存在的情况如下代码所示</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="type">Person</span>()</span><br><span class="line">    p.fn = &#123;</span><br><span class="line">        [<span class="keyword">weak</span> p](num) <span class="keyword">in</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"num = \(num)"</span>)</span><br><span class="line">        p?.run()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="self的循环引用"><a href="#self的循环引用" class="headerlink" title="self的循环引用"></a>self的循环引用</h3><ul>
+<li>如果想在引用闭包的同时引用<code>self</code>, 这个闭包必须是<code>lazy</code>的</li>
+<li>因为实例在初始化完毕之后才能引用<code>self</code></li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> fn: (() -&gt; ()) = &#123;</span><br><span class="line">        <span class="keyword">self</span>.run()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">run</span><span class="params">()</span></span> &#123; <span class="built_in">print</span>(<span class="string">"run"</span>) &#125;</span><br><span class="line">    <span class="keyword">deinit</span> &#123; <span class="built_in">print</span>(<span class="string">"deinit"</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="type">Person</span>()</span><br><span class="line">    p.fn()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>上面代码中如果<code>fn</code>闭包去掉<code>lazy</code>, 编译器会直接报错</li>
+<li>在<code>Swift</code>中, 为了保证初始化的安全, 设定了两段式初始化, 在所有的存储属性被初始化完成之后, 初始化器才能够使用<code>self</code></li>
+<li>而且在上述<code>fn</code>闭包中, 如果<code>fn</code>内部用到了实例成员(属性和方法), 则编译器会强制要求明确写出<code>self</code></li>
+<li><code>lazy</code>既保证只有在使用的时候才会被初始化一次</li>
+<li>但是上述代码同样存在循环引用的问题, <code>Person</code>对象强引用着<code>fn</code>闭包, <code>fn</code>闭包也强引用着<code>self</code></li>
+<li>同样使用<code>weak</code>和<code>unowned</code>解决循环引用的问题</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// weak解决循环引用</span></span><br><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> fn: (() -&gt; ()) = &#123;</span><br><span class="line">    [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">self</span>?.run()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// unowned解决循环引用</span></span><br><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> fn: (() -&gt; ()) = &#123;</span><br><span class="line">    [<span class="keyword">unowned</span> <span class="keyword">self</span>] <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">self</span>.run()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外再看看下面这种情况, 是都存在循环引用的问题</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> age: <span class="type">Int</span> = <span class="number">2</span></span><br><span class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> getAge: <span class="type">Int</span> = &#123;</span><br><span class="line">        <span class="keyword">self</span>.age</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">deinit</span> &#123; <span class="built_in">print</span>(<span class="string">"deinit"</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> p = <span class="type">Student</span>()</span><br><span class="line">    <span class="built_in">print</span>(p.getAge)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test()</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">deinit</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>通过输出结果看一看出调用了<code>deinit</code>, 说明对象最终被释放, 并未出现循环引用的问题, 下面比较一下</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 存在循环引用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> fn: (() -&gt; ()) = &#123;</span><br><span class="line">        <span class="keyword">self</span>.run()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">run</span><span class="params">()</span></span> &#123; <span class="built_in">print</span>(<span class="string">"run"</span>) &#125;</span><br><span class="line">    <span class="keyword">deinit</span> &#123; <span class="built_in">print</span>(<span class="string">"deinit"</span>) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不存在循环引用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> age: <span class="type">Int</span> = <span class="number">2</span></span><br><span class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> getAge: <span class="type">Int</span> = &#123;</span><br><span class="line">        <span class="keyword">self</span>.age</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">deinit</span> &#123; <span class="built_in">print</span>(<span class="string">"deinit"</span>) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>上述两种写法的区别, 本质上说</li>
+<li><code>Person</code>对象中的<code>fn</code>闭包属于闭包赋值</li>
+<li><code>Student</code>对象那个中的<code>getAge</code>属于闭包调用(类似函数调用)</li>
+<li>相当于在在<code>Student</code>对象调用<code>getAge</code>结束之后, 作用域内的变量就会被释放</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// getAge也可以写成如下形式</span></span><br><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> getAge: <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>.age</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以理解为</span></span><br><span class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> getAge: <span class="type">Int</span> = <span class="keyword">self</span>.age</span><br></pre></td></tr></table></figure>
+<h2 id="内存访问冲突"><a href="#内存访问冲突" class="headerlink" title="内存访问冲突"></a>内存访问冲突</h2><p>在<code>Swift</code>中的内存访问冲突主要在两个访问满足下列条件时发生</p>
+<ul>
+<li>至少一个是写入操作</li>
+<li>它们访问的是同一块内存</li>
+<li>它们的访问时间重叠(比如在同一个函数内)</li>
+<li>对比看看以下两个函数操作</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不存在内存访问冲突</span></span><br><span class="line"><span class="keyword">var</span> number = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plus</span><span class="params">(<span class="number">_</span> num: <span class="keyword">inout</span> Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> num + <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">number = plus(&amp;number)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 存在内存访问冲突</span></span><br><span class="line"><span class="keyword">var</span> step = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">increment</span><span class="params">(<span class="number">_</span> num: <span class="keyword">inout</span> Int)</span></span> &#123;</span><br><span class="line">    num += step</span><br><span class="line">&#125;</span><br><span class="line">increment(&amp;step)</span><br></pre></td></tr></table></figure>
+<p>上面第二部分代码就是同时对<code>step</code>变量执行读写操作, 运行时会报出如下错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Simultaneous accesses to 0x100002028, but modification requires exclusive access.</span><br></pre></td></tr></table></figure>
+<p>再看下面对于结构体和元组的使用, 这里先定义一个全局函数和一个结构体</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 改变两个传入参数的值, 读取并修改传入参数的值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">balance</span><span class="params">(<span class="number">_</span> x: <span class="keyword">inout</span> Int, <span class="number">_</span> y: <span class="keyword">inout</span> Int)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> sum = x + y</span><br><span class="line">    x = sum / <span class="number">2</span></span><br><span class="line">    y = sum - x</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义Player结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Player</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> health: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">var</span> energy: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">shareHealth</span><span class="params">(with teammate: <span class="keyword">inout</span> Player)</span></span> &#123;</span><br><span class="line">        balance(&amp;teammate.health, &amp;health)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再看下面的使用示例, 两者都会有一个内存访问冲突的错误</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里读写的是同一个maria</span></span><br><span class="line"><span class="keyword">var</span> maria = <span class="type">Player</span>(name: <span class="string">"Maria"</span>, health: <span class="number">50</span>, energy: <span class="number">10</span>)</span><br><span class="line">balance(&amp;maria.health, &amp;maria.energy)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里读写的是同一个tuple</span></span><br><span class="line"><span class="keyword">var</span> tuple = (health: <span class="number">10</span>, energy: <span class="number">20</span>)</span><br><span class="line">balance(&amp;tuple.health, &amp;tuple.energy)</span><br></pre></td></tr></table></figure>
+<p>但是有时候的确会有上面这种访问同一块内存的需求, 如果下面的条件满足, 就说明重叠访问结构体的属性是安全的</p>
+<ul>
+<li>访问的是实例存储属性, 不是计算属性或者类属性</li>
+<li>结构体是局部变量而非全局变量</li>
+<li>结构体要么没有被闭包捕获要么只被非逃逸闭包捕获</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里可以在局部作用域内定义成局部变量, 就不会有问题了</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> maria = <span class="type">Player</span>(name: <span class="string">"Maria"</span>, health: <span class="number">50</span>, energy: <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">var</span> tuple = (health: <span class="number">10</span>, energy: <span class="number">20</span>)</span><br><span class="line">    balance(&amp;tuple.health, &amp;tuple.energy)</span><br><span class="line">    balance(&amp;maria.health, &amp;maria.energy)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="type">Person</span>()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在<code>Swift</code>中<code>class</code>声明的类(<code>Person</code>)是引用类型, 初始化的<code>person</code>对象其本质上就是一个指针变量</li>
+<li>而<code>person</code>里面存储的就是这个指针变量的地址值, 也就可以根据这个地址值去访问被分配的内存空间</li>
+<li>指针在某种意义上被定性为不安全的, 举个例子:<ul>
+<li>当前指针变量的地址值对应的空间只有32个字节, 但有可能访问的是超过32个字节的空间, 这样就可能会出问题的</li>
+</ul>
+</li>
+</ul>
+<h3 id="指针分类"><a href="#指针分类" class="headerlink" title="指针分类"></a>指针分类</h3><p>在<code>Swift</code>中也有专门的指针类型，这些都被定性为<code>Unsafe</code>（不安全的），常见的有以下4种类型</p>
+<ul>
+<li><code>UnsafePointer&lt;Pointee&gt;</code>, 类似于C语言中的<code>const Pointee *</code>, 只能访问内存不能修改内存, 这里的<code>Pointee</code>是指泛型</li>
+<li><code>UnsafeMutablePointer&lt;Pointee&gt;</code>类似于C语言中的<code>Pointee *</code>, 可以访问和修改内存, 这里的<code>Pointee</code>是指泛型 </li>
+<li><code>UnsafeRawPointer</code>类似于<code>const void *</code>, 不支持泛型</li>
+<li><code>UnsafeMutableRawPointer</code>类似于<code>void</code>, 不支持泛型</li>
+</ul>
+<p>下面看一下具体的使用示例</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum1</span><span class="params">(<span class="number">_</span> ptr: UnsafeMutablePointer&lt;Int&gt;)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 通过访问pointee属性, 获取ptr指针的内存地址所存储的值</span></span><br><span class="line">    <span class="comment">// UnsafeMutablePointer的pointee属性是可读可写的</span></span><br><span class="line">    ptr.pointee += <span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum2</span><span class="params">(<span class="number">_</span> ptr: UnsafePointer&lt;Int&gt;)</span></span> &#123;</span><br><span class="line">    <span class="comment">// UnsafePointer的pointee属性是只读的</span></span><br><span class="line">    <span class="comment">// ptr.pointee += 10</span></span><br><span class="line">    <span class="built_in">print</span>(ptr.pointee)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum3</span><span class="params">(<span class="number">_</span> num: <span class="keyword">inout</span> Int)</span></span> &#123;</span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">    num += <span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 和inout输入输出参数一样接受变量的地址值</span></span><br><span class="line">sum1(&amp;age)</span><br><span class="line">sum2(&amp;age)</span><br><span class="line">sum3(&amp;age)</span><br><span class="line"><span class="built_in">print</span>(age)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum4</span><span class="params">(<span class="number">_</span> ptr: UnsafeMutableRawPointer)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 可读可写, 取值</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"age = "</span>, ptr.load(<span class="keyword">as</span>: <span class="type">Int</span>.<span class="keyword">self</span>))</span><br><span class="line">    <span class="comment">// 可读可写, 赋值</span></span><br><span class="line">    ptr.storeBytes(of: <span class="number">50</span>, <span class="keyword">as</span>: <span class="type">Int</span>.<span class="keyword">self</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum5</span><span class="params">(<span class="number">_</span> ptr: UnsafeRawPointer)</span></span> &#123;</span><br><span class="line">    <span class="comment">// 只读, 取值</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"age = "</span>, ptr.load(<span class="keyword">as</span>: <span class="type">Int</span>.<span class="keyword">self</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sum4(&amp;age)</span><br><span class="line">sum5(&amp;age)</span><br></pre></td></tr></table></figure>
+<h3 id="获得变量的指针"><a href="#获得变量的指针" class="headerlink" title="获得变量的指针"></a>获得变量的指针</h3><p><code>Swift</code>中有可以直接获取变量的指针的方法</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取可变的变量指针, value参数接受变量地址</span></span><br><span class="line">@inlinable <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">withUnsafeMutablePointer</span>&lt;T, Result&gt;<span class="params">(to value: <span class="keyword">inout</span> T, <span class="number">_</span> body: <span class="params">(UnsafeMutablePointer&lt;T&gt;)</span></span></span> <span class="keyword">throws</span> -&gt; <span class="type">Result</span>) <span class="keyword">rethrows</span> -&gt; <span class="type">Result</span></span><br><span class="line"><span class="comment">// 获取不可变的变量指针, value参数接受变量</span></span><br><span class="line">@inlinable <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">withUnsafePointer</span>&lt;T, Result&gt;<span class="params">(to value: T, <span class="number">_</span> body: <span class="params">(UnsafePointer&lt;T&gt;)</span></span></span> <span class="keyword">throws</span> -&gt; <span class="type">Result</span>) <span class="keyword">rethrows</span> -&gt; <span class="type">Result</span></span><br><span class="line"><span class="comment">// 获取不可变的变量指针, value参数接受变量地址</span></span><br><span class="line">@inlinable <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">withUnsafePointer</span>&lt;T, Result&gt;<span class="params">(to value: <span class="keyword">inout</span> T, <span class="number">_</span> body: <span class="params">(UnsafePointer&lt;T&gt;)</span></span></span> <span class="keyword">throws</span> -&gt; <span class="type">Result</span>) <span class="keyword">rethrows</span> -&gt; <span class="type">Result</span></span><br></pre></td></tr></table></figure>
+<p>上述方法中返回值默认是变量的指针地址, 也可以是其他的数据类型, 主要取决于<code>body</code>闭包的返回值, 返回值类型由闭包中的<code>Result</code>泛型决定</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> ptr1 = <span class="built_in">withUnsafeMutablePointer</span>(to: &amp;age) &#123; $<span class="number">0</span> &#125;   <span class="comment">// UnsafeMutablePointer&lt;Int&gt;</span></span><br><span class="line"><span class="keyword">var</span> ptr2 = <span class="built_in">withUnsafePointer</span>(to: &amp;age) &#123; $<span class="number">0</span> &#125;          <span class="comment">// UnsafePointer&lt;Int&gt;</span></span><br><span class="line">ptr1.pointee = <span class="number">22</span></span><br><span class="line"><span class="built_in">print</span>(ptr2.pointee) <span class="comment">// 22</span></span><br><span class="line"><span class="built_in">print</span>(ptr2)         <span class="comment">// 0x0000000100008310</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ptr3 = <span class="built_in">withUnsafeMutablePointer</span>(to: &amp;age) &#123; <span class="type">UnsafeMutableRawPointer</span>($<span class="number">0</span>) &#125;   <span class="comment">// UnsafeMutableRawPointer</span></span><br><span class="line"><span class="keyword">var</span> ptr4 = <span class="built_in">withUnsafePointer</span>(to: &amp;age) &#123; <span class="type">UnsafeRawPointer</span>($<span class="number">0</span>) &#125;                 <span class="comment">// UnsafeRawPointer</span></span><br><span class="line"><span class="comment">// as参数是需要存储什么类型的数据</span></span><br><span class="line">ptr3.storeBytes(of: <span class="number">33</span>, <span class="keyword">as</span>: <span class="type">Int</span>.<span class="keyword">self</span>)</span><br><span class="line"><span class="built_in">print</span>(ptr4.load(<span class="keyword">as</span>: <span class="type">Int</span>.<span class="keyword">self</span>)) <span class="comment">// 33</span></span><br><span class="line"><span class="built_in">print</span>(ptr4)         <span class="comment">// 0x0000000100008310</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建指针"><a href="#创建指针" class="headerlink" title="创建指针"></a>创建指针</h3><ul>
+<li>之前获取到的指针都是根据已经存在的内存获取的</li>
+<li>这里就看看重新分配一块内存指向堆空间</li>
+</ul>
+<h4 id="malloc"><a href="#malloc" class="headerlink" title="malloc"></a>malloc</h4><p><code>Swift</code>提供了<code>malloc</code>直接分配内存创建指针的方式</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据需要分配的内存大小创建一个指针</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">malloc</span><span class="params">(<span class="number">_</span> __size: Int)</span></span> -&gt; <span class="type">UnsafeMutableRawPointer!</span></span><br><span class="line"><span class="comment">// 释放内存</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">free</span><span class="params">(<span class="number">_</span>: UnsafeMutableRawPointer!)</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面这两个函数, 是赋值和取值的函数, 之前简单介绍过</span></span><br><span class="line"><span class="comment">// 参数一: 需要存储的值</span></span><br><span class="line"><span class="comment">// 参数二: 偏移量, 从第几个字节开始存储, 默认从第一个</span></span><br><span class="line"><span class="comment">// 参数三: 需要存储的值的类型</span></span><br><span class="line">@inlinable <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">storeBytes</span>&lt;T&gt;<span class="params">(of value: T, toByteOffset offset: Int = <span class="number">0</span>, <span class="keyword">as</span>: T.<span class="keyword">Type</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数一: 偏移量, 从第几个字节开始存储, 默认从第一个</span></span><br><span class="line"><span class="comment">// 参数二: 需要存储的值的类型</span></span><br><span class="line">@inlinable <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">load</span>&lt;T&gt;<span class="params">(fromByteOffset offset: Int = <span class="number">0</span>, <span class="keyword">as</span> type: T.<span class="keyword">Type</span>)</span></span> -&gt; <span class="type">T</span></span><br></pre></td></tr></table></figure>
+<p>代码示例如下</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建指针</span></span><br><span class="line"><span class="keyword">var</span> ptr = malloc(<span class="number">16</span>)</span><br><span class="line"><span class="comment">// 存储值</span></span><br><span class="line">ptr?.storeBytes(of: <span class="number">10</span>, <span class="keyword">as</span>: <span class="type">Int</span>.<span class="keyword">self</span>)</span><br><span class="line"><span class="comment">// 这里toByteOffset参数如果传0, 就会覆盖前8个字节的数据</span></span><br><span class="line">ptr?.storeBytes(of: <span class="number">12</span>, toByteOffset: <span class="number">8</span>, <span class="keyword">as</span>: <span class="type">Int</span>.<span class="keyword">self</span>)</span><br><span class="line"><span class="comment">// 取值</span></span><br><span class="line"><span class="built_in">print</span>(ptr?.load(<span class="keyword">as</span>: <span class="type">Int</span>.<span class="keyword">self</span>) ?? <span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(ptr?.load(fromByteOffset: <span class="number">8</span>, <span class="keyword">as</span>: <span class="type">Int</span>.<span class="keyword">self</span>) ?? <span class="number">0</span>)</span><br><span class="line"><span class="comment">// 销毁, 释放内存</span></span><br><span class="line">free(ptr)</span><br></pre></td></tr></table></figure>
+<h4 id="allocate"><a href="#allocate" class="headerlink" title="allocate"></a>allocate</h4><p>使用<code>allocate</code>方式创建指针, 代码示例如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// byteCount: 需要申请的字节数, alignment: 对其字节数</span><br><span class="line">var ptr2 = UnsafeMutableRawPointer.allocate(byteCount: 16, alignment: 1)</span><br><span class="line">// 存储</span><br><span class="line">ptr2.storeBytes(of: 9, as: Int.self)</span><br><span class="line"></span><br><span class="line">// 根据字节偏移存储</span><br><span class="line">// 这里的ptr3是ptr2偏移8个字节的新的指针地址</span><br><span class="line">var ptr3 = ptr2.advanced(by: 8)  // UnsafeMutableRawPointer</span><br><span class="line">ptr3.storeBytes(of: 12, as: Int.self)</span><br><span class="line"></span><br><span class="line">// 上面这种方式等价于</span><br><span class="line">ptr2.storeBytes(of: 12, toByteOffset: 8, as: Int.self)</span><br><span class="line"></span><br><span class="line">// 取值同样</span><br><span class="line">print(ptr2.load(as: Int.self))</span><br><span class="line">// 下面这两种取值方式也是一样的</span><br><span class="line">print(ptr2.advanced(by: 8).load(as: Int.self))</span><br><span class="line">print(ptr2.load(fromByteOffset: 8, as: Int.self))</span><br><span class="line"></span><br><span class="line">// 释放内存</span><br><span class="line">ptr2.deallocate()</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>这里需要注意的地方</p></div>
+
+<ul>
+<li>只有<code>UnsafeMutableRawPointer</code>才有<code>allocate</code>分配方法, <code>UnsafeRawPointer</code>是没有这个方法的</li>
+<li>下面说到的<code>UnsafeMutablePointer&lt;T&gt;</code>类型也是, <code>UnsafePointer&lt;T&gt;</code>没有<code>allocate</code>分配方法</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// capacity: 容量, 即可以存储3个Int类型的数据, 也就是24个字节</span></span><br><span class="line"><span class="keyword">var</span> ptr = <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int</span>&gt;.allocate(capacity: <span class="number">3</span>)</span><br><span class="line"><span class="comment">// 初始化内存, 用10初始化钱8个字节</span></span><br><span class="line">ptr.initialize(to: <span class="number">10</span>)</span><br><span class="line"><span class="comment">// 用10初始化前两个容量的内存, 即16个字节</span></span><br><span class="line">ptr.initialize(repeating: <span class="number">10</span>, <span class="built_in">count</span>: <span class="number">2</span>)</span><br><span class="line"><span class="comment">// 使用successor获取下一个存储位, 也就是下一个Int的位置</span></span><br><span class="line"><span class="keyword">var</span> ptr1 = ptr.successor()  <span class="comment">//  UnsafeMutablePointer&lt;Int&gt;</span></span><br><span class="line">ptr1.initialize(to: <span class="number">20</span>)</span><br><span class="line"><span class="comment">// 存储第三个Int值</span></span><br><span class="line">ptr.successor().successor().initialize(to: <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取值的两种方式</span></span><br><span class="line"><span class="built_in">print</span>(ptr.pointee)        <span class="comment">// 第一个值</span></span><br><span class="line"><span class="built_in">print</span>((ptr + <span class="number">1</span>).pointee)  <span class="comment">// 第二个值</span></span><br><span class="line"><span class="built_in">print</span>((ptr + <span class="number">2</span>).pointee)  <span class="comment">// 第三个值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面这种方式和上面等价</span></span><br><span class="line"><span class="built_in">print</span>(ptr[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(ptr[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(ptr[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前面如果使用了initialize, 则必须调用反初始化</span></span><br><span class="line"><span class="comment">// 而且count要和上面allocate(capacity: 3)的capacity一致, 否则会造成内存泄露的问题</span></span><br><span class="line">ptr.deinitialize(<span class="built_in">count</span>: <span class="number">3</span>)</span><br><span class="line">ptr.deallocate()</span><br></pre></td></tr></table></figure>
+<h3 id="指针之间的转换"><a href="#指针之间的转换" class="headerlink" title="指针之间的转换"></a>指针之间的转换</h3><p>前面提到过<code>Swift</code>中的指针类型有四种</p>
+<ul>
+<li><code>UnsafePointer&lt;Pointee&gt;</code>类似于<code>const Pointee *</code></li>
+<li><code>UnsafeMutablePointer&lt;Pointee&gt;</code>类似于<code>Pointee *</code></li>
+<li><code>UnsafeRawPointer</code>类似于<code>const void *</code></li>
+<li><code>UnsafeMutableRawPointer</code>类似于<code>void *</code></li>
+<li>那么上面的类型, 能否通过其中的一种创建另外一种指针呢, 下面我们来看一下</li>
+</ul>
+<h4 id="init"><a href="#init" class="headerlink" title="init"></a>init</h4><p><code>UnsafeMutableRawPointer</code>中有一个初始化方法可以根据<code>UnsafeMutablePointer</code>创建自身</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="type">T</span>&gt;(<span class="number">_</span> other: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">T</span>&gt;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ptr = <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int</span>&gt;.allocate(capacity: <span class="number">3</span>)</span><br><span class="line"><span class="keyword">var</span> ptr1 = <span class="type">UnsafeMutableRawPointer</span>(ptr)</span><br></pre></td></tr></table></figure>
+<h4 id="assumingMemoryBound"><a href="#assumingMemoryBound" class="headerlink" title="assumingMemoryBound"></a>assumingMemoryBound</h4><p>反过来, <code>UnsafeMutableRawPointer</code>也提供了一个方法用于创建<code>UnsafePointer</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">assumingMemoryBound</span>&lt;T&gt;<span class="params">(to: T.<span class="keyword">Type</span>)</span></span> -&gt; <span class="type">UnsafePointer</span>&lt;<span class="type">T</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ptr = <span class="type">UnsafeMutableRawPointer</span>.allocate(byteCount: <span class="number">16</span>, alignment: <span class="number">1</span>)</span><br><span class="line"><span class="keyword">var</span> ptr1 = ptr.assumingMemoryBound(to: <span class="type">Int</span>.<span class="keyword">self</span>)</span><br><span class="line"><span class="comment">// 初始化前8个字节</span></span><br><span class="line">ptr1.pointee = <span class="number">11</span></span><br><span class="line"><span class="comment">// 初始化后8个字节</span></span><br><span class="line"><span class="comment">// 特别注意, 这里的(ptr + 8)是指ptr向后偏移8个字节, 要和之前的区分开</span></span><br><span class="line">(ptr + <span class="number">8</span>).assumingMemoryBound(to: <span class="type">Int</span>.<span class="keyword">self</span>).pointee = <span class="number">12</span></span><br><span class="line"></span><br><span class="line">ptr.deallocate()</span><br></pre></td></tr></table></figure>
+<h4 id="unsafeBitCast"><a href="#unsafeBitCast" class="headerlink" title="unsafeBitCast"></a>unsafeBitCast</h4><p><code>unsafeBitCast</code>是忽略数据类型的强制转换，不会因为数据类型的变化而改变原来的内存数</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把第一个参数类型转成第二个参数类型</span></span><br><span class="line">@inlinable <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">unsafeBitCast</span>&lt;T, U&gt;<span class="params">(<span class="number">_</span> x: T, to type: U.<span class="keyword">Type</span>)</span></span> -&gt; <span class="type">U</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ptr = <span class="type">UnsafeMutableRawPointer</span>.allocate(byteCount: <span class="number">16</span>, alignment: <span class="number">1</span>)</span><br><span class="line"><span class="built_in">unsafeBitCast</span>(ptr, to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Int</span>&gt;.<span class="keyword">self</span>).pointee = <span class="number">13</span></span><br><span class="line"><span class="comment">// 注意, 这里的(ptr + 8)是指ptr向后偏移8个字节, 要和之前的区分开</span></span><br><span class="line"><span class="built_in">unsafeBitCast</span>(ptr + <span class="number">8</span>, to: <span class="type">UnsafeMutablePointer</span>&lt;<span class="type">Double</span>&gt;.<span class="keyword">self</span>).pointee = <span class="number">14.23</span></span><br><span class="line"></span><br><span class="line">ptr.deallocate()</span><br></pre></td></tr></table></figure>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:17px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+    
+    
+      <div>
+        
+      </div>
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+
+	<div>欢迎您扫一扫下面的微信公众号，订阅我的博客！</div>
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="TitanKing wechat" style="width: 200px; max-width: 100%;">
+    
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpeg" alt="TitanKing 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="TitanKing 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    TitanKing
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://titanjun.top/浅谈Swift的内存管理.html" title="浅谈Swift的内存管理">https://titanjun.top/浅谈Swift的内存管理.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift5-1-2/" rel="tag"><i class="fa fa-tag"></i> Swift5.1.2</a>
+          
+            <a href="/tags/weak/" rel="tag"><i class="fa fa-tag"></i> weak</a>
+          
+            <a href="/tags/unowned/" rel="tag"><i class="fa fa-tag"></i> unowned</a>
+          
+            <a href="/tags/内存管理/" rel="tag"><i class="fa fa-tag"></i> 内存管理</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div style="color: rgba(0, 0, 0, 0.75); font-size:15px; letter-spacing:3px">(&gt;看完记得五星好评哦&lt;)</div>
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Flutter开发之Dart中的类和对象.html" rel="prev" title="Flutter开发之Dart中的类和对象">
+                <i class="fa fa-chevron-left"></i> Flutter开发之Dart中的类和对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/浅谈Swift的属性(Property).html" rel="next" title="浅谈Swift的属性(Property)">
+                浅谈Swift的属性(Property) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-hoofoo-share-title">分享到：</div>
+<div class="-hoofoo-share-buttons">
+    <div class="-mob-share-weibo -hoofoo-share-weibo -hoofoo-share-ui-button"><i class="fa fa-weibo" aria-hidden="true"></i></div>
+    <div class="-mob-share-weixin -hoofoo-share-weixin -hoofoo-share-ui-button"><i class="fa fa-weixin" aria-hidden="true"></i></div>
+    <div class="-mob-share-qq -hoofoo-share-qq -hoofoo-share-ui-button"><i class="fa fa-qq" aria-hidden="true"></i></div>
+    <div class="-mob-share-twitter -hoofoo-share-twitter -hoofoo-share-ui-button"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+    <div class="-hoofoo-share-more -hoofoo-share-ui-button -mob-share-open"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
+</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-renren"><p>人人网</p></li>
+        <li class="-mob-share-kaixin"><p>开心网</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=24fc497bb07bc"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/" class="site-author-image" rel="start" style="border:none">
+                <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="TitanKing">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">TitanKing</p>
+              <p class="site-description motion-element" itemprop="description">我还年轻，我渴望上路。带着最初的激情，追寻着最初的梦想，感受着最初的体验，我们上路吧!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">154</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CoderTitan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005056052774133/home?from=page_100505&mod=TAB&is_all=1#place" target="_blank" title="新浪微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>新浪微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/5bd5e9ed569e" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/ShmilyCoder" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a7a64ae6fb9a0636323fd06/posts" target="_blank" title="稀土掘金">
+                      
+                        <i class="fa fa-fw fa-database"></i>稀土掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:quanjunt@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/CoderTitan" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理"><span class="nav-number">1.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#weak"><span class="nav-number">1.1.</span> <span class="nav-text">weak</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unowned"><span class="nav-number">1.2.</span> <span class="nav-text">unowned</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环引用"><span class="nav-number">2.</span> <span class="nav-text">循环引用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包的循环引用"><span class="nav-number">2.1.</span> <span class="nav-text">闭包的循环引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self的循环引用"><span class="nav-number">2.2.</span> <span class="nav-text">self的循环引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存访问冲突"><span class="nav-number">3.</span> <span class="nav-text">内存访问冲突</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针"><span class="nav-number">4.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针分类"><span class="nav-number">4.1.</span> <span class="nav-text">指针分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得变量的指针"><span class="nav-number">4.2.</span> <span class="nav-text">获得变量的指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建指针"><span class="nav-number">4.3.</span> <span class="nav-text">创建指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#malloc"><span class="nav-number">4.3.1.</span> <span class="nav-text">malloc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#allocate"><span class="nav-number">4.3.2.</span> <span class="nav-text">allocate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针之间的转换"><span class="nav-number">4.4.</span> <span class="nav-text">指针之间的转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#init"><span class="nav-number">4.4.1.</span> <span class="nav-text">init</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#assumingMemoryBound"><span class="nav-number">4.4.2.</span> <span class="nav-text">assumingMemoryBound</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unsafeBitCast"><span class="nav-number">4.4.3.</span> <span class="nav-text">unsafeBitCast</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+  
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站总访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<span>|</span>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共295.7k字</span>
+</div>
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'CoderTitan',
+            repo: 'CoderTitan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '218676a3ad406ae623f3974be77590653ee351d5',
+            
+                client_id: '47d71683076aa93948d8'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'm7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz',
+        appKey: '7X31Wl5lm6BXqgtV9k3sm7yI',
+        placeholder: '在这里说点什么吧...',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("m7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz", "7X31Wl5lm6BXqgtV9k3sm7yI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 10998,
+    el: 'wpac-rating',
+    color: 'f79533'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript">
+    //微信二维码点击背景关闭
+    $('body').delegate('.-mob-share-weixin-qrcode-bg','click', function(){
+         $(".-mob-share-weixin-qrcode-close").trigger("click");
+    }); 
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<script type="text/javascript" src="/source/js/src/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init();</script>
+
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

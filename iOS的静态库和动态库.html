@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+  <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "a85a9be2"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="静态库,动态库,framewoframework,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="keywords" content="静态库,动态库,framewoframework">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS的静态库和动态库">
+<meta property="og:url" content="https://titanjun.top/iOS的静态库和动态库.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/staticFramework.jpg?x-oss-process=style/titanjun">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-b8f9c74fc0185ddd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-086dd1629ebb028b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/697/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-1b00f7f45a6654c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/930/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-727056aa929e2c7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/707/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-b1f80d56eccf1990.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/331/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-88dc3d5139099895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-88dc3d5139099895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/764/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-6e40f428fc01b99b.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-768361c8b9d2c1a7.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-b71694440807f1f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/424/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-dc1006500bfeecb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/454/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-f60b374e5952d639.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/764/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-7b193d311de70e01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/412/format/webp">
+<meta property="og:updated_time" content="2020-05-21T02:41:31.937Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS的静态库和动态库">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/staticFramework.jpg?x-oss-process=style/titanjun">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":3,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://titanjun.top/iOS的静态库和动态库.html">
+
+
+
+
+
+  <title>iOS的静态库和动态库 | TitanKing</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6dd8cf28eb4a5f6451fa0cd10918824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/CoderTitan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TitanKing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="/navigation/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br>
+            
+            导航
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/iOS的静态库和动态库.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS的静态库和动态库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-12T11:56:26+08:00">
+                2018-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/组件化开发/" itemprop="url" rel="index">
+                    <span itemprop="name">组件化开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/iOS的静态库和动态库.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/iOS的静态库和动态库.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/iOS的静态库和动态库.html" class="leancloud_visitors" data-flag-title="iOS的静态库和动态库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,204 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/staticFramework.jpg?x-oss-process=style/titanjun" alt="staticFramework"></p>
+<a id="more"></a>
+<h2 id="静态库简介"><a href="#静态库简介" class="headerlink" title="静态库简介"></a>静态库简介</h2><h3 id="什么是库"><a href="#什么是库" class="headerlink" title="什么是库?"></a>什么是库?</h3><ul>
+<li>库从本质上来说是一种可执行代码的二进制格式，可以被载入内存中执行</li>
+<li>库就是程序代码的集合, 是共享程序代码的一种方式</li>
+<li>库从广义上可分为开源库和闭源库, 而闭源库才分为静态库和动态库<ul>
+<li>开源库: 对外公开源代码, 能看到具体的代码实现, 例如<code>Github</code>上面的第三方开源库都称之为开源库</li>
+<li>闭源库: 不公开源代码, 文件是经过编译后的二进制文件, 看不到具体实现, 例如<code>.a</code>文件和<code>.framework</code>文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="静态库与动态库"><a href="#静态库与动态库" class="headerlink" title="静态库与动态库"></a>静态库与动态库</h3><ul>
+<li>静态库：链接时完整地拷贝至可执行文件中，被多次使用就有多份冗余拷贝<ul>
+<li>静态库有两种存在形式: <code>.a</code>和<code>.framework</code></li>
+</ul>
+</li>
+<li>动态库：动态库则不会复制, 只有一份. 程序运行时动态加载到内存; 系统只加载一次, 多个程序共用, 节省内存<ul>
+<li>动态库有两种存在形式: <code>.dylib</code>和<code>.framework</code></li>
+<li>需要注意的是: 系统的<code>.framework</code>是动态库，我们自己建立的<code>.framework</code>是静态库</li>
+</ul>
+</li>
+<li>但是项目中如果使用到自己的动态库, 苹果是不允许上架!</li>
+<li>再但是<code>WWDC2014</code>上公布的苹果对<code>ios8</code>开放动态加载<code>dylib</code>的接口 也就是说 开放了动态库挂载, 但是目前几乎没有上架的项目使用</li>
+</ul>
+ <div class="note info"><p><code>.a</code>与<code>.framework</code>的区别</p></div>
+
+<ul>
+<li><code>.a</code>是一个纯二进制文件不能直接使用, 必须要有<code>.h</code>文件才能使用, <code>.h</code>文件对外提供接口, <code>.a</code>文件是代码的具体实现, 即<code>.m</code></li>
+<li><code>.framework</code>中除了有二进制文件之外还有资源文件, 可以直接使用</li>
+<li>所以开发中建议使用<code>.framework</code></li>
+</ul>
+<h3 id="为什么要使用静态库？"><a href="#为什么要使用静态库？" class="headerlink" title="为什么要使用静态库？"></a>为什么要使用静态库？</h3><ul>
+<li>保护自己的核心代码, 国内的企业，掌握有核心技术，同时是又希望更多的程序员来使用其技术，因此采用”闭源”的方式开发使用</li>
+<li>实现iOS项目的组件化, 可以把固定的业务模块编译成静态库</li>
+<li>开发第三方SDK, 例如: 友盟SDK, 百度地图SDK….</li>
+<li>提高项目的编译速度, 比如项目的组件化, 虽然使用了组件化, 但依然是源码, 如果工程庞大, 编译速度依然非常慢, 但是如果把响应的功能和业务组件编译成静态库, 将会大大提高项目的编译速度</li>
+</ul>
+<h2 id="a静态库的生成和使用"><a href="#a静态库的生成和使用" class="headerlink" title=".a静态库的生成和使用"></a><code>.a</code>静态库的生成和使用</h2><p><img src="http://upload-images.jianshu.io/upload_images/4122543-b8f9c74fc0185ddd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="staticLibrary"></p>
+<ul>
+<li>生成<code>.a</code>静态库, 这里我们选择第二个创建</li>
+<li>静态库分真机和模拟机两种环境<ul>
+<li>在真机环境下编译出来的是只适用于真机的静态库</li>
+<li>在模拟机环境下编译出来的是只使用模拟机的静态库</li>
+<li>同事使用真机和模拟机的静态库, 后面会提到, 暂不赘述</li>
+</ul>
+</li>
+<li>在不同的环境下静态库支持的架构也是不同的, 模拟器下的静态库和真机下的静态库不能共用, 不同型号编译的静态库也是不能共用的</li>
+<li>不同设备使用的CPU不同，从而使用的CPU架构（指令集）也不同，静态库有其支持的CPU架构，若静态库在不支持的CPU架构上运行程序就会崩溃</li>
+</ul>
+<h3 id="静态库的架构"><a href="#静态库的架构" class="headerlink" title="静态库的架构"></a>静态库的架构</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 模拟器使用的CPU架构： </span></span><br><span class="line">iphone4s - iphone5 : i386 </span><br><span class="line">iPhone5s - iPhoneX ：x86_64</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 真机使用的CPU架构： </span></span><br><span class="line">iPhone3gs - iPhone4s：armv7 </span><br><span class="line">iPhone5 - iPhone5c：armv7s </span><br><span class="line">iPhone5s - iPhoneX：armv64</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果想要查看不同的机型所支持的架构, 可分别使用不同的模拟器或者真机, 编译出不同的静态库</li>
+<li>然后使用终端, cd 到静态库所在的目录</li>
+<li>在执行<code>lipo -info 静态库名称</code>即可</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 执行lipo -info的输出结果</span></span><br><span class="line">$ lipo -info libStateLib.a </span><br><span class="line">input file libStateLib.a is not a fat file</span><br><span class="line">Non-fat file: libStateLib.a is architecture: x86_64</span><br></pre></td></tr></table></figure>
+<h3 id="编译多架构静态库"><a href="#编译多架构静态库" class="headerlink" title="编译多架构静态库"></a>编译多架构静态库</h3><ul>
+<li>在调试不同机型的过程中, 需要选中每一个模拟器进行编译, 生成支持对应架构的静态库然后合并, 非常蛋疼</li>
+<li>怎样一次编译支持多个架构的的静态库?</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-086dd1629ebb028b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/697/format/webp" alt="bundleActive"></p>
+<ul>
+<li>该选项默认是<code>YES</code>, 也就是只编译当前活跃环境的架构, 设置成<code>No</code>即可</li>
+<li>模拟器环境编译出来的就支持所有的模拟机型号, 真机亦是如此</li>
+</ul>
+<h3 id="静态库的版本"><a href="#静态库的版本" class="headerlink" title="静态库的版本"></a>静态库的版本</h3><ul>
+<li>和<code>iOS</code>证书一样分调试版本(<code>Debug</code>)和发布版本<code>Release</code></li>
+<li>真机-<code>Debug</code>版本 </li>
+<li>真机-<code>Release</code>版本 </li>
+<li>模拟器-<code>Debug</code>版本 </li>
+<li>模拟器-<code>Release</code>版本</li>
+</ul>
+<div class="note info"><p>调试版本<code>Debug</code></p></div>
+
+<ul>
+<li>真机-<code>Debug</code>版本和模拟器-<code>Debug</code>版本 </li>
+<li>调试版本的特点<ul>
+<li>调试版本会包含完整的符号信息，以方便调试</li>
+<li>调试版本不会对代码进行优化</li>
+</ul>
+</li>
+</ul>
+<div class="note info"><p>发布版本<code>Release</code></p></div>
+
+<ul>
+<li>真机-<code>Release</code>版本和模拟器-<code>Release</code>版本 </li>
+<li>发布版本的特点<ul>
+<li>发布版本不会包含完整的符号信息， </li>
+<li>发布版本的执行代码是进行过优化的， </li>
+<li>发布版本的大小会比调试版本的略小， </li>
+<li>在执行速度方面，发布版本会更快些，但不意味着会有显著的提升</li>
+</ul>
+</li>
+</ul>
+<div class="note primary"><p>生成不同版本的静态库</p></div>
+
+<p>选择项目 <code>-&gt; Edit Scheme -&gt; Run -&gt; Release/Debug</code> 分别进行编译, 即可得到不同版本的静态库</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-1b00f7f45a6654c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/930/format/webp" alt="EditScheme"></p>
+<h3 id="生成-a和-h文件"><a href="#生成-a和-h文件" class="headerlink" title="生成.a和.h文件"></a>生成<code>.a</code>和<code>.h</code>文件</h3><ul>
+<li>正常情况下, 生成的<code>.h</code>文件是在<code>../include/$(PRODUCT_NAME)</code>目录下的, <code>$(PRODUCT_NAME)</code>指的是项目的名字</li>
+<li>修改图中2处的路径地址, 即可修改<code>.h</code>文件生成的路径, 填空即为和<code>.a</code>文件在同级目录下</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-727056aa929e2c7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/707/format/webp" alt="image"></p>
+<p>最后编写好代码, <code>command+B</code>编译之后, 如图所示操作即可找到生成的静态库</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-b1f80d56eccf1990.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/331/format/webp" alt="image"></p>
+<div class="note success"><p>合并静态库</p></div>
+
+<ul>
+<li>因为静态库针对于模拟器和真机生成了不同版本(支持不同架构), 所以没法同时运行</li>
+<li>合并后的静态库既可以在真机上调试，也可以在模拟器上调试, 省去了来回切换的诸多烦恼</li>
+<li>但是合并后的静态库大小是模拟器和真机的大小之和，如果静态库太大，合并打包后，会非常大，因此很多第三方的静态库的<code>.a</code>是区分版本的</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下所有方式得到的静态库都可以通过lipo -info xx.a方式检测现有的架构, 注意要在xx.a所在的目录下</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 合并静态库</span></span><br><span class="line">lipo -create 静态库<span class="number">1</span>路径 静态库<span class="number">2</span>路径 -output 合并后的静态库名称</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例</span></span><br><span class="line">lipo -create /Users/xxx/Debug-iphoneos/libStateLib.a /Users/xxx/Debug-iphonesimulator/libStateLib.a -output hahah.a</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 移除某一个架构</span></span><br><span class="line">lipo -remove 架构名称 静态库绝对路径 -output 新的静态库名字</span><br><span class="line">lipo -remove arm64 /Users/xxx/Build/Products/hahah.a -output ha_arm64.a</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 拆分出一个单独架构的静态库</span></span><br><span class="line">lipo -thin 架构名称 静态库绝对路径 -output 新的静态库名字</span><br><span class="line">lipo -thin arm64 /Users/xxx/Build/Products/hahah.a -output only_arm64.a</span><br></pre></td></tr></table></figure>
+<h2 id="framework静态库"><a href="#framework静态库" class="headerlink" title=".framework静态库"></a><code>.framework</code>静态库</h2><h3 id="生成-framework静态库"><a href="#生成-framework静态库" class="headerlink" title="生成.framework静态库"></a>生成<code>.framework</code>静态库</h3><h4 id="选择framework"><a href="#选择framework" class="headerlink" title="选择framework"></a>选择<code>framework</code></h4><p>创建新工程, 选择第一个创建<code>Framework</code>工程</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-88dc3d5139099895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="staticLibrary"></p>
+<h4 id="选择编译环境"><a href="#选择编译环境" class="headerlink" title="选择编译环境"></a>选择编译环境</h4><p>选择适配所有真机或者适配所有模拟器(编译所有架构), <code>Build Settings -&gt; Build Active Architecture Only</code>选项设为<code>NO</code></p>
+<h4 id="手动设置静态库"><a href="#手动设置静态库" class="headerlink" title="手动设置静态库"></a>手动设置静态库</h4><p>刚创建的工程默认创建的是动态库, 需要手动设置链接类型, <code>Build Settings -&gt; Mach-o Type</code>设置成<code>Static Library</code></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-88dc3d5139099895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/764/format/webp" alt="machtype"></p>
+<h4 id="静态库版本"><a href="#静态库版本" class="headerlink" title="静态库版本"></a>静态库版本</h4><p>设置静态库的版本, 选择项目 -&gt; <code>Edit Scheme -&gt; Run -&gt; Release/Debug</code> 分别进行编译, 即可得到不同版本的静态库</p>
+<h4 id="添加公开头文件"><a href="#添加公开头文件" class="headerlink" title="添加公开头文件"></a>添加公开头文件</h4><p><code>Target-&gt;Build Phases-&gt;Headers</code>中的<code>Project</code>中要暴露的头文件拖拽到<code>Pulic</code>里面： </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-6e40f428fc01b99b.gif?imageMogr2/auto-orient/strip" alt="headerfile"></p>
+<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><p>分别选择<code>Generic iOS Device</code>和任意一个模拟器各编译一次。编译完，工程中<code>Products</code>文件夹下的<code>xxx.framework</code>由红色变成了黑色，然后<code>show in finder</code>，看看生成的文件 </p>
+<div class="note warning"><p>注意事项</p></div>
+
+<ul>
+<li>如果静态库中有<code>category</code>类，则在使用静态库的项目配置中<code>Other Linker Flags</code>需要添加参数<code>-ObjC</code>或者<code>-all_load</code> </li>
+<li>如果创建的<code>framework</code>类中使用了<code>.tbd</code>，则需要在实际项目中导入<code>.tbd</code>动态库。</li>
+<li><code>.framework</code>静态库的合并和拆分和<code>.a</code>静态库的方式一样, 就不在赘述了</li>
+</ul>
+<h3 id="bundle加载资源"><a href="#bundle加载资源" class="headerlink" title="bundle加载资源"></a><code>bundle</code>加载资源</h3><ul>
+<li>由于<code>Xcode</code>默认在编译时会把所有的素材文件导入到<code>mainBundle</code>中，可能会让宿主工程与使用静态库的程序冲突。</li>
+<li>在创建静态库的项目中又是难免会用到一些图片或者<code>xib</code>等资源, 类似这些资源在静态库中又如何进行管理呢</li>
+<li>这里我们就要引入一个<code>bundle</code>文件, 对资源进行管理, 用以存放<code>xib</code>文件或者图片等资源</li>
+<li><code>bundle</code>文件是是静态的，不进行编译的资源文件, 所以使用时需要找到相应的资源路径</li>
+</ul>
+<div class="note success"><p>创建方式</p></div>
+
+<ul>
+<li>把包含资源文件的文件夹的后缀改为<code>.bundle</code>, 这时他就变成一个<code>bundle</code>文件</li>
+<li>或者右键显示包内容就可以把对应的图片资源等放进文件中，然后把他丢进工程中就可以使用了</li>
+<li>调用该图片时, 需要在图片名前加上<code>xxx.bundle</code>前缀</li>
+</ul>
+<h3 id="静态库的测试"><a href="#静态库的测试" class="headerlink" title="静态库的测试"></a>静态库的测试</h3><ul>
+<li>静态库本身就是一个小项目, 实现某些功能, 但是这些功能在开发中也需要测试. 而测试代码又不能作为静态库的一部分</li>
+<li>建议创建一个复合项目, 在宿主工程中添加一个静态库的工程</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-768361c8b9d2c1a7.gif?imageMogr2/auto-orient/strip" alt="allStatic"></p>
+<h3 id="自动打包"><a href="#自动打包" class="headerlink" title="自动打包"></a>自动打包</h3><ul>
+<li>上面介绍的都是手动打包的方式, 虽然麻烦一些, 但是相对更不容易出错, 而且可以对本地代码打包</li>
+<li>还有一种自动打包方式, 只需一条命令<code>package</code>, 便可对静态库进行打包, 但是前提是: 代码必须已经上传到远程仓库</li>
+<li>首先安装<code>package</code>: <ul>
+<li><code>sudo gem install cocoapods-packager</code></li>
+</ul>
+</li>
+<li>使用</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前提是代码必须已经上传到远程仓库, 否则报错不会成功</span></span><br><span class="line"><span class="comment">// 1. cd 到podspec文件所在的根目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 执行</span></span><br><span class="line">pod package xxx.podspec</span><br></pre></td></tr></table></figure>
+<h2 id="私有库的二进制"><a href="#私有库的二进制" class="headerlink" title="私有库的二进制"></a>私有库的二进制</h2><ul>
+<li>在组件化开发的过程选中, 虽然使用了组件化, 但依然是源码, 如果工程庞大, 编译速度依然非常慢</li>
+<li>所以,为了加快编译速度可以直接把私有库打包成为一个静态库库文件, 进行使用</li>
+<li>在每一个私有库里面都有一个这样的测试工程, 但是这个工程不能打包成静态库</li>
+<li>但是, 如果为了打包静态库单独分离出一个工程用于打包, 那么我们后期就需要维护和更新两套代码, 过于繁琐</li>
+<li>所以我们可以用符合工程进行处理, 在<code>Example</code>所在的测试工程中添加一个静态库的工程, 如<a href="#静态库的测试">静态库的测试</a>所示</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-b71694440807f1f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/424/format/webp" alt="exampleTest"></p>
+<h3 id="打包静态库"><a href="#打包静态库" class="headerlink" title="打包静态库"></a>打包静态库</h3><p>这里我们是以<code>framework</code>静态库为例, 静态库工程添加之后, 左侧会多出一个类似<code>BaseLib</code>的文件夹, 该文件夹用于存放需要打包的文件, 即<code>TitanBase/Classes</code>目录下的文件</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-dc1006500bfeecb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/454/format/webp" alt="image"></p>
+<ul>
+<li>导入文件的时候需要注意, 一定不能勾选<code>Copy Items</code>选项, 因为我们需要的是引用<code>Classes</code>目录下的文件, 而不是拷贝</li>
+<li>如果是拷贝, 静态库和<code>Classes</code>目录使用的将会是两套不同的代码(虽然内容可能一样), 由乙方改变, 另一方的代码不会改变</li>
+<li>引用则可以做到一改全改</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-f60b374e5952d639.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/764/format/webp" alt="copyItem"></p>
+<ul>
+<li>接下来选择静态库的工程, 并修改打包静态库的相应的配置, 步骤参考<a href="#生成.framework静态库">生成.framework静态库</a></li>
+<li>这里生成的静态库的目录是系统默认, 我们也可以自行设置: <code>File -&gt; WorkSpace Setting</code></li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/4122543-7b193d311de70e01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/412/format/webp" alt="selectLib"></p>
+<ul>
+<li>最后在<code>Classes</code>的统计目录下创建一个<code>Products</code>的目录(自定义创建, 你开心就好)</li>
+<li>把打包好的<code>.framework</code>或者<code>.a</code>的静态库, 放到<code>Products</code>目录下</li>
+</ul>
+<h3 id="修改podspec文件"><a href="#修改podspec文件" class="headerlink" title="修改podspec文件"></a>修改<code>podspec</code>文件</h3><h4 id="引入静态库"><a href="#引入静态库" class="headerlink" title="引入静态库"></a>引入静态库</h4><p>完成了静态库的打包, 下面就是修改<code>podspec</code>文件中相应的配置了</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s.source_files = <span class="string">'TitanBase/Classes/**/*.h'</span></span><br><span class="line">s.vendored_frameworks = <span class="string">"TitanBase/Products/BaseLib.framework"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>source_files</code>: 需要导入的文件, 现在只需要导入<code>.h</code>文件即可</li>
+<li><code>vendored_frameworks</code>: 需要导入的<code>framework</code>静态库</li>
+<li>最后重新对测试工程进行<code>pod install</code>即可, 更多配置相关信息可参考<a href="https://guides.cocoapods.org/syntax/podspec.html#specification" target="_blank" rel="noopener">官方文档</a></li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表示依赖的系统类库，比如libz.dylib等</span></span><br><span class="line">s.libraries     = <span class="string">'z'</span>, <span class="string">'sqlite3'</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 表示依赖系统的框架</span></span><br><span class="line">s.frameworks    = <span class="string">'UIKit'</span>,<span class="string">'AVFoundation'</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 依赖的第三方/自己的framework静态库</span></span><br><span class="line">s.vendored_frameworks = <span class="string">'YJKit/YJKit.framework'</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 表示依赖第三方/自己的静态库（比如libWeChatSDK.a）</span></span><br><span class="line">s.vendored_libraries = <span class="string">'Library/Classes/libWeChatSDK.a'</span> </span><br><span class="line"><span class="comment"># 依赖的第三方的或者自己的静态库文件必须以lib为前缀进行命名，否则会出现找不到的情况，这一点非常重要</span></span><br></pre></td></tr></table></figure>
+<h4 id="切换静态库和源码"><a href="#切换静态库和源码" class="headerlink" title="切换静态库和源码"></a>切换静态库和源码</h4><ul>
+<li>开发过程中如果需要调试代码的时候, 需要查看源码进行调试</li>
+<li>但是静态库却只能看到头文件, 没有源码, 无法进行调试</li>
+<li>在导入的私有库中, 静态库和源码如何进行切换呢</li>
+<li>这里我们在<code>podspec</code>配置文件中引入一个<code>if-else</code>语句, 如下所示</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ENV[<span class="string">'IS_SOURCE'</span>]</span><br><span class="line">    s.source_files = <span class="string">'TitanBase/Classes/**/*'</span></span><br><span class="line">    s.dependency <span class="string">'AFNetworking'</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    s.source_files = <span class="string">'TitanBase/Classes/**/*.h'</span></span><br><span class="line">    s.vendored_frameworks = <span class="string">"TitanBase/Products/BaseLib.framework"</span></span><br><span class="line">    s.dependency <span class="string">'AFNetworking'</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>此时如果需要切换为源码, 只需要执行<code>IS_SOURCE=1 pod install</code>即可(或者任意非0的数字, 非0即为真)</li>
+<li>执行<code>pod install</code>, 就会执行<code>else</code>后面的语句, 即导入静态库</li>
+<li>但是如果所有的组件都加了类似的判断, 切判断条件都是<code>IS_SOURCE</code>, 那么每次重新切换, 所有的组件都会导入源码或者导入静态库</li>
+<li>建议每一语句可以加两个判断条件, 一个统一的判断条件, 一个只对每一个组件的条件</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ENV[<span class="string">'IS_SOURCE'</span>] <span class="params">||</span> ENV[<span class="string">'IS_BASE'</span>]</span><br><span class="line">   ...</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="有依赖关系的静态库"><a href="#有依赖关系的静态库" class="headerlink" title="有依赖关系的静态库"></a>有依赖关系的静态库</h3><ul>
+<li>对单独的静态库工程打包静态库的时候, 默认不会将第三方库的内容打包进去, 是可以使用的</li>
+<li>对包含静态库工程的复合工程打包的时候, 可能会出现引用的第三方头文件找不到的问题或者出现打包出的静态库包含第三方库的代码和资源, 这样打包出来的静态库<ul>
+<li>第一: 打包好的静态库应该是不能使用的</li>
+<li>第二: 打包好的静态库中包含第三方库的所有代码和资源, 所以打包的静态库会很大</li>
+</ul>
+</li>
+<li>所以我们打包静态库, 是不需要把第三方的任何东西打包进去的</li>
+<li>在复合工程中建议的办法: 修改<code>Podfile</code>文件, 如下</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">target <span class="string">'CoreImage_Example'</span> <span class="keyword">do</span></span><br><span class="line">  pod <span class="string">'CoreImage'</span>, <span class="symbol">:path</span> =&gt; <span class="string">'../'</span></span><br><span class="line"></span><br><span class="line">  target <span class="string">'CoreImage_Tests'</span> <span class="keyword">do</span></span><br><span class="line">    inherit! <span class="symbol">:search_paths</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 以下添加的部分, CoreImgLib: 为静态库的名称, 需要在静态库中重新引用pod库的部分</span></span><br><span class="line">  target <span class="string">'CoreImgLib'</span> <span class="keyword">do</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>在引用第三方头文件的地方</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果使用""方式报错</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"AFNetworking.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可改成以下方式引用</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;AFNetworking/AFNetworking.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>接下来在重新打包就可以了</p>
+<h3 id="多分类的静态库打包"><a href="#多分类的静态库打包" class="headerlink" title="多分类的静态库打包"></a>多分类的静态库打包</h3><p>类似<code>AFNetworking</code>的多分类框架</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-&gt; AFNetworking (<span class="number">3.2</span>.<span class="number">1</span>)</span><br><span class="line">   A delightful iOS <span class="keyword">and</span> OS X networking framework.</span><br><span class="line">   pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 3.2.1'</span></span><br><span class="line">   - <span class="symbol">Homepage:</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/</span>AFNetworking/AFNetworking</span><br><span class="line">   - <span class="symbol">Source:</span>   <span class="symbol">https:</span>/<span class="regexp">/github.com/</span>AFNetworking/AFNetworking.git</span><br><span class="line">   - <span class="symbol">Versions:</span> <span class="number">3.2</span>.<span class="number">1</span>, ......,<span class="number">0</span>.<span class="number">5.1</span> [master repo]</span><br><span class="line">   - <span class="symbol">Subspecs:</span></span><br><span class="line">     - AFNetworking/Serialization (<span class="number">3.2</span>.<span class="number">1</span>)</span><br><span class="line">     - AFNetworking/Security (<span class="number">3.2</span>.<span class="number">1</span>)</span><br><span class="line">     - AFNetworking/Reachability (<span class="number">3.2</span>.<span class="number">1</span>)</span><br><span class="line">     - AFNetworking/NSURLSession (<span class="number">3.2</span>.<span class="number">1</span>)</span><br><span class="line">     - AFNetworking/UIKit (<span class="number">3.2</span>.<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对于有多个分类的私有库, 如果要打包成静态库<ul>
+<li>一: 可以每个分类单独处理, 分别打包, 很麻烦不建议这么做(也没必要)</li>
+<li>二: 把分类整合到一起, 打包成一个静态库</li>
+</ul>
+</li>
+<li>如下, 如果使用源码, 按照分类导入, 如果使用静态库, 打包成一个静态库导入</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ENV[<span class="string">'IS_SOURCE'</span>]</span><br><span class="line">    <span class="comment"># 静态库</span></span><br><span class="line">    s.source_files = <span class="string">'TKDownloadPlayer/Classes/**/*.h'</span></span><br><span class="line">    s.vendored_frameworks = <span class="string">'TKDownloadPlayer/Products/TKDownPlayerLib.framework'</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="comment"># 源码</span></span><br><span class="line">    s.subspec <span class="string">'TKDownload'</span> <span class="keyword">do</span> <span class="params">|dl|</span></span><br><span class="line">        dl.source_files = <span class="string">'TKDownloadPlayer/Classes/TKDownload/**/*'</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    s.subspec <span class="string">'TKRemotePlayer'</span> <span class="keyword">do</span> <span class="params">|rp|</span></span><br><span class="line">        rp.source_files = <span class="string">'TKDownloadPlayer/Classes/TKRemotePlayer/**/*'</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:17px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+    
+    
+      <div>
+        
+      </div>
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+
+	<div>欢迎您扫一扫下面的微信公众号，订阅我的博客！</div>
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="TitanKing wechat" style="width: 200px; max-width: 100%;">
+    
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpeg" alt="TitanKing 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="TitanKing 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    TitanKing
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://titanjun.top/iOS的静态库和动态库.html" title="iOS的静态库和动态库">https://titanjun.top/iOS的静态库和动态库.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/静态库/" rel="tag"><i class="fa fa-tag"></i> 静态库</a>
+          
+            <a href="/tags/动态库/" rel="tag"><i class="fa fa-tag"></i> 动态库</a>
+          
+            <a href="/tags/framewoframework/" rel="tag"><i class="fa fa-tag"></i> framewoframework</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div style="color: rgba(0, 0, 0, 0.75); font-size:15px; letter-spacing:3px">(&gt;看完记得五星好评哦&lt;)</div>
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Hexo博客不蒜子统计不显示.html" rel="prev" title="Hexo博客不蒜子统计不显示">
+                <i class="fa fa-chevron-left"></i> Hexo博客不蒜子统计不显示
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/移动开发之Fastlane自动化.html" rel="next" title="移动开发之Fastlane自动化">
+                移动开发之Fastlane自动化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-hoofoo-share-title">分享到：</div>
+<div class="-hoofoo-share-buttons">
+    <div class="-mob-share-weibo -hoofoo-share-weibo -hoofoo-share-ui-button"><i class="fa fa-weibo" aria-hidden="true"></i></div>
+    <div class="-mob-share-weixin -hoofoo-share-weixin -hoofoo-share-ui-button"><i class="fa fa-weixin" aria-hidden="true"></i></div>
+    <div class="-mob-share-qq -hoofoo-share-qq -hoofoo-share-ui-button"><i class="fa fa-qq" aria-hidden="true"></i></div>
+    <div class="-mob-share-twitter -hoofoo-share-twitter -hoofoo-share-ui-button"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+    <div class="-hoofoo-share-more -hoofoo-share-ui-button -mob-share-open"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
+</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-renren"><p>人人网</p></li>
+        <li class="-mob-share-kaixin"><p>开心网</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=24fc497bb07bc"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/" class="site-author-image" rel="start" style="border:none">
+                <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="TitanKing">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">TitanKing</p>
+              <p class="site-description motion-element" itemprop="description">我还年轻，我渴望上路。带着最初的激情，追寻着最初的梦想，感受着最初的体验，我们上路吧!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">154</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CoderTitan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005056052774133/home?from=page_100505&mod=TAB&is_all=1#place" target="_blank" title="新浪微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>新浪微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/5bd5e9ed569e" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/ShmilyCoder" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a7a64ae6fb9a0636323fd06/posts" target="_blank" title="稀土掘金">
+                      
+                        <i class="fa fa-fw fa-database"></i>稀土掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:quanjunt@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/CoderTitan" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库简介"><span class="nav-number">1.</span> <span class="nav-text">静态库简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是库"><span class="nav-number">1.1.</span> <span class="nav-text">什么是库?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态库与动态库"><span class="nav-number">1.2.</span> <span class="nav-text">静态库与动态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要使用静态库？"><span class="nav-number">1.3.</span> <span class="nav-text">为什么要使用静态库？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a静态库的生成和使用"><span class="nav-number">2.</span> <span class="nav-text">.a静态库的生成和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态库的架构"><span class="nav-number">2.1.</span> <span class="nav-text">静态库的架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译多架构静态库"><span class="nav-number">2.2.</span> <span class="nav-text">编译多架构静态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态库的版本"><span class="nav-number">2.3.</span> <span class="nav-text">静态库的版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成-a和-h文件"><span class="nav-number">2.4.</span> <span class="nav-text">生成.a和.h文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#framework静态库"><span class="nav-number">3.</span> <span class="nav-text">.framework静态库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成-framework静态库"><span class="nav-number">3.1.</span> <span class="nav-text">生成.framework静态库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#选择framework"><span class="nav-number">3.1.1.</span> <span class="nav-text">选择framework</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择编译环境"><span class="nav-number">3.1.2.</span> <span class="nav-text">选择编译环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手动设置静态库"><span class="nav-number">3.1.3.</span> <span class="nav-text">手动设置静态库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#静态库版本"><span class="nav-number">3.1.4.</span> <span class="nav-text">静态库版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加公开头文件"><span class="nav-number">3.1.5.</span> <span class="nav-text">添加公开头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译"><span class="nav-number">3.1.6.</span> <span class="nav-text">编译</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bundle加载资源"><span class="nav-number">3.2.</span> <span class="nav-text">bundle加载资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态库的测试"><span class="nav-number">3.3.</span> <span class="nav-text">静态库的测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动打包"><span class="nav-number">3.4.</span> <span class="nav-text">自动打包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有库的二进制"><span class="nav-number">4.</span> <span class="nav-text">私有库的二进制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#打包静态库"><span class="nav-number">4.1.</span> <span class="nav-text">打包静态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改podspec文件"><span class="nav-number">4.2.</span> <span class="nav-text">修改podspec文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引入静态库"><span class="nav-number">4.2.1.</span> <span class="nav-text">引入静态库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切换静态库和源码"><span class="nav-number">4.2.2.</span> <span class="nav-text">切换静态库和源码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有依赖关系的静态库"><span class="nav-number">4.3.</span> <span class="nav-text">有依赖关系的静态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多分类的静态库打包"><span class="nav-number">4.4.</span> <span class="nav-text">多分类的静态库打包</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+  
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站总访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<span>|</span>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共295.7k字</span>
+</div>
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'CoderTitan',
+            repo: 'CoderTitan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '218676a3ad406ae623f3974be77590653ee351d5',
+            
+                client_id: '47d71683076aa93948d8'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'm7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz',
+        appKey: '7X31Wl5lm6BXqgtV9k3sm7yI',
+        placeholder: '在这里说点什么吧...',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("m7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz", "7X31Wl5lm6BXqgtV9k3sm7yI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 10998,
+    el: 'wpac-rating',
+    color: 'f79533'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript">
+    //微信二维码点击背景关闭
+    $('body').delegate('.-mob-share-weixin-qrcode-bg','click', function(){
+         $(".-mob-share-weixin-qrcode-close").trigger("click");
+    }); 
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<script type="text/javascript" src="/source/js/src/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init();</script>
+
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

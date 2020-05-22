@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+  <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "a85a9be2"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Equatable,Hashable,Swift4.2,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="keywords" content="Equatable,Hashable,Swift4.2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 4.2 新特性更新">
+<meta property="og:url" content="https://titanjun.top/Swift 4.2 新特性更新.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-9babace437ddb9f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2020-05-21T02:41:31.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 4.2 新特性更新">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":3,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://titanjun.top/Swift 4.2 新特性更新.html">
+
+
+
+
+
+  <title>Swift 4.2 新特性更新 | TitanKing</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6dd8cf28eb4a5f6451fa0cd10918824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/CoderTitan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TitanKing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="/navigation/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br>
+            
+            导航
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/Swift 4.2 新特性更新.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift 4.2 新特性更新</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T15:16:40+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Swift学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Swift 4.2 新特性更新.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/Swift 4.2 新特性更新.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/Swift 4.2 新特性更新.html" class="leancloud_visitors" data-flag-title="Swift 4.2 新特性更新">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,808 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun" alt="Swift"><br><a id="more"></a></p>
+<ul>
+<li><code>Github</code>地址–<a href="https://github.com/CoderTitan/Swift-4.2Demo/tree/master" target="_blank" rel="noopener">Swift 4.2代码地址</a></li>
+<li><code>Swift 4.2</code>是<code>Swift 4.0</code>发布以来的第二次小更新, 继上次<code>Xcode 9.3</code>和<code>Swift 4.1</code>发布以来也有俩月有余</li>
+<li>上个版本<a href="https://www.titanjun.top/2018/04/24/Swift%204.1%20%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/" target="_blank" rel="noopener">Swift 4.1 的新特性</a>中介绍了条件一致性和哈希索引等相关更新</li>
+<li>随着<code>Xcode Bate 10</code>的发布, <code>Swift 4.2</code>也发布了测试版, 相信也带来了很多优化和改进</li>
+<li>下面运行环境都是在<code>Xcode Bate 10</code>环境中进行的</li>
+</ul>
+<h3 id="CaseInterable协议"><a href="#CaseInterable协议" class="headerlink" title="CaseInterable协议"></a><code>CaseInterable</code>协议</h3><ul>
+<li><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0194-derived-collection-of-enum-cases.md" target="_blank" rel="noopener">SE-0194</a>介绍了在<code>Swift 4.2</code>中新增的一个新的<code>CaseIterable</code>协议</li>
+<li>定义的枚举遵循<code>CaseIterable</code>协议后, 编译时<code>Swift</code> 会自动合成一个<code>allCases</code>属性，是包含枚举的所有<code>case</code>项的数组</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">NetState</span>: <span class="title">CaseIterable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> wifi</span><br><span class="line">    <span class="keyword">case</span> hotWifi</span><br><span class="line">    <span class="keyword">case</span> mobile</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">none</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>之后我们在其他地方调用改枚举时就可以获取到<code>allCase</code>属性, 如下</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="type">NetState</span>.allCases)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"case个数: "</span> + <span class="string">"\(NetState.allCases.count)"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="type">NetState</span>.allCases &#123;</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果:</span></span><br><span class="line">[__lldb_expr_9.<span class="type">NetState</span>.wifi, __lldb_expr_9.<span class="type">NetState</span>.hotWifi, __lldb_expr_9.<span class="type">NetState</span>.mobile, __lldb_expr_9.<span class="type">NetState</span>.<span class="keyword">none</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span>个数: <span class="number">4</span></span><br><span class="line"></span><br><span class="line">wifi</span><br><span class="line">hotWifi</span><br><span class="line">mobile</span><br><span class="line"><span class="keyword">none</span></span><br></pre></td></tr></table></figure>
+<div class="note info"><p>这个<code>allCases</code>的自动合成仅替换没有参数的<code>case</code>值, 但是如果需要你需要所有<code>case</code>值, 可以重写<code>allCases</code>属性自己添加</p></div>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">FoodKind</span>: <span class="title">CaseIterable</span> </span>&#123;</span><br><span class="line">    <span class="comment">//此处, 必须重写allCases属性, 否则报错</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> allCases: [<span class="type">FoodKind</span>] &#123;</span><br><span class="line">        <span class="keyword">return</span> [.apple, .pear, .orange(look: <span class="literal">false</span>)]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> apple</span><br><span class="line">    <span class="keyword">case</span> pear</span><br><span class="line">    <span class="keyword">case</span> orange(look: <span class="type">Bool</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="type">FoodKind</span>.allCases &#123;</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 输出结果:</span></span><br><span class="line"><span class="comment"> apple</span></span><br><span class="line"><span class="comment"> pear</span></span><br><span class="line"><span class="comment"> orange(look: false)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<div class="note primary"><p>如果有枚举项标记为<code>unavailable</code>，则默认无法合成<code>allCases</code>，只能依靠自己来手动合成</p></div>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CarKind</span>: <span class="title">CaseIterable</span> </span>&#123;</span><br><span class="line">    <span class="comment">//当有unavailable修饰的case值, 也必须重写allCase属性</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> allCases: [<span class="type">CarKind</span>] &#123;</span><br><span class="line">        <span class="keyword">return</span> [.bwm, .ford]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> bwm</span><br><span class="line">    <span class="keyword">case</span> ford</span><br><span class="line"></span><br><span class="line">    <span class="meta">@available</span>(*, unavailable)</span><br><span class="line">    <span class="keyword">case</span> toyota</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> <span class="type">CarKind</span>.allCases &#123;</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> 输出结果:</span></span><br><span class="line"><span class="comment"> bwm</span></span><br><span class="line"><span class="comment"> ford</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h3 id="KeyValuePairs"><a href="#KeyValuePairs" class="headerlink" title="KeyValuePairs"></a>KeyValuePairs</h3><p><code>KeyValuePairs</code>是一种类似字典的数据类型(类似一种字典数组, 切字典有且仅有一个<code>key-value</code>值)，提供了类似字典的功能, 除此之外还具有字典所不具有的功能</p>
+<ul>
+<li>不需要遵循<code>Hashable</code>协议</li>
+<li>可以添加具有重复键的成员</li>
+<li>每一个成员变量都有其唯一的索引值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具有重复键值的KeyValuePairs数据类型</span></span><br><span class="line"><span class="keyword">var</span> dic: <span class="type">KeyValuePairs</span> = [<span class="string">"first"</span>: <span class="string">"titan"</span>, <span class="string">"second"</span>: <span class="string">"jun"</span>, <span class="string">"second"</span>: <span class="string">"top"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 访问第一个元素的key-value值</span></span><br><span class="line"><span class="built_in">print</span>(dic[<span class="number">0</span>])</span><br><span class="line"><span class="comment">// (key: "first", value: "titan")</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"first: key = \(dic[0].key), value = \(dic[0].value)"</span>)</span><br><span class="line"><span class="comment">// first: key = first, value = titan</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历所有的key-value</span></span><br><span class="line"><span class="keyword">for</span> dict <span class="keyword">in</span> dic &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"key = \(dict.key), value = \(dict.value)"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*输出结果</span></span><br><span class="line"><span class="comment">key = first, value = titan</span></span><br><span class="line"><span class="comment">key = second, value = jun</span></span><br><span class="line"><span class="comment">key = second, value = top</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="warning和-error编译指令"><a href="#warning和-error编译指令" class="headerlink" title="#warning和#error编译指令"></a><code>#warning</code>和<code>#error</code>编译指令</h3><ul>
+<li><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0196-diagnostic-directives.md" target="_blank" rel="noopener">SE-0196</a>介绍新的编译指令来强制<code>Xcode</code>在<code>build</code>时生成警告或错误信息</li>
+<li>这两个指令是<code>#warning</code>和<code>#error</code>，前者会强制<code>Xcode</code>在生成你的代码时发出一个警告，后者会发出一个编译错误这样你的代码就完全不能编译</li>
+<li><code>#warning</code>主要用于提醒你或者别人一些工作还没有完成，<code>Xcode</code>模板常使用<code>#warning</code>标记一些你需要替换成自己代码的方法存根(<code>method stubs</code>)。</li>
+<li><code>#error</code>主要用于如果你发送一个库，需要其他开发者提供一些数据。比如，一个网络 <code>API</code>的认证密码，你需要用户输入它们自己的密码，就使用<code>#error</code>在继续之前强制他们更改这行代码</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/4122543-9babace437ddb9f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<div class="note info"><p><code>#warning</code>和<code>#error</code>可以和已存的<code>#if</code>编译指令共同使用，并且只有在条件为<code>true</code>时才会激活。例如：</p></div>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#<span class="keyword">if</span> os(macOS)</span><br><span class="line">#error(<span class="string">"MyLibrary is not supported on macOS."</span>)</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<h3 id="动态成员查找"><a href="#动态成员查找" class="headerlink" title="动态成员查找"></a>动态成员查找</h3><ul>
+<li><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0195-dynamic-member-lookup.md" target="_blank" rel="noopener">SE-0195</a>介绍了一个方法，让<code>Swift</code>更接近类似<code>Python</code>的脚本语言, 让<code>Swift</code>可以以属性访问的方式调用下标操作</li>
+<li>这让我们可以像<code>Python</code>一样来访问字典值，不过是以类型安全的方式, 其核心在于:<ul>
+<li><code>@dynamicMemberLookup</code>: 可以让<code>Swift</code>以一种下标方法去进行属性访问</li>
+<li><code>subscript(dynamicMember:)</code>：可以通过所请求属性的字符串名得到，并且可以返回你想要的任何值</li>
+</ul>
+</li>
+<li>我们可以创建一个<code>Titan</code>结构，并且从一个字典读取它的值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Titan</span> </span>&#123;</span><br><span class="line">    <span class="keyword">subscript</span>(dynamicMember member: <span class="type">String</span>) -&gt; <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> properties = [<span class="string">"name"</span>: <span class="string">"Titanjun"</span>, <span class="string">"city"</span>: <span class="string">"Hang"</span>]</span><br><span class="line">        <span class="keyword">return</span> properties[member, <span class="keyword">default</span>: <span class="string">"0"</span>] <span class="comment">//默认值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以看到上述代码按字符串接收成员名字，并返回一个字符串。</li>
+<li>从内部看它只是在一个字典中查找这个成员名字并返回它的值</li>
+<li>即使取不到对应的值, 也会以默认值的形式返回, 上述结构的代码可以这么写</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> titan = <span class="type">Titan</span>()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(titan.name)</span><br><span class="line"><span class="built_in">print</span>(titan.city)</span><br><span class="line"><span class="built_in">print</span>(titan.age)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出:</span></span><br><span class="line"><span class="type">Titanjun</span></span><br><span class="line"><span class="type">Hang</span></span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<div class="note default"><p>处理多种不同的类型</p></div>
+
+<ul>
+<li>上述<code>subscript(dynamicMember:)</code> 方法必须返回一串字符，这体现了<code>Swift</code>的类型安全性</li>
+<li>如果你想要多种不同的类型, 就执行不同的<code>subscript(dynamicMember:)</code>方法</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dynamicMemberLookup</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Titan</span> </span>&#123;</span><br><span class="line">    <span class="keyword">subscript</span>(dynamicMember member: <span class="type">String</span>) -&gt; <span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> properties = [<span class="string">"name"</span>: <span class="string">"Titanjun"</span>, <span class="string">"city"</span>: <span class="string">"Hang"</span>]</span><br><span class="line">        <span class="keyword">return</span> properties[member, <span class="keyword">default</span>: <span class="string">"0"</span>] <span class="comment">//默认值</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">subscript</span>(dynamicMember member: <span class="type">String</span>) -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> properties = [<span class="string">"age"</span>: <span class="number">20</span>, <span class="string">"source"</span>: <span class="number">99</span>]</span><br><span class="line">        <span class="keyword">return</span> properties[member, <span class="keyword">default</span>: <span class="number">0</span>] <span class="comment">//默认值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>需要注意的是: 这里取值的时候, 必须注明所取得值的类型<br></p></div>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> titan = <span class="type">Titan</span>()</span><br><span class="line"><span class="keyword">let</span> name: <span class="type">String</span> = titan.name</span><br><span class="line"><span class="keyword">let</span> city: <span class="type">String</span> = titan.city</span><br><span class="line"><span class="keyword">let</span> age: <span class="type">Int</span> = titan.age</span><br><span class="line"><span class="keyword">let</span> jun: <span class="type">String</span> = titan.jun</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(jun)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"name = \(name), city = \(city), age = \(age)"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//输出:</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line">name = <span class="type">Titanjuun</span>, city = <span class="type">Hang</span>, age = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<h3 id="增强的条件一致性"><a href="#增强的条件一致性" class="headerlink" title="增强的条件一致性"></a>增强的条件一致性</h3><p>条件一致性在<a href="https://www.titanjun.top/2018/04/24/Swift%204.1%20%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/" target="_blank" rel="noopener">Swift 4.1</a>中引入，一个类型的所有元素如果符合<code>Hashable</code>协议，则类型自动符合<code>Hashable</code>协议</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义Purchaseable协议</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Purchaseable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">buy</span><span class="params">()</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义一个符合该协议的结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Book</span>: <span class="title">Purchaseable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">buy</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"You bought a book"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//数组遵循该协议, 并且每一个元素也遵循该协议</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span>: <span class="title">Purchaseable</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Purchaseable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">buy</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> <span class="keyword">self</span> &#123;</span><br><span class="line">            item.buy()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note danger"><p>下面我们在Swift 4.1中运行如下代码, 会发现崩溃<br></p></div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let items: Any = [Book(), Book(), Book()]</span><br><span class="line"></span><br><span class="line">if let books = items as? Purchaseable &#123;</span><br><span class="line">    books.buy()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果你收到一种类型的数据，想要检查它是否可以被转化为一个条件一致性协议, 这种在<code>Swift 4.1</code>中是不支持的, 但是在<code>Swift 4.2</code>中却可以很好的解决</li>
+<li>另外, 对<code>Hashable</code>一致性自动合并的支持在<code>Swift 4.2</code>被大幅提高，来自<code>Swift</code> 标准库的几个内置类型，包括<code>optionals</code>, <code>arrays</code>, <code>dictionaries</code>和 <code>ranges</code>, 现在当他们的元素符合<code>Hashable</code>时会自动符合<code>Hashable</code> 协议</li>
+</ul>
+<h3 id="本地集合元素移除"><a href="#本地集合元素移除" class="headerlink" title="本地集合元素移除"></a>本地集合元素移除</h3><p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0197-remove-where.md" target="_blank" rel="noopener">SE-0197</a>介绍一个新的<code>removeAll(where:)</code>方法, 高效地执行根据条件删除操作</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pythons = [<span class="string">"John"</span>, <span class="string">"Michael"</span>, <span class="string">"Graham"</span>, <span class="string">"Terry"</span>, <span class="string">"Eric"</span>, <span class="string">"Terry"</span>]</span><br><span class="line">pythons.removeAll &#123; $<span class="number">0</span>.hasPrefix(<span class="string">"Terry"</span>) &#125;</span><br><span class="line"><span class="built_in">print</span>(pythons)</span><br><span class="line"></span><br><span class="line"><span class="comment">//输出: ["John", "Michael", "Graham", "Eric"]</span></span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>对比<code>filter</code>过滤方法<br></p></div>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> python2 = [<span class="string">"John"</span>, <span class="string">"Michael"</span>, <span class="string">"Graham"</span>, <span class="string">"Terry"</span>, <span class="string">"Eric"</span>, <span class="string">"Terry"</span>]</span><br><span class="line">python2 = python2.<span class="built_in">filter</span> &#123; !$<span class="number">0</span>.hasPrefix(<span class="string">"Terry"</span>) &#125;</span><br><span class="line"><span class="built_in">print</span>(python2)</span><br></pre></td></tr></table></figure>
+<p>这并不是非常有效地使用内存，它指定了你不想要的东西，而不是你想要的东西</p>
+<h3 id="随机数字的生成和洗牌"><a href="#随机数字的生成和洗牌" class="headerlink" title="随机数字的生成和洗牌"></a>随机数字的生成和洗牌</h3><ul>
+<li><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0202-random-unification.md" target="_blank" rel="noopener">SE-0202</a>中<code>Swift</code>引入了新的随机数<code>API</code></li>
+<li>可以通过调用<code>random()</code>随机数方法来生成一个随机数, 只需提供一个随机数范围即可</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ranInt = <span class="type">Int</span>.random(<span class="keyword">in</span>: <span class="number">0</span>..&lt;<span class="number">5</span>)</span><br><span class="line"><span class="keyword">let</span> ranFloat = <span class="type">Float</span>.random(<span class="keyword">in</span>: <span class="number">0</span>..&lt;<span class="number">5</span>)</span><br><span class="line"><span class="keyword">let</span> ranDouble = <span class="type">Double</span>.random(<span class="keyword">in</span>: <span class="number">0</span>..&lt;<span class="number">5</span>)</span><br><span class="line"><span class="keyword">let</span> ranCGFloat = <span class="type">CGFloat</span>.random(<span class="keyword">in</span>: <span class="number">0</span>..&lt;<span class="number">5</span>)</span><br><span class="line"><span class="keyword">let</span> ranBOOL = <span class="type">Bool</span>.random()</span><br></pre></td></tr></table></figure>
+<div class="note primary"><p>对数组进行重新洗牌<br></p></div>
+
+<p><code>SE-0202</code>还支持使用新方法<code>shuffle()</code>和<code>shuffled()</code>方法对数组元素进行重新随机排序</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> albums = [<span class="string">"Red"</span>, <span class="string">"1989"</span>, <span class="string">"Reputation"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 没有返回值</span></span><br><span class="line">albums.shuffle()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 有返回值, 重新返回一个数组</span></span><br><span class="line"><span class="keyword">let</span> shuffled = albums.shuffled()</span><br></pre></td></tr></table></figure>
+<div class="note info"><p>获取数组中的一个随机元素<br></p></div>
+
+<p><code>randomElement()</code>: 数组的一个新方法, 如果数组部位空, 则返回数组中的一个随机元素, 否则返回<code>nil</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> random = albums.randomElement() &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"The random album is \(random)."</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="更简单，更安全的哈希"><a href="#更简单，更安全的哈希" class="headerlink" title="更简单，更安全的哈希"></a>更简单，更安全的哈希</h3><ul>
+<li><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0206-hashable-enhancements.md" target="_blank" rel="noopener">SE-0206</a>介绍了在<code>Swift 4.1</code>中简化了我们使自定义类型符合<code>Hashable</code>协议的方式</li>
+<li><code>Swift 4.2</code>引入了一个新的<code>Hasher</code>结构，它提供了一个随机播种的通用散列函数</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">iPad</span>: <span class="title">Hashable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> serialNumber: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> capacity: <span class="type">Int</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">hash</span><span class="params">(into hasher: <span class="keyword">inout</span> Hasher)</span></span> &#123;</span><br><span class="line">        hasher.combine(serialNumber)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以通过<code>combine()</code>重复调用将更多属性添加到散列，并且添加属性的顺序会影响完成的散列值。</li>
+<li>还可以将其<code>Hasher</code>用作独立散列发生器：只要提供您想散列的任何值，然后调用<code>finalize()</code>以生成最终值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> first = iPad(serialNumber: <span class="string">"12345"</span>, capacity: <span class="number">256</span>)</span><br><span class="line"><span class="keyword">let</span> second = iPad(serialNumber: <span class="string">"54321"</span>, capacity: <span class="number">512</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hasher = <span class="type">Hasher</span>()</span><br><span class="line">hasher.combine(first)</span><br><span class="line">hasher.combine(second)</span><br><span class="line"><span class="keyword">let</span> hash = hasher.finalize()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Hasher</code>每次散列对象时都会使用随机种子，这意味着任何对象的散列值在您的应用运行之间有效地保证是不同的</li>
+<li>这又意味着您添加到集合或字典中的元素很可能在您每次运行应用程序时都有不同的顺序</li>
+</ul>
+<h3 id="检查序列元素是否符合条件"><a href="#检查序列元素是否符合条件" class="headerlink" title="检查序列元素是否符合条件"></a>检查序列元素是否符合条件</h3><p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0207-containsOnly.md" target="_blank" rel="noopener">SE-0207</a>提供了<code>allSatisfy()</code>一种检查序列中的所有元素是否满足条件的新方法</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断数组的所有元素是否全部大于85</span></span><br><span class="line"><span class="keyword">let</span> scores = [<span class="number">86</span>, <span class="number">88</span>, <span class="number">95</span>, <span class="number">92</span>]</span><br><span class="line"><span class="comment">//返回一个BOOL</span></span><br><span class="line"><span class="keyword">let</span> passed = scores.allSatisfy(&#123; $<span class="number">0</span> &gt; <span class="number">85</span> &#125;)</span><br><span class="line"><span class="built_in">print</span>(passed)</span><br><span class="line"></span><br><span class="line"><span class="comment">//输出: true</span></span><br></pre></td></tr></table></figure>
+<h3 id="布尔切换"><a href="#布尔切换" class="headerlink" title="布尔切换"></a>布尔切换</h3><p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0199-bool-toggle.md" target="_blank" rel="noopener">SE-0199</a>引入了一种新的<code>toggle()</code>方法, 可以将布尔值取反, 实现代码如下:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Bool</span> </span>&#123;</span><br><span class="line">   <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">toggle</span><span class="params">()</span></span> &#123;</span><br><span class="line">      <span class="keyword">self</span> = !<span class="keyword">self</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note success"><p>测试代码<br></p></div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var isSwift = true</span><br><span class="line">//toggle函数没有返回值</span><br><span class="line">isSwift.toggle()</span><br><span class="line">print(isSwift)</span><br></pre></td></tr></table></figure>
+<p>###</p>
+<ul>
+<li><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0204-add-last-methods.md" target="_blank" rel="noopener">SE-0204</a>介绍了数组中的获取满足条件的数组中的最后一个元素或者索引值</li>
+<li>在<code>Swift 4.1</code>中我们只能取得<code>first</code>值, 却无法获取数组中的最后一个值(或者要用大量代码实现)</li>
+<li>在<code>Swift 4.2</code>中提供了<code>last(where:)</code>和<code>lastIndex(where:)</code>方法来获取数组中满足条件的最后的元素和索引值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取满足条件的数组中的第一个值</span></span><br><span class="line"><span class="keyword">let</span> a = [<span class="number">20</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">40</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">10</span>, <span class="number">40</span>, <span class="number">20</span>]</span><br><span class="line"><span class="built_in">print</span>(a.first(<span class="keyword">where</span>: &#123; $<span class="number">0</span> &gt; <span class="number">25</span> &#125;))  </span><br><span class="line"><span class="built_in">print</span>(a.index(<span class="keyword">where</span>: &#123; $<span class="number">0</span> &gt; <span class="number">25</span> &#125;))</span><br><span class="line"><span class="built_in">print</span>(a.index(of: <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">//输出:</span></span><br><span class="line"><span class="number">30</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<div class="note success"><p><code>Swift 4.2</code>中新增的<code>last</code>函数<br></p></div>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在Swift4.1中</span></span><br><span class="line"><span class="built_in">print</span>((a.reversed().index(<span class="keyword">where</span>: &#123; $<span class="number">0</span> &gt; <span class="number">25</span> &#125;)?.base).<span class="built_in">map</span>(&#123; a.index(before: $<span class="number">0</span>) &#125;))</span><br><span class="line"><span class="comment">//输出: 7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Swift 4.2</span></span><br><span class="line"><span class="comment">//获取满足条件的元素</span></span><br><span class="line"><span class="built_in">print</span>(a.last(<span class="keyword">where</span>: &#123; $<span class="number">0</span> &gt; <span class="number">25</span> &#125;))   <span class="comment">//40</span></span><br><span class="line"><span class="comment">//获取满足条件的元素的索引</span></span><br><span class="line"><span class="built_in">print</span>(a.lastIndex(<span class="keyword">where</span>: &#123; $<span class="number">0</span> &gt; <span class="number">25</span> &#125;))   <span class="comment">//7</span></span><br></pre></td></tr></table></figure>
+<h3 id="展望Swift-5-0"><a href="#展望Swift-5-0" class="headerlink" title="展望Swift 5.0"></a>展望Swift 5.0</h3><ul>
+<li>苹果形容<code>Swift 4.2</code>为”为了实现Swift 5中ABI稳定性的中继点”, 想必<code>Swift 4.1</code>和<code>Swift 4.2</code>的发布也是为了<code>Swift 5.0</code>做一个铺垫</li>
+<li>最后还是期待<code>Swift 5.0</code>能够带来更加稳定的<code>API</code></li>
+</ul>
+<h4 id="附录参考"><a href="#附录参考" class="headerlink" title="附录参考"></a>附录参考</h4><ul>
+<li><a href="https://www.hackingwithswift.com/articles/77/whats-new-in-swift-4-2" target="_blank" rel="noopener">What’s new in Swift 4.2?</a></li>
+<li><a href="https://swift.org/blog/4-2-release-process/" target="_blank" rel="noopener">Swift 4.2 Release Process</a></li>
+<li><a href="https://github.com/apple/swift-evolution/tree/master/proposals" target="_blank" rel="noopener">Swift evolution</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:17px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+    
+    
+      <div>
+        
+      </div>
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+
+	<div>欢迎您扫一扫下面的微信公众号，订阅我的博客！</div>
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="TitanKing wechat" style="width: 200px; max-width: 100%;">
+    
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpeg" alt="TitanKing 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="TitanKing 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    TitanKing
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://titanjun.top/Swift 4.2 新特性更新.html" title="Swift 4.2 新特性更新">https://titanjun.top/Swift 4.2 新特性更新.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Equatable/" rel="tag"><i class="fa fa-tag"></i> Equatable</a>
+          
+            <a href="/tags/Hashable/" rel="tag"><i class="fa fa-tag"></i> Hashable</a>
+          
+            <a href="/tags/Swift4-2/" rel="tag"><i class="fa fa-tag"></i> Swift4.2</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div style="color: rgba(0, 0, 0, 0.75); font-size:15px; letter-spacing:3px">(&gt;看完记得五星好评哦&lt;)</div>
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Python编程之Tkinter的使用01.html" rel="prev" title="Python编程之Tkinter的使用01">
+                <i class="fa fa-chevron-left"></i> Python编程之Tkinter的使用01
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Python中模块的使用.html" rel="next" title="Python中模块的使用">
+                Python中模块的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-hoofoo-share-title">分享到：</div>
+<div class="-hoofoo-share-buttons">
+    <div class="-mob-share-weibo -hoofoo-share-weibo -hoofoo-share-ui-button"><i class="fa fa-weibo" aria-hidden="true"></i></div>
+    <div class="-mob-share-weixin -hoofoo-share-weixin -hoofoo-share-ui-button"><i class="fa fa-weixin" aria-hidden="true"></i></div>
+    <div class="-mob-share-qq -hoofoo-share-qq -hoofoo-share-ui-button"><i class="fa fa-qq" aria-hidden="true"></i></div>
+    <div class="-mob-share-twitter -hoofoo-share-twitter -hoofoo-share-ui-button"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+    <div class="-hoofoo-share-more -hoofoo-share-ui-button -mob-share-open"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
+</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-renren"><p>人人网</p></li>
+        <li class="-mob-share-kaixin"><p>开心网</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=24fc497bb07bc"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/" class="site-author-image" rel="start" style="border:none">
+                <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="TitanKing">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">TitanKing</p>
+              <p class="site-description motion-element" itemprop="description">我还年轻，我渴望上路。带着最初的激情，追寻着最初的梦想，感受着最初的体验，我们上路吧!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">154</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CoderTitan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005056052774133/home?from=page_100505&mod=TAB&is_all=1#place" target="_blank" title="新浪微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>新浪微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/5bd5e9ed569e" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/ShmilyCoder" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a7a64ae6fb9a0636323fd06/posts" target="_blank" title="稀土掘金">
+                      
+                        <i class="fa fa-fw fa-database"></i>稀土掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:quanjunt@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/CoderTitan" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CaseInterable协议"><span class="nav-number">1.</span> <span class="nav-text">CaseInterable协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KeyValuePairs"><span class="nav-number">2.</span> <span class="nav-text">KeyValuePairs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#warning和-error编译指令"><span class="nav-number">3.</span> <span class="nav-text">#warning和#error编译指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态成员查找"><span class="nav-number">4.</span> <span class="nav-text">动态成员查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增强的条件一致性"><span class="nav-number">5.</span> <span class="nav-text">增强的条件一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地集合元素移除"><span class="nav-number">6.</span> <span class="nav-text">本地集合元素移除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机数字的生成和洗牌"><span class="nav-number">7.</span> <span class="nav-text">随机数字的生成和洗牌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更简单，更安全的哈希"><span class="nav-number">8.</span> <span class="nav-text">更简单，更安全的哈希</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查序列元素是否符合条件"><span class="nav-number">9.</span> <span class="nav-text">检查序列元素是否符合条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔切换"><span class="nav-number">10.</span> <span class="nav-text">布尔切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#展望Swift-5-0"><span class="nav-number">11.</span> <span class="nav-text">展望Swift 5.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#附录参考"><span class="nav-number">11.1.</span> <span class="nav-text">附录参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+  
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站总访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<span>|</span>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共295.7k字</span>
+</div>
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'CoderTitan',
+            repo: 'CoderTitan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '218676a3ad406ae623f3974be77590653ee351d5',
+            
+                client_id: '47d71683076aa93948d8'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'm7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz',
+        appKey: '7X31Wl5lm6BXqgtV9k3sm7yI',
+        placeholder: '在这里说点什么吧...',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("m7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz", "7X31Wl5lm6BXqgtV9k3sm7yI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 10998,
+    el: 'wpac-rating',
+    color: 'f79533'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript">
+    //微信二维码点击背景关闭
+    $('body').delegate('.-mob-share-weixin-qrcode-bg','click', function(){
+         $(".-mob-share-weixin-qrcode-close").trigger("click");
+    }); 
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<script type="text/javascript" src="/source/js/src/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init();</script>
+
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
