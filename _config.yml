@@ -138,5 +138,7 @@ plugins: hexo-generate-feed
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/CoderTitan/CoderTitan.github.io.git
+  repository: 
+    github: https://github.com/CoderTitan/CoderTitan.github.io.git
+    coding: git@e.coding.net:titantop/titantop.git
   branch: master
