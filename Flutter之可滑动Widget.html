@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="TitanKing">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_scroll.png">
-<meta property="og:updated_time" content="2020-05-21T02:41:31.914Z">
+<meta property="og:updated_time" content="2020-06-23T05:43:07.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flutter之可滑动Widget">
 <meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_scroll.png">
@@ -451,7 +451,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  7,090 字
+                  7,228 字
                 </span>
               
 
@@ -686,7 +686,7 @@
 </ul>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CustomScrollView(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 滑动方向</span></span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    <span class="built_in">double</span> cacheExtent,</span><br><span class="line">    <span class="keyword">this</span>.slivers = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">    <span class="built_in">int</span> semanticChildCount,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>上述属性除了<code>slivers</code>之外, 前面都有提到过, 接受一个<code>Widget</code>数组, 但是这里的<code>Widget</code>必须是<code>Sliver</code>类型的, 至于原因, 下面会详解</p>
-<div class="note warning"><p>什么是<code>Sliver</code> ??</p></div>
+<div class="note warning"><p>什么是Sliver ?</p></div>
 
 <ul>
 <li>在<code>Flutter</code>中，<code>Sliver</code>通常指具有特定滚动效果的可滚动块</li>
@@ -695,6 +695,17 @@
 <li>正因如此，<code>CustomScrollView</code>才可以将多个<code>Sliver</code>“粘”在一起，这些<code>Sliver</code>共用<code>CustomScrollView</code>的<code>Scrollable</code>，最终实现统一的滑动效果</li>
 <li>前面之所以说“大多数“<code>Sliver</code>都和可滚动<code>Widget</code>对应，是由于还有一些如<code>SliverPadding</code>、<code>SliverAppBar</code>等是和可滚动<code>Widget</code>无关的</li>
 <li>它们主要是为了结合<code>CustomScrollView</code>一起使用，这是因为<code>CustomScrollView</code>的子<code>widget</code>必须都是<code>Sliver</code></li>
+<li>下面是常用的一些<code>Sliver</code>：<ul>
+<li><code>SliverToBoxAdapter</code>: 将各种视图组合在一起, 类似于<code>Container</code></li>
+<li><code>SliverPersistentHeader</code>: 实现<code>sticky</code>吸顶的效果的<code>Sliver</code></li>
+<li><code>SliverList</code>：类似于我们之前使用过的<code>ListView</code>；</li>
+<li><code>SliverFixedExtentList</code>：类似于<code>SliverList</code>只是可以设置滚动的高度；</li>
+<li><code>SliverGrid</code>：类似于我们之前使用过的<code>GridView</code></li>
+<li><code>SliverPadding</code>：设置<code>Sliver</code>的内边距，因为可能要单独给<code>Sliver</code>设置内边距；</li>
+<li><code>SliverAppBar</code>：添加一个<code>AppBar</code>，通常用来作为<code>CustomScrollView</code>的<code>HeaderView</code></li>
+<li><code>SliverSafeArea</code>：设置内容显示在安全区域（比如不让齐刘海挡住我们的内容）</li>
+</ul>
+</li>
 </ul>
 <h3 id="SliverAppBar"><a href="#SliverAppBar" class="headerlink" title="SliverAppBar"></a>SliverAppBar</h3><ul>
 <li><code>AppBar</code>和<code>SliverAppBar</code>是<code>Material Design</code>中的导航栏</li>
@@ -1164,7 +1175,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共302.6k字</span>
+  <span class="post-count">博客全站共303.8k字</span>
 </div>
 
 
