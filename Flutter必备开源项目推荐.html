@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+  <script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+  </script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "a85a9be2"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Flutter,Dart,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="这段时间内一直学习Flutter, 自行设计完成了一个实战项目mahua_pet 项目中用到了flutter中的大部分的组件, 界面也涉及了很多功能(可能很多地方还有待完善) 项目目前也还是处在开发待完成阶段, 主要内容差不多已经完成 下面是一些UI界面展示, 后面推见一些比较好的开源项目 验证码登录和密码登录都可以登录, 账号: 123 密码: 123">
+<meta name="keywords" content="Flutter,Dart">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter必备开源项目推荐">
+<meta property="og:url" content="https://titanjun.top/Flutter必备开源项目推荐.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:description" content="这段时间内一直学习Flutter, 自行设计完成了一个实战项目mahua_pet 项目中用到了flutter中的大部分的组件, 界面也涉及了很多功能(可能很多地方还有待完善) 项目目前也还是处在开发待完成阶段, 主要内容差不多已经完成 下面是一些UI界面展示, 后面推见一些比较好的开源项目 验证码登录和密码登录都可以登录, 账号: 123 密码: 123">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/home_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/calendar_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/find_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/detail_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/language_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/theme_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://github.com/hnvn/flutter_shimmer/blob/master/screenshots/loading_list.gif?raw=true">
+<meta property="og:image" content="https://github.com/hnvn/flutter_shimmer/blob/master/screenshots/slide_to_unlock.gif?raw=true">
+<meta property="og:updated_time" content="2020-11-20T12:08:59.224Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter必备开源项目推荐">
+<meta name="twitter:description" content="这段时间内一直学习Flutter, 自行设计完成了一个实战项目mahua_pet 项目中用到了flutter中的大部分的组件, 界面也涉及了很多功能(可能很多地方还有待完善) 项目目前也还是处在开发待完成阶段, 主要内容差不多已经完成 下面是一些UI界面展示, 后面推见一些比较好的开源项目 验证码登录和密码登录都可以登录, 账号: 123 密码: 123">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/home_0.png?x-oss-process=style/titanjun">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":3,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://titanjun.top/Flutter必备开源项目推荐.html">
+
+
+
+
+
+  <title>Flutter必备开源项目推荐 | TitanKing</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6dd8cf28eb4a5f6451fa0cd10918824";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/CoderTitan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TitanKing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-navigation">
+          <a href="/navigation/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-globe"></i> <br>
+            
+            导航
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/Flutter必备开源项目推荐.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flutter必备开源项目推荐</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-20T20:16:40+08:00">
+                2020-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flutter笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Flutter必备开源项目推荐.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/Flutter必备开源项目推荐.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/Flutter必备开源项目推荐.html" class="leancloud_visitors" data-flag-title="Flutter必备开源项目推荐">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,416 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>这段时间内一直学习<code>Flutter</code>, 自行设计完成了一个实战项目<code>mahua_pet</code></li>
+<li>项目中用到了<code>flutter</code>中的大部分的组件, 界面也涉及了很多功能(可能很多地方还有待完善)</li>
+<li>项目目前也还是处在开发待完成阶段, 主要内容差不多已经完成</li>
+<li>下面是一些UI界面展示, 后面推见一些比较好的开源项目</li>
+<li>验证码登录和密码登录都可以登录, 账号: 123 密码: 123</li>
+</ul>
+<a id="more"></a>
+<h2 id="部分界面展示"><a href="#部分界面展示" class="headerlink" title="部分界面展示"></a>部分界面展示</h2><h3 id="首页"><a href="#首页" class="headerlink" title="首页"></a>首页</h3><p>动态的展示导航栏的显示和隐藏</p>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/home_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<h3 id="日历模块"><a href="#日历模块" class="headerlink" title="日历模块"></a>日历模块</h3><p>展示日历的记录, 每日记录生成图片和保存图片</p>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/calendar_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<h3 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h3><p>类似朋友圈的内容展示, 图片浏览和保存图片</p>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/find_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<p>动态详情模块, 动态的评论和删除评论</p>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/detail_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<h3 id="多语言国际化"><a href="#多语言国际化" class="headerlink" title="多语言国际化"></a>多语言国际化</h3><p>部分页面适配了韩语和英语</p>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/language_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<h3 id="颜色主题和暗黑模式"><a href="#颜色主题和暗黑模式" class="headerlink" title="颜色主题和暗黑模式"></a>颜色主题和暗黑模式</h3><p>部分页面支持手动的修改项目主题色, 黑色主题(暗黑模式)适配</p>
+<p><img src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/theme_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<h2 id="用到的插件"><a href="#用到的插件" class="headerlink" title="用到的插件"></a>用到的插件</h2><h3 id="dio"><a href="#dio" class="headerlink" title="dio"></a>dio</h3><blockquote>
+<p><a href="https://pub.dartlang.org/packages/dio" target="_blank" rel="noopener">https://pub.dartlang.org/packages/dio</a></p>
+</blockquote>
+<p>Dart社区提供的http请求库，不仅支持常见的网络请求，还支持Restful API、FormData、拦截器、请求取消、Cookie管理、文件上传/下载、超时等操作</p>
+<h3 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h3><blockquote>
+<p><a href="https://pub.dev/packages/provider" target="_blank" rel="noopener">https://pub.dev/packages/provider</a></p>
+</blockquote>
+<p><code>Flutter</code>官方推荐的状态管理插件, <a href="https://flutter.cn/docs/development/data-and-backend/state-mgmt/simple" target="_blank" rel="noopener">简单的应用状态管理</a></p>
+<h3 id="flutter-redux"><a href="#flutter-redux" class="headerlink" title="flutter_redux"></a>flutter_redux</h3><blockquote>
+<p><a href="https://pub.dev/packages/flutter_redux" target="_blank" rel="noopener">https://pub.dev/packages/flutter_redux</a></p>
+</blockquote>
+<p><code>flutter</code>版的<code>redux</code></p>
+<h3 id="pull-to-refresh"><a href="#pull-to-refresh" class="headerlink" title="pull_to_refresh"></a>pull_to_refresh</h3><blockquote>
+<p><a href="https://pub.dev/packages/pull_to_refresh" target="_blank" rel="noopener">https://pub.dev/packages/pull_to_refresh</a></p>
+</blockquote>
+<p>一个提供上拉加载和下拉刷新的组件,同时支持<code>Android</code>和<code>ios</code></p>
+<h3 id="flutter-staggered-grid-view"><a href="#flutter-staggered-grid-view" class="headerlink" title="flutter_staggered_grid_view"></a>flutter_staggered_grid_view</h3><blockquote>
+<p><a href="https://pub.dev/packages/flutter_staggered_grid_view" target="_blank" rel="noopener">https://pub.dev/packages/flutter_staggered_grid_view</a></p>
+</blockquote>
+<p>一个支持瀑布流布局, 支持交错和可扩展的网格布局的组件</p>
+<h3 id="flutter-easyloading"><a href="#flutter-easyloading" class="headerlink" title="flutter_easyloading"></a>flutter_easyloading</h3><blockquote>
+<p><a href="https://pub.dev/packages/flutter_easyloading" target="_blank" rel="noopener">https://pub.dev/packages/flutter_easyloading</a></p>
+</blockquote>
+<p>支持多种样式的toast提示组件, 支持自定义</p>
+<h3 id="carousel-slider"><a href="#carousel-slider" class="headerlink" title="carousel_slider"></a>carousel_slider</h3><blockquote>
+<p><a href="https://pub.dev/packages/carousel_slider" target="_blank" rel="noopener">https://pub.dev/packages/carousel_slider</a></p>
+</blockquote>
+<p>轮播图组件, 支持缩放切换</p>
+<h3 id="table-calendar"><a href="#table-calendar" class="headerlink" title="table_calendar"></a>table_calendar</h3><blockquote>
+<p><a href="https://pub.dev/packages/table_calendar" target="_blank" rel="noopener">https://pub.dev/packages/table_calendar</a></p>
+</blockquote>
+<p>日历组件, 可定制性比较高, 支持语言国际化</p>
+<h3 id="photo-view"><a href="#photo-view" class="headerlink" title="photo_view"></a>photo_view</h3><blockquote>
+<p><a href="https://pub.dev/packages/photo_view" target="_blank" rel="noopener">https://pub.dev/packages/photo_view</a></p>
+</blockquote>
+<p>可定制的图片查看器, 支持手势缩放, 动画展示等</p>
+<h3 id="shimmer"><a href="#shimmer" class="headerlink" title="shimmer"></a>shimmer</h3><blockquote>
+<p><a href="https://pub.dev/packages/shimmer" target="_blank" rel="noopener">https://pub.dev/packages/shimmer</a></p>
+</blockquote>
+<p>提供闪光效果的组件, 表述不清晰, 看提供效果图</p>
+<p><img src="https://github.com/hnvn/flutter_shimmer/blob/master/screenshots/loading_list.gif?raw=true" alt="image"><br><img src="https://github.com/hnvn/flutter_shimmer/blob/master/screenshots/slide_to_unlock.gif?raw=true" alt="image"></p>
+<h3 id="cached-network-image"><a href="#cached-network-image" class="headerlink" title="cached_network_image"></a>cached_network_image</h3><blockquote>
+<p><a href="https://pub.dev/packages/cached_network_image" target="_blank" rel="noopener">https://pub.dev/packages/cached_network_image</a></p>
+</blockquote>
+<p>用来加载和缓存网络图像</p>
+<h3 id="image-picker"><a href="#image-picker" class="headerlink" title="image_picker"></a>image_picker</h3><blockquote>
+<p><a href="https://pub.dev/packages/image_picker" target="_blank" rel="noopener">https://pub.dev/packages/image_picker</a></p>
+</blockquote>
+<p>用于从Android和iOS图像库中选择图像的库，支持使用相机拍摄新照片。</p>
+<h3 id="image-gallery-saver"><a href="#image-gallery-saver" class="headerlink" title="image_gallery_saver"></a>image_gallery_saver</h3><blockquote>
+<p><a href="https://pub.dev/packages/image_gallery_saver" target="_blank" rel="noopener">https://pub.dev/packages/image_gallery_saver</a></p>
+</blockquote>
+<p>保存视频和图片到手机相册</p>
+<h3 id="video-player"><a href="#video-player" class="headerlink" title="video_player"></a>video_player</h3><blockquote>
+<p><a href="https://pub.dev/packages/video_player" target="_blank" rel="noopener">https://pub.dev/packages/video_player</a></p>
+</blockquote>
+<p>flutter官方推荐的视频播放组件</p>
+<h3 id="permission-handler"><a href="#permission-handler" class="headerlink" title="permission_handler"></a>permission_handler</h3><blockquote>
+<p><a href="https://pub.dev/packages/permission_handler" target="_blank" rel="noopener">https://pub.dev/packages/permission_handler</a></p>
+</blockquote>
+<p>用于Android和iOS的相关隐私权限判断</p>
+<h3 id="shared-preferences"><a href="#shared-preferences" class="headerlink" title="shared_preferences"></a>shared_preferences</h3><blockquote>
+<p><a href="https://pub.dev/packages/shared_preferences" target="_blank" rel="noopener">https://pub.dev/packages/shared_preferences</a></p>
+</blockquote>
+<p>用于基本数据的缓存处理</p>
+<h3 id="device-info"><a href="#device-info" class="headerlink" title="device_info"></a>device_info</h3><blockquote>
+<p><a href="https://pub.dev/packages/device_info" target="_blank" rel="noopener">https://pub.dev/packages/device_info</a></p>
+</blockquote>
+<p>用于获取用户设备信息</p>
+<h3 id="location"><a href="#location" class="headerlink" title="location"></a>location</h3><blockquote>
+<p><a href="https://pub.dev/packages/location" target="_blank" rel="noopener">https://pub.dev/packages/location</a></p>
+</blockquote>
+<p>获取定位信息, 可以获取位置更改时的回调</p>
+<h2 id="值得推荐的插件"><a href="#值得推荐的插件" class="headerlink" title="值得推荐的插件"></a>值得推荐的插件</h2><h3 id="适配相关"><a href="#适配相关" class="headerlink" title="适配相关"></a>适配相关</h3><h4 id="native-widgets"><a href="#native-widgets" class="headerlink" title="native_widgets"></a>native_widgets</h4><blockquote>
+<p><a href="https://pub.dev/packages/native_widgets" target="_blank" rel="noopener">https://pub.dev/packages/native_widgets</a></p>
+</blockquote>
+<p>支持自动根据平台自动使用对应风格组件，Android将使用Material风格，iOS将使用Cupertino风格</p>
+<h3 id="日期时间"><a href="#日期时间" class="headerlink" title="日期时间"></a>日期时间</h3><h4 id="flutter-picker"><a href="#flutter-picker" class="headerlink" title="flutter_picker"></a>flutter_picker</h4><blockquote>
+<p><a href="https://pub.dev/packages/flutter_picker" target="_blank" rel="noopener">https://pub.dev/packages/flutter_picker</a></p>
+</blockquote>
+<p>一个日期，时间，日期时间，icon，自定义数据的选择器，可以居中弹窗，也可以在底部弹出</p>
+<h3 id="MarkDown"><a href="#MarkDown" class="headerlink" title="MarkDown"></a>MarkDown</h3><h4 id="markdown"><a href="#markdown" class="headerlink" title="markdown"></a>markdown</h4><blockquote>
+<p><a href="https://pub.dev/packages/markdown" target="_blank" rel="noopener">https://pub.dev/packages/markdown</a></p>
+</blockquote>
+<p>用Dart编写的便携式Markdown库。它可以在客户端和服务器上将Markdown解析为HTML</p>
+<h3 id="颜色选择"><a href="#颜色选择" class="headerlink" title="颜色选择"></a>颜色选择</h3><h4 id="flutter-colorpicker"><a href="#flutter-colorpicker" class="headerlink" title="flutter_colorpicker"></a>flutter_colorpicker</h4><blockquote>
+<p><a href="https://pub.dev/packages/flutter_colorpicker" target="_blank" rel="noopener">https://pub.dev/packages/flutter_colorpicker</a></p>
+</blockquote>
+<p>一个HSV(HSB)/HSL颜色选择器</p>
+<h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><h4 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h4><blockquote>
+<p><a href="https://pub.dev/packages/crypto" target="_blank" rel="noopener">https://pub.dev/packages/crypto</a></p>
+</blockquote>
+<p>crypto算法库支持的算法: </p>
+<ul>
+<li>SHA-1</li>
+<li>SHA-224</li>
+<li>SHA-256</li>
+<li>SHA-384</li>
+<li>SHA-512</li>
+<li>MD5</li>
+<li>HMAC (i.e. HMAC-MD5, HMAC-SHA1, HMAC-SHA256)</li>
+</ul>
+<h4 id="pointycastle"><a href="#pointycastle" class="headerlink" title="pointycastle"></a>pointycastle</h4><blockquote>
+<p><a href="https://pub.dev/packages/pointycastle" target="_blank" rel="noopener">https://pub.dev/packages/pointycastle</a></p>
+</blockquote>
+<p>用于加密和解密的Dart库, 实现了AES RSA 公私钥加解密等加密算法</p>
+<h3 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h3><h4 id="archive"><a href="#archive" class="headerlink" title="archive"></a>archive</h4><blockquote>
+<p><a href="https://pub.dev/packages/archive" target="_blank" rel="noopener">https://pub.dev/packages/archive</a></p>
+</blockquote>
+<p>为各种存档和压缩格式提供编码器和解码器，如zip，tar，bzip2，gzip和zlib</p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><h4 id="sqflite"><a href="#sqflite" class="headerlink" title="sqflite"></a>sqflite</h4><blockquote>
+<p><a href="https://pub.dev/packages/sqflite" target="_blank" rel="noopener">https://pub.dev/packages/sqflite</a></p>
+</blockquote>
+<p>SQLite的Flutter插件，一个自包含的高可靠性嵌入式SQL数据库引擎</p>
+<h3 id="分享统计支付"><a href="#分享统计支付" class="headerlink" title="分享统计支付"></a>分享统计支付</h3><h4 id="share"><a href="#share" class="headerlink" title="share"></a>share</h4><blockquote>
+<p><a href="https://pub.dev/packages/share" target="_blank" rel="noopener">https://pub.dev/packages/share</a></p>
+</blockquote>
+<p>支持分享的flutter插件</p>
+<h4 id="flutter-umeng-analytics"><a href="#flutter-umeng-analytics" class="headerlink" title="flutter_umeng_analytics"></a>flutter_umeng_analytics</h4><blockquote>
+<p><a href="https://pub.dev/packages/flutter_umeng_analytics" target="_blank" rel="noopener">https://pub.dev/packages/flutter_umeng_analytics</a></p>
+</blockquote>
+<p>友盟的分享和统计库</p>
+<h4 id="flutter-qq"><a href="#flutter-qq" class="headerlink" title="flutter_qq"></a>flutter_qq</h4><blockquote>
+<p><a href="https://pub.dev/packages/flutter_qq" target="_blank" rel="noopener">https://pub.dev/packages/flutter_qq</a></p>
+</blockquote>
+<p>集成了QQ登录、QQ分享、QQ空间分享等功能的库</p>
+<h4 id="flutter-wechat"><a href="#flutter-wechat" class="headerlink" title="flutter_wechat"></a>flutter_wechat</h4><blockquote>
+<p><a href="https://pub.dev/packages/flutter_wechat" target="_blank" rel="noopener">https://pub.dev/packages/flutter_wechat</a></p>
+</blockquote>
+<p>集成了微信，支持微信登录、分享、支付等功能的库</p>
+<h4 id="flutter-alipay"><a href="#flutter-alipay" class="headerlink" title="flutter_alipay"></a>flutter_alipay</h4><blockquote>
+<p><a href="https://pub.dev/packages/flutter_alipay" target="_blank" rel="noopener">https://pub.dev/packages/flutter_alipay</a></p>
+</blockquote>
+<p>支付宝支付的功能</p>
+<h2 id="学习资料和项目"><a href="#学习资料和项目" class="headerlink" title="学习资料和项目"></a>学习资料和项目</h2><p>推荐一些不错的学习网站和项目学习</p>
+<h3 id="awesome-flutter-cn"><a href="#awesome-flutter-cn" class="headerlink" title="awesome-flutter-cn"></a>awesome-flutter-cn</h3><blockquote>
+<p><a href="https://github.com/crazycodeboy/awesome-flutter-cn" target="_blank" rel="noopener">https://github.com/crazycodeboy/awesome-flutter-cn</a></p>
+</blockquote>
+<p>一个Flutter的学习资料库, 里面提供了很多的学习资料</p>
+<h3 id="flutter-go"><a href="#flutter-go" class="headerlink" title="flutter-go"></a>flutter-go</h3><blockquote>
+<p><a href="https://github.com/alibaba/flutter-go" target="_blank" rel="noopener">https://github.com/alibaba/flutter-go</a></p>
+</blockquote>
+<p>由阿里巴巴前端技术团队开发的Flutter 开发者帮助 APP，包含 flutter 常用 140+ 组件的demo 演示与中文文档</p>
+<h3 id="Widget整理"><a href="#Widget整理" class="headerlink" title="Widget整理"></a>Widget整理</h3><blockquote>
+<p><a href="http://laomengit.com/flutter/widgets/widgets_structure.html" target="_blank" rel="noopener">http://laomengit.com/flutter/widgets/widgets_structure.html</a></p>
+</blockquote>
+<p>整理的330+组件的详细用法，不仅包含UI组件，还包含了功能性的组件</p>
+<h3 id="Morec"><a href="#Morec" class="headerlink" title="Morec"></a>Morec</h3><blockquote>
+<p><a href="https://github.com/Mayandev/morec" target="_blank" rel="noopener">https://github.com/Mayandev/morec</a></p>
+</blockquote>
+<p>一个非常精美的 Flutter 版电影客户端，利用豆瓣现有的 Api，打造了一个完整的电影展示 App</p>
+<h3 id="flutter-hrlweibo"><a href="#flutter-hrlweibo" class="headerlink" title="flutter_hrlweibo"></a>flutter_hrlweibo</h3><blockquote>
+<p><a href="https://github.com/huangruiLearn/flutter_hrlweibo" target="_blank" rel="noopener">https://github.com/huangruiLearn/flutter_hrlweibo</a></p>
+</blockquote>
+<p>仿微博最新版本,还原微博80%的界面,总共涉及到了几十个界面和接口,用到了flutter中的大部分组件</p>
+<h3 id="flutter-netease-music"><a href="#flutter-netease-music" class="headerlink" title="flutter-netease-music"></a>flutter-netease-music</h3><blockquote>
+<p><a href="https://github.com/boyan01/flutter-netease-music" target="_blank" rel="noopener">https://github.com/boyan01/flutter-netease-music</a></p>
+</blockquote>
+<p>仿网易云音乐，完成大部分功能的APP</p>
+<h3 id="flutter-shuqi"><a href="#flutter-shuqi" class="headerlink" title="flutter_shuqi"></a>flutter_shuqi</h3><blockquote>
+<p><a href="https://github.com/huanxsd/flutter_shuqi" target="_blank" rel="noopener">https://github.com/huanxsd/flutter_shuqi</a></p>
+</blockquote>
+<p>一个用Flutter写的书旗小说客户端, 所有功能都是用Dart写的，iOS和Android的代码复用率达到了100%</p>
+<h3 id="gsy-github-app-flutter"><a href="#gsy-github-app-flutter" class="headerlink" title="gsy_github_app_flutter"></a>gsy_github_app_flutter</h3><blockquote>
+<p><a href="https://github.com/CarGuo/GSYGithubAPP" target="_blank" rel="noopener">https://github.com/CarGuo/GSYGithubAPP</a></p>
+</blockquote>
+<p>一款跨平台的开源Github客户端App，项目涉及各种常用控件、网络、数据库、设计模式、主题切换、多语言、Redux等</p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:17px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      </div>
+    
+    
+    
+      <div>
+        
+      </div>
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+
+	<div>欢迎您扫一扫下面的微信公众号，订阅我的博客！</div>
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="TitanKing wechat" style="width: 200px; max-width: 100%;">
+    
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpeg" alt="TitanKing 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="TitanKing 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    TitanKing
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://titanjun.top/Flutter必备开源项目推荐.html" title="Flutter必备开源项目推荐">https://titanjun.top/Flutter必备开源项目推荐.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flutter/" rel="tag"><i class="fa fa-tag"></i> Flutter</a>
+          
+            <a href="/tags/Dart/" rel="tag"><i class="fa fa-tag"></i> Dart</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div style="color: rgba(0, 0, 0, 0.75); font-size:15px; letter-spacing:3px">(&gt;看完记得五星好评哦&lt;)</div>
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Flutter中Widget的生命周期和渲染原理.html" rel="next" title="Flutter中Widget的生命周期和渲染原理">
+                Flutter中Widget的生命周期和渲染原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-hoofoo-share-title">分享到：</div>
+<div class="-hoofoo-share-buttons">
+    <div class="-mob-share-weibo -hoofoo-share-weibo -hoofoo-share-ui-button"><i class="fa fa-weibo" aria-hidden="true"></i></div>
+    <div class="-mob-share-weixin -hoofoo-share-weixin -hoofoo-share-ui-button"><i class="fa fa-weixin" aria-hidden="true"></i></div>
+    <div class="-mob-share-qq -hoofoo-share-qq -hoofoo-share-ui-button"><i class="fa fa-qq" aria-hidden="true"></i></div>
+    <div class="-mob-share-twitter -hoofoo-share-twitter -hoofoo-share-ui-button"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+    <div class="-hoofoo-share-more -hoofoo-share-ui-button -mob-share-open"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
+</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
+        <li class="-mob-share-renren"><p>人人网</p></li>
+        <li class="-mob-share-kaixin"><p>开心网</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-pengyou"><p>朋友网</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=24fc497bb07bc"></script>
+<!--MOB SHARE END-->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/" class="site-author-image" rel="start" style="border:none">
+                <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="TitanKing">
+              </a>
+            
+              <p class="site-author-name" itemprop="name">TitanKing</p>
+              <p class="site-description motion-element" itemprop="description">我还年轻，我渴望上路。带着最初的激情，追寻着最初的梦想，感受着最初的体验，我们上路吧!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CoderTitan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/p/1005056052774133/home?from=page_100505&mod=TAB&is_all=1#place" target="_blank" title="新浪微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>新浪微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/5bd5e9ed569e" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/ShmilyCoder" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a7a64ae6fb9a0636323fd06/posts" target="_blank" title="稀土掘金">
+                      
+                        <i class="fa fa-fw fa-database"></i>稀土掘金</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:quanjunt@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/CoderTitan" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#部分界面展示"><span class="nav-number">1.</span> <span class="nav-text">部分界面展示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首页"><span class="nav-number">1.1.</span> <span class="nav-text">首页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日历模块"><span class="nav-number">1.2.</span> <span class="nav-text">日历模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发现"><span class="nav-number">1.3.</span> <span class="nav-text">发现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多语言国际化"><span class="nav-number">1.4.</span> <span class="nav-text">多语言国际化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色主题和暗黑模式"><span class="nav-number">1.5.</span> <span class="nav-text">颜色主题和暗黑模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用到的插件"><span class="nav-number">2.</span> <span class="nav-text">用到的插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dio"><span class="nav-number">2.1.</span> <span class="nav-text">dio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#provider"><span class="nav-number">2.2.</span> <span class="nav-text">provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-redux"><span class="nav-number">2.3.</span> <span class="nav-text">flutter_redux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pull-to-refresh"><span class="nav-number">2.4.</span> <span class="nav-text">pull_to_refresh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-staggered-grid-view"><span class="nav-number">2.5.</span> <span class="nav-text">flutter_staggered_grid_view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-easyloading"><span class="nav-number">2.6.</span> <span class="nav-text">flutter_easyloading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#carousel-slider"><span class="nav-number">2.7.</span> <span class="nav-text">carousel_slider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#table-calendar"><span class="nav-number">2.8.</span> <span class="nav-text">table_calendar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#photo-view"><span class="nav-number">2.9.</span> <span class="nav-text">photo_view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shimmer"><span class="nav-number">2.10.</span> <span class="nav-text">shimmer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cached-network-image"><span class="nav-number">2.11.</span> <span class="nav-text">cached_network_image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-picker"><span class="nav-number">2.12.</span> <span class="nav-text">image_picker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-gallery-saver"><span class="nav-number">2.13.</span> <span class="nav-text">image_gallery_saver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#video-player"><span class="nav-number">2.14.</span> <span class="nav-text">video_player</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#permission-handler"><span class="nav-number">2.15.</span> <span class="nav-text">permission_handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shared-preferences"><span class="nav-number">2.16.</span> <span class="nav-text">shared_preferences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#device-info"><span class="nav-number">2.17.</span> <span class="nav-text">device_info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#location"><span class="nav-number">2.18.</span> <span class="nav-text">location</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#值得推荐的插件"><span class="nav-number">3.</span> <span class="nav-text">值得推荐的插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适配相关"><span class="nav-number">3.1.</span> <span class="nav-text">适配相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#native-widgets"><span class="nav-number">3.1.1.</span> <span class="nav-text">native_widgets</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日期时间"><span class="nav-number">3.2.</span> <span class="nav-text">日期时间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-picker"><span class="nav-number">3.2.1.</span> <span class="nav-text">flutter_picker</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MarkDown"><span class="nav-number">3.3.</span> <span class="nav-text">MarkDown</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#markdown"><span class="nav-number">3.3.1.</span> <span class="nav-text">markdown</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色选择"><span class="nav-number">3.4.</span> <span class="nav-text">颜色选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-colorpicker"><span class="nav-number">3.4.1.</span> <span class="nav-text">flutter_colorpicker</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密算法"><span class="nav-number">3.5.</span> <span class="nav-text">加密算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#crypto"><span class="nav-number">3.5.1.</span> <span class="nav-text">crypto</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pointycastle"><span class="nav-number">3.5.2.</span> <span class="nav-text">pointycastle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压缩"><span class="nav-number">3.6.</span> <span class="nav-text">解压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#archive"><span class="nav-number">3.6.1.</span> <span class="nav-text">archive</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库"><span class="nav-number">3.7.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sqflite"><span class="nav-number">3.7.1.</span> <span class="nav-text">sqflite</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分享统计支付"><span class="nav-number">3.8.</span> <span class="nav-text">分享统计支付</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#share"><span class="nav-number">3.8.1.</span> <span class="nav-text">share</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-umeng-analytics"><span class="nav-number">3.8.2.</span> <span class="nav-text">flutter_umeng_analytics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-qq"><span class="nav-number">3.8.3.</span> <span class="nav-text">flutter_qq</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-wechat"><span class="nav-number">3.8.4.</span> <span class="nav-text">flutter_wechat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-alipay"><span class="nav-number">3.8.5.</span> <span class="nav-text">flutter_alipay</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习资料和项目"><span class="nav-number">4.</span> <span class="nav-text">学习资料和项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#awesome-flutter-cn"><span class="nav-number">4.1.</span> <span class="nav-text">awesome-flutter-cn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-go"><span class="nav-number">4.2.</span> <span class="nav-text">flutter-go</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Widget整理"><span class="nav-number">4.3.</span> <span class="nav-text">Widget整理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Morec"><span class="nav-number">4.4.</span> <span class="nav-text">Morec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-hrlweibo"><span class="nav-number">4.5.</span> <span class="nav-text">flutter_hrlweibo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-netease-music"><span class="nav-number">4.6.</span> <span class="nav-text">flutter-netease-music</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-shuqi"><span class="nav-number">4.7.</span> <span class="nav-text">flutter_shuqi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gsy-github-app-flutter"><span class="nav-number">4.8.</span> <span class="nav-text">gsy_github_app_flutter</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+  
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站总访客数:<span id="busuanzi_value_site_pv"></span>
+</span>
+</div>
+
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<span>|</span>
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共305.2k字</span>
+</div>
+
+
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'CoderTitan',
+            repo: 'CoderTitan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '218676a3ad406ae623f3974be77590653ee351d5',
+            
+                client_id: '47d71683076aa93948d8'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV, 
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'm7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz',
+        appKey: '7X31Wl5lm6BXqgtV9k3sm7yI',
+        placeholder: '在这里说点什么吧...',
+        avatar:'identicon',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("m7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz", "7X31Wl5lm6BXqgtV9k3sm7yI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 10998,
+    el: 'wpac-rating',
+    color: 'f79533'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript">
+    //微信二维码点击背景关闭
+    $('body').delegate('.-mob-share-weixin-qrcode-bg','click', function(){
+         $(".-mob-share-weixin-qrcode-close").trigger("click");
+    }); 
+</script>
+
+
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<script type="text/javascript" src="/source/js/src/instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init();</script>
+
+</body>
+</html>
