@@ -904,7 +904,7 @@ const CustomScrollView({
 上述属性除了`slivers`之外, 前面都有提到过, 接受一个`Widget`数组, 但是这里的`Widget`必须是`Sliver`类型的, 至于原因, 下面会详解
 
 
-<div class="note warning"><p>什么是`Sliver` ??</p></div>
+<div class="note warning"><p>什么是Sliver ?</p></div>
 
 - 在`Flutter`中，`Sliver`通常指具有特定滚动效果的可滚动块
 - 可滚动`widget`，如`ListView`、`GridView`等都有对应的`Sliver`实现如`SliverList`、`SliverGrid`等
@@ -912,7 +912,15 @@ const CustomScrollView({
 - 正因如此，`CustomScrollView`才可以将多个`Sliver`"粘"在一起，这些`Sliver`共用`CustomScrollView`的`Scrollable`，最终实现统一的滑动效果
 - 前面之所以说“大多数“`Sliver`都和可滚动`Widget`对应，是由于还有一些如`SliverPadding`、`SliverAppBar`等是和可滚动`Widget`无关的
 - 它们主要是为了结合`CustomScrollView`一起使用，这是因为`CustomScrollView`的子`widget`必须都是`Sliver`
-
+- 下面是常用的一些`Sliver`：
+  - `SliverToBoxAdapter`: 将各种视图组合在一起, 类似于`Container`
+  - `SliverPersistentHeader`: 实现`sticky`吸顶的效果的`Sliver`
+  - `SliverList`：类似于我们之前使用过的`ListView`；
+  - `SliverFixedExtentList`：类似于`SliverList`只是可以设置滚动的高度；
+  - `SliverGrid`：类似于我们之前使用过的`GridView`
+  - `SliverPadding`：设置`Sliver`的内边距，因为可能要单独给`Sliver`设置内边距；
+  - `SliverAppBar`：添加一个`AppBar`，通常用来作为`CustomScrollView`的`HeaderView`
+  - `SliverSafeArea`：设置内容显示在安全区域（比如不让齐刘海挡住我们的内容）
 
 ### SliverAppBar
 

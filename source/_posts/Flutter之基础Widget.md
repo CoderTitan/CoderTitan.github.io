@@ -385,6 +385,12 @@ const TextSpan({
 
 #### 部分属性详解
 
+##### width、height：
+
+- 用于设置图片的宽、高，当不指定宽高时，图片会根据当前父容器的限制，尽可能的显示其原始大小
+- 如果只设置`width`、`height`的其中一个，那么另一个属性默认会按比例缩放
+- 但可以通过下面介绍的fit属性来指定适应规则
+
 ##### fit
 
 图像在布局中分配的空间, `BoxFit`枚举值
@@ -428,6 +434,91 @@ Image(
   alignment: Alignment.topLeft,
 ),
 ```
+
+##### color和 colorBlendMode
+
+在图片绘制时可以对每一个像素进行颜色混合处理，`color`指定混合色，而`colorBlendMode`指定混合模式；
+
+
+##### repeat
+
+当图片本身大小小于显示空间时，指定图片的重复规则
+
+
+### FadeInImage
+
+可以用于添加占位图
+
+```dart
+class FadeInImage extends StatelessWidget {
+  const FadeInImage({
+    Key key,
+    // 占位图片, 默认本地图片
+    @required this.placeholder,
+    this.placeholderErrorBuilder,
+    // 网络图片
+    @required this.image,
+    this.imageErrorBuilder,
+    this.excludeFromSemantics = false,
+    this.imageSemanticLabel,
+    this.fadeOutDuration = const Duration(milliseconds: 300),
+    this.fadeOutCurve = Curves.easeOut,
+    this.fadeInDuration = const Duration(milliseconds: 700),
+    this.fadeInCurve = Curves.easeIn,
+    this.width,
+    this.height,
+    this.fit,
+    this.alignment = Alignment.center,
+    this.repeat = ImageRepeat.noRepeat,
+    this.matchTextDirection = false,
+  })
+}
+```
+
+### ImageProvider
+
+用于显示图片的抽象类, 不能直接使用, 需要使用其子类
+
+
+
+用于显示网络图片
+
+```dart
+// 用于显示网络图片
+abstract class NetworkImage extends ImageProvider<NetworkImage> {
+  /// 抽象类不能直接使用, 但是可以使用它的工厂构造函数
+  const factory NetworkImage(String url, { double scale, Map<String, String> headers }) = network_image.NetworkImage;
+}
+
+// 用于加载图片文件
+class FileImage extends ImageProvider<FileImage> {
+  /// 常量构造方法
+  const FileImage(this.file, { this.scale = 1.0 })
+    : assert(file != null),
+      assert(scale != null);
+}
+
+// 用于加载内存中的图片
+class MemoryImage extends ImageProvider<MemoryImage> {
+  /// 常量构造方法
+  const MemoryImage(this.bytes, { this.scale = 1.0 })
+    : assert(bytes != null),
+      assert(scale != null);
+} 
+
+// 用于显示本地图片
+class AssetImage extends AssetBundleImageProvider {
+  /// 常量构造方法
+  const AssetImage(
+    this.assetName, {
+    this.bundle,
+    this.package,
+  }) : assert(assetName != null);
+}
+```
+
+
+
 
 ### Image.network 
 
@@ -629,6 +720,151 @@ const Icon(this.icon, {
     this.textDirection,
 })
 ```
+
+
+### 圆形图片
+
+在`Flutter`中实现圆角效果也是使用一些`Widget`来实现的
+
+#### CircleAvatar
+
+`CircleAvatar`可以实现圆角头像，也可以添加一个子`Widget`
+
+```dart
+class CircleAvatar extends StatelessWidget {
+  /// Creates a circle that represents a user.
+  const CircleAvatar({
+    Key key,
+    this.child, // 子Widget
+    this.backgroundColor, // 背景颜色
+    this.backgroundImage, // 背景图像
+    this.foregroundColor, // 前景颜色
+    this.radius, // 半径
+    this.minRadius, // 最小半径
+    this.maxRadius, // 最大半径
+  })
+}
+```
+
+简单使用实现一个圆形头像：
+- 这里我们使用的是`NetworkImage`，因为`backgroundImage`要求我们传入一个`ImageProvider`；
+- 这里我还在里面添加了一个文字，但是我在文字外层包裹了一个`Container`；
+- 这里`Container`的作用是为了可以控制文字在其中的位置调整
+
+
+```dart
+class HomeContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CircleAvatar(
+        radius: 100,
+        backgroundImage: NetworkImage("https://tva1.sinaimg.cn/large/006y8mN6gy1g7aa03bmfpj3069069mx8.jpg"),
+        child: Container(
+          alignment: Alignment(0, .5),
+          width: 200,
+          height: 200,
+          child: Text("圣诞节")
+        ),
+      ),
+    );
+  }
+}
+```
+
+
+#### ClipOval
+
+`ClipOval`也可以实现圆角头像，而且通常是在只有头像时使用
+
+
+```dart
+class ClipOval extends SingleChildRenderObjectWidget {
+  /// 
+  const ClipOval({
+      Key key, 
+      this.clipper, 
+      this.clipBehavior = Clip.antiAlias, 
+      Widget child
+  }): assert(clipBehavior != null),
+        super(key: key, child: child);
+}
+
+
+// 简单使用
+class HomeContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ClipOval(
+        child: Image.network(
+          "https://tva1.sinaimg.cn/large/006y8mN6gy1g7aa03bmfpj3069069mx8.jpg",
+          width: 200,
+          height: 200,
+        ),
+      ),
+    );
+  }
+}
+```
+
+#### BoxDecoration
+
+通过`Container`和`Container`实现
+
+```dart
+class CirCleImage extends StatelessWidget {
+  const CirCleImage({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Container(
+        decoration: BoxDecoration(
+          // 设置不同大小可实现不同的圆角, 设置图片大小的一半就是圆形图片
+          borderRadius: BorderRadius.all(Radius.circular(50))
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Image.network(
+          'https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_scroll.png',
+          width: 100,
+          height: 100,
+          fit: BoxFit.fitHeight,
+        ),
+      ),
+    );
+  }
+}
+```
+
+
+### 图片圆角
+
+#### ClipRRect
+
+`ClipRRect`用于实现圆角效果，可以设置圆角的大小。
+
+
+```dart
+class HomeContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image.network(
+          'https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_scroll.png',
+          width: 200,
+          height: 200,
+        ),
+      ),
+    );
+  }
+}
+```
+
+
+
 
 ## 按钮
 
