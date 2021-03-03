@@ -345,6 +345,60 @@ ConstrainedBox(
 - 在定义一个通用的`widget`时，如果对子`widget`指定限制时一定要注意，因为一旦指定限制条件，子`widget`如果要进行相关自定义大小时将可能非常困难，因为子`widget`在不更改父`widget`的代码的情况下无法彻底去除其限制条件
 
 
+# AspectRatio
+
+`AspectRatio`组件是固定宽高比的组件
+
+```dart
+const AspectRatio({
+  Key key,
+  // 宽高比，可以直接写成分数的形式，也可以写成小数的形式，但建议写成分数的形式，可读性更高
+  @required this.aspectRatio,
+  Widget child,
+})
+```
+
+如果组件的宽度固定，希望高是宽的1/2，可以用`AspectRatio`实现此效果
+
+```dart
+AspectRatio(
+  aspectRatio: 2 / 1,
+  child: Container(color: Colors.red),
+)
+```
+
+
+## FractionallySizedBox
+
+设置一个控件的尺寸是相对尺寸时，比如当前按钮的宽度占父组件的70%，可以使用`FractionallySizedBox`来实现此效果
+
+```dart
+const FractionallySizedBox({
+  Key key,
+  // 控制子组件显示的位置
+  this.alignment = Alignment.center,
+  // 设置宽度系数，系数值的范围是0-1
+  this.widthFactor,
+  // 设置高度系数，系数值的范围是0-1
+  this.heightFactor,
+  Widget child,
+})
+```
+
+## LimitedBox
+
+`LimitedBox`组件是当不受父组件约束时限制它的尺寸, `LimitedBox`的父组件受到约束，此时`LimitedBox`将会不做任何操作，我们可以认为没有这个组件
+
+```dart
+const LimitedBox({
+  Key key,
+  this.maxWidth = double.infinity,
+  this.maxHeight = double.infinity,
+  Widget child,
+})
+```
+
+
 ## DecoratedBox
 
 `DecoratedBox`可以在其子`widget`绘制前(或后)绘制一个装饰`Decoration`（如背景、边框、渐变等）, 构造函数如下
@@ -901,6 +955,19 @@ Container(
   ),
 );
 ```
+
+
+## 总结
+
+- `ConstrainedBox`：适用于需要设置最大/小宽高，组件大小以来子组件大小，但不能超过设置的界限。
+- `UnconstrainedBox`：用到情况不多，当作`ConstrainedBox`的子组件可以“突破”`ConstrainedBox`的限制，超出界限的部分会被截取。
+- `SizedBox`：适用于固定宽高的情况，常用于当作2个组件之间间隙组件。
+- `AspectRatio`：适用于固定宽高比的情况。
+- `FractionallySizedBox`：适用于占父组件百分比的情况。
+- `LimitedBox`：适用于没有父组件约束的情况。
+- `Container`：适用于不仅有尺寸的约束，还有装饰（颜色、边框、等）、内外边距等需求的情况。
+
+
 
 ## 参考文献
 
