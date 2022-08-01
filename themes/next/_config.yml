@@ -28,7 +28,7 @@ custom_file_path:
   #bodyEnd: source/_data/body-end.njk
   variable: source/_data/variables.styl
   #mixin: source/_data/mixins.styl
-  # style: source/_data/styles.styl
+  style: source/_data/styles.styl
 
 
 # ---------------------------------------------------------------
@@ -163,7 +163,7 @@ sidebar:
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: /uploads/avatar.jpg
+  url: /images/avatar.jpg
   # If true, the avatar will be displayed in circle.
   rounded: false
   # If true, the avatar will be rotated with the cursor.
@@ -177,10 +177,10 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
-  GitHub: https://github.com/CoderTitan || fab fa-square-github
-  CSDN: https://blog.csdn.net/ShmilyCoder || fa fa-circle-c
-  RSS : /atom.xml || fa fa-square-rss
-  E-Mail: mailto:titanking2014@163.com || fa fa-circle-envelope
+  GitHub: https://github.com/CoderTitan || fab fa-github
+  CSDN: https://blog.csdn.net/ShmilyCoder || fa fa-book
+  RSS : /atom.xml || fa fa-rss
+  E-Mail: mailto:titanking2014@163.com || fa fa-envelope
   # 稀土掘金: https://juejin.im/user/5a7a64ae6fb9a0636323fd06/posts || fab fa-facebook
   # Twitter: https://twitter.com/CoderTitan || fab fa-twitter
   #Google: https://plus.google.com/yourname || fab fa-google
@@ -314,7 +314,7 @@ reward:
 follow_me:
   #Twitter: https://twitter.com/username || fab fa-twitter
   #Telegram: https://t.me/channel_name || fab fa-telegram
-  WeChat: /images/wechat_channel.jpg || fab fa-weixin
+  WeChat: /images/wechat-qcode.jpg || fab fa-weixin
   RSS: /atom.xml || fa fa-rss
 
 # Related popular posts
@@ -406,7 +406,7 @@ codeblock:
   copy_button:
     enable: true
     # Available values: default | flat | mac
-    style: flat
+    style: mac
 
 back2top:
   enable: true
@@ -712,7 +712,7 @@ google_analytics:
 
 # Baidu Analytics
 # See: https://tongji.baidu.com
-baidu_analytics: # <app_id>
+baidu_analytics: bb0d06abde4ca5c3660fdcb01693e9a2
 
 # Growingio Analytics
 # See: https://www.growingio.com
@@ -941,9 +941,9 @@ vendors:
 
 three:
   enable: true
-  three_waves: true           # 背景3D动画样式一
+  three_waves: false           # 背景3D动画样式一
   canvas_lines: false         # 背景3D动画样式二
-  canvas_sphere: false        # 背景3D动画样式三
+  canvas_sphere: true        # 背景3D动画样式三
 
 # Canvas ribbon
 # For more information: https://github.com/hustcc/ribbon.js
