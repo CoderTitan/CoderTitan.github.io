@@ -729,7 +729,7 @@ clarity_analytics: # <project_id>
 # Show number of visitors of each article.
 # You can visit https://www.leancloud.cn to get AppID and AppKey.
 leancloud_visitors:
-  enable: true
+  enable: false
   app_id: m7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz
   app_key: 7X31Wl5lm6BXqgtV9k3sm7yI
   # Required for apps from CN region
