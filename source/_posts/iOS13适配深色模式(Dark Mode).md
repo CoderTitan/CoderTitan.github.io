@@ -1,11 +1,9 @@
 ---
 title: iOS13适配深色模式(Dark Mode)
 tags:
-  - iOS13
   - iOS
-  - Swift5.0
-  - Xcode11
-categories: iOS进阶指南
+  - Swift
+categories: iOS
 abbrlink: da0e549f
 date: 2019-09-25 18:36:20
 image:

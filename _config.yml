@@ -15,7 +15,7 @@ timezone:
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://titanjun.top
 root: /
-permalink: archives/:abbrlink.html
+permalink: post/:abbrlink.html
 abbrlink:
   alg: crc32  # 算法：crc16(default) and crc32
   rep: hex    # 进制：dec(default) and hex
@@ -119,6 +119,16 @@ feed:
   icon: icon.png
   autodiscovery: true
   template:
+
+
+# hexo-tag-cloud
+tag_cloud:
+  textFont: Trebuchet MS, Helvetica
+  textColor: '#333'
+  textHeight: 16
+  outlineColor: '#E2E1D1'
+  maxSpeed: 0.3
+  pauseOnSelected: true # true 意味着当选中对应 tag 时,停止转动
 
 
 # 百度和谷歌收录

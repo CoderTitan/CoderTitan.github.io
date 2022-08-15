@@ -2,9 +2,7 @@
 title: Python数据类型详解01
 tags:
   - Python
-  - 数据类型
-  - MacOS
-categories: Python基础
+categories: Python
 <!--copyright: true-->
 abbrlink: 8d410658
 date: 2018-04-10 16:45:56

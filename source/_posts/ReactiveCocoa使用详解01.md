@@ -1,11 +1,10 @@
 ---
 title: ReactiveCocoa使用详解01
 tags:
+  - ReactiveCocoa
   - 函数式
   - 响应式
-  - RACSingle
-  - RACSubject
-categories: ReactiveCocoa
+categories: iOS组件库
 abbrlink: eac9a3e3
 date: 2018-03-19 21:58:09
 ---

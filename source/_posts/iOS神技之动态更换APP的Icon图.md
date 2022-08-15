@@ -2,9 +2,8 @@
 title: iOS神技之动态更换APP的Icon图
 date: '2018-03-16 20:18'
 tags:
-  - AppIcon
-  - iOS 10.3
-categories: Swift高阶功能
+  - iOS
+categories: Swift
 abbrlink: 632f54a6
 ---
 

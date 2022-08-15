@@ -1,11 +1,9 @@
 ---
 title: 浅谈Swift的内存管理
 tags:
-  - Swift5.1.2
-  - weak
-  - unowned
+  - Swift
   - 内存管理
-categories: Swift学习笔记
+categories: Swift底层原理
 abbrlink: 30039fb5
 date: 2020-01-01 00:00:00
 image:

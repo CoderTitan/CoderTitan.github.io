@@ -2,7 +2,7 @@
 title: 简析OC中对象占用内存的原理
 tags:
   - Objective-C
-categories: iOS底层原理
+categories: OC底层原理
 abbrlink: 84ca04ec
 date: 2019-06-10 20:16:20
 ---

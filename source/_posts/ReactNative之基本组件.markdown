@@ -1,10 +1,7 @@
 ---
 title: ReactNative之基本组件
 date: '2017-12-18 16:54'
-tags:
-  - View
-  - Text
-  - Image
+tags: 
 categories: ReactNaive
 abbrlink: de78254
 ---

@@ -1,11 +1,8 @@
 ---
 title: Swift4.0新特性之String和Array和Dictionary
 tags:
-  - Swift4.0
-  - String
-  - Array
-  - Dictionary
-categories: Swift学习笔记
+  - Swift
+categories: Swift
 abbrlink: c2889347
 date: 2017-07-19 21:16:40
 ---

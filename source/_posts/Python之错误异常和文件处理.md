@@ -2,15 +2,13 @@
 title: Python之错误异常和文件处理
 tags:
   - Python
-  - 错误异常
-  - 文件
-categories: Python基础
+categories: Python
 abbrlink: 64abe4fe
 date: 2018-05-22 21:56:12
 ---
 
 
-- 之前的文章介绍的都是`Python`的一些语法和使用方法, 详情可参考[Python基础知识](https://www.titanjun.top/categories/Python%E5%9F%BA%E7%A1%80/) 
+- 之前的文章介绍的都是`Python`的一些语法和使用方法, 详情可参考[Python知识](https://www.titanjun.top/categories/Python%E5%9F%BA%E7%A1%80/) 
 - 然而这里我们要说的是编程中我们最不想见到的, 但是却也是不得不面对的`Bug`
 - 除此之外, 这里还会介绍一下`Python`中的文件读取
 

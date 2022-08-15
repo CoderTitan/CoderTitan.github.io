@@ -1,9 +1,6 @@
 ---
 title: ReactNative之AsyncStorage本地存储
-date: '2018-01-24 11:13'
-tags:
-  - AsyncStorage
-  - JavaScript
+date: '2018-01-24 11:13:12'
 categories: ReactNaive
 abbrlink: b2044ec2
 ---

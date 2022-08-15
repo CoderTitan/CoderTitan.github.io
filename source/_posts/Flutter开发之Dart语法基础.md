@@ -3,7 +3,7 @@ title: Flutter开发之Dart语法基础
 tags:
   - Flutter
   - Dart
-categories: Flutter笔记
+categories: Flutter
 abbrlink: aa54e55a
 date: 2019-02-19 14:10:40
 image:

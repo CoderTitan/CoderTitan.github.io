@@ -3,7 +3,7 @@ title: Flutter必备开源项目推荐
 tags:
   - Flutter
   - Dart
-categories: Flutter笔记
+categories: Flutter
 abbrlink: 60a03ea8
 date: 2020-11-20 20:16:40
 image:

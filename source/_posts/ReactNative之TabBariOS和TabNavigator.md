@@ -3,8 +3,6 @@ title: ReactNative之TabBariOS和TabNavigator
 date: '2018-01-06 15:23'
 tags:
   - CSS
-  - TabBariOS
-  - TabNavigator
 categories: ReactNaive
 abbrlink: 60a392e1
 ---

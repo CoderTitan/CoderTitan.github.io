@@ -2,9 +2,7 @@
 title: Python的面向对象和正则表达式
 tags:
   - Python
-  - 面向对象
-  - 正则表达式
-categories: Python基础
+categories: Python
 abbrlink: '30901519'
 date: 2018-05-03 21:56:12
 ---

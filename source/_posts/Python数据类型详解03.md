@@ -2,11 +2,7 @@
 title: Python数据类型详解03
 tags:
   - Python
-  - 数据类型
-  - List
-  - Tuple
-  - Calendar
-categories: Python基础
+categories: Python
 abbrlink: 634f6774
 date: 2018-04-19 15:14:12
 ---

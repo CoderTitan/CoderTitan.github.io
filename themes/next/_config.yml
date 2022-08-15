@@ -397,11 +397,11 @@ codeblock:
   # Code Highlight theme
   # All available themes: https://theme-next.js.org/highlight/
   theme:
-    light: github
+    light: atom-one-light
     dark: github-dark
   prism:
-    light: prism-one-light
-    dark: prism-one-dark
+    light: prism
+    dark: prism-solarized-dark-atom
   # Add copy button on codeblock
   copy_button:
     enable: true
@@ -510,7 +510,7 @@ exturl_icon: true
 
 # Google Webmaster tools verification.
 # See: https://developers.google.com/search
-google_site_verification:
+google-site-verification: PC7p4XI2bu759QIxF175WiFoqnSwVcTW_HKgMojXivE
 
 # Bing Webmaster tools verification.
 # See: https://www.bing.com/webmasters
@@ -522,7 +522,8 @@ yandex_site_verification:
 
 # Baidu Webmaster tools verification.
 # See: https://ziyuan.baidu.com/site
-baidu_site_verification:
+baidu_site_verification: mXGc57bzu6
+baidu_push: true
 
 
 # ---------------------------------------------------------------
@@ -567,7 +568,7 @@ mediumzoom: true
 
 # Vanilla JavaScript plugin for lazyloading images.
 # For more information: https://apoorv.pro/lozad.js/demo/
-lazyload: false
+lazyload: true
 
 # Pangu Support
 # For more information: https://github.com/vinta/pangu.js
@@ -592,6 +593,9 @@ quicklink:
   # Default (true) will attempt to use the fetch() API if supported (rather than link[rel=prefetch]).
   priority: true
 
+
+# mouse click effect: fireworks | explosion | love | text
+cursor_effect: fireworks
 
 # ---------------------------------------------------------------
 # Comments Settings
@@ -688,9 +692,9 @@ isso: # <data_isso>
 # Star rating support to each article.
 # To get your ID visit https://widgetpack.com
 rating:
-  enable: false
-  id:     # <app_id>
-  color:  "#fc6423"
+  enable: true
+  id: 10998
+  color:  #f79533
 
 # AddThis Share. See: https://www.addthis.com
 # Go to https://www.addthis.com/dashboard to customize your tools.
@@ -705,7 +709,7 @@ add_this_id:
 # Google Analytics
 # See: https://analytics.google.com
 google_analytics:
-  tracking_id: # <app_id>
+  tracking_id: G-9X3SQNQRQZ
   # By default, NexT will load an external gtag.js script on your site.
   # If you only need the pageview feature, set the following option to true to get a better performance.
   only_pageview: false
@@ -739,6 +743,22 @@ leancloud_visitors:
   # (without hexo-leancloud-counter-security plugin), set `security` to `false`.
   security: true
 
+
+# Valine.
+# You can get your appid and appkey from https://leancloud.cn
+# more info please open https://valine.js.org
+valine:
+  enable: true
+  appid: m7FB3zoFkQnVKAyykKJlY8QR-gzGzoHsz # your leancloud application appid
+  appkey: 7X31Wl5lm6BXqgtV9k3sm7yI # your leancloud application appkey
+  notify: true # mail notifier , https://github.com/xCss/Valine/wiki
+  verify: false # Verification code
+  placeholder: 在这里说点什么吧... # comment box placeholder
+  avatar: identicon # 评论表头样式  /mm/identicon/monsterid/wavatar/retro/hide
+  guest_info: nick,mail,link # custom comment header
+  pageSize: 10 # pagination size
+
+
 # Another tool to show number of visitors to each article.
 # Visit https://console.firebase.google.com/u/0/ to get apiKey and projectId.
 # Visit https://firebase.google.com/docs/firestore/ to get more information about firestore.
@@ -769,6 +789,15 @@ busuanzi_count:
   page_pv: true
   page_pv_header: <i class="fa fa-file-o"></i> 浏览
   page_pv_footer: 次
+
+# DaoVoice
+daovoice:
+  enabled: true
+  app_id: a85a9be2
+
+
+
+
 
 
 # ---------------------------------------------------------------

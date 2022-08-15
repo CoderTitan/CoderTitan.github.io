@@ -2,8 +2,6 @@
 title: Hexo博客多台电脑设备同步管理
 tags:
   - Hexo
-  - 多设备
-  - 同步管理
 categories: Hexo博客
 abbrlink: 3ac2f657
 date: 2018-04-12 16:55:45

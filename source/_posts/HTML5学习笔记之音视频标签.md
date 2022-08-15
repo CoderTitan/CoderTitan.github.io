@@ -2,9 +2,8 @@
 title: HTML5学习笔记之音视频标签
 date: '2017-06-16 20:01'
 tags:
-  - HTML5标签
+  - HTML5
   - CSS
-  - WebStorm
 categories: HTML5
 abbrlink: d95c95af
 image:

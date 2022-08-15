@@ -3,8 +3,6 @@ title: ReactNaive之ScrollView和ListView
 date: '2018-01-03 16:54'
 tags:
   - CSS
-  - ScrollView
-  - ListView
 categories: ReactNaive
 abbrlink: d9c2daec
 ---

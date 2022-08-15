@@ -2,8 +2,6 @@
 title: React Native之导航组件NavigatorIOS和Navigator
 date: '2018-01-05 17:04'
 tags:
-  - CSS
-  - NavigatorIOS
   - Navigator
 categories: ReactNaive
 abbrlink: 64007fb7

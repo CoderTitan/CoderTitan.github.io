@@ -2,9 +2,7 @@
 title: NSRunLoop底层原理详解
 tags:
   - NSRunLoop
-  - RunLoop
-  - CFRunLoopRef
-categories: iOS底层原理
+categories: OC底层原理
 abbrlink: 76b52ee
 date: 2019-08-20 22:06:21
 image:

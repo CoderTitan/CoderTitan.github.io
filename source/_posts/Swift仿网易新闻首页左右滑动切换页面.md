@@ -3,8 +3,7 @@ title: Swift仿网易新闻首页左右滑动切换页面
 date: '2017-06-12 20:12'
 tags:
   - Swift
-  - 框架
-categories: Swift高阶功能
+categories: Swift
 abbrlink: 731f92e4
 ---
 

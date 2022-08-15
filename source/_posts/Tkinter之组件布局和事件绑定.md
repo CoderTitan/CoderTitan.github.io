@@ -3,7 +3,7 @@ title: Tkinter之组件布局和事件绑定
 tags:
   - Python
   - Tkinter
-categories: Python基础
+categories: Python
 abbrlink: 27aa90ef
 date: 2018-06-26 14:46:20
 image:
@@ -20,7 +20,7 @@ image:
 
 
 
-- [前面的一些文章](https://www.titanjun.top/categories/Python基础/)介绍了`Tkinter`模块和大部分组建的使用
+- [前面的一些文章](https://www.titanjun.top/categories/Python/)介绍了`Tkinter`模块和大部分组建的使用
 - 这里主要介绍数据的操作和组件布局等
 - [GitHub代码示例目地址](https://github.com/CoderTitan/PythonDemo)
 

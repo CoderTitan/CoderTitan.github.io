@@ -3,8 +3,7 @@ title: SwiftLint代码规范属性说明02
 tags:
   - SwiftLint
   - Swift
-  - 规则
-categories: SwiftLint
+categories: iOS组件库
 abbrlink: d32d4beb
 date: 2018-03-10 17:04:54
 ---

@@ -2,9 +2,7 @@
 title: 探索KVC和KVO的本质
 tags:
   - Objective-C
-  - KVO
-  - KVC
-categories: iOS底层原理
+categories: OC底层原理
 abbrlink: 478f6c1
 date: 2019-06-12 18:36:20
 ---

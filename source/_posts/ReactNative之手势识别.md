@@ -1,8 +1,5 @@
 ---
 title: ReactNative之手势识别
-tags:
-  - PanResponder
-  - onPress
 categories: ReactNaive
 abbrlink: 36f41dd2
 date: 2019-04-10 12:21:32

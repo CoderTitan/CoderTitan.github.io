@@ -3,7 +3,7 @@ title: Flutter开发之Dart的数据类型01
 tags:
   - Flutter
   - Dart
-categories: Flutter笔记
+categories: Flutter
 abbrlink: d6a5aafa
 date: 2019-02-20 10:16:40
 image:

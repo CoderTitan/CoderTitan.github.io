@@ -3,7 +3,7 @@ title: iOS出门必备之CoreAnimation(核心动画)
 tags:
   - Swift
   - CoreAnimation
-categories: iOS动画
+categories: iOS
 abbrlink: b47e4a7d
 date: 2017-10-12 19:48:28
 ---

@@ -4,9 +4,8 @@ date: '2017-11-22 14:39'
 tags:
   - Swift
   - CoreImage
-  - CIDetector
   - AVFoundation
-categories: Swift黑科技
+categories: Swift框架
 abbrlink: 81c63b4c
 image:
 ---

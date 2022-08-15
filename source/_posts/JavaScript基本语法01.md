@@ -2,8 +2,7 @@
 title: JavaScript基本语法01
 tags:
   - JavaScript
-  - 语法
-categories: JavaScript笔记
+categories: JavaScript
 abbrlink: e1be9692
 date: 2017-08-09 23:16:40
 image:

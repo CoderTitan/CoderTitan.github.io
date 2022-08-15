@@ -5,7 +5,7 @@ tags:
   - CIFilter
   - CIDetector
   - AVFoundation
-categories: Swift黑科技
+categories: Swift框架
 abbrlink: 433291c1
 date: 2017-11-16 16:00:00
 ---

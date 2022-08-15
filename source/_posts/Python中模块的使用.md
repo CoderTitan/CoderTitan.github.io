@@ -2,9 +2,7 @@
 title: Python中模块的使用
 tags:
   - Python
-  - Pillow
-  - pip3
-categories: Python基础
+categories: Python
 abbrlink: fe2495d8
 date: 2018-05-31 16:20:12
 ---

@@ -2,9 +2,7 @@
 title: iOS之Scanner字符串扫描类
 tags:
   - Swift
-  - Scanner
-  - iOS扫描器
-categories: 高级用法
+categories: iOS
 abbrlink: 82865b70
 date: 2017-09-09 22:14:40
 ---

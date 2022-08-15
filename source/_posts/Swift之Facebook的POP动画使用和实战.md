@@ -2,8 +2,7 @@
 title: Swift之Facebook的POP动画使用和实战
 tags:
   - Swift
-  - Facebook POP
-categories: iOS动画
+categories: iOS组件库
 abbrlink: d88375f6
 date: 2017-10-17 21:18:38
 image:

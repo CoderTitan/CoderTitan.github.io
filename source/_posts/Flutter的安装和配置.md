@@ -3,9 +3,8 @@ title: Flutter的安装和配置
 tags:
   - Flutter
   - iOS
-  - Android
   - Dart
-categories: Flutter笔记
+categories: Flutter
 abbrlink: 8fbde7fa
 date: 2019-02-12 19:20:40
 image:

@@ -1,9 +1,9 @@
 ---
 title: Swift基本语法02
 tags:
-  - Swift3.0
+  - Swift
   - 语法
-categories: Swift学习笔记
+categories: Swift
 abbrlink: cbf14617
 date: 2016-12-28 11:44:30
 ---

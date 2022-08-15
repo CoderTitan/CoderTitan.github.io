@@ -2,9 +2,8 @@
 title: HTML5学习笔记之基础标签
 date: '2017-06-15 20:17'
 tags:
-  - HTML5标签
+  - HTML5
   - CSS
-  - WebStorm
 categories: HTML5
 abbrlink: 7ab2d054
 ---

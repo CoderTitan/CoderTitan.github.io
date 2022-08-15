@@ -2,9 +2,7 @@
 title: Python数据类型详解02
 tags:
   - Python
-  - 数据类型
-  - string
-categories: Python基础
+categories: Python
 abbrlink: '144857e2'
 date: 2018-04-17 16:45:12
 ---

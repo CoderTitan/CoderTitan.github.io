@@ -1,11 +1,10 @@
 ---
 title: ReactiveCocoa之集合使用详解02
 tags:
+  - ReactiveCocoa
   - 函数式
   - 响应式
-  - RACTuple
-  - RACSequence
-categories: ReactiveCocoa
+categories: iOS组件库
 abbrlink: 1a5a7051
 date: 2018-03-21 22:48:29
 ---

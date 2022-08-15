@@ -4,9 +4,7 @@ date: '2017.05.19 16:57:03'
 tags:
   - Swift
   - 语法
-  - filter
-  - reduce
-categories: 高级用法
+categories: Swift底层原理
 abbrlink: a5163306
 ---
 

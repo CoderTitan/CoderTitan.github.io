@@ -1,8 +1,10 @@
 ---
 title: ReactiveCocoa 的一些高级用法
 tags:
-  - 高级用法
-categories: ReactiveCocoa
+  - ReactiveCocoa
+  - 函数式
+  - 响应式
+categories: iOS组件库
 abbrlink: e1fe9ce0
 date: 2018-03-31 19:14:40
 ---

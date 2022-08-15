@@ -3,7 +3,6 @@ title: ReactNative基本动画之Animated
 tags:
   - ReactNative
   - Animated
-  - LayoutAnimation
 categories: ReactNaive
 abbrlink: e16550ba
 date: 2018-03-06 19:26:34

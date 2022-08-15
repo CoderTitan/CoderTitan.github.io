@@ -3,8 +3,7 @@ title: RxSwift的使用详解02
 tags:
   - Swift
   - RxSwift
-  - 响应式编程
-categories: RxSwift框架
+categories: iOS组件库
 abbrlink: fd52c18d
 date: 2017-09-21 19:15:47
 ---

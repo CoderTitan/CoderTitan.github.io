@@ -3,9 +3,7 @@ title: Flutter中Widget的生命周期和渲染原理
 tags:
   - Flutter
   - Widget
-  - Element
-  - Key
-categories: Flutter笔记
+categories: Flutter
 abbrlink: f26f2a71
 date: 2020-05-21 00:00:00
 image:

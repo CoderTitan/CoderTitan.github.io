@@ -2,11 +2,9 @@
 title: Socket搭建即时通讯服务器
 date: '2018-11-16 11:45'
 tags:
-  - Node.js
+  - Node
   - Socket
-  - WebSocket
-  - Socket.IO
-categories: Socket学习笔记
+categories: Socket
 abbrlink: 3cb11047
 image:
 ---

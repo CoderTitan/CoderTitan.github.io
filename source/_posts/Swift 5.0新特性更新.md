@@ -1,9 +1,8 @@
 ---
 title: Swift 5.0新特性更新
 tags:
-  - Swift5.0
-  - dynamicCallable
-categories: Swift学习笔记
+  - Swift
+categories: Swift
 abbrlink: fecd5afa
 date: 2019-01-28 15:20:40
 image:

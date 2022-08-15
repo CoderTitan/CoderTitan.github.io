@@ -3,7 +3,7 @@ title: 浅谈OC中Block的本质
 tags:
   - Objective-C
   - Block
-categories: iOS底层原理
+categories: OC底层原理
 abbrlink: 2080e3a
 date: 2019-06-27 20:36:20
 image:

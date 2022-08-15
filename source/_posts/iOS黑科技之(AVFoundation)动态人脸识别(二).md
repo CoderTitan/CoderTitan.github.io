@@ -4,7 +4,7 @@ date: '2017-11-22 14:50'
 tags:
   - Swift
   - AVFoundation
-categories: Swift黑科技
+categories: Swift框架
 abbrlink: 584be10c
 ---
 

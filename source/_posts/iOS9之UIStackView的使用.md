@@ -4,7 +4,7 @@ date: '2017-06-10 17:12'
 tags:
   - Objective-C
   - UIStackView
-categories: iOS进阶指南
+categories: iOS
 abbrlink: b2ac06fb
 ---
 

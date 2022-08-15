@@ -3,8 +3,7 @@ title: Swift版-H5页面实现长按保存图片
 tags:
   - Swift
   - JavaScript
-  - WebView
-categories: Swift高阶功能
+categories: Swift
 abbrlink: fe709246
 date: 2017-07-10 14:26:40
 ---

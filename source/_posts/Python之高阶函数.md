@@ -2,11 +2,7 @@
 title: Python之高阶函数
 tags:
   - Python
-  - 高阶函数
-  - map
-  - reduce
-  - filter
-categories: Python基础
+categories: Python
 abbrlink: 7f54d88f
 date: 2018-06-28 16:45:12
 ---

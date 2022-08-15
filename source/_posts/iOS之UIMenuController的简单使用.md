@@ -2,8 +2,7 @@
 title: iOS之UIMenuController的简单使用
 tags:
   - Objective-C
-  - UIMenuController
-categories: iOS进阶指南
+categories: iOS
 abbrlink: 2bfa0929
 date: 2016-11-22 11:52:30
 ---

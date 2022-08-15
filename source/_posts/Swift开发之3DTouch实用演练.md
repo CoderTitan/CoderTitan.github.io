@@ -2,8 +2,7 @@
 title: Swift开发之3DTouch实用演练
 tags:
   - Swift
-  - 3DTouch
-categories: Swift高阶功能
+categories: Swift框架
 abbrlink: cedeaa9d
 date: 2017-10-23 07:54:58
 ---

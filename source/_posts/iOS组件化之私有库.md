@@ -2,8 +2,6 @@
 title: iOS组件化之私有库
 tags:
   - CocoaPods
-  - pod
-  - spec
   - git
 categories: 组件化开发
 abbrlink: 7c5c4661

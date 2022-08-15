@@ -2,10 +2,6 @@
 title: 发布开源框架到CocoaPods入坑指南
 tags:
   - CocoaPods
-  - pod
-  - trunk
-  - spec
-  - git
 categories: 组件化开发
 abbrlink: '75198337'
 date: 2018-06-29 20:06:20

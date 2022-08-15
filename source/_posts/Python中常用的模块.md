@@ -2,9 +2,7 @@
 title: Python中常用的模块
 tags:
   - Python
-  - os
-  - random
-categories: Python基础
+categories: Python
 abbrlink: 85d9cd1f
 date: 2018-07-14 19:20:12
 ---

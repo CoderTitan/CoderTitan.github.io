@@ -3,7 +3,7 @@ title: Flutter开发之Dart中的类和对象
 tags:
   - Flutter
   - Dart
-categories: Flutter笔记
+categories: Flutter
 abbrlink: ee7c7428
 date: 2020-05-21 00:00:00
 image:

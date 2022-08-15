@@ -3,8 +3,7 @@ title: RxSwift+Moya网络请求之项目实战
 tags:
   - Swift
   - RxSwift
-  - 响应式编程
-categories: RxSwift框架
+categories: iOS组件库
 abbrlink: e15a5d56
 date: 2017-10-08 17:58:28
 ---

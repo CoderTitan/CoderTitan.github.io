@@ -2,8 +2,6 @@
 title: 移动开发之Fastlane自动化
 tags:
   - fastlane
-  - Action
-  - lane
 categories: 组件化开发
 abbrlink: d1078e95
 date: 2018-09-10 13:36:20

@@ -1,10 +1,8 @@
 ---
 title: iOS私有Api检测
 tags:
-  - API
-  - ipa
-  - APP
-categories: 入坑指南
+  - iOS
+categories: iOS
 abbrlink: 824e217a
 date: 2018-07-16 15:16:40
 image:

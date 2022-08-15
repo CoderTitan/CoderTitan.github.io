@@ -3,8 +3,7 @@ title: Xcode代码规范之SwiftLint配置
 tags:
   - SwiftLint
   - Swift
-  - Homebrew
-categories: SwiftLint
+categories: iOS组件库
 abbrlink: 321bd392
 date: 2018-02-07 15:34:34
 ---

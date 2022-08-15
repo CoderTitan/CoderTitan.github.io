@@ -1,10 +1,9 @@
 ---
 title: 浅谈Swift的属性(Property)
 tags:
-  - Swift5.1.2
+  - Swift
   - Property
-  - 属性
-categories: Swift学习笔记
+categories: Swift底层原理
 abbrlink: bde391d5
 date: 2019-12-20 18:20:40
 image:

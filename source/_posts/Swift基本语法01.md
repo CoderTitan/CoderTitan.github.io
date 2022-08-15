@@ -3,7 +3,7 @@ title: Swift基本语法01
 tags:
   - Swift
   - 语法
-categories: Swift学习笔记
+categories: Swift
 abbrlink: 52f817ad
 date: 2016-12-25 15:23:03
 ---

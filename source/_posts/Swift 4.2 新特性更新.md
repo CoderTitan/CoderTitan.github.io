@@ -1,10 +1,8 @@
 ---
 title: Swift 4.2 新特性更新
 tags:
-  - Swift4.2
-  - Equatable
-  - Hashable
-categories: Swift学习笔记
+  - Swift
+categories: Swift
 abbrlink: bc9c7e33
 date: 2018-06-06 15:16:40
 image:

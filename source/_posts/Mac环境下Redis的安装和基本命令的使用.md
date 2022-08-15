@@ -3,7 +3,6 @@ title: Mac环境下Redis的安装和基本命令的使用
 tags:
   - Python
   - Redis
-  - NoSQL
 categories: 数据库基础
 abbrlink: '52249095'
 date: 2018-07-24 19:06:40

@@ -3,7 +3,7 @@ title: R.Swift高效引用资源文件
 tags:
   - Swift
   - R.Swift
-categories: 入坑指南
+categories: iOS组件库
 abbrlink: 9adb52b8
 date: 2018-07-20 15:15:47
 ---

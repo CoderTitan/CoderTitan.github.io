@@ -1,11 +1,8 @@
 ---
 title: Sign In with Apple
 tags:
-  - iOS13
   - iOS
-  - Swift5.0
-  - Xcode11
-categories: iOS进阶指南
+categories: iOS
 abbrlink: de12f33
 date: 2019-09-30 17:36:20
 image:

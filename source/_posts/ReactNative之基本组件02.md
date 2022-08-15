@@ -1,9 +1,6 @@
 ---
 title: ReactNative之基本组件02
-date: '2018-12-31 00:00'
-tags:
-  - Alert
-  - Cliboard
+date: '2018-12-31 00:00:11'
 categories: ReactNaive
 abbrlink: 8b290237
 image:

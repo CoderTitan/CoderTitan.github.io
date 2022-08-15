@@ -3,7 +3,7 @@ title: Python编程之Tkinter的使用02
 tags:
   - Python
   - Tkinter
-categories: Python基础
+categories: Python
 abbrlink: 21aa9981
 date: 2018-06-25 19:16:40
 image:

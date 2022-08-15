@@ -1,9 +1,7 @@
 ---
 title: iOS的静态库和动态库
 tags:
-  - 静态库
-  - 动态库
-  - framewoframework
+  - iOS
 categories: 组件化开发
 abbrlink: 128c2f48
 date: 2018-09-12 11:56:26

@@ -1,10 +1,8 @@
 ---
 title: 升级Swift4.0遇到的坑
 tags:
-  - Swift4.0
-  - Error
-  - 入坑
-categories: Swift学习笔记
+  - Swift
+categories: Swift
 abbrlink: f1e7dff2
 date: 2017-08-25 15:06:40
 ---

@@ -2,9 +2,7 @@
 title: Swift之微信朋友圈图片浏览器
 tags:
   - Swift
-  - CATransition
-  - UIBesizationv
-categories: Swift高阶功能
+categories: Swift
 abbrlink: 441759ef
 date: 2017-10-28 19:19:19
 ---

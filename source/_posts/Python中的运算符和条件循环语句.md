@@ -2,9 +2,7 @@
 title: Python中的运算符和条件循环语句
 tags:
   - Python
-  - 判断语句
-  - 运算符
-categories: Python基础
+categories: Python
 abbrlink: b4004272
 date: 2018-04-14 19:42:46
 ---

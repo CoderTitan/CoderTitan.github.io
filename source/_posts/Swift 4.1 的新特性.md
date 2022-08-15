@@ -1,10 +1,8 @@
 ---
 title: Swift 4.1 的新特性
 tags:
-  - Swift4.1
-  - Equatable
-  - Hashable
-categories: Swift学习笔记
+  - Swift
+categories: Swift
 abbrlink: da0fafd1
 date: 2018-04-24 21:16:40
 ---
