@@ -336,48 +336,59 @@ note:
   light_bg_offset: 0
 ```
 
-效果如下:
-<div class="note default"><p>default</p></div>
+```
+{% note default %}
+default 提示块标签
+{% endnote %}
 
-```objc
-<div class="note default"><p>default</p></div>
+{% note primary %}
+primary 提示块标签
+{% endnote %}
+
+{% note success %}
+success 提示块标签
+{% endnote %}
+
+{% note info %}
+info 提示块标签
+{% endnote %}
+
+{% note warning %}
+warning 提示块标签
+{% endnote %}
+
+{% note danger %}
+danger 提示块标签
+{% endnote %}
 ```
 
-<div class="note primary"><p>primary</p></div>
+显示效果：
 
-```objc
-<div class="note primary"><p>primary</p></div>
-```
+{% note default %}
+default 提示块标签
+{% endnote %}
 
-<div class="note success"><p>success</p></div>
+{% note primary %}
+primary 提示块标签
+{% endnote %}
 
-```objc
-<div class="note success"><p>success</p></div>
-```
+{% note success %}
+success 提示块标签
+{% endnote %}
 
-<div class="note info"><p>info</p></div>
+{% note info %}
+info 提示块标签
+{% endnote %}
 
-```objc
-<div class="note info"><p>info</p></div>
-```
+{% note warning %}
+warning 提示块标签
+{% endnote %}
 
-<div class="note warning"><p>warning</p></div>
+{% note danger %}
+danger 提示块标签
+{% endnote %}
 
-```objc
-<div class="note warning"><p>warning</p></div>
-```
 
-<div class="note danger"><p>danger</p></div>
-
-```objc
-<div class="note danger"><p>danger</p></div>
-```
-
-<div class="note danger no-icon"><p>danger no-icon</p></div>
-
-```objc
-<div class="note danger no-icon"><p>danger no-icon</p></div>
-```
 
 里面的三种风格长啥样？开启图标长啥样？可以查看 [这个页面](https://github.com/iissnan/hexo-theme-next/pull/1697) ，更多的介绍也在这个页面，请自行查看
 

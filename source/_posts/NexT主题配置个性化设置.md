@@ -5,663 +5,853 @@ tags:
   - NexT
 categories: Hexo博客
 abbrlink: 9eda55ce
-date: 2018-04-03 15:03:13
+date: 2022-08-18 15:03:13
 ---
 
 
-- 前段时间, 辛辛苦苦花了一周的时间搭建了属于自己的[个人技术博客](https://www.titanjun.top/), 当然也是各种采坑各种跳, 大家如果在搭建过程中遇到什么问题, 可以参考[基于GitHub和Hexo搭建个人博客](https://www.titanjun.top/2018/03/08/%E5%9F%BA%E4%BA%8EGitHub%E5%92%8CHexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/)
+- 最近基于`NexT`主题重新搭建了自己的[个人技术博客](https://www.titanjun.top/), 现在主要是总结分享关于`NexT(8.12.2)`主题的相关配置和优化
 - 我现在用的是`NexT`主题, 这是作者提供的[NexT主题中文配置](http://theme-next.iissnan.com/)
-- 下面我把集成NexT主题配置时遇到的坑给大家总结分享一下
 
 
 <!-- more -->
 
-- 文章主要介绍的优化方面主要有以下34种配置
-  - 集成Mob社会化分享
-  - 在右上角或者左上角实现fork me on github
-  - 添加RSS
-  - 添加动态背景
-  - 实现点击出现桃心效果
-  - 修改文章内链接文本样式
-  - 修改文章底部的那个带#号的标签
-  - 在每篇文章末尾统一添加“本文结束”标记
-  - 修改作者头像并旋转
-  - 博文压缩
-  - 修改``代码块自定义样式
-  - 侧边栏社交小图标设置
-  - 主页文章添加阴影效果
-  - 在网站底部加上访问量
-  - 添加热度
-  - 网站底部字数统计
-  - 添加 README.md 文件
-  - 设置网站的图标Favicon
-  - 实现统计功能
-  - 添加顶部加载条
-  - 在文章底部增加版权信息
-  - 添加网易云跟帖(跟帖关闭，已失效，改为来必力)
-  - 隐藏网页底部powered By Hexo / 强力驱动
-  - 修改网页底部的桃心
-  - 文章加密访问
-  - 添加jiathis分享
-  - 博文置顶
-  - 修改字体大小
-  - 修改打赏字体不闪动
-  - 侧边栏推荐阅读
-  - 自定义鼠标样式
-  - 为博客加上萌萌的宠物
-  - DaoVoice 在线联系
-  - 点击爆炸效果
 
-### https技术博客配置社会化分享
-大家应该知道像一些`JiaThis`分享和百度分享并不支持`https`, 这里给大家推荐一个, 支持`https`的社会化分享-Mob
 
-1-1. 获取`App Key`
-博客集成Mod分享组件, 参考 [Mob官方文档](http://wiki.mob.com/快速集成-13/) , 获取到`App Key`
+## `NexT`常规配置
 
-1-2. 在主题配置文件中添加配置：
+### PDF 显示
 
-```objc
-mob_share:
+`NexT`默认支持`PDF`自定义标签, 更改`NexT`主题的配置文件 `themes/next/_config.yml`，修改以下配置，详见[官方文档](https://github.com/next-theme/theme-next-pdf)
+
+```yaml
+pdf:
   enable: true
-  appkey: ********
+  # Default height
+  height: 550px
+
 ```
 
-1-3. 在`next/layout/_partials/share/`里面添加`mob_share.swig`文件, 并在`mob_share.swig`内输入一下内容:
 
-- 这里需要注意的一点:
-  - 以下代码只支持`http`开头的网址, 在`https`中点击分享按钮会没有任何反应
-  - 如果需要支持`https`的网址, 在最后一行`src=http://f1.webshare.mob.com`, 需要把这里的`http`同样改成`https`, 这样你就可以实现分享功能了
+使用格式为
 
-```objc
-<!--MOB SHARE BEGIN-->
-<div class="-hoofoo-share-title">分享到：</div>
-<div class="-hoofoo-share-buttons">
-    <div class="-mob-share-weibo -hoofoo-share-weibo -hoofoo-share-ui-button"><i class="fa fa-weibo" aria-hidden="true"></i></div>
-    <div class="-mob-share-weixin -hoofoo-share-weixin -hoofoo-share-ui-button"><i class="fa fa-weixin" aria-hidden="true"></i></div>
-    <div class="-mob-share-qq -hoofoo-share-qq -hoofoo-share-ui-button"><i class="fa fa-qq" aria-hidden="true"></i></div>
-    <div class="-mob-share-twitter -hoofoo-share-twitter -hoofoo-share-ui-button"><i class="fa fa-twitter" aria-hidden="true"></i></div>
-    <div class="-hoofoo-share-more -hoofoo-share-ui-button -mob-share-open"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></div>
-</div>
-<div class="-mob-share-ui" style="display: none">
-    <ul class="-mob-share-list">
-        <li class="-mob-share-weibo"><p>新浪微博</p></li>
-        <li class="-mob-share-weixin"><p>微信</p></li>
-        <li class="-mob-share-qzone"><p>QQ空间</p></li>
-        <li class="-mob-share-qq"><p>QQ好友</p></li>
-        <li class="-mob-share-tencentweibo"><p>腾讯微博</p></li>
-        <li class="-mob-share-renren"><p>人人网</p></li>
-        <li class="-mob-share-kaixin"><p>开心网</p></li>
-        <li class="-mob-share-douban"><p>豆瓣</p></li>
-        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
-        <li class="-mob-share-mingdao"><p>明道</p></li>
-        <li class="-mob-share-pengyou"><p>朋友网</p></li>
-        <li class="-mob-share-facebook"><p>Facebook</p></li>
-        <li class="-mob-share-twitter"><p>Twitter</p></li>
-        <li class="-mob-share-pocket"><p>Pocket</p></li>
-        <li class="-mob-share-google"><p>Google+</p></li>
-        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
-        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
-        <li class="-mob-share-linkedin"><p>Linkedin</p></li>
-    </ul>
-    <div class="-mob-share-close">取消</div>
-</div>
-<div class="-mob-share-ui-bg"></div>
-<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey={{theme.mob_share.appkey}}"></script>
-<!--MOB SHARE END-->
+```
+{% pdf https://www.titanjun.top/test.pdf %}
 ```
 
-1-4. 在`next/layout/post.swig`中添加条件分支：
 
-```objc
-{% if theme.jiathis %}
-      {% include '_partials/share/jiathis.swig' %}
-    {% elseif theme.baidushare %}
-      {% include '_partials/share/baidushare.swig' %}
-    {% elseif theme.add_this_id %}
-      {% include '_partials/share/add-this.swig' %}
-    {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-      {% include '_partials/share/duoshuo_share.swig' %}
-    {% elseif theme.mob_share.enable %}
-      {% include '_partials/share/mob_share.swig' %}
-{% endif %}
+### 首页头像
+
+更改`NexT`主题的配置文件`themes/next/_config.yml`
+
+```yaml
+avatar:
+  url: /images/avatar.png      # 头像图片
+  rounded: true                # 头像显示在圆里
+  rotated: true                # 鼠标焦点落在头像时，是否转动头像
 ```
 
-1-5. 在`next/source/css/_common/components/third-party/`里添加样式文件`mob_share.styl`：
 
-```objc
-.-hoofoo-share-buttons{
-    display: inline-block;
-}
-.-hoofoo-share-title{
-    font-size: 1.1em;
-    font-weight: 200;
-}
-.-hoofoo-share-ui-button{
-    cursor: pointer;
-    background-color: #555;
-    color: #fff;
-    font-size: 24px;
-    line-height: 40px;
-    width: 40px;
-    height: 40px;
-    margin: 10px;
-    border-radius: 25px;
-    float: left;
-    transition: background 0.4s;
-    -moz-transition: background 0.4s;    /* Firefox 4 */
-    -webkit-transition: background 0.4s;    /* Safari 和 Chrome */
-    -o-transition: background 0.4s;
-}
-.-hoofoo-share-weibo:hover{
-    background-color: #cf3f41;
-}
-.-hoofoo-share-weixin:hover{
-    background-color: #18a01a;
-}
-.-hoofoo-share-qq:hover{
-    background-color: #950c0c;
-}
-.-hoofoo-share-twitter:hover{
-    background-color: #2ab3e6;
-}
-.-hoofoo-share-more:hover{
-    background-color: #777;
-}
-.-mob-share-weixin-qrcode-content{
-    border-radius: 4px;
-    -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    -o-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-}
-.-mob-share-weixin-qrcode{
-    margin: 5% !important;
-    width: 90% !important;
-    height: auto !important;
-}
-.-mob-share-weixin-qrcode-close {
-    background-image: url('/lib/fancybox/source/fancybox_sprite.png') !important;//因为兼容问题把vendor改成了lib，根据自己的路径修改
-}
-.-mob-share-weixin-qrcode-close {
-    overflow: hidden;
-    line-height: 100px !important;
-    position: absolute !important;
-    top: -18px !important;
-    right: -18px !important;
-    width: 36px !important;
-    height: 36px !important;
-    cursor: pointer !important;
-    z-index: 8040 !important;
-}
-/*Retina graphics!*/
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-       only screen and (min--moz-device-pixel-ratio: 1.5),
-       only screen and (min-device-pixel-ratio: 1.5){
-    .-mob-share-weixin-qrcode-close {
-        background-image: url('/lib/fancybox/source/fancybox_sprite@2x.png') !important;//因为兼容问题把vendor改成了lib，根据自己的路径修改
-        background-size: 44px 152px !important; /*The size of the normal image, half the size of the hi-res image*/
-    }
-}
-.-mob-share-close{
-    height: 4em !important;
-    font-size: 0.8em !important;
-    line-height: 4em !important;
-    background: #555 !important;
-    color: #fff !important;
-}
+### 菜单显示中文
+
+在博客的根目录里，找到`_config.yml`文件，然后设置以下的配置项，需要注意，这里的字体是 `zh-CN`，而不是`zh-Hans`
+
+```
+language: zh-CN
 ```
 
-1-6. 同一目录下的 `third-party.styl` 中添加：
 
-```objc
-@import "mob_share";
+### 启用文章目录
+
+更改`NexT`主题的配置文件`themes/next/_config.yml`，设置以下内容
+
+```yaml
+toc:
+  enable: true
+  number: false           # 自动添加目录编号
+  wrap: true              # 每行目录字数超长自动换行
+  expand_all: true        # 展开所有级别
+  max_depth: 5            # 目录的最大深度
 ```
 
-1-7. 在`next/layout/_scripts/third-party/`里添加脚本文件`mob_share.swig`：
 
-```objc
-{% if theme.mob_share.enable %}
-<script type="text/javascript">
-    //微信二维码点击背景关闭
-    $('body').delegate('.-mob-share-weixin-qrcode-bg','click', function(){
-         $(".-mob-share-weixin-qrcode-close").trigger("click");
-    }); 
-</script>
-{% endif %}
+### 设置右上角`Github`图标
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```yaml
+github_banner:
+  enable: true
+  permalink: https://https://github.com/CoderTitan
+  title: Follow me on GitHub
 ```
 
-1-8. 在`next/layout/_layout.swig的body`标签结束前添加：
 
-```objc
-{% include '_scripts/third-party/mob_share.swig' %}
+### 修改上下篇文章顺序
+
+在`NexT`主题中文章底部，有上下篇文章的链接, 默认的上一篇实在右侧, 下一篇是在左侧, 有点不太符合我们的阅读习惯, 可在主题的配置文件`themes/next/_config.yml`中修改
+
+```yaml
+# Show previous post and next post in post footer if exists
+# Available values: left | right | false
+# left: 上一篇在右, 下一篇在左
+# right: 上一篇在左, 下一篇在右
+# false: 不显示
+post_navigation: right
 ```
 
-### 更改上一篇，下一篇的顺序
-- 进入一篇文章，在文章底部，有上下篇的链接，但是点击 发现进入的是页面中的的上面那篇文章，不符合我们的正常习惯, 修改方法如下:
-- 文件位置：`themes/next/layout/_macro/post.swig`
 
-``` diff
-{% if not is_index and (post.prev or post.next) %}
-  <div class="post-nav">
-    <div class="post-nav-next post-nav-item">
--      {% if post.next %}
-+      {% if post.prev %}
--        <a href="{{ url_for(post.next.path) }}" rel="next" title="{{ post.next.title }}">
-+        <a href="{{ url_for(post.prev.path) }}" rel="prev" title="{{ post.prev.title }}">
--          <i class="fa fa-chevron-left"></i> {{ post.next.title }}
-+          <i class="fa fa-chevron-left"></i> {{ post.prev.title }}
-        </a>
-      {% endif %}
-    </div>
+### 设置侧栏阅读进度百分比
 
-    <span class="post-nav-divider"></span>
+主题的配置文件`themes/next/_config.yml`，设置
 
-    <div class="post-nav-prev post-nav-item">
--      {% if post.prev %}
-+      {% if post.next %}
--        <a href="{{ url_for(post.prev.path) }}" rel="prev" title="{{ post.prev.title }}">
-+        <a href="{{ url_for(post.next.path) }}" rel="next" title="{{ post.next.title }}">
--          {{ post.prev.title }} <i class="fa fa-chevron-right"></i>
-+          {{ post.next.title }} <i class="fa fa-chevron-right"></i>
-        </a>
-      {% endif %}
-    </div>
-  </div>
-{% endif %}
+```yaml
+back2top:
+  enable: true
+  # 是否显示在边栏
+  sidebar: true  
+  # 点击是否回到顶部
+  scrollpercent: true
 ```
 
-<div class="note warning"><p>需要注意的是`prev`和`next`一定不要弄错了</p></div>
+### 配置`hexo`站点的`footer`信息
+
+- 底部`footer`可以开关显示`hexo`信息、`theme`信息、建站时间等个性化配置：
+- 主题的配置文件`themes/next/_config.yml`，设置
 
 
-### 文章底部加上评分小星星
-这里我们先看一个评分的效果图
 
-![image](https://titanjun.oss-cn-hangzhou.aliyuncs.com/hexo-next/nextstart.png)
+```yaml
+footer:
+  since: 2018        # 建站开始时间
+  icon:
+    name: user       # 设置 建站初始时间和至今时间中间的图标，默认是一个'小人像'，更改user为heart可以变成一个心
+    animated: true
+    color: "#808080" # 更改图标的颜色，红色为'#ff0000'
+  powered: true      # 开启hexo驱动
+```
 
-- 首先先去[WidgetPack](https://widgetpack.com)注册一个账号并登陆, 填一下自己博客的信息，左上角有个 ID
-- 首先打开主题配置文件：`themes/next/_config.yml`
 
-```objc
+
+### 启用文章打赏
+
+主题的配置文件`themes/next/_config.yml`，设置以下内容，`themes/next/source/images` 文件夹下，图片目录路径也可自定义
+
+```yaml
+reward_settings:
+  enable: true
+  animation: false
+  comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
+
+reward:
+  wechatpay: /images/wechatpay.png
+  alipay: /images/alipay.png
+```
+
+
+### 添加版权声明
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```yaml
+creative_commons:
+  license: by-nc-sa       # License类型： by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
+  sidebar: false          # 在侧边栏有一个版权的图片链接
+  post: true              # 在每一篇文章末尾自动增加本文作者、本文链接、版权声明信息
+  language: deed.zh       # 点击链接后显示的版权信息的语言
+```
+
+### 添加标签/分类页面
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```yaml
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  categories: /categories/ || fa fa-th
+  tags: /tags/ || fa fa-tags
+  about: /about/ || fa fa-user
+  #schedule: /schedule/ || fa fa-calendar
+  #commonweal: /404/ || fa fa-heartbeat
+  # search: /search/ || fa fa-globe
+
+# Enable / Disable menu icons / item badges.
+menu_settings:
+  # 是否显示各个页面的图标
+  icons: true
+  # 是否显示分类/标签/归档页的内容量
+  badges: true
+```
+
+
+通过`Hexo`创建一个标签/分类/关于页面
+
+```yaml
+# 进入博客的根目录
+$ cd blog
+
+# 创建标签页
+$ hexo new page "about"
+$ hexo new page "tags"
+$ hexo new page "categories"
+
+```
+
+以上命令执行完毕后，在根目录`source`文件夹下会多了如下文件
+
+- `tags/index.md`
+- `categories\index.md`
+- `about\index.md`
+
+在对应的文件下分别添加对应内容, 必须使用`---`包裹配置内容，否则配置无效
+
+```yaml
+# tags/index.md
+---
+title: 关于
+type: "about"
+---
+
+# about\index.md
+---
+title: 标签
+type: "tags"
+---
+
+# categories\index.md
+---
+title: 分类
+type: "categories"
+---
+```
+
+
+### 启用不蒜子统计
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+``` yaml
+# Show Views / Visitors of the website / page with busuanzi.
+# For more information: http://ibruce.info/2015/04/04/busuanzi/
+busuanzi_count:
+  enable: true
+  total_visitors: true
+  total_visitors_icon: fa fa-user
+  total_views: true
+  total_views_icon: fa fa-eye
+  post_views: true
+  post_views_icon: far fa-eye
+```
+
+
+### 修改网站底部图标
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```yaml
+icon:
+    name: fa fa-heart 
+    animated: true 
+    color: "#ff0000"
+```
+
+
+### 网站底部添加备案信息
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```yaml
+beian:
+  enable: true
+  icp: '备案号'
+```
+
+
+### 文章评分功能
+
+`NexT`主题中已经集成了`widgetpack` 的星级评分系统，用户无须再安装或引入插件脚本，只需在 [widgetpack](https://widgetpack.com/)中注册账号并修改主题配置即可
+
+```yaml
 # Star rating support to each article.
 # To get your ID visit https://widgetpack.com
 rating:
   enable: true
-  id: 你登录后的ID    
-  color: f79533
+  id: #<app_id>
+  color: #f79533
 ```
 
-- `color`: 色值可改成自己喜欢的颜色
-- 设置配置项
-  - 可以配置评分方式，侧栏 > `Rating` > `Setting`，建议用 `IP address` 或 `Device(cookie)`，免登录，毕竟 `Socials` 里面的选项几乎都被墙，不适合国内网络环境。
-  - 建议 侧栏 > `Site` > `Setting` 中勾选 `Private` 选项。
-  - 上面两步勾选后别忘了点击页面右下方的 `SAVE SETTING` 绿色按钮保存
+在控制台中点击左上角展开菜单，在`Rating` -> `Setting`中将 `Vote via`选项改为`Device(cookie)`以开启匿名评分，该选项将基于设备认证访问者身份，如果不开启这个选项，那么就需要登录才能评分
 
-<div class="note info"><p>经过上面的配置，默认最下面只会显示 5 颗简单的小星星, 下面我们在自己优化一下样式吧</p></div>
 
-首先打开文件：`blog/themes/next/layout/_macro/post.swig`, 添加有`+`哪一行代码
 
-``` diff
-        {% if theme.rating.enable %}
-          <div class="wp_rating">
-+            <div style="color: rgba(0, 0, 0, 0.75); font-size:13px; letter-spacing:3px">(&gt;看完记得五星好评哦亲&lt;)</div>
-            <div id="wpac-rating"></div>
-          </div>
-        {% endif %}
-```
 
-然后打开文件：`blog/themes/next/source/css/_custom/custom.styl`, 添加如下代码
+## `NexT`高级配置
 
-```objc
-// 星星评分更改高度
-.post-widgets {
-    height: 80px;
-}
+### 添加站内搜索
+
+`NexT`主题默认支持使用 [Hexo-Generator-Searchdb](https://github.com/theme-next/hexo-generator-searchdb) 插件来实现本地搜索
+
+```yaml
+# 进入博客的根目录
+cd blog_rooot
+
+# 安装搜索插件
+npm install hexo-generator-searchdb --save
 ```
 
 
-### `leanCloud`统计
-#### 统计文章阅读量
-- 通过`leanCloud`统计您网站的文章阅读量
-- 注册[LeanCloud](https://leancloud.cn/), 并创建一个你自己的应用
+根目录配置文件`/_config.yml`，设置
 
-![image](https://titanjun.oss-cn-hangzhou.aliyuncs.com/hexo-next/createLeanCloud.png?x-oss-process=style/titanjun)
+```yaml
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
+  limit: 100
+```
 
-- 点击图片右上角的设置图标进入应用界面
-- 到此，你的应用创建成功，继续表的创建
-  - 创建表，并将表的名字命名为：`Counter`, 如图
 
-![image](https://titanjun.oss-cn-hangzhou.aliyuncs.com/hexo-next/LeanCloudSet.png?x-oss-process=style/titanjun)
+主题的配置文件`themes/next/_config.yml`，设置
 
-<div class="note primary"><p>打开设置 -> 应用key 获取`App ID`和`App Key`</p></div>
-
-最后打开主题配置文件: `themes/next/_config.yml`
-
-```objc
-leancloud_visitors:
+```yaml
+local_search:
   enable: true
-  app_id: #你的app_id
-  app_key: #你的的app_key
+  # auto /  manual，auto 自动搜索、manual：按回车[enter ]键手动搜索
+  trigger: auto
+  top_n_per_article: 1
+  unescape: false
+  preload: false
+
 ```
 
-完成配置并重新编译。到此您已经成功设置了阅读量的统计
+### 添加RSS
 
-#### WEB安全
-为了保证应用的统计计数功能仅应用于自己的博客系统，你可以在应用->设置->安全中心的Web安全域名中加入自己的博客域名，以保证数据的调用安全
+`NexT`主题默认支持`RSS`订阅, 安装插件[hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed)
+
+```yaml
+# 进入博客的根目录
+cd blog_rooot
+
+# 安装RSS插件
+npm install hexo-generator-feed --save
+```
 
 
+根目录配置文件`/_config.yml`，设置
 
-
-### 配置Valine评论系统
-- 评论系统之前用的来必力, 但是有时也会被墙, 用起来也不是很方便
-- 现在更换的[`Valine`](https://valine.js.org/)评论系统还是很爽的
-- `Valine` 是一款基于`Leancloud`的快速、简洁且高效的无后端评论系统
-- 特性¶
-  - 快速
-  - 安全
-  - 无后端实现
-  - `MarkDown` 全语法支持
-  - 轻量易用(~15kb gzipped)
-- 配置方法
-  - 获取`Leancloud`的`APP ID`和 `APP KEY`, 上面设置中已经介绍了获取方法
-  
-
-<div class="note success"><p>打开主题配置文件: `themes/next/_config.yml`</p></div>
-
-```objc
-# Valine.
-# You can get your appid and appkey from https://leancloud.cn
-# more info please open https://valine.js.org
-valine:
+```yaml
+feed:
   enable: true
-  appid:  # your leancloud application appid
-  appkey: # your leancloud application appkey
-  notify: true # mail notifier , https://github.com/xCss/Valine/wiki
-  verify: false # Verification code
-  placeholder: 在这里说点什么吧... # comment box placeholder
-  avatar: identicon # 评论表头样式  /mm/identicon/monsterid/wavatar/retro/hide
-  guest_info: nick,mail,link # custom comment header
-  pageSize: 10 # pagination size
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:
 ```
 
-<div class="note info"><p>其他相关配置和邮件提醒方式可查看[Valline详细配置官网](https://valine.js.org/configuration/)</p></div>
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```yaml
+social:
+  RSS: /atom.xml || fa fa-rss
+```
+
+### 设置博客文章永久链接
+
+- `hexo`的默认永久链接是在`_config.yml`里配置的，其生成默认规则是`permalink: :year/:month/:day/:title/`，是按照年、月、日、标题来生成的。
+- 这种默认配置有个很不能接受的缺点，当文件名为中文时，会导致`url`链接中也出现中文, 复制后的链接会编码，非常不利于阅读，也不简洁。
+- [hexo-abbrlink](https://github.com/rozbo/hexo-abbrlink)支持使用不同的算法和进制生成文章的永久链接
 
 
-<div class="note primary"><p>下面着重说一下自定义样式</p></div>
+```yaml
+# 进入博客的根目录
+cd blog_rooot
 
-看一下默认效果图
+# 安装abbrlink插件
+npm install hexo-abbrlink --save
+```
 
-![image](http://titanjun.oss-cn-hangzhou.aliyuncs.com/hexo-next/values.png)
 
-修改后的效果图
+根目录配置文件`/_config.yml`，设置
 
-![image](https://titanjun.oss-cn-hangzhou.aliyuncs.com/hexo-next/next-value.png?x-oss-process=style/titanjun)
+```yaml
+#文章的永久链接, 如：http://localhost:4000/post/abaf7e89.html
+permalink: post/:abbrlink.html
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: hex    # 进制：dec(default) and hex
+```
 
-- 首先[下载 Valine.min.js](https://github.com/panjunwen/Valine/releases/tag/v1.1.4.fix), 并把下载好的文件放到文件夹 `themes/next/source/js/src` 
-- 然后打开文件`themes/next/layout/_third-party/comments/valine.swig`, 按照如下修改
 
-``` diff
-{% if theme.valine.enable and theme.valine.appid and theme.valine.appkey %}
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
--  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-+  <script src="/js/src/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = '{{ theme.valine.guest_info }}';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        av: AV, 
-        el: '#comments' ,
-        verify: {{ theme.valine.verify }},
-        notify: {{ theme.valine.notify }},
-        appId: '{{ theme.valine.appid }}',
-        appKey: '{{ theme.valine.appkey }}',
-        placeholder: '{{ theme.valine.placeholder }}',
-        avatar:'{{ theme.valine.avatar }}',
-        guest_info:guest,
-        pageSize:'{{ theme.valine.pageSize }}' || 10,
-    });
-  </script>
+生成的链接将会是这样的(官方样例)：
+
+| 算法 | 进制 | 生成链接样例 |
+| --- | --- | --- |
+| crc16 | hex | https://post.zz173.com/posts/66c8.html |
+| crc16 | dec | https://post.zz173.com/posts/65535.html |
+| crc32 | hex | https://post.zz173.com/posts/8ddf18fb.html |
+| crc32 | dec | https://post.zz173.com/posts/1690090958.html |
+
+
+
+安装完成后, 执行`hexo clean & hexo g & hexo s`查看效果
+
+
+### 字数与阅读时长统计
+
+`NexT`主题默认支持使用 [hexo-symbols-count-time](https://github.com/theme-next/hexo-symbols-count-time) 插件来统计文章字数和阅读时长
+
+
+```yaml
+# 进入博客的根目录
+cd blog_rooot
+
+# 安装hexo-symbols-count-time插件
+npm install hexo-symbols-count-time --save
+```
+
+
+根目录配置文件`/_config.yml`，设置
+
+```yaml
+symbols_count_time:
+  time: true                   # 文章阅读时长
+  symbols: true                # 文章字数统计
+  total_time: true             # 站点总阅读时长
+  total_symbols: true          # 站点总字数统计
+  exclude_codeblock: true      # 排除代码字数统计
+```
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```yaml
+symbols_count_time:
+  separated_meta: false         # 是否另起一行显示（即不和发表时间等同一行显示）
+  item_text_post: true          # 首页文章统计数量前是否显示文字描述（本文字数、阅读时长）
+  item_text_total: false        # 页面底部统计数量前是否显示文字描述（站点总字数、站点阅读时长）
+```
+
+
+### 添加标签云
+
+[hexo-tag-cloud](https://github.com/D0n9X1n/hexo-tag-cloud)标签云插件
+
+```yaml
+# 进入博客的根目录
+cd blog_rooot
+
+# 安装hexo-tag-cloud插件
+npm install hexo-tag-cloud --save
+```
+
+根目录配置文件`/_config.yml`，设置
+
+```yaml
+# hexo-tag-cloud
+tag_cloud:
+  textFont: Trebuchet MS, Helvetica
+  textColor: '#333'
+  textHeight: 16
+  outlineColor: '#E2E1D1'
+  maxSpeed: 0.3
+  pauseOnSelected: false # true 意味着当选中对应 tag 时,停止转动
+```
+
+更改 `NexT` 主题的源文件 `themes/next/layout/_macro/sidebar.njk`, 然后在最后添加如下内容
+
+```
+{% if site.tags.length > 1 %}
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            {{ list_tags() }}
+        </canvas>
+    </div>
+</div>
 {% endif %}
 ```
 
-<div class="note info"><p>修改评论按钮文字</p></div>
+- 完成安装和显示，可以通过 `hexo clean && hexo g && hexo s` 来进行本地预览, `hexo clean` 为必须选项。
+- PS:不要使用 `hexo g -d` 或者 `hexo d -g` 这类组合命令
 
-打开刚刚下载的`Valine.min.js`文件, 找到`class="vsubmit">回复</button>`代码, 更换为`class="vsubmit">提交</button>` , 这样文字就修改了
 
+### 添加豆瓣个人主页
 
-### 侧栏加入已运行的时间
-相当于给记录博客的年龄, 但是我的不显示, 不知道为啥, 比较惆怅, 估计可能是主题风格的原因吧
+[hexo-douban](https://github.com/mythsman/hexo-douban)插件支持在 `Hexo` 页面中嵌入豆瓣个人主页
 
-<div class="note primary"><p>首先, 在`~/blog/themes/next/layout/_custom/sidebar.swig`, 加入以下代码</p></div>
+```yaml
+# 进入博客的根目录
+cd blog_rooot
 
-```objc
-<div id="days"></div>
-</script>
-<script language="javascript">
-function show_date_time(){
-window.setTimeout("show_date_time()", 1000);
-BirthDay=new Date("05/27/2017 15:00:00");
-today=new Date();
-timeold=(today.getTime()-BirthDay.getTime());
-sectimeold=timeold/1000
-secondsold=Math.floor(sectimeold);
-msPerDay=24*60*60*1000
-e_daysold=timeold/msPerDay
-daysold=Math.floor(e_daysold);
-e_hrsold=(e_daysold-daysold)*24;
-hrsold=setzero(Math.floor(e_hrsold));
-e_minsold=(e_hrsold-hrsold)*60;
-minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
-seconds=setzero(Math.floor((e_minsold-minsold)*60));
-document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
-}
-function setzero(i){
-if (i<10)
-{i="0" + i};
-return i;
-}
-show_date_time();
-</script>
+# 安装
+npm install hexo-douban --save
 ```
 
-<div class="note warning"><p>切记要将上面的`Date`按照一样的格式改成自己的时间</p></div>
+根目录配置文件`/_config.yml`，设置
 
-然后还要修改`~/blog/themes/next/layout/_macro/sidebar.swig`
-
-``` diff
-{# Blogroll #}
-        {% if theme.links %}
-          <div class="links-of-blogroll motion-element {{ "links-of-blogroll-" + theme.links_layout | default('inline') }}">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-{{ theme.links_icon | default('globe') | lower }}"></i>
-              {{ theme.links_title }}&nbsp;
-              <i class="fa  fa-fw fa-{{ theme.links_icon | default('globe') | lower }}"></i>
-            </div>
-            <ul class="links-of-blogroll-list">
-              {% for name, link in theme.links %}
-                <li class="links-of-blogroll-item">
-                  <a href="{{ link }}" title="{{ name }}" target="_blank">{{ name }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-+        {% include '../_custom/sidebar.swig' %}
-          </div>
-         {% endif %}
-
--        {% include '../_custom/sidebar.swig' %}
+```yaml
+douban:
+  user: mythsman
+  builtin: false
+  book:
+    title: 'This is my book title'
+    quote: 'This is my book quote'
+  movie:
+    title: 'This is my movie title'
+    quote: 'This is my movie quote'
+  game:
+    title: 'This is my game title'
+    quote: 'This is my game quote'
+  timeout: 10000 
 ```
 
-如果你还想修改样式, 打开`~/blog/themes/next/source/css/_custom/custom.styl`
+- user: 你的豆瓣ID.打开豆瓣，登入账户，然后在右上角点击 "个人主页" ，这时候地址栏的URL大概是这样："https://www.douban.com/people/xxxxxx/" ，其中的"xxxxxx"就是你的个人ID了。
+- builtin: 是否将生成页面的功能嵌入hexo s和hexo g中，默认是false,另一可选项为true(1.x.x版本新增配置项)。
+- title: 该页面的标题.
+- quote: 写在页面开头的一段话,支持html语法.
+- timeout: 爬取数据的超时时间，默认是 10000ms ,如果在使用时发现报了超时的错(ETIMEOUT)可以把这个数据设置的大一点。
+- 如果只想显示某一个页面(比如movie)，那就把其他的配置项注释掉即可。
 
-```objc
-// 自定义的侧栏时间样式
-#days {
-    display: block;
-    color: rgb(7, 179, 155);
-    font-size: 13px;
-    margin-top: 15px;
-}
+### 启用sitemap功能
+
+为了让博文被`google`或百度检索，需要使用`hexo`的`sitemap`功能
+
+```yaml
+# 进入博客的根目录
+cd blog_rooot
+
+# 安装
+npm install hexo-generator-sitemap --save
+npm install hexo-generator-baidu-sitemap --save
 ```
 
+修改主题的配置文件`themes/next/_config.yml`
 
-### 添加Top阅读排行页面
-- 基于`Leancloud`的文章阅读量进行文章排行, 所以前提是在主题配置文件中, 配置了`Leancloud`的相关配置
-- 新建排行榜页面
-  - 终端打开博客所在目录: `~/blog/`
-  - 终端输入: `hexo new page "top"`
-- 在主题配置文件中加上菜单 `top` 和它的 `icon`, 文件位置: `~/blog/themes/next/_config.yml`
-
-``` JavaScript 
+```yaml
 menu:
-  top: /top/ || signal
+  sitemap: /sitemap.xml || fa fa-sitemap
 ```
 
-接着在语言翻译文件中加上菜单 `top`, 文件位置：`~/blog/themes/next/languages/zh_Hans.yml`
+- 执行`hexo clean & hexo g`命令后即可访问站点地图
+- 在`public`的静态文件根目录中会多出一个`sitemap.xml`文件，表示谷歌检索的`sitemap`安装成功
 
-```objc
-menu:
-  home: 首页
-  top: 排行 # 名字自定义就好
-  archives: 文章
-  categories: 分类
-  tags: 标签
-  about: 关于
-  search: 搜索
+
+## `NexT`进阶设置
+
+
+### 启用`Canvas Ribbon`背景
+
+`NexT`主题默认支持`Canvas Ribbon`背景，官方配置教程可以看[这里](https://github.com/theme-next/theme-next-canvas-ribbon)，前提是需要下载指定的静态资源文件或者使用`CDN`静态资源文件
+
+```
+# 进入Next主题的目录
+cd themes/next
+
+# # 下载Canvas资源文件
+git clone https://github.com/theme-next/theme-next-canvas-ribbon source/lib/canvas-ribbon
 ```
 
-最后，编辑第一步新建页面生成的`index.md`文件
+或者更改主题的配置文件`themes/next/_config.yml`，通过以下配置内容来指定`CDN`静态资源文件的`URL`
 
-``` JavaScript
----
-title: 排行榜
-comments: false
-date: 2018-05-04 14:14:02
----
+```yaml
+vendors:
+  canvas_ribbon: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js
+```
 
-<div id="top"></div>
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script>AV.initialize("app_id", "app_key");</script>
-<script type="text/javascript">
-  var time=0
-  var title=""
-  var url=""
-  var query = new AV.Query('Counter');
-  query.notEqualTo('id',0);
-  query.descending('time');
-  query.limit(1000);
-  query.find().then(function (todo) {
-    for (var i=0;i<1000;i++){
-      var result=todo[i].attributes;
-      time=result.time;
-      title=result.title;
-      url=result.url;
-      var content="<a href='"+"https://www.titanjun.top"+url+"'>"+title+"</a>"+"<br />"+"<font color='#555'>"+"阅读次数："+time+"</font>"+"<br /><br />";
-      document.getElementById("top").innerHTML+=content
+主题的配置文件`themes/next/_config.yml`，设置
+
+```yaml
+canvas_ribbon:
+  enable: true
+  size: 300           # Ribbon的宽度
+  alpha: 0.6          # Ribbon的透明度
+  zIndex: -1          # Ribbon的显示级别
+```
+
+
+### 启用背景`3D`动画
+
+`NexT`主题默认支持背景`3D`动画，官方配置教程可以看[这里](https://github.com/theme-next/theme-next-three)，前提是需要下载指定的静态资源文件或者使用`CDN`静态资源文件
+
+```
+# 进入Next主题的目录
+cd themes/next
+
+# 下载3D资源文件
+git clone https://github.com/theme-next/theme-next-three source/lib/three
+```
+
+或者更改主题的配置文件`themes/next/_config.yml`，通过以下配置内容来指定`CDN`静态资源文件的`URL`
+
+```yaml
+vendors:
+  three: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js
+  three_waves: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@latest/three-waves.min.js
+  canvas_lines: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@latest/canvas_lines.min.js
+  canvas_sphere: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@latest/canvas_sphere.min.js
+
+```
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```yaml
+three:
+  enable: true
+  three_waves: true           # 背景3D动画样式一
+  canvas_lines: false         # 背景3D动画样式二
+  canvas_sphere: false        # 背景3D动画样式三
+```
+
+### 启用`Pjax`
+
+`Pjax`主要用于加速`Web`页面的切换速度，同时也可以用来解决`Aplayer`音频播发器切换页面后播放出现中断的问题
+
+```
+# 进入Next主题的目录
+cd themes/next
+
+# 下载资源文件
+git clone https://github.com/theme-next/theme-next-pjax source/lib/pjax
+```
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```
+pjax: true
+```
+
+
+### 添加顶部加载进度条
+
+```
+# 进入Next主题的目录
+cd themes/next
+
+# 下载资源文件
+git clone https://github.com/theme-next/theme-next-pace source/lib/pace
+```
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```
+pace:
+  enable: true
+  theme: minimal
+```
+
+
+### 添加页面顶部阅读进度条
+
+```
+# 进入Next主题的目录
+cd themes/next
+
+# 下载资源文件
+git clone https://github.com/theme-next/theme-next-reading-progress source/lib/reading_progress
+```
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```
+reading_progress:
+  enable: true
+  position: top               # 进度条的位置：top | bottom
+  color: "#37c6c0"            # 进度条的颜色
+  height: 3px                 # 进度条的大小
+```
+
+
+
+
+## CSS样式修改
+
+### 设置背景图片和透明度
+
+主题的配置文件`themes/next/_config.yml`，设置
+
+```yaml
+custom_file_path:
+  style: source/_data/styles.styl
+```
+
+在博客根目录下的`source`文件夹下新建`_data`文件夹并添加`styles.styl`文件
+
+```css
+// 添加背景图片
+body {
+  // 图片需放在根目录/source/images/background.jpg
+  background: url(/images/background.jpg);//自己喜欢的图片地址
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+}
+
+//博客内容透明化
+//文章内容的透明度设置
+.main-inner {
+  opacity: 0.98;
+}
+
+//侧边框的透明度设置
+.sidebar {
+  opacity: 0.95;
+}
+
+//菜单栏的透明度设置
+.header-inner {
+  opacity: 0.95;
+}
+
+//搜索框（local-search）的透明度设置
+.popup {
+  opacity: 0.95;
+}
+```
+
+
+
+### 设置页脚文字样式
+
+在上述新添加的`source/_data/styles.styl`文件内添加如下代码
+
+```css
+//页脚文字
+.footer, .footer a, .footer .with-love {
+  color: #fff
+}
+```
+
+
+### 鼠标点击特效
+
+鼠标点击特效常用的有礼花特效、爆炸特效、浮出爱心、浮出文字，可以点击下方按钮下载对应的`js`文件, 并保存在`themes\next\source\js\cursor\` 目录下
+
+{% btn https://titanjun.oss-cn-hangzhou.aliyuncs.com/hexo-next/finder/fireworks.js, 礼花特效, download fa-lg fa-fw %}
+
+{% btn https://titanjun.oss-cn-hangzhou.aliyuncs.com/hexo-next/finder/explosion.js, 爆炸特效, download fa-lg fa-fw %}
+
+{% btn https://titanjun.oss-cn-hangzhou.aliyuncs.com/hexo-next/finder/clicklove.js, 浮出爱心, download fa-lg fa-fw %}
+
+{% btn https://titanjun.oss-cn-hangzhou.aliyuncs.com/hexo-next/finder/clicktext.js, 浮出文字, download fa-lg fa-fw %}
+
+
+新建一个自定义样式文件`themes\next\layout\_custom\custom.njk` , 添加如下代码
+
+```njk
+{# 鼠标点击特效 #}
+{% if theme.cursor_effect == "fireworks" %}
+  <script async src="/js/cursor/fireworks.js"></script>
+{% elseif theme.cursor_effect == "explosion" %}
+  <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+  <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+  <script async src="/js/cursor/explosion.min.js"></script>
+{% elseif theme.cursor_effect == "love" %}
+  <script async src="/js/cursor/love.min.js"></script>
+{% elseif theme.cursor_effect == "text" %}
+  <script async src="/js/cursor/text.js"></script>
+{% endif %}
+```
+
+
+将新建的`custom.njk`引入到`themes\next\layout\_layout.njk`文件代码中
+
+```
+    ....
+  <!-- 页面点击效果 -->
+  {% include '_custom/custom.njk' %}
+
+</body>
+</html>
+```
+
+最后在主题配置文件中添加以下代码
+```yaml
+# mouse click effect: fireworks | explosion | love | text
+cursor_effect: fireworks
+```
+
+
+### 站点运行时间设置
+
+在`thems/next/layout/_partials/footer.njk`文件内, 搜索`theme.footer.powered`, 在此之前添加如下代码
+
+
+```
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
     }
-  }, function (error) {
-    console.log("error");
-  });
+    setInterval("createtime()",250);
 </script>
-```
 
-必须将里面的里面的`app_id`和`app_key`替换为你的主题配置文件中的值，必须替换里面博客的链接，1000是显示文章的数量
-
-
-### 点击侧栏头像回到博客首页
-- 首先要在主题配置文件中配置好，比如我把头像`avatar.gif`放`在~/blog/source/uploads/`
-- 修改主题配置文件: `~/blog/themes/next/_config.yml`
-
-``` diff
-# Sidebar Avatar
-# in theme directory(source/images): /images/avatar.gif
-# in site  directory(source/uploads): /uploads/avatar.gif
--#avatar: /images/avatar.gif
-+avatar: /uploads/avatar.gif
-```
-
-然后编辑文件：`~/blog/themes/next/layout/_macro/sidebar.swig`
-
-``` diff
-+        <a href="/" class="site-author-image" rel="start" style="border:none">
-          <img class="site-author-image" itemprop="image"
-               src="{{ url_for( theme.avatar | default(theme.images + '/avatar.gif') ) }}"
-               alt="{{ theme.author }}" />
-+        </a>
-```
-
-### 文章摘要图片
-- 文章摘要是指每篇文章在页面上显示的那部分内容，也就是阅读全文之前的文章内容, 进入文章后图片自动隐藏
-- 在主题配置文件中：`~/blog/themes/next/_config.yml`
-
-```objc
-excerpt_description: false
-
-auto_excerpt:
-  enable: false
-```
-
-在文件中添加如下代码: `~/blog/themes/next/layout/_macro/post.swig`
-
-``` diff
-{% if is_index %}
-        {% if post.description and theme.excerpt_description %}
-          {{ post.description }}
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="{{ url_for(post.path) }}">
-              {{ __('post.read_more') }} &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        {% elif post.excerpt  %}
-          {{ post.excerpt }}
-+          
-+        {% if post.image %}
-+        <div class="out-img-topic">
-+          <img src={{ post.image }} class="img-topic" />
-+        </div>
-+        {% endif %}
-+          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="{{ url_for(post.path) }}{% if theme.scroll_to_more %}#{{ __('post.more') }}{% endif %}" rel="contents">
-              {{ __('post.read_more') }} &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-```
-
-为了防止有的图片宽度不够导致风格不够统一，页面不美观，需要在`~/blog/themes/next/source/css/_custom/custom.styl`中添加
-
-```objc
-// 自定义的文章摘要图片样式
-img.img-topic {
-    width: 100%;
-}
-```
-
-最后编辑有这需求的相关文章时, 在`Front-matter`（文件最上方以`---`分隔的区域）加上一行：
-
-```objc
-image: url  # 图片的链接地址
 ```
 
 
-### 使用`CloudFlare`配置`https`
-参考
-- [使用 CloudFlare 为 hexo 博客实现 HTTPS](https://blog.csdn.net/u010099080/article/details/79617603)
-- [使用 cloudflare 为网站添加免费 CDN 并获取免费 SSL 服务](https://coderschool.cn/2035.html)
-- [为自定义域名的GitHub Pages添加SSL 完整方案](https://www.yicodes.com/2016/12/04/free-cloudflare-ssl-for-custom-domain/)
+### 点击头像回到首页
+
+修改侧边栏模板代码`thems/next/layout/_partials/site-overview.njk`
+
+```
+  {%- if theme.avatar.url %}
++    <a href="/">
+        <img class="site-author-image" itemprop="image" alt="{{ author }}"
+          src="{{ url_for(theme.avatar.url) }}">
++    </a>
+  {%- endif %}
+```
 
 
-### 关于next主题个性化配置
-这里给大家推荐, 提供33中炫酷效果的文章
-- [hexo的next主题个性化配置教程](https://segmentfault.com/a/1190000009544924)
-- [打造个性超赞博客Hexo+NexT+GithubPages的超深度优化](https://reuixiy.github.io/technology/computer/computer-aided-art/2017/06/09/hexo-next-optimization.html#fn:2)
+### 文章尾部添加本文结束标记
+
+
+在主题的配置文件`themes/next/_config.yml`中设置
+
+```yaml
+custom_file_path:
+  postBodyEnd: source/_data/post-body-end.njk
+```
+
+在博客根目录下的`source`文件夹下新建`_data`文件夹并添加`post-body-end.njk`文件, 并在文件中添加一下内容
+
+```html
+
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">------------- 本文结束啦<i class="fa fa-paw"></i>感谢您的阅读 -------------</div>	
+</div>
+```
+
+
+
+
+
+## 参考文章
+- [hexo的next主题个性化配置教程](https://www.techgrow.cn/)
+- [打造个性超赞博客Hexo+NexT+GithubPages的超深度优化](https://reuixiy.github.io/)
 - [Hexo 优化 --- 支持邮件通知的评论 Valine 增强版](http://www.zhaojun.im/hexo-valine-modify/)
 
 
-
+---
