@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Socket搭建即时通讯服务器">
+<meta property="og:url" content="https://titanjun.top/post/3cb11047.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/WebSocket1.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="http://pcat1usdp.bkt.clouddn.com/webServer.jpg">
+<meta property="article:published_time" content="2018-11-16T03:45:00.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.898Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Node">
+<meta property="article:tag" content="Socket">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/WebSocket1.png?x-oss-process=style/titanjun">
+
+
+<link rel="canonical" href="https://titanjun.top/post/3cb11047.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/3cb11047.html","path":"post/3cb11047.html","title":"Socket搭建即时通讯服务器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Socket搭建即时通讯服务器 | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF"><span class="nav-number">1.</span> <span class="nav-text">即时通讯</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IM%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">IM通信原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF%E8%BF%9E%E6%8E%A5%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">即时通讯连接原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%92%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">即时通讯数据传递方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%AD%E8%BD%AE%E8%AF%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">短轮询:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%95%BF%E8%BD%AE%E8%AF%A2"><span class="nav-number">1.3.2.</span> <span class="nav-text">长轮询:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSE"><span class="nav-number">1.3.3.</span> <span class="nav-text">SSE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebSocket"><span class="nav-number">1.3.4.</span> <span class="nav-text">WebSocket</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebSocket-1"><span class="nav-number">2.</span> <span class="nav-text">WebSocket</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">WebSocket如何工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Websocket%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.1.1.</span> <span class="nav-text">Websocket协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">2.2.</span> <span class="nav-text">WebSocket客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-API"><span class="nav-number">2.2.1.</span> <span class="nav-text">客户端 API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebSocket%E5%B1%9E%E6%80%A7"><span class="nav-number">2.2.2.</span> <span class="nav-text">WebSocket属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebSocket%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.2.3.</span> <span class="nav-text">WebSocket事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebSocket%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.4.</span> <span class="nav-text">WebSocket方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">2.3.</span> <span class="nav-text">WebSocket服务端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Socket-IO"><span class="nav-number">3.</span> <span class="nav-text">Socket.IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Socket-IO%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">3.1.</span> <span class="nav-text">Socket.IO服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5Socket-IO%E5%BA%93"><span class="nav-number">3.1.1.</span> <span class="nav-text">导入Socket.IO库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAsocket"><span class="nav-number">3.1.2.</span> <span class="nav-text">创建socket</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8Bsocket%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.1.3.</span> <span class="nav-text">建立socket连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Socket-IO%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">3.2.</span> <span class="nav-text">Socket.IO客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAsocket%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.2.1.</span> <span class="nav-text">创建socket对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%91%E5%90%AC%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.2.2.</span> <span class="nav-text">监听连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SocketIO%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">SocketIO事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9B%91%E5%90%AC%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.3.1.</span> <span class="nav-text">客户端监听事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E9%80%81%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.3.2.</span> <span class="nav-text">客户端发送事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%91%E5%90%AC%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.3.3.</span> <span class="nav-text">服务器监听事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%91%E9%80%81%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.3.4.</span> <span class="nav-text">服务器发送事件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SocketIO%E5%88%86%E7%BB%84"><span class="nav-number">4.</span> <span class="nav-text">SocketIO分组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%86%E7%BB%84"><span class="nav-number">4.1.</span> <span class="nav-text">如何分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">4.2.</span> <span class="nav-text">分组的原理</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/3cb11047.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Socket搭建即时通讯服务器 | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Socket搭建即时通讯服务器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-16 11:45:00" itemprop="dateCreated datePublished" datetime="2018-11-16T11:45:00+08:00">2018-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/socket/" itemprop="url" rel="index"><span itemprop="name">Socket</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>10k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/WebSocket1.png?x-oss-process=style/titanjun" alt="webSecket"></p>
+<span id="more"></span>
+
+<h2 id="即时通讯"><a href="#即时通讯" class="headerlink" title="即时通讯"></a>即时通讯</h2><ul>
+<li>相关代码<a target="_blank" rel="noopener" href="https://github.com/CoderTitan/WebSocketDemo">Demo地址</a></li>
+<li>即时通讯<code>（Instant messaging，简称IM）</code>是一个终端服务，允许两人或多人使用网路即时的传递文字讯息、档案、语音与视频交流</li>
+<li>即时通讯按使用用途分为企业即时通讯和网站即时通讯</li>
+<li>根据装载的对象又可分为手机即时通讯和PC即时通讯，手机即时通讯代表是短信，网站、视频即时通讯</li>
+</ul>
+<h3 id="IM通信原理"><a href="#IM通信原理" class="headerlink" title="IM通信原理"></a>IM通信原理</h3><ul>
+<li>客户端A与客户端B如何产生通信？客户端A不能直接和客户端B，因为两者相距太远。</li>
+<li>这时就需要通过IM服务器，让两者产生通信.</li>
+<li>客户端A通过<code>socket</code>与IM服务器产生连接,客户端B也通过<code>socket</code>与IM服务器产生连接</li>
+<li>A先把信息发送给IM应用服务器，并且指定发送给B，服务器根据A信息中描述的接收者将它转发给B，同样B到A也是这样。</li>
+<li>通讯问题: 服务器是不能主动连接客户端的，只能客户端主动连接服务器</li>
+</ul>
+<h3 id="即时通讯连接原理"><a href="#即时通讯连接原理" class="headerlink" title="即时通讯连接原理"></a>即时通讯连接原理</h3><ul>
+<li>即时通讯都是长连接，基本上都是<a target="_blank" rel="noopener" href="https://blog.csdn.net/linsongbin1/article/details/54980801/">HTTP1.1</a>协议，设置<code>Connection</code>为<code>keep-alive</code>即可实现长连接，而<code>HTTP1.1</code>默认是长连接，也就是默认<code>Connection</code>的值就是<code>keep-alive</code></li>
+<li>HTTP分为长连接和短连接，其实本质上是TCP连接，HTTP协议是应用层的协议，而TCP才是真正的传输层协议, IP是网络层协议，只有负责传输的这一层才需要建立连接</li>
+<li>例如: 急送一个快递，HTTP协议指的那个快递单，你寄件的时候填的单子就像是发了一个HTTP请求。而TCP协议就是中间运货的运输工具，它是负责运输的，而运输工具所行驶的路就是所谓的TCP连接</li>
+<li>HTTP短连接（非持久连接）是指，客户端和服务端进行一次HTTP请求&#x2F;响应之后，就关闭连接。所以，下一次的HTTP请求&#x2F;响应操作就需要重新建立连接。</li>
+<li>HTTP长连接（持久连接）是指，客户端和服务端建立一次连接之后，可以在这条连接上进行多次请求&#x2F;响应操作。持久连接可以设置过期时间，也可以不设置</li>
+</ul>
+<h3 id="即时通讯数据传递方式"><a href="#即时通讯数据传递方式" class="headerlink" title="即时通讯数据传递方式"></a>即时通讯数据传递方式</h3><p>目前实现即时通讯的有四种方式（短轮询、长轮询、SSE、<code>Websocket</code>）</p>
+<h4 id="短轮询"><a href="#短轮询" class="headerlink" title="短轮询:"></a>短轮询:</h4><ul>
+<li>每隔一小段时间就发送一个请求到服务器，服务器返回最新数据，然后客户端根据获得的数据来更新界面，这样就间接实现了即时通信</li>
+<li>优点是简单，缺点是对服务器压力较大，浪费带宽流量（通常情况下数据都是没有发生改变的）。</li>
+<li>主要是客户端人员写代码，服务器人员比较简单，适于小型应用</li>
+</ul>
+<h4 id="长轮询"><a href="#长轮询" class="headerlink" title="长轮询:"></a>长轮询:</h4><ul>
+<li>客户端发送一个请求到服务器，服务器查看客户端请求的数据(服务器中数据)是否发生了变化（是否有最新数据），如果发生变化则立即响应返回，否则保持这个连接并定期检查最新数据，直到发生了数据更新或连接超时</li>
+<li>同时客户端连接一旦断开，则再次发出请求，这样在相同时间内大大减少了客户端请求服务器的次数.</li>
+<li>弊端:服务器长时间连接会消耗资源，返回数据顺序无保证，难于管理维护</li>
+<li>底层实现:在服务器的程序中加入一个死循环，在循环中监测数据的变动。当发现新数据时，立即将其输出给浏览器并断开连接，浏览器在收到数据后，再次发起请求以进入下一个周期</li>
+</ul>
+<h4 id="SSE"><a href="#SSE" class="headerlink" title="SSE"></a>SSE</h4><ul>
+<li>（<code>Server-sent Events</code>服务器推送事件）:为了解决浏览器只能够单向传输数据到服务端，HTML5提供了一种新的技术叫做服务器推送事件SSE</li>
+<li>SSE技术提供的是从服务器单向推送数据给浏览器的功能，加上配合浏览器主动HTTP请求，两者结合起来,实际上就实现了客户端和服务器的双向通信.</li>
+</ul>
+<h4 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h4><ul>
+<li>以上提到的这些解决方案中，都是利用浏览器单向请求服务器或者服务器单向推送数据到浏览器</li>
+<li>而在HTML5中，为了加强web的功能，提供了<code>websocket</code>技术，它不仅是一种web通信方式，也是一种应用层协议</li>
+<li>它提供了浏览器和服务器之间原生的全双工跨域通信，通过浏览器和服务器之间建立<code>websocket</code>连接,在同一时刻能够实现客户端到服务器和服务器到客户端的数据发送</li>
+</ul>
+<h2 id="WebSocket-1"><a href="#WebSocket-1" class="headerlink" title="WebSocket"></a>WebSocket</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://websocket.org/">WebSocket</a> 是一种网络通信协议。<a target="_blank" rel="noopener" href="https://note.youdao.com/">RFC6455</a> 定义了它的通信标准</li>
+<li><code>WebSocket</code>是一种双向通信协议，在建立连接后，<code>WebSocket</code> 服务器和客户端都能主动的向对方发送或接收数据</li>
+<li><code>WebSocket</code>是基于<code>HTTP</code>协议的，或者说借用了<code>HTTP</code>协议来完成一部分握手(连接)，在握手(连接)阶段与<code>HTTP</code>是相同的,只不过<code>HTTP</code>不能服务器给客户端推送，而<code>WebSocket</code>可以</li>
+</ul>
+<h3 id="WebSocket如何工作"><a href="#WebSocket如何工作" class="headerlink" title="WebSocket如何工作"></a>WebSocket如何工作</h3><ul>
+<li>Web浏览器和服务器都必须实现<code>WebSockets</code>协议来建立和维护连接。</li>
+<li>由于<code>WebSockets</code>连接长期存在，与典型的<code>HTTP</code>连接不同，对服务器有重要的影响</li>
+<li>基于多线程或多进程的服务器无法适用于 <code>WebSockets</code>，因为它旨在打开连接，尽可能快地处理请求，然后关闭连接</li>
+<li>任何实际的<code>WebSockets</code>服务器端实现都需要一个异步服务器</li>
+</ul>
+<p><img data-src="http://pcat1usdp.bkt.clouddn.com/webServer.jpg" alt="webServer"></p>
+<h4 id="Websocket协议"><a href="#Websocket协议" class="headerlink" title="Websocket协议"></a><code>Websocket</code>协议</h4><p>协议头: ws, 服务器根据协议头判断是<code>Http</code>还是<code>websocket</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求头</span></span><br><span class="line">     <span class="variable constant_">GET</span> <span class="attr">ws</span>:<span class="comment">//localhost:12345/websocket/test.html HTTP/1.1</span></span><br><span class="line">     <span class="title class_">Origin</span>: <span class="attr">http</span>:<span class="comment">//localhost</span></span><br><span class="line">     <span class="title class_">Connection</span>: <span class="title class_">Upgrade</span></span><br><span class="line">     <span class="title class_">Host</span>: <span class="attr">localhost</span>:<span class="number">12345</span></span><br><span class="line">     <span class="title class_">Sec</span>-<span class="title class_">WebSocket</span>-<span class="title class_">Key</span>: <span class="title class_">JspZdPxs9MrWCt3</span>j6h7KdQ==  </span><br><span class="line">     <span class="title class_">Upgrade</span>: websocket </span><br><span class="line">     <span class="title class_">Sec</span>-<span class="title class_">WebSocket</span>-<span class="title class_">Version</span>: <span class="number">13</span></span><br><span class="line">    <span class="comment">// Sec-WebSocket-Key: 叫“梦幻字符串”是个密钥，只有有这个密钥 服务器才能通过解码认出来，这是个WB的请求，要建立TCP连接了！！！如果这个字符串没有按照加密规则加密，那服务端就认不出来，就会认为这整个协议就是个HTTP请求。更不会开TCP。其他的字段都可以随便设置，但是这个字段是最重要的字段，标识WB协议的一个字段</span></span><br><span class="line">     </span><br><span class="line"></span><br><span class="line"><span class="comment">// 响应头</span></span><br><span class="line">     <span class="variable constant_">HTTP</span>/<span class="number">1.1</span> <span class="number">101</span> <span class="title class_">Web</span> <span class="title class_">Socket</span> <span class="title class_">Protocol</span> <span class="title class_">Handshake</span></span><br><span class="line">     <span class="title class_">WebSocket</span>-<span class="title class_">Location</span>: <span class="attr">ws</span>:<span class="comment">//localhost:12345/websocket/test.php</span></span><br><span class="line">     <span class="title class_">Connection</span>: <span class="title class_">Upgrade</span></span><br><span class="line">     <span class="title class_">Upgrade</span>: websocket</span><br><span class="line">     <span class="title class_">Sec</span>-<span class="title class_">WebSocket</span>-<span class="title class_">Accept</span>: zUyzbJdkVJjhhu8KiAUCDmHtY/o= </span><br><span class="line">     <span class="title class_">WebSocket</span>-<span class="title class_">Origin</span>: <span class="attr">http</span>:<span class="comment">//localhost</span></span><br><span class="line">     </span><br><span class="line">    <span class="comment">// Sec-WebSocket-Accept: 叫“梦幻字符串”，和上面那个梦幻字符串作用一样。不同的是，这个字符串是要让客户端辨认的，客户端拿到后自动解码。并且辨认是不是一个WB请求。然后进行相应的操作。这个字段也是重中之重，不可随便修改的。加密规则，依然是有规则的</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="WebSocket客户端"><a href="#WebSocket客户端" class="headerlink" title="WebSocket客户端"></a>WebSocket客户端</h3><p>在客户端，没有必要为<code>WebSockets</code>使用<code>JavaScript</code>库。实现<code>WebSockets</code>的<code>Web</code> 浏览器将通过<code>WebSockets</code>对象公开所有必需的客户端功能（主要指支持<code>HTML5</code>的浏览器）</p>
+<h4 id="客户端-API"><a href="#客户端-API" class="headerlink" title="客户端 API"></a>客户端 API</h4><p>以下 API 用于创建<code>WebSocket</code>对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">Socket</span> = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(url, [protocol] );</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>以上代码中的第一个参数<code>url</code>, 指定连接的<code>URL</code></li>
+<li>第二个参数<code>protocol</code>是可选的，指定了可接受的子协议</li>
+</ul>
+<h4 id="WebSocket属性"><a href="#WebSocket属性" class="headerlink" title="WebSocket属性"></a>WebSocket属性</h4><p>以下是<code>WebSocket</code>对象的属性。假定我们使用了以上代码创建了<code>Socket</code>对象</p>
+<ul>
+<li><code>Socket.readyState</code>: 只读属性<code>readyState</code>表示连接状态, 可以是以下值<ul>
+<li>0 : 表示连接尚未建立</li>
+<li>1 : 表示连接已建立，可以进行通信</li>
+<li>2 : 表示连接正在进行关闭</li>
+<li>3 : 表示连接已经关闭或者连接不能打开。</li>
+</ul>
+</li>
+<li><code>Socket.bufferedAmount</code>: 只读属性<code>bufferedAmount</code><ul>
+<li>表示已被<code>send()</code> 放入正在队列中等待传输，但是还没有发出的<code>UTF-8</code>文本字节数</li>
+</ul>
+</li>
+</ul>
+<h4 id="WebSocket事件"><a href="#WebSocket事件" class="headerlink" title="WebSocket事件"></a>WebSocket事件</h4><p>以下是<code>WebSocket</code>对象的相关事件。假定我们使用了以上代码创建了<code>Socket</code> 对象：</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>事件处理程序</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>open</td>
+<td>Socket.onopen</td>
+<td>连接建立时触发</td>
+</tr>
+<tr>
+<td>message</td>
+<td>Socket.onmessage</td>
+<td>客户端接收服务端数据时触发</td>
+</tr>
+<tr>
+<td>error</td>
+<td>Socket.onerror</td>
+<td>通信发生错误时触发</td>
+</tr>
+<tr>
+<td>close</td>
+<td>Socket.onclose</td>
+<td>连接关闭时触发</td>
+</tr>
+</tbody></table>
+<h4 id="WebSocket方法"><a href="#WebSocket方法" class="headerlink" title="WebSocket方法"></a>WebSocket方法</h4><p>以下是<code>WebSocket</code>对象的相关方法。假定我们使用了以上代码创建了<code>Socket</code>对象：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Socket.send()</td>
+<td>使用连接发送数据</td>
+</tr>
+<tr>
+<td>Socket.close()</td>
+<td>关闭连接</td>
+</tr>
+</tbody></table>
+<div class='note success'><p>代码示例</p></div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="keyword">var</span> socket = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:9090&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立 web socket 连接成功触发事件</span></span><br><span class="line">socket.<span class="property">onopen</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 使用send发送数据</span></span><br><span class="line">    socket.<span class="title function_">send</span>(<span class="string">&quot;发送数据&quot;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(socket.<span class="property">bufferedAmount</span>)</span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&#x27;数据发送中&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受服务端数据是触发事件</span></span><br><span class="line">socket.<span class="property">onmessage</span> = <span class="keyword">function</span> (<span class="params">evt</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> received_msg = evt.<span class="property">data</span></span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&#x27;数据已经接受..&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 断开 websocket 连接成功触发事件</span></span><br><span class="line">socket.<span class="property">onclose</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&#x27;链接已经关闭&#x27;</span>)</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(socket.<span class="property">readyState</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="WebSocket服务端"><a href="#WebSocket服务端" class="headerlink" title="WebSocket服务端"></a>WebSocket服务端</h3><p><code>WebSocket</code>在服务端的实现非常丰富。<code>Node.js</code>、<code>Java</code>、<code>C++</code>、<code>Python</code> 等多种语言都有自己的解决方案, 其中<code>Node.js</code>常用的有以下三种</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/uNetworking/uWebSockets">µWebSockets</a></li>
+<li><a target="_blank" rel="noopener" href="https://socket.io/">Socket.IO</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/theturtle32/WebSocket-Node">WebSocket-Node</a></li>
+</ul>
+<p>下面就着重研究一下<code>Socket.IO</code>吧, 因为别的我也不会, 哈哈哈哈……</p>
+<h2 id="Socket-IO"><a href="#Socket-IO" class="headerlink" title="Socket.IO"></a><code>Socket.IO</code></h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/socketio">Socket.IO</a>是一个库，可以在浏览器和服务器之间实现实时，双向和基于事件的通信</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/socketio">Socket.IO</a>是一个完全由<code>JavaScript</code>实现、基于<code>Node.js</code>、支持<code>WebSocket</code>的协议用于实时通信、跨平台的开源框架</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/socketio">Socket.IO</a>包括了客户端(<code>iOS,Android</code>)和服务器端(<code>Node.js</code>)的代码，可以很好的实现iOS即时通讯技术</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/socketio">Socket.IO</a>支持及时、双向、基于事件的交流，可在不同平台、浏览器、设备上工作，可靠性和速度稳定</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/socketio">Socket.IO</a>实际上是<code>WebSocket</code>的父集，<code>Socket.io</code>封装了<code>WebSocket</code>和轮询等方法，会根据情况选择方法来进行通讯</li>
+<li>典型的应用场景如：<ul>
+<li>实时分析：将数据推送到客户端，客户端表现为实时计数器、图表、日志客户</li>
+<li>实时通讯：聊天应用</li>
+<li>二进制流传输：<code>socket.io</code>支持任何形式的二进制文件传输，例如图片、视频、音频等</li>
+<li>文档合并：允许多个用户同时编辑一个文档，并能够看到每个用户做出的修改</li>
+</ul>
+</li>
+</ul>
+<h3 id="Socket-IO服务端"><a href="#Socket-IO服务端" class="headerlink" title="Socket.IO服务端"></a>Socket.IO服务端</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/socketio">Socket.IO</a>实质是一个库, 所以在使用之前必须先导入<code>Socket.IO</code>库</li>
+<li><code>Node.js</code>导入库和<code>iOS</code>导入第三方库性质一样, 只不过<code>iOS</code>使用的是<code>pods</code>管理, <code>Node.js</code>使用<code>npm</code></li>
+</ul>
+<h4 id="导入Socket-IO库"><a href="#导入Socket-IO库" class="headerlink" title="导入Socket.IO库"></a>导入<code>Socket.IO</code>库</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 1. 进入当当前文件夹</span><br><span class="line">cd ...</span><br><span class="line"></span><br><span class="line">// 2. 创建package.json文件</span><br><span class="line">npm init</span><br><span class="line"></span><br><span class="line">/// 3. 导入库</span><br><span class="line">npm install socket.io --sava</span><br><span class="line">npm install express --sava</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="创建socket"><a href="#创建socket" class="headerlink" title="创建socket"></a>创建socket</h4><ul>
+<li><code>socket</code>本质还是<code>http</code>协议，所以需要绑定<code>http</code>服务器，才能启动socket服务.</li>
+<li>而且需要通过<code>web</code>服务器监听端口，<code>socket</code>不能监听端口，有人访问端口才能建立连接，所以先创建<code>web</code>服务器</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入http模块</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 面向express框架开发，加载express框架，方便处理get,post请求</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建web服务器</span></span><br><span class="line"><span class="keyword">var</span> server = http.<span class="title class_">Server</span>(express)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入socket.io模块</span></span><br><span class="line"><span class="keyword">var</span> socketio = <span class="built_in">require</span>(<span class="string">&#x27;socket.io&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建爱你socket服务器</span></span><br><span class="line"><span class="keyword">var</span> serverSocket = <span class="title function_">socketio</span>(server)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server.<span class="title function_">listen</span>(<span class="number">9090</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;监听9090&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="建立socket连接"><a href="#建立socket连接" class="headerlink" title="建立socket连接"></a>建立socket连接</h4><ul>
+<li>服务器不需要主动建立连接，建立连接是客户端的事情，服务器只需要监听连接</li>
+<li>客户端主动连接会发送<code>connection</code>事件，服务端只需要监听<code>connection</code>事件有没有发送，就知道客户端有没有主动连接服务器</li>
+<li><code>Socket.IO</code>本质是通过发送和接受事件触发服务器和客户端之间的通讯，任何能被编辑成<code>JSON</code>或二进制的对象都可以传递</li>
+<li><code>socket.on</code>: 监听事件，这个方法会有两个参数，第一个参数是事件名称，第二个参数是监听事件的回调函数，监听到链接就会执行这个回调函数</li>
+<li>监听<code>connection</code>，回调函数会传入一个连接好的<code>socket</code>，这个<code>socket</code>就是客户端的<code>socket</code></li>
+<li><code>socket</code>连接原理，就是客户端和服务端通过<code>socket</code>连接，服务器有<code>socket</code>，客户端也有</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听客户端有没有连接成功,如果连接成功,服务端会发送connection事件,通知客户端连接成功</span></span><br><span class="line"><span class="comment">// serverSocket: 服务端, clientSocket: 客户端</span></span><br><span class="line">serverSocket.<span class="title function_">on</span>(<span class="string">&#x27;connection&#x27;</span>, <span class="keyword">function</span> (<span class="params">clientSocket</span>) &#123;</span><br><span class="line">    <span class="comment">// 建立socket连接成功</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;建立连接成功&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(clientSocket)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Socket-IO客户端"><a href="#Socket-IO客户端" class="headerlink" title="Socket.IO客户端"></a>Socket.IO客户端</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/socketio/socket.io-client-swift">Socket.IO-Client-Swift</a>是<code>iOS</code>使用的库, 目前只有<code>Swift</code>版本</li>
+<li>iOS中的使用</li>
+</ul>
+<h4 id="创建socket对象"><a href="#创建socket对象" class="headerlink" title="创建socket对象"></a>创建socket对象</h4><p>创建<code>SocketIOClient</code>对象, 两种创建方式</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种, SocketIOClientConfiguration: 可选参数</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">init</span>(<span class="params">socketURL</span>: <span class="type">URL</span>, <span class="params">config</span>: <span class="type">SocketIOClientConfiguration</span> <span class="operator">=</span> [])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种, 底层还是使用的第一种方式创建</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">convenience</span> <span class="keyword">init</span>(<span class="params">socketURL</span>: <span class="type">URL</span>, <span class="params">config</span>: [<span class="params">String</span>: <span class="keyword">Any</span>]<span class="operator">?</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(socketURL: socketURL, config: config<span class="operator">?</span>.toSocketConfiguration() <span class="operator">??</span> [])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><code>SocketIOClientConfiguration</code>: 是一个数组, 等同于<code>[SocketIOClientOption]</code></li>
+<li><code>SocketIOClientOption</code>的所有取值如下</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">SocketIOClientOption</span> : <span class="title class_">ClientOption</span> &#123;</span><br><span class="line">    <span class="comment">/// 使用压缩的方式进行传输</span></span><br><span class="line">    <span class="keyword">case</span> compress</span><br><span class="line">    <span class="comment">/// 通过字典内容连接</span></span><br><span class="line">    <span class="keyword">case</span> connectParams([String: <span class="keyword">Any</span>])</span><br><span class="line">    <span class="comment">/// NSHTTPCookies的数组, 在握手过程中传递, Default is nil.</span></span><br><span class="line">    <span class="keyword">case</span> cookies([<span class="type">HTTPCookie</span>])</span><br><span class="line">    <span class="comment">/// 添加自定义请求头初始化来请求, 默认为nil</span></span><br><span class="line">    <span class="keyword">case</span> extraHeaders([String: <span class="type">String</span>])</span><br><span class="line">    <span class="comment">/// 将为每个连接创建一个新的connect, 如果你在重新连接有bug时使用.</span></span><br><span class="line">    <span class="keyword">case</span> forceNew(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 传输是否使用HTTP长轮询, 默认false</span></span><br><span class="line">    <span class="keyword">case</span> forcePolling(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 是否使用 WebSockets. Default is `false`</span></span><br><span class="line">    <span class="keyword">case</span> forceWebsockets(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 调度handle的运行队列, 默认在主队列</span></span><br><span class="line">    <span class="keyword">case</span> handleQueue(<span class="type">DispatchQueue</span>)</span><br><span class="line">    <span class="comment">/// 是否打印调试信息. Default is false</span></span><br><span class="line">    <span class="keyword">case</span> log(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 可自定义SocketLogger调试日志</span></span><br><span class="line">    <span class="keyword">case</span> logger(<span class="type">SocketLogger</span>)</span><br><span class="line">    <span class="comment">/// 自定义服务器使用的路径.</span></span><br><span class="line">    <span class="keyword">case</span> path(<span class="type">String</span>)</span><br><span class="line">    <span class="comment">/// 链接失败时, 是否重新链接, Default is `true`</span></span><br><span class="line">    <span class="keyword">case</span> reconnects(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 重新连接多少次. Default is `-1` (无限次)</span></span><br><span class="line">    <span class="keyword">case</span> reconnectAttempts(<span class="type">Int</span>)</span><br><span class="line">    <span class="comment">/// 等待重连时间. Default is `10`</span></span><br><span class="line">    <span class="keyword">case</span> reconnectWait(<span class="type">Int</span>)</span><br><span class="line">    <span class="comment">/// 是否使用安全传输, Default is false</span></span><br><span class="line">    <span class="keyword">case</span> secure(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// 设置允许那些证书有效</span></span><br><span class="line">    <span class="keyword">case</span> security(<span class="type">SSLSecurity</span>)</span><br><span class="line">    <span class="comment">/// 自签名只能用于开发模式</span></span><br><span class="line">    <span class="keyword">case</span> selfSigned(<span class="type">Bool</span>)</span><br><span class="line">    <span class="comment">/// NSURLSessionDelegate 底层引擎设置. 如果你需要处理自签名证书. Default is nil.</span></span><br><span class="line">    <span class="keyword">case</span> sessionDelegate(<span class="type">URLSessionDelegate</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建<code>SocketIOClient</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意协议：ws开头</span></span><br><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> url <span class="operator">=</span> <span class="type">URL</span>(string: <span class="string">&quot;ws://localhost:9090&quot;</span>) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"><span class="keyword">let</span> manager <span class="operator">=</span> <span class="type">SocketManager</span>(socketURL: url, config: [.log(<span class="literal">true</span>), .compress])</span><br><span class="line"><span class="comment">// SocketIOClient</span></span><br><span class="line"><span class="keyword">let</span> socket <span class="operator">=</span> manager.defaultSocket</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="监听连接"><a href="#监听连接" class="headerlink" title="监听连接"></a>监听连接</h4><ul>
+<li>创建好<code>socket</code>对象,然后连接用<code>connect</code>方法</li>
+<li>因为<code>socket</code>需要进行3次握手，不可能马上建议连接，需要监听是否连接成功的回调,使用<code>on</code>方法</li>
+<li><code>ON</code>方法两个参数<ul>
+<li>参数一: 监听的事件名称，参数二：监听事件回调函数，会自动调用</li>
+<li>回调函数也有两个参数(参数一：服务器传递的数据 参数二:确认请求数据<code>ACK</code>)</li>
+<li>在<code>TCP/IP</code>协议中，如果接收方成功的接收到数据，那么会回复一个<code>ACK</code>数据- <code>ACK</code>只是一个标记，标记是否成功传输数据</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回调闭包</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="type">NormalCallback</span> <span class="operator">=</span> ([<span class="keyword">Any</span>], <span class="type">SocketAckEmitter</span>) -&gt; ()</span><br><span class="line"></span><br><span class="line"><span class="comment">// on方法</span></span><br><span class="line"><span class="keyword">@discardableResult</span></span><br><span class="line"><span class="keyword">open</span> <span class="keyword">func</span> <span class="title function_">on</span>(<span class="keyword">_</span> <span class="params">event</span>: <span class="type">String</span>, <span class="params">callback</span>: <span class="keyword">@escaping</span> <span class="type">NormalCallback</span>) -&gt; <span class="type">UUID</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// SocketClientEvent: 接受枚举类型的on方法</span></span><br><span class="line"><span class="keyword">@discardableResult</span></span><br><span class="line"><span class="keyword">open</span> <span class="keyword">func</span> <span class="title function_">on</span>(<span class="params">clientEvent</span> <span class="params">event</span>: <span class="type">SocketClientEvent</span>, <span class="params">callback</span>: <span class="keyword">@escaping</span> <span class="type">NormalCallback</span>) -&gt; <span class="type">UUID</span> &#123;</span><br><span class="line">    <span class="comment">// 这里调用的是上面的on方法</span></span><br><span class="line">    <span class="keyword">return</span> on(event.rawValue, callback: callback)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>完整代码</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> url <span class="operator">=</span> <span class="type">URL</span>(string: <span class="string">&quot;ws://localhost:9090&quot;</span>) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> manager <span class="operator">=</span> <span class="type">SocketManager</span>(socketURL: url, config: [.log(<span class="literal">true</span>), .compress])</span><br><span class="line"><span class="keyword">let</span> socket <span class="operator">=</span> manager.defaultSocket</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听链接成功</span></span><br><span class="line">socket.on(clientEvent: .connect) &#123; (data, ack) <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;链接成功&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br><span class="line">    <span class="built_in">print</span>(ack)</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line">socket.connect()</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="SocketIO事件"><a href="#SocketIO事件" class="headerlink" title="SocketIO事件"></a>SocketIO事件</h3><p><code>SocketIO</code>通过事件链接服务器和传递数据</p>
+<h4 id="客户端监听事件"><a href="#客户端监听事件" class="headerlink" title="客户端监听事件"></a>客户端监听事件</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听链接成功</span></span><br><span class="line">socket.on(clientEvent: .connect) &#123; (data, ack) <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;链接成功&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(data)</span><br><span class="line">    <span class="built_in">print</span>(ack)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="客户端发送事件"><a href="#客户端发送事件" class="headerlink" title="客户端发送事件"></a>客户端发送事件</h4><p>只有连接成功之后，才能发送事件</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 建立一个连接到服务器. 连接成功会触发 &quot;connect&quot;事件</span></span><br><span class="line"><span class="keyword">open</span> <span class="keyword">func</span> <span class="title function_">connect</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接到服务器. 如果连接超时,会调用handle</span></span><br><span class="line"><span class="keyword">open</span> <span class="keyword">func</span> <span class="title function_">connect</span>(<span class="params">timeoutAfter</span>: <span class="type">Double</span>, <span class="params">withHandler</span> <span class="params">handler</span>: (() -&gt; ())<span class="operator">?</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重开一个断开连接的socket</span></span><br><span class="line"><span class="keyword">open</span> <span class="keyword">func</span> <span class="title function_">disconnect</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向服务器发送事件, 参数一: 事件的名称，参数二: 传输的数据组</span></span><br><span class="line"><span class="keyword">open</span> <span class="keyword">func</span> <span class="title function_">emit</span>(<span class="keyword">_</span> <span class="params">event</span>: <span class="type">String</span>, <span class="params">with</span> <span class="params">items</span>: [<span class="keyword">Any</span>])</span><br></pre></td></tr></table></figure>
+
+<h4 id="服务器监听事件"><a href="#服务器监听事件" class="headerlink" title="服务器监听事件"></a>服务器监听事件</h4><ul>
+<li>监听客户端事件，需要嵌套在连接好的<code>connect</code>回调函数中</li>
+<li>必须使用回调函数的<code>socket</code>参数，如<code>function(s)</code>中的s，监听事件,因此这是客户端的<code>socket</code>，肯定监听客户端发来的事件</li>
+<li>服务器监听连接的回调函数的参数可以添加多个，具体看客户端传递数据数组有几个，每个参数都是与客户段一一对应，第一个参数对应客户端数组第0个数据</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听socket连接</span></span><br><span class="line">socket.<span class="title function_">on</span>(<span class="string">&#x27;connection&#x27;</span>,<span class="keyword">function</span>(<span class="params">s</span>)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;监听到客户端连接&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// data:客户端数组第0个元素</span></span><br><span class="line">    <span class="comment">// data1:客户端数组第1个元素</span></span><br><span class="line">    s.<span class="title function_">on</span>(<span class="string">&#x27;chat&#x27;</span>,<span class="keyword">function</span>(<span class="params">data,data1</span>)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;监听到chat事件&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data,data1);</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="服务器发送事件"><a href="#服务器发送事件" class="headerlink" title="服务器发送事件"></a>服务器发送事件</h4><p>这里的<code>socket</code>一定要用服务器端的<code>socket</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 给当前客户端发送数据，其他客户端收不到.</span></span><br><span class="line">socket.<span class="title function_">emit</span>(<span class="string">&#x27;chat&#x27;</span>, <span class="string">&#x27;服务器&#x27;</span> + data)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发给所有客户端，不包含当前客户端</span></span><br><span class="line">socket.<span class="property">emit</span>.<span class="property">broadcast</span>.<span class="title function_">emit</span>(<span class="string">&#x27;chat&#x27;</span>, <span class="string">&#x27;发给所有客户端,不包含当前客户端&#x27;</span> + data)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发给所有客户端，包含当前客户端</span></span><br><span class="line">socket.<span class="property">emit</span>.<span class="property">sockets</span>.<span class="title function_">emit</span>(<span class="string">&#x27;chat&#x27;</span>, <span class="string">&#x27;发给所有客户端,包含当前客户端&#x27;</span> + data)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="SocketIO分组"><a href="#SocketIO分组" class="headerlink" title="SocketIO分组"></a>SocketIO分组</h2><ul>
+<li>每一个客户端和服务器只会保持一个<code>socket</code>链接, 那么怎么吧每一条信息推送到对应的聊天室, 针对多个聊天室的问题有如何解决</li>
+<li>给每个聊天室都分组, 服务器就可以给指定的组进行数据的推送, 就不会影响到其他的聊天室</li>
+</ul>
+<h3 id="如何分组"><a href="#如何分组" class="headerlink" title="如何分组"></a>如何分组</h3><ul>
+<li><code>socket.io</code>提供<a target="_blank" rel="noopener" href="https://socket.io/docs/rooms-and-namespaces/">rooms和namespace的API</a></li>
+<li>用<code>rooms</code>的API就可以实现多房间聊天了，总结出来无外乎就是：<code>join/leave room</code> 和 <code>say to room</code></li>
+<li>这里的<code>socket</code>是客户端的<code>socket</code>，也就是连接成功，传递过来的<code>socket</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// join和leave</span></span><br><span class="line">io.<span class="title function_">on</span>(<span class="string">&#x27;connection&#x27;</span>, <span class="keyword">function</span>(<span class="params">socket</span>)&#123;</span><br><span class="line">  socket.<span class="title function_">join</span>(<span class="string">&#x27;some room&#x27;</span>);</span><br><span class="line">  <span class="comment">// socket.leave(&#x27;some room&#x27;);</span></span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// say to room</span></span><br><span class="line">io.<span class="title function_">to</span>(<span class="string">&#x27;some room&#x27;</span>).<span class="title function_">emit</span>(<span class="string">&#x27;some event&#x27;</span>):</span><br><span class="line">io.<span class="title function_">in</span>(<span class="string">&#x27;some room&#x27;</span>).<span class="title function_">emit</span>(<span class="string">&#x27;some event&#x27;</span>):</span><br></pre></td></tr></table></figure>
+
+<h3 id="分组的原理"><a href="#分组的原理" class="headerlink" title="分组的原理"></a>分组的原理</h3><ul>
+<li>只要客户端<code>socket</code>调用<code>join</code>，服务器就会把客户端<code>socket</code>和分组的名称绑定起来</li>
+<li>到时候就可以根据分组的名称找到对应客户端的<code>socket</code>，就能给指定的客户端推送信息</li>
+<li>一个客户端<code>socket</code>只能添加到一组，离开的时候，要记得移除</li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/3cb11047.html" title="Socket搭建即时通讯服务器">https://titanjun.top/post/3cb11047.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/node/" rel="tag"> <i class="fa fa-tag"></i> Node</a>
+              <a href="/tags/socket/" rel="tag"> <i class="fa fa-tag"></i> Socket</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/fb0f7be.html" rel="prev" title="JavaScript基本语法03">
+                  <i class="fa fa-chevron-left"></i> JavaScript基本语法03
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/641ca9b6.html" rel="next" title="Hexo博客不蒜子统计不显示">
+                  Hexo博客不蒜子统计不显示 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/3cb11047.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="推荐: Swift 编程语言 原文链接: What’s New in Swift 4? Guards翻译组: 中文地址 Swift 4是苹果计划在2017年秋季推出的最新版本，值得关注的是其提供了与Swift 3代码很好的兼容性，并最大限度的保持了ABI稳定性.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift4.0新特性之String和Array和Dictionary">
+<meta property="og:url" content="https://titanjun.top/post/c2889347.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:description" content="推荐: Swift 编程语言 原文链接: What’s New in Swift 4? Guards翻译组: 中文地址 Swift 4是苹果计划在2017年秋季推出的最新版本，值得关注的是其提供了与Swift 3代码很好的兼容性，并最大限度的保持了ABI稳定性.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-07-19T13:16:40.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.899Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Swift">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://titanjun.top/post/c2889347.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/c2889347.html","path":"post/c2889347.html","title":"Swift4.0新特性之String和Array和Dictionary"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Swift4.0新特性之String和Array和Dictionary | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">1.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F-%E5%8F%AF%E7%94%A8isEmpty%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA%E7%A9%BA"><span class="nav-number">1.1.</span> <span class="nav-text">创建空字符串的两种方式,可用isEmpty判断是否为空</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.2.</span> <span class="nav-text">字符和字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.2.1.</span> <span class="nav-text">遍历字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-Character%E7%B1%BB%E5%9E%8B%E5%88%9B%E5%BB%BA%E5%8D%95%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="nav-number">1.2.2.</span> <span class="nav-text">通过 Character类型创建单个字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String%E5%80%BC%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E4%BC%A0%E5%85%A5-Character%E6%9D%A5%E6%9E%84%E9%80%A0%EF%BC%9A"><span class="nav-number">1.2.3.</span> <span class="nav-text">String值可以通过传入 Character来构造：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.2.4.</span> <span class="nav-text">拼接字符串</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AA%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">字符串个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E4%B8%BA%E7%A9%BA"><span class="nav-number">1.4.</span> <span class="nav-text">是否为空</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E6%8E%89%E6%9F%90%E4%B8%80%E4%B8%AA%E6%88%96%E5%87%A0%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="nav-number">1.5.</span> <span class="nav-text">去掉某一个或几个字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%80%92%E5%8F%99"><span class="nav-number">1.6.</span> <span class="nav-text">倒叙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E5%89%B2%E6%95%B0%E7%BB%84"><span class="nav-number">1.7.</span> <span class="nav-text">字符串分割数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E4%B8%8D%E7%AC%A6%E5%90%88ASCII%E7%BC%96%E7%A0%81%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="nav-number">1.8.</span> <span class="nav-text">删除不符合ASCII编码的字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B4%A2%E5%BC%95"><span class="nav-number">1.9.</span> <span class="nav-text">字符串索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#startIndex%E5%92%8CendIndex"><span class="nav-number">1.9.1.</span> <span class="nav-text">startIndex和endIndex</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-characters%E5%B1%9E%E6%80%A7%E7%9A%84-indices%E5%B1%9E%E6%80%A7%E6%9D%A5%E5%88%9B%E5%BB%BA%E6%89%80%E6%9C%89%E8%83%BD%E5%A4%9F%E7%94%A8%E6%9D%A5%E8%AE%BF%E9%97%AE%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%8B%AC%E7%AB%8B%E5%AD%97%E7%AC%A6%E7%9A%84%E7%B4%A2%E5%BC%95%E8%8C%83%E5%9B%B4-Range%E3%80%82"><span class="nav-number">1.9.2.</span> <span class="nav-text">使用 characters属性的 indices属性来创建所有能够用来访问字符串中独立字符的索引范围 Range。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.10.</span> <span class="nav-text">多行字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Array"><span class="nav-number">2.</span> <span class="nav-text">Array</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%A1%AE%E5%AE%9A%E5%A4%A7%E5%B0%8F%E4%B8%94%E5%85%83%E7%B4%A0%E9%83%BD%E8%AE%BE%E5%AE%9A%E4%B8%BA%E7%9B%B8%E5%90%8C%E9%BB%98%E8%AE%A4%E5%80%BC%E7%9A%84%E6%95%B0%E7%BB%84%E3%80%82"><span class="nav-number">2.1.</span> <span class="nav-text">创建确定大小且元素都设定为相同默认值的数组。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E6%9D%A5%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84-%E7%B1%BB%E5%9E%8B%E5%BF%85%E9%A1%BB%E4%B8%80%E8%87%B4"><span class="nav-number">2.2.</span> <span class="nav-text">连接两个数组来创建数组(类型必须一致)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">数组个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%95%B0%E7%BB%84%E4%B8%AA%E6%95%B0%E6%98%AF%E5%90%A6%E4%B8%BA0"><span class="nav-number">2.4.</span> <span class="nav-text">判断数组个数是否为0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0"><span class="nav-number">2.5.</span> <span class="nav-text">添加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E5%80%BC"><span class="nav-number">2.6.</span> <span class="nav-text">取值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86"><span class="nav-number">2.7.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%92%8C%E6%8F%92%E5%85%A5"><span class="nav-number">2.8.</span> <span class="nav-text">删除和插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0%E5%9C%A8%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">2.9.</span> <span class="nav-text">获取元素在数组中的索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dictionary-and-Set"><span class="nav-number">3.</span> <span class="nav-text">Dictionary and Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E5%88%97%E8%A1%A8%E5%8F%AF%E4%BB%A5%E6%98%AF%E4%BB%8E%E4%B8%80%E7%B3%BB%E5%88%97%E9%94%AE%E5%80%BC%E5%AF%B9%EF%BC%88%E5%85%83%E7%BB%84%EF%BC%89%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AD%97%E5%85%B8"><span class="nav-number">3.1.</span> <span class="nav-text">首先列表可以是从一系列键值对（元组）创建一个字典:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%88%9D%E5%A7%8B%E5%8C%96Dictionary%E6%97%B6-%E4%BD%A0%E7%8E%B0%E5%9C%A8%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E4%BD%A0%E5%96%9C%E6%AC%A2%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9D%A5%E5%A4%84%E7%90%86%E9%87%8D%E5%A4%8D%E7%9A%84%E9%94%AE-%E5%90%8C%E6%97%B6%E9%81%BF%E5%85%8D%E8%A6%86%E7%9B%96%E9%94%AE%E5%80%BC%E5%AF%B9%EF%BC%8C%E4%B8%94%E4%B8%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%E4%BB%BB%E4%BD%95%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">在初始化Dictionary时, 你现在可以使用你喜欢的方式来处理重复的键,同时避免覆盖键值对，且不会出现任何问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dictionary-%E5%92%8C-Set%E7%8E%B0%E5%9C%A8%E9%83%BD%E5%8F%AF%E4%BB%A5%E5%B0%86%E7%BB%93%E6%9E%9C-%E9%80%9A%E8%BF%87filter%E5%87%BD%E6%95%B0-%E8%BF%87%E6%BB%A4%E5%88%B0%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B0%E5%AF%B9%E8%B1%A1%E4%B8%AD%EF%BC%9A"><span class="nav-number">3.3.</span> <span class="nav-text">Dictionary 和 Set现在都可以将结果 通过filter函数 过滤到原始类型的新对象中：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dictionary%E4%B8%BA%E7%9B%B4%E6%8E%A5%E6%98%A0%E5%B0%84%E5%85%B6%E5%80%BC%E6%8F%90%E4%BE%9B%E4%BA%86%E4%B8%80%E7%A7%8D%E9%9D%9E%E5%B8%B8%E6%9C%89%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95-%EF%BC%9A"><span class="nav-number">3.4.</span> <span class="nav-text">Dictionary为直接映射其值提供了一种非常有用的方法:：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Dictionary%E4%B8%8A%E8%AE%BF%E9%97%AE%E6%9F%90%E4%B8%AA%E5%80%BC%E6%97%B6%EF%BC%8C%E5%B8%B8%E8%A7%81%E7%9A%84%E5%81%9A%E6%B3%95%E6%98%AF%E4%BD%BF%E7%94%A8nil-coalescing-operator%E7%BB%99%E5%87%BA%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">3.5.</span> <span class="nav-text">在Dictionary上访问某个值时，常见的做法是使用nil-coalescing operator给出默认值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E4%BB%8ESequence%E2%80%9D%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96Dictionary%EF%BC%8C%E5%B9%B6%E5%B0%86%E5%85%B6%E5%88%86%E7%BB%84%E4%B8%BAbucket-%EF%BC%9A"><span class="nav-number">3.6.</span> <span class="nav-text">我们可以从Sequence”中初始化Dictionary，并将其分组为bucket:：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4"><span class="nav-number">3.7.</span> <span class="nav-text">预留空间</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/c2889347.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Swift4.0新特性之String和Array和Dictionary | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Swift4.0新特性之String和Array和Dictionary
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-07-19 21:16:40" itemprop="dateCreated datePublished" datetime="2017-07-19T21:16:40+08:00">2017-07-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/swift/" itemprop="url" rel="index"><span itemprop="name">Swift</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<ul>
+<li>推荐: <a target="_blank" rel="noopener" href="https://www.cnswift.org/">Swift 编程语言</a></li>
+<li>原文链接: <a target="_blank" rel="noopener" href="https://www.raywenderlich.com/163857/whats-new-swift-4">What’s New in Swift 4?</a></li>
+<li>Guards翻译组: <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/3bedf1de5cb3">中文地址</a></li>
+<li>Swift 4是苹果计划在2017年秋季推出的最新版本，值得关注的是其提供了与Swift 3代码很好的兼容性，并最大限度的保持了ABI稳定性.</li>
+</ul>
+</blockquote>
+<span id="more"></span>
+
+<hr>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><blockquote>
+<p>字符串已经像之前的2.0版一样, 改为了Collection类型 。此变化消除了字符串对字符数组的依赖</p>
+</blockquote>
+<h3 id="创建空字符串的两种方式-可用isEmpty判断是否为空"><a href="#创建空字符串的两种方式-可用isEmpty判断是否为空" class="headerlink" title="创建空字符串的两种方式,可用isEmpty判断是否为空"></a>创建空字符串的两种方式,可用isEmpty判断是否为空</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let SwiftString = <span class="string">&quot;Hello&quot;</span></span><br><span class="line">var emptyString = <span class="string">&quot;&quot;</span>               <span class="comment">// empty string literal</span></span><br><span class="line">var anotherEmptyString = String()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符和字符串"><a href="#字符和字符串" class="headerlink" title="字符和字符串"></a>字符和字符串</h3><h4 id="遍历字符串"><a href="#遍历字符串" class="headerlink" title="遍历字符串"></a>遍历字符串</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="type">char</span> <span class="keyword">in</span> SwiftString &#123;</span><br><span class="line">    print(<span class="type">char</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通过-Character类型创建单个字符"><a href="#通过-Character类型创建单个字符" class="headerlink" title="通过 Character类型创建单个字符"></a>通过 Character类型创建单个字符</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let <span class="type">char</span> : Character = <span class="string">&quot;H&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="String值可以通过传入-Character来构造："><a href="#String值可以通过传入-Character来构造：" class="headerlink" title="String值可以通过传入 Character来构造："></a>String值可以通过传入 Character来构造：</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let charArr : [Character] = [<span class="string">&quot;H&quot;</span>, <span class="string">&quot;e&quot;</span>, <span class="string">&quot;l&quot;</span>, <span class="string">&quot;l&quot;</span>, <span class="string">&quot;o&quot;</span>]</span><br><span class="line">print(String(<span class="type">char</span>)) <span class="comment">// H</span></span><br><span class="line">print(String(charArr)) <span class="comment">// Hello</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="拼接字符串"><a href="#拼接字符串" class="headerlink" title="拼接字符串"></a>拼接字符串</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式一:</span></span><br><span class="line">let addString = String(charArr) + String(<span class="type">char</span>) <span class="comment">//HelloH</span></span><br><span class="line"><span class="comment">//方式二:</span></span><br><span class="line">var addString2 = <span class="string">&quot;Why&quot;</span></span><br><span class="line">addString2 += String(charArr) <span class="comment">//&quot;WhyHello&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串个数"><a href="#字符串个数" class="headerlink" title="字符串个数"></a>字符串个数</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let count1 = SwiftString.count <span class="comment">//5(类型: String.CharacterView.IndexDistance)</span></span><br><span class="line">let count2 = SwiftString.characters.count <span class="comment">// 5(Int型)</span></span><br><span class="line">count1:</span><br></pre></td></tr></table></figure>
+
+<h3 id="是否为空"><a href="#是否为空" class="headerlink" title="是否为空"></a>是否为空</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let isStr = SwiftString.isEmpty <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="去掉某一个或几个字符"><a href="#去掉某一个或几个字符" class="headerlink" title="去掉某一个或几个字符"></a>去掉某一个或几个字符</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let text1 = SwiftString.dropFirst()<span class="comment">//&quot;ello&quot;</span></span><br><span class="line">let text2 = SwiftString.dropLast()<span class="comment">//&quot;Hell&quot;</span></span><br><span class="line">let text3 = SwiftString.dropFirst(<span class="number">2</span>)<span class="comment">//&quot;llo&quot;</span></span><br><span class="line">let text4 = SwiftString.dropLast(<span class="number">2</span>)<span class="comment">//&quot;Hel&quot;</span></span><br><span class="line"><span class="comment">//注:以上皆为String.SubSequence类型</span></span><br><span class="line">let text5 = String(text1) <span class="comment">//&quot;ello&quot;---text5为String类型</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="倒叙"><a href="#倒叙" class="headerlink" title="倒叙"></a>倒叙</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let text6 = String(SwiftString.reversed()) <span class="comment">//&quot;olleH&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串分割数组"><a href="#字符串分割数组" class="headerlink" title="字符串分割数组"></a>字符串分割数组</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let swiftString2 = <span class="string">&quot;one two three&quot;</span></span><br><span class="line">let StrArr = swiftString2.split(separator: <span class="string">&quot; &quot;</span>) <span class="comment">//[&quot;one&quot;, &quot;two&quot;, &quot;three&quot;]</span></span><br><span class="line"><span class="comment">//let StrArr: [String.SubSequence]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除不符合ASCII编码的字符"><a href="#删除不符合ASCII编码的字符" class="headerlink" title="删除不符合ASCII编码的字符"></a>删除不符合ASCII编码的字符</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let swiftString3 = <span class="string">&quot;quanjun 🐷,&quot;</span></span><br><span class="line">let qj = swiftString3.filter &#123; (<span class="type">char</span>) -&gt; Bool <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> <span class="type">char</span>.unicodeScalars.reduce(<span class="literal">true</span>, &#123; $<span class="number">0</span> &amp;&amp; $<span class="number">1.</span>isASCII &#125;)</span><br><span class="line">&#125;</span><br><span class="line">print(qj)  <span class="comment">//&quot;quanjun ,&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串索引"><a href="#字符串索引" class="headerlink" title="字符串索引"></a>字符串索引</h3><ul>
+<li>Swift 的字符串不能通过整数值索引</li>
+<li>使用 index(before:) 和 index(after:) 方法来访问给定索引的前后。要访问给定索引更远的索引，你可以使用 index(_:offsetBy:) 方法而不是多次调用这两个方法。</li>
+<li>Swift 4添加了Substring类型，用于引用String的子序列。</li>
+<li>String和Substring都实现了StringProtocol，两者几乎具有相同的功能：</li>
+</ul>
+<h4 id="startIndex和endIndex"><a href="#startIndex和endIndex" class="headerlink" title="startIndex和endIndex"></a>startIndex和endIndex</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let greeting = &quot;Guten Tag!&quot;</span><br><span class="line">//startIndex属性来访问 String中第一个 Character的位置</span><br><span class="line">print(greeting[greeting.startIndex])</span><br><span class="line">print(greeting[greeting.index(after: greeting.startIndex)])</span><br><span class="line">//endIndex属性就是 String中最后一个字符后的位置。endIndex属性并不是字符串下标脚本的合法实际参数</span><br><span class="line">//greeting[greeting.endIndex] //会报错</span><br><span class="line">print(greeting[greeting.index(before: greeting.endIndex)])</span><br><span class="line">//注: 如果 String为空，则 startIndex与 endIndex相等</span><br><span class="line"></span><br><span class="line">let index = greeting.index(greeting.startIndex, offsetBy: 2)</span><br><span class="line">print(greeting[index])</span><br><span class="line">let indesString = greeting[greeting.startIndex...index]  //&quot;Gut&quot;</span><br><span class="line">//注:indesString : Substring类型</span><br><span class="line">print(String(indesString)) //&quot;Gut&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用-characters属性的-indices属性来创建所有能够用来访问字符串中独立字符的索引范围-Range。"><a href="#使用-characters属性的-indices属性来创建所有能够用来访问字符串中独立字符的索引范围-Range。" class="headerlink" title="使用 characters属性的 indices属性来创建所有能够用来访问字符串中独立字符的索引范围 Range。"></a>使用 characters属性的 indices属性来创建所有能够用来访问字符串中独立字符的索引范围 Range。</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> greeting.characters.indices &#123;</span><br><span class="line">    print(<span class="string">&quot;\(greeting[index]) &quot;</span>, terminator: <span class="string">&quot;&quot;</span>)<span class="comment">//不换行输出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h3><ul>
+<li>注:你可以在多行字面量中使用单个双引号 “ 。要在多行字符串中包含 “”” ，你必须用反斜杠（ \ ）转义至少其中一个双引号</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let rowsString = <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">                我是一只小鸭子</span></span><br><span class="line"><span class="string">                咿呀咿呀哟</span></span><br><span class="line"><span class="string">                \&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">                &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">print(rowsString)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><ul>
+<li>Swift 的 Array类型被桥接到了基础框架的 NSArray类上。</li>
+<li>Swift 数组的类型完整写法是 Array<Element>， Element是数组允许存入的值的类型。你同样可以简写数组的类型为 [Element]。</li>
+</ul>
+<h3 id="创建确定大小且元素都设定为相同默认值的数组。"><a href="#创建确定大小且元素都设定为相同默认值的数组。" class="headerlink" title="创建确定大小且元素都设定为相同默认值的数组。"></a>创建确定大小且元素都设定为相同默认值的数组。</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Array*/</span></span><br><span class="line"><span class="comment">//默认值（叫做 repeating）和新数组元素的数量（叫做 count)</span></span><br><span class="line">var array1 = Array(repeating: <span class="number">1</span>, count: <span class="number">2</span>)</span><br><span class="line">var array2 = Array(repeating: <span class="number">3</span>, count: <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="连接两个数组来创建数组-类型必须一致"><a href="#连接两个数组来创建数组-类型必须一致" class="headerlink" title="连接两个数组来创建数组(类型必须一致)"></a>连接两个数组来创建数组(类型必须一致)</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var array3 = array1 + array2</span><br><span class="line">print(array3) <span class="comment">//[1, 1, 3, 3]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数组个数"><a href="#数组个数" class="headerlink" title="数组个数"></a>数组个数</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(array3.count)  <span class="comment">//5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="判断数组个数是否为0"><a href="#判断数组个数是否为0" class="headerlink" title="判断数组个数是否为0"></a>判断数组个数是否为0</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(array3.isEmpty)  <span class="comment">//false</span></span><br><span class="line">print(array3.count == <span class="number">0</span>)  <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array3.append(<span class="number">4</span>) <span class="comment">//[1, 1, 3, 3, 4]</span></span><br><span class="line">array3 += [<span class="number">5</span>]  <span class="comment">//[1, 1, 3, 3, 4, 5]</span></span><br><span class="line">array3 += [<span class="number">6</span>, <span class="number">5</span>]  <span class="comment">//[1, 1, 3, 3, 4, 5, 6, 5]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="取值"><a href="#取值" class="headerlink" title="取值"></a>取值</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(array3[<span class="number">0</span>]) <span class="comment">// 1</span></span><br><span class="line">array3[<span class="number">1</span>] = <span class="number">9</span> <span class="comment">// [1, 9, 3, 3, 4, 5, 6, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//用下标改变一个范围的值，就算替换与范围长度不同的值的合集也行</span></span><br><span class="line">array3[<span class="number">2.</span>.<span class="number">.4</span>] = [<span class="number">0</span>, <span class="number">8</span>] <span class="comment">//[1, 9, 0, 8, 5, 6, 5]</span></span><br></pre></td></tr></table></figure>
+<h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> array3 &#123;</span><br><span class="line">    print(item)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//元组输出</span></span><br><span class="line"><span class="keyword">for</span> (index, item) <span class="keyword">in</span> array3.enumerated() &#123;</span><br><span class="line">    print(<span class="string">&quot;\(index)---\(item)&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//倒叙输出</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> array3.reversed() &#123;</span><br><span class="line">    print(item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//forEach遍历,如同for-in</span></span><br><span class="line">let arr = [<span class="number">1</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">5</span>]</span><br><span class="line">arr.forEach &#123; (x) <span class="keyword">in</span></span><br><span class="line">    print(x)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="删除和插入"><a href="#删除和插入" class="headerlink" title="删除和插入"></a>删除和插入</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">array3.remove(at: <span class="number">1</span>)  <span class="comment">//[1, 0, 8, 5, 6, 5]</span></span><br><span class="line">array3.removeFirst()  <span class="comment">//[0, 8, 5, 6, 5]</span></span><br><span class="line">array3.removeLast()   <span class="comment">//[0, 8, 5, 6]</span></span><br><span class="line">array3.removeFirst(<span class="number">2</span>) <span class="comment">//[5,6]</span></span><br><span class="line">array3.removeLast(<span class="number">1</span>)  <span class="comment">//[5]</span></span><br><span class="line">array3.removeAll()    <span class="comment">//[]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取元素在数组中的索引"><a href="#获取元素在数组中的索引" class="headerlink" title="获取元素在数组中的索引"></a>获取元素在数组中的索引</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr <span class="operator">=</span> [<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;6&quot;</span>, <span class="string">&quot;2&quot;</span>]</span><br><span class="line"><span class="comment">//获取最后一个元素索引</span></span><br><span class="line"><span class="keyword">let</span> index0 <span class="operator">=</span> arr.endIndex           <span class="comment">//6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//获取第一个元素索引</span></span><br><span class="line"><span class="keyword">let</span> index1 <span class="operator">=</span> arr.startIndex         <span class="comment">//0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//获取指定某元素索引</span></span><br><span class="line"><span class="keyword">let</span> index2 <span class="operator">=</span> arr.index(of: <span class="string">&quot;3&quot;</span>)     <span class="comment">//3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//当数组中有多个相同元素时, 返回指定元素的第一个的索引</span></span><br><span class="line"><span class="keyword">let</span> index3 <span class="operator">=</span> arr.index(of: <span class="string">&quot;2&quot;</span>)     <span class="comment">//1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//返回指定某索引的后一个索引, 等同于4+1</span></span><br><span class="line"><span class="keyword">let</span> index4 <span class="operator">=</span> arr.index(after: <span class="number">4</span>)    <span class="comment">//5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//返回指定某索引的前一个索引, 等同于4-1</span></span><br><span class="line"><span class="keyword">let</span> index5 <span class="operator">=</span> arr.index(before: <span class="number">8</span>)   <span class="comment">//7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//根据元素内的某属性获取索引</span></span><br><span class="line"><span class="keyword">let</span> strArr <span class="operator">=</span> [(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;1&quot;</span>), (<span class="string">&quot;b&quot;</span>, <span class="string">&quot;2&quot;</span>), (<span class="string">&quot;s&quot;</span>, <span class="string">&quot;3&quot;</span>)]</span><br><span class="line"><span class="keyword">let</span> index <span class="operator">=</span> strArr.index(where: &#123; <span class="variable">$0</span>.<span class="number">0</span> <span class="operator">==</span> <span class="string">&quot;b&quot;</span> &#125;)</span><br><span class="line"><span class="comment">//返回值是一个可选值: Optional(1)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Dictionary-and-Set"><a href="#Dictionary-and-Set" class="headerlink" title="Dictionary and Set"></a>Dictionary and Set</h2><ul>
+<li>至于Collection类型，Set和Dictionary并不那么最直观的</li>
+<li>Swift 的 Dictionary桥接到了基础框架的 NSDictionary类。</li>
+</ul>
+<h3 id="首先列表可以是从一系列键值对（元组）创建一个字典"><a href="#首先列表可以是从一系列键值对（元组）创建一个字典" class="headerlink" title="首先列表可以是从一系列键值对（元组）创建一个字典:"></a>首先列表可以是从一系列键值对（元组）创建一个字典:</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Dictionary</span></span><br><span class="line">let keyNames = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>, <span class="string">&quot;e&quot;</span>]</span><br><span class="line">let valueNames = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//public init&lt;S&gt;(uniqueKeysWithValues keysAndValues: S) where S : Sequence, S.Element == (Key, Value)</span></span><br><span class="line"><span class="comment">//对于该方法的具体解释,可以点进去看一下官方的讲解</span></span><br><span class="line">let nameDic = Dictionary(uniqueKeysWithValues: zip(keyNames, valueNames))</span><br><span class="line">print(nameDic)</span><br><span class="line"><span class="comment">//[&quot;b&quot;: 2, &quot;e&quot;: 6, &quot;a&quot;: 1, &quot;d&quot;: 5, &quot;c&quot;: 4]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="在初始化Dictionary时-你现在可以使用你喜欢的方式来处理重复的键-同时避免覆盖键值对，且不会出现任何问题："><a href="#在初始化Dictionary时-你现在可以使用你喜欢的方式来处理重复的键-同时避免覆盖键值对，且不会出现任何问题：" class="headerlink" title="在初始化Dictionary时, 你现在可以使用你喜欢的方式来处理重复的键,同时避免覆盖键值对，且不会出现任何问题："></a>在初始化Dictionary时, 你现在可以使用你喜欢的方式来处理重复的键,同时避免覆盖键值对，且不会出现任何问题：</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let keyNames2 = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//public init&lt;S&gt;(_ keysAndValues: S, uniquingKeysWith combine: (Value, Value) throws -&gt; Value) rethrows where S : Sequence, S.Element == (Key, Value)</span></span><br><span class="line"><span class="comment">//对于该方法的具体解释,可以点进去看一下官方的讲解</span></span><br><span class="line">let nameDic2 = Dictionary(zip(keyNames2, repeatElement(<span class="number">1</span>, count: keyNames2.count)), uniquingKeysWith: +)</span><br><span class="line">print(nameDic2)</span><br><span class="line"><span class="comment">//[&quot;b&quot;: 2, &quot;a&quot;: 2, &quot;c&quot;: 1]</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Dictionary-和-Set现在都可以将结果-通过filter函数-过滤到原始类型的新对象中："><a href="#Dictionary-和-Set现在都可以将结果-通过filter函数-过滤到原始类型的新对象中：" class="headerlink" title="Dictionary 和 Set现在都可以将结果 通过filter函数 过滤到原始类型的新对象中："></a>Dictionary 和 Set现在都可以将结果 通过filter函数 过滤到原始类型的新对象中：</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let nameDic3 = nameDic.filter(&#123; $<span class="number">0.</span>value &lt; <span class="number">5</span> &#125;)</span><br><span class="line">print(nameDic3)</span><br><span class="line"><span class="comment">//[&quot;b&quot;: 2, &quot;a&quot;: 1, &quot;c&quot;: 4]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Dictionary为直接映射其值提供了一种非常有用的方法-："><a href="#Dictionary为直接映射其值提供了一种非常有用的方法-：" class="headerlink" title="Dictionary为直接映射其值提供了一种非常有用的方法:："></a>Dictionary为直接映射其值提供了一种非常有用的方法:：</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将value值Int转化为字符串</span></span><br><span class="line">let nameDic4 = nameDic3.mapValues(&#123; <span class="string">&quot;\($0)&quot;</span> &#125;)</span><br><span class="line">print(nameDic4)</span><br><span class="line"><span class="comment">//[&quot;b&quot;: &quot;2&quot;, &quot;a&quot;: &quot;1&quot;, &quot;c&quot;: &quot;4&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="在Dictionary上访问某个值时，常见的做法是使用nil-coalescing-operator给出默认值"><a href="#在Dictionary上访问某个值时，常见的做法是使用nil-coalescing-operator给出默认值" class="headerlink" title="在Dictionary上访问某个值时，常见的做法是使用nil-coalescing operator给出默认值"></a>在Dictionary上访问某个值时，常见的做法是使用nil-coalescing operator给出默认值</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let nameDic5 = nameDic4[<span class="string">&quot;d&quot;</span>, <span class="keyword">default</span> : <span class="string">&quot;unknown&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="我们可以从Sequence”中初始化Dictionary，并将其分组为bucket-："><a href="#我们可以从Sequence”中初始化Dictionary，并将其分组为bucket-：" class="headerlink" title="我们可以从Sequence”中初始化Dictionary，并将其分组为bucket:："></a>我们可以从Sequence”中初始化Dictionary，并将其分组为bucket:：</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注: 当通过特定模式对数据进行分组时，这相当方便。</span></span><br><span class="line">let name2 = [<span class="string">&quot;Proxima&quot;</span>, <span class="string">&quot;Centauri A&quot;</span>, <span class="string">&quot;Centauri B&quot;</span>, <span class="string">&quot;Barnard&quot;</span>, <span class="string">&quot;Wolf&quot;</span>]</span><br><span class="line">let nameDic6 = Dictionary(grouping: name2, by: &#123; $<span class="number">0.</span>first! &#125;)</span><br><span class="line">print(nameDic6)</span><br><span class="line"><span class="comment">//[&quot;B&quot;: [&quot;Barnard&quot;], &quot;W&quot;: [&quot;Wolf&quot;], &quot;P&quot;: [&quot;Proxima&quot;], &quot;C&quot;: [&quot;Centauri A&quot;, &quot;Centauri B&quot;]]</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>涉及Zip的用法,详见<a target="_blank" rel="noopener" href="http://www.jianshu.com/p/8c39bbacceb2">Swift语法之Zip详解</a></p>
+</blockquote>
+<h3 id="预留空间"><a href="#预留空间" class="headerlink" title="预留空间"></a>预留空间</h3><ul>
+<li>Sequence和Dictionary现在都具有明确保留容量的能力</li>
+<li>在这些类型上，Reallocation可能是一项代价高昂的任务。</li>
+<li>如果你知道需要存储的数据量时, 使用reserveCapacity(_:)可以提高性能且便捷</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var name3 : [String : Int] = [ : ]</span><br><span class="line">print(name3.capacity) <span class="comment">// 0</span></span><br><span class="line">name3.reserveCapacity(<span class="number">10</span>) <span class="comment">//储备 10元素的能力</span></span><br><span class="line">print(name3.capacity) <span class="comment">// 12</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/c2889347.html" title="Swift4.0新特性之String和Array和Dictionary">https://titanjun.top/post/c2889347.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/swift/" rel="tag"> <i class="fa fa-tag"></i> Swift</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/e1be9692.html" rel="prev" title="JavaScript基本语法01">
+                  <i class="fa fa-chevron-left"></i> JavaScript基本语法01
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/fe709246.html" rel="next" title="Swift版-H5页面实现长按保存图片">
+                  Swift版-H5页面实现长按保存图片 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/c2889347.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

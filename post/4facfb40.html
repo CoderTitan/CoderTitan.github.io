@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Flutter开发之Dart的数据类型02">
+<meta property="og:url" content="https://titanjun.top/post/4facfb40.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/dart-logo.png?x-oss-process=style/titanjun">
+<meta property="article:published_time" content="2019-03-01T01:16:34.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.890Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Flutter">
+<meta property="article:tag" content="Dart">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/dart-logo.png?x-oss-process=style/titanjun">
+
+
+<link rel="canonical" href="https://titanjun.top/post/4facfb40.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/4facfb40.html","path":"post/4facfb40.html","title":"Flutter开发之Dart的数据类型02"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Flutter开发之Dart的数据类型02 | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">1.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAMap"><span class="nav-number">1.1.</span> <span class="nav-text">创建Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">相关属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">相关函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterable"><span class="nav-number">2.</span> <span class="nav-text">Iterable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">创建方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runes"><span class="nav-number">3.</span> <span class="nav-text">Runes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">简单使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbols"><span class="nav-number">4.</span> <span class="nav-text">Symbols</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">5.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BASet"><span class="nav-number">5.1.</span> <span class="nav-text">创建Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">5.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Duration"><span class="nav-number">6.</span> <span class="nav-text">Duration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BADuration"><span class="nav-number">6.1.</span> <span class="nav-text">创建Duration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%BF%90%E7%AE%97"><span class="nav-number">6.2.</span> <span class="nav-text">相关运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0-1"><span class="nav-number">6.3.</span> <span class="nav-text">相关函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DateTime"><span class="nav-number">7.</span> <span class="nav-text">DateTime</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%97%B6%E9%97%B4%E7%82%B9"><span class="nav-number">7.1.</span> <span class="nav-text">创建时间点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parse"><span class="nav-number">7.2.</span> <span class="nav-text">parse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="nav-number">7.3.</span> <span class="nav-text">属性值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0-2"><span class="nav-number">7.4.</span> <span class="nav-text">相关函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">7.5.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/4facfb40.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Flutter开发之Dart的数据类型02 | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter开发之Dart的数据类型02
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-01 09:16:34" itemprop="dateCreated datePublished" datetime="2019-03-01T09:16:34+08:00">2019-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>10k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/dart-logo.png?x-oss-process=style/titanjun" alt="dart-logo"></p>
+<span id="more"></span>
+
+
+
+<ul>
+<li>这几篇文章都是在学习<code>Dart</code>过程中所记录的学习笔记, 都是一些基础知识, 几乎没什么技术含量, 主要是方便后期使用的时候方便查阅</li>
+<li>之前的一篇文章已经介绍了一部分的数据类型<a target="_blank" rel="noopener" href="https://www.titanjun.top/2019/02/20/Flutter%E5%BC%80%E5%8F%91%E4%B9%8BDart%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/">Flutter开发之Dart的数据类型01</a>, 这里主要记录剩下的一些常用的数据类型</li>
+<li>我写的<a target="_blank" rel="noopener" href="https://www.titanjun.top/categories/Flutter%E7%AC%94%E8%AE%B0/">Flutter和Dart语法系列相关的文章</a>, 有兴趣的可参考随便看看</li>
+</ul>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><ul>
+<li><code>key-value</code>键值对（可以使用相关联的<code>key</code>检索<code>value</code>值）的集合, 即传说中的字典</li>
+<li><code>Map</code>中<code>key</code>的数量是有限的，每个<code>key</code>正好有一个相关的<code>value</code></li>
+<li><code>Map</code>、以及它的键和值，都是可以迭代的, 迭代的顺序由<code>Map</code>不同的类型定义<ul>
+<li><a target="_blank" rel="noopener" href="http://www.shutongye.com/dartapi/dart-collection/HashMap-class.html"><code>HashMap</code></a>是无序的，这意味着它迭代的顺序是不确定的</li>
+<li><a target="_blank" rel="noopener" href="http://www.shutongye.com/dartapi/dart-collection/LinkedHashMap-class.html"><code>LinkedHashMap</code></a>按<code>key</code>的插入顺序进行迭代</li>
+<li><a target="_blank" rel="noopener" href="http://www.shutongye.com/dartapi/dart-collection/SplayTreeMap-class.html"><code>SplayTreeMap</code></a>按<code>key</code>的排序顺序进行迭代</li>
+</ul>
+</li>
+<li>当<code>Map</code>的一个操作正在执行的时候，通常不允许修改<code>Map</code>（添加或删除<code>key</code>）</li>
+</ul>
+<h3 id="创建Map"><a href="#创建Map" class="headerlink" title="创建Map"></a>创建Map</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Map</span>()</span><br><span class="line"><span class="comment">// 创建一个Map实例，默认实现是LinkedHashMap。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Map</span>.from(<span class="built_in">Map</span> other)</span><br><span class="line"><span class="comment">// 创建一个LinkedHashMap实例，包含other的所有键值对。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Map</span>.fromIterable(<span class="built_in">Iterable</span> iterable, &#123;K key(element), V value(element)&#125;)</span><br><span class="line"><span class="comment">// 创建一个Map实例，其中Key和Value由iterable的元素计算得到。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Map</span>.fromIterables(<span class="built_in">Iterable</span>&lt;K&gt; keys, <span class="built_in">Iterable</span>&lt;V&gt; values)</span><br><span class="line"><span class="comment">// 将指定的keys和values关联，创建一个Map实例。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Map</span>.identity()</span><br><span class="line"><span class="comment">// 使用默认实现LinkedHashMap创建一个严格的Map。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Map</span>.unmodifiable(<span class="built_in">Map</span> other)</span><br><span class="line"><span class="comment">// 创建一个不可修改、基于哈希值的Map，包含other所有的项</span></span><br></pre></td></tr></table></figure>
+
+<p>每一种创建方式的具体使用</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个Map实例, 插入顺序进行排列</span></span><br><span class="line"><span class="keyword">var</span> dic = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="built_in">print</span>(dic);  <span class="comment">// &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据一个Map创建一个新的Map, 插入顺序进行排列</span></span><br><span class="line"><span class="keyword">var</span> dic1 = <span class="keyword">new</span> <span class="built_in">Map</span>.from(&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;titan&#x27;</span>&#125;);</span><br><span class="line"><span class="built_in">print</span>(dic1);  <span class="comment">// &#123;name: titan&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据List创建Map, 插入顺序进行排列</span></span><br><span class="line"><span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="comment">// 使用默认方式, key和value都是数组对应的元素</span></span><br><span class="line"><span class="keyword">var</span> dic2 = <span class="keyword">new</span> <span class="built_in">Map</span>.fromIterable(list);</span><br><span class="line"><span class="built_in">print</span>(dic2);  <span class="comment">// &#123;1: 1, 2: 2, 3: 3&#125;</span></span><br><span class="line"><span class="comment">// 设置key和value的值</span></span><br><span class="line"><span class="keyword">var</span> dic3 = <span class="keyword">new</span> <span class="built_in">Map</span>.fromIterable(list, key: (item) =&gt; item.toString(), value: (item) =&gt; item * item);</span><br><span class="line"><span class="built_in">print</span>(dic3);  <span class="comment">// &#123;1: 1, 2: 4, 3: 9&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 两个数组映射一个字典, 插入顺序进行排列</span></span><br><span class="line"><span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; keys = [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> values = [<span class="string">&#x27;jun&#x27;</span>, <span class="number">20</span>];</span><br><span class="line"><span class="comment">// 如果有相同的key值, 后面的值会覆盖前面的值</span></span><br><span class="line"><span class="keyword">var</span> dic4 = <span class="keyword">new</span> <span class="built_in">Map</span>.fromIterables(keys, values);</span><br><span class="line"><span class="built_in">print</span>(dic4);  <span class="comment">// &#123;name: jun, age: 20&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个空的Map, Map允许null作为key</span></span><br><span class="line"><span class="keyword">var</span> dic5 = <span class="keyword">new</span> <span class="built_in">Map</span>.identity();</span><br><span class="line"><span class="built_in">print</span>(dic5);  <span class="comment">//&#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个不可修改、基于哈希值的Map</span></span><br><span class="line"><span class="keyword">var</span> dic6 = <span class="keyword">new</span> <span class="built_in">Map</span>.unmodifiable(&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;titan&#x27;</span>&#125;);</span><br><span class="line"><span class="built_in">print</span>(dic6);</span><br></pre></td></tr></table></figure>
+
+<h3 id="相关属性"><a href="#相关属性" class="headerlink" title="相关属性"></a>相关属性</h3><p><code>Map</code>中相关属性和一些常用属性的操作如下:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> map1 = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;titan&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">20</span>&#125;;</span><br><span class="line"><span class="comment">// 哈希值</span></span><br><span class="line"><span class="built_in">print</span>(map1.hashCode); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行时类型</span></span><br><span class="line"><span class="built_in">print</span>(map1.runtimeType);  <span class="comment">//_InternalLinkedHashMap&lt;String, Object&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 是否为空, null不能判断, 会报错</span></span><br><span class="line"><span class="built_in">print</span>(map1.isEmpty);  <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 是否不为空</span></span><br><span class="line"><span class="built_in">print</span>(map1.isNotEmpty);  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 键值对个数</span></span><br><span class="line"><span class="built_in">print</span>(map1.length);   <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 所有的key值, 返回Iterable&lt;K&gt;类型</span></span><br><span class="line"><span class="built_in">print</span>(map1.keys.toList());  <span class="comment">// [name, age]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 所有的value值, 返回Iterable&lt;K&gt;类型</span></span><br><span class="line"><span class="built_in">print</span>(map1.values.toList());   <span class="comment">// [titan, 20]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据key取值</span></span><br><span class="line"><span class="built_in">print</span>(map1[<span class="string">&#x27;name&#x27;</span>] ?? <span class="string">&#x27;&#x27;</span>);   <span class="comment">// titan</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据key赋值</span></span><br><span class="line">map1[<span class="string">&#x27;age&#x27;</span>] = <span class="number">30</span>;</span><br><span class="line"><span class="built_in">print</span>(map1);   <span class="comment">// &#123;name: titan, age: 30&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="相关函数"><a href="#相关函数" class="headerlink" title="相关函数"></a>相关函数</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> map2 = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;titan&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">20</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加一个map</span></span><br><span class="line">map2.addAll(&#123;<span class="string">&#x27;blog&#x27;</span>: <span class="string">&#x27;titanjun&#x27;</span>&#125;);</span><br><span class="line"><span class="built_in">print</span>(map2);</span><br><span class="line"><span class="comment">// &#123;name: titan, age: 20, blog: titanjun&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否包含指定的key</span></span><br><span class="line"><span class="built_in">print</span>(map2.containsKey(<span class="string">&#x27;age&#x27;</span>));  <span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否包含指定的value</span></span><br><span class="line"><span class="built_in">print</span>(map2.containsValue(<span class="string">&#x27;titan&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 操作每个键值对</span></span><br><span class="line">map2.forEach((key, value) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;key = <span class="subst">$key</span>, value = <span class="subst">$value</span>&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找key对应的value，或添加一个新的值为key.length的value</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;king&#x27;</span>]) &#123;</span><br><span class="line">  <span class="comment">// 函数的返回值为查找到的对应的value值</span></span><br><span class="line">  <span class="built_in">print</span>(map2.putIfAbsent(key, () =&gt; key.length));</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">print</span>(map2);</span><br><span class="line"><span class="comment">// &#123;name: titan, age: 20, blog: titanjun, king: 4&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 转成字符串</span></span><br><span class="line"><span class="built_in">print</span>(map2.toString());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除键值对, 返回删除key对应的value值, 没有则返回null</span></span><br><span class="line"><span class="built_in">print</span>(map2.remove(<span class="string">&#x27;blog&#x27;</span>));  <span class="comment">//titanjun</span></span><br><span class="line"><span class="built_in">print</span>(map2.remove(<span class="string">&#x27;coder&#x27;</span>));  <span class="comment">//null</span></span><br><span class="line"><span class="built_in">print</span>(map2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除所有的键值对</span></span><br><span class="line">map2.clear();</span><br><span class="line"><span class="built_in">print</span>(map2);  <span class="comment">//&#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Iterable"><a href="#Iterable" class="headerlink" title="Iterable"></a>Iterable</h2><ul>
+<li>按顺序访问的值或元素的集合, <code>List</code>集合也是继承于<code>Iterable</code></li>
+<li><code>List</code>和<code>Set</code>也是<code>Iterable</code>，<code>dart:collection</code>库中同样有很多</li>
+<li>部分<code>Iterable</code>集合可以被修改   <ul>
+<li>向<code>List</code>或<code>Set</code>添加元素将改变对象所有包含的元素。 </li>
+<li>向Map添加新的<code>Key</code>会改变所有<code>Map.keys</code>的元素。 </li>
+<li>在集合改变后，创建的迭代器将提供新的所有元素，并且可能会保持目前元素的顺序, 也可能不会</li>
+</ul>
+</li>
+</ul>
+<h3 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建空的可迭代对象</span></span><br><span class="line"><span class="keyword">var</span> ite = <span class="built_in">Iterable</span>.empty();</span><br><span class="line"><span class="built_in">print</span>(ite);   <span class="comment">// ()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个Iterable，通过序列来动态生成元素</span></span><br><span class="line"><span class="keyword">var</span> ite1 = <span class="built_in">Iterable</span>.generate(<span class="number">5</span>);</span><br><span class="line"><span class="built_in">print</span>(ite1);  <span class="comment">// (0, 1, 2, 3, 4)</span></span><br></pre></td></tr></table></figure>
+
+<p>至于<code>Iterable</code>的所有属性和函数的介绍和使用, 在上篇文章<a target="_blank" rel="noopener" href="https://www.titanjun.top/2019/02/20/Flutter%E5%BC%80%E5%8F%91%E4%B9%8BDart%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/#List">Flutter开发之Dart的数据类型01</a>中的<code>List</code>模块中已经详细介绍了, 因为<code>List</code>是继承于<code>Iterable</code>的, 所以<code>Iterable</code>有的属性和方法<code>List</code>中都有</p>
+<h2 id="Runes"><a href="#Runes" class="headerlink" title="Runes"></a>Runes</h2><ul>
+<li>在<code>Dart</code>中，<code>Runes</code>代表字符串的<code>UTF-32</code>字符集, 另一种<code>Strings</code></li>
+<li><code>Unicode</code>为每一个字符、标点符号、表情符号等都定义了 一个唯一的数值</li>
+<li>由于<code>Dart</code>字符串是<code>UTF-16</code>的字符序列，所以在字符串中表达32的字符序列就需要新的语法了</li>
+<li>通常使用<code>\uXXXX</code>的方式来表示, 这里的<code>XXXX</code>是4个16进制的数, 如，心形符号<code>(♥)</code>是<code>\u2665</code></li>
+<li>对于非4个数值的情况，把编码值放到大括号中即可, 如，笑脸<code>emoji</code> (😆) 是<code>\u&#123;1f600&#125;</code></li>
+<li><code>String</code>类有一些属性可以提取<code>rune</code>信息<ul>
+<li><code>codeUnitAt</code>和<code>codeUnit</code>属性返回16为字符</li>
+<li>使用<code>runes</code>属性来获取字符串的<code>runes</code>信息</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> clapping = <span class="string">&#x27;\u&#123;1f44f&#125;&#x27;</span>;</span><br><span class="line"><span class="built_in">print</span>(clapping);  <span class="comment">// 👏</span></span><br><span class="line"><span class="built_in">print</span>(clapping.codeUnits);  <span class="comment">// [55357, 56399]</span></span><br><span class="line"><span class="built_in">print</span>(clapping.runes.toList());  <span class="comment">// [128079]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据字符串创建</span></span><br><span class="line">Runes runes = <span class="keyword">new</span> Runes(<span class="string">&#x27;\u2665, \u&#123;1f605&#125;, \u&#123;1f60e&#125;&#x27;</span>);</span><br><span class="line"><span class="built_in">print</span>(runes);</span><br><span class="line"><span class="comment">// (9829, 44, 32, 128517, 44, 32, 128526)</span></span><br><span class="line"><span class="comment">// 输出特殊字符的字符串</span></span><br><span class="line"><span class="built_in">print</span>(<span class="keyword">new</span> <span class="built_in">String</span>.fromCharCodes(runes));</span><br><span class="line"><span class="comment">// ♥, 😅, 😎</span></span><br></pre></td></tr></table></figure>
+
+<p>由于<code>Runes</code>也是继承于<code>Iterable</code>, 所以<code>Runes</code>中的属性和方法的使用也和<code>Iterable</code>一样, 详情参考<a target="_blank" rel="noopener" href="http://www.shutongye.com/dartapi/dart-core/Runes-class.html">Runes</a>和<a target="_blank" rel="noopener" href="https://www.titanjun.top/2019/02/20/Flutter%E5%BC%80%E5%8F%91%E4%B9%8BDart%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/#List">Flutter开发之Dart的数据类型01</a>中的介绍</p>
+<h2 id="Symbols"><a href="#Symbols" class="headerlink" title="Symbols"></a>Symbols</h2><ul>
+<li>一个<code>Symbol</code>对象代表<code>Dart</code>程序中声明的操作符或者标识符</li>
+<li>也许不会用到<code>Symbol</code>，但是该功能对于通过名字来引用标识符的情况 是非常有价值的，特别是混淆后的代码，标识符的名字被混淆了，但是<code>Symbol</code>的名字不会改变</li>
+<li>使用<code>Symbol</code>字面量来获取标识符的<code>symbol</code>对象，也就是在标识符前面添加一个 <code>#</code> 符号</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取symbol 对象</span></span><br><span class="line"><span class="keyword">var</span> sym1 = <span class="built_in">Symbol</span>(<span class="string">&#x27;name&#x27;</span>);</span><br><span class="line"><span class="built_in">print</span>(sym1);   <span class="comment">// Symbol(&quot;name&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// #号创建</span></span><br><span class="line"><span class="keyword">var</span> sym2 = #titan;</span><br><span class="line"><span class="built_in">print</span>(sym2);   <span class="comment">// Symbol(&quot;titan&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><ul>
+<li>对象的集合，其中每个对象只能出现一次, <code>List</code>中一个对象可以出现多次</li>
+<li>迭代Set中的元素时，某些时候有可能是无序的，也有可能是有序的。例如：<ul>
+<li><code>HashSet</code>是无序的，这意味着它迭代的顺序是不确定的</li>
+<li><code>LinkedHashSet</code>按元素的插入顺序进行迭代</li>
+<li><code>SplayTreeSet</code>按排序顺序迭代元素</li>
+</ul>
+</li>
+<li><code>Set</code>除创建方式和<code>List</code>不同, 其他属性和方法基本一样</li>
+</ul>
+<h3 id="创建Set"><a href="#创建Set" class="headerlink" title="创建Set"></a>创建Set</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个空的Set。</span></span><br><span class="line"><span class="keyword">var</span> set1 = <span class="built_in">Set</span>();</span><br><span class="line"><span class="built_in">print</span>(set1);   <span class="comment">// &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个包含所有elements的Set</span></span><br><span class="line"><span class="keyword">var</span> set2 = <span class="built_in">Set</span>.from([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br><span class="line"><span class="built_in">print</span>(set2);   <span class="comment">// &#123;1, 2, 3&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个空的，元素严格相等的Set</span></span><br><span class="line"><span class="keyword">var</span> set3 = <span class="built_in">Set</span>.identity();</span><br><span class="line"><span class="built_in">print</span>(set3);   <span class="comment">// &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// set2 = &#123;1, 2, 3&#125;</span></span><br><span class="line"><span class="comment">//返回一个新的Set，它是this和other的交集</span></span><br><span class="line"><span class="keyword">var</span> set4 = <span class="built_in">Set</span>.from([<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>]);</span><br><span class="line"><span class="built_in">print</span>(set2.intersection(set4));  <span class="comment">//&#123;2, 3&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回一个新的Set，它包含this和other的所有元素（并集）</span></span><br><span class="line"><span class="built_in">print</span>(set2.union(set4));  <span class="comment">// &#123;1, 2, 3, 5, 6&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查Set中是否包含object, 有则返回该object, 没有则返回null</span></span><br><span class="line"><span class="built_in">print</span>(set4.lookup(<span class="number">5</span>));   <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">print</span>(set4.lookup(<span class="number">21</span>));  <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+
+<p>其他更多属性参考<a target="_blank" rel="noopener" href="http://www.shutongye.com/dartapi/dart-core/Set-class.html">Set<E></a>和<a target="_blank" rel="noopener" href="https://www.titanjun.top/2019/02/20/Flutter%E5%BC%80%E5%8F%91%E4%B9%8BDart%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B01/#List">Flutter开发之Dart的数据类型01</a>中的介绍</p>
+<h2 id="Duration"><a href="#Duration" class="headerlink" title="Duration"></a>Duration</h2><ul>
+<li><code>Duration</code>表示从一个时间点到另一个时间点的时间差</li>
+<li>如果是一个较晚的时间点和一个较早的时间点，<code>Duration</code>可能是负数</li>
+</ul>
+<h3 id="创建Duration"><a href="#创建Duration" class="headerlink" title="创建Duration"></a>创建Duration</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 唯一的构造函数创建Duration对象</span></span><br><span class="line"><span class="built_in">Duration</span>(&#123;<span class="built_in">int</span> days: <span class="number">0</span>, <span class="built_in">int</span> hours: <span class="number">0</span>, <span class="built_in">int</span> minutes: <span class="number">0</span>, <span class="built_in">int</span> seconds: <span class="number">0</span>, <span class="built_in">int</span> milliseconds: <span class="number">0</span>, <span class="built_in">int</span> microseconds: <span class="number">0</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以使用其中的一个或者几个参数创建</span></span><br><span class="line"><span class="comment">// 只是用其中的一个参数</span></span><br><span class="line"><span class="built_in">Duration</span> ration = <span class="built_in">Duration</span>(days: <span class="number">1</span>);</span><br><span class="line"><span class="built_in">print</span>(ration);  <span class="comment">//24:00:00.000000</span></span><br><span class="line"><span class="built_in">Duration</span> ration1 = <span class="built_in">Duration</span>(hours: <span class="number">10</span>);</span><br><span class="line"><span class="built_in">print</span>(ration1);  <span class="comment">//10:00:00.000000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 只是用其中的两个参数</span></span><br><span class="line"><span class="built_in">Duration</span> ration2 = <span class="built_in">Duration</span>(days: <span class="number">1</span>, hours: <span class="number">3</span>);</span><br><span class="line"><span class="built_in">print</span>(ration2);  <span class="comment">//27:00:00.000000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用所有的参数</span></span><br><span class="line"><span class="built_in">Duration</span> ration3 = <span class="built_in">Duration</span>(days: <span class="number">2</span>, hours: <span class="number">2</span>, minutes: <span class="number">23</span>, seconds: <span class="number">34</span>, milliseconds: <span class="number">56</span>, microseconds: <span class="number">89</span>);</span><br><span class="line"><span class="built_in">print</span>(ration3);  <span class="comment">//50:23:34.056089</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="相关运算"><a href="#相关运算" class="headerlink" title="相关运算"></a>相关运算</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Duration</span> time1 = <span class="built_in">Duration</span>(days: <span class="number">1</span>, hours: <span class="number">1</span>, minutes: <span class="number">1</span>, seconds: <span class="number">1</span>, milliseconds: <span class="number">1</span>, microseconds: <span class="number">1</span>);</span><br><span class="line"><span class="built_in">Duration</span> time2 = <span class="built_in">Duration</span>(days: <span class="number">2</span>, hours: <span class="number">2</span>, minutes: <span class="number">2</span>, seconds: <span class="number">2</span>, milliseconds: <span class="number">2</span>, microseconds: <span class="number">2</span>);</span><br><span class="line"><span class="built_in">print</span>(time1);  <span class="comment">//25:01:01.001001</span></span><br><span class="line"><span class="built_in">print</span>(time2);  <span class="comment">//50:02:02.002002</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 加</span></span><br><span class="line"><span class="built_in">print</span>(time1 + time2);  <span class="comment">//75:03:03.003003</span></span><br><span class="line"><span class="comment">// 减</span></span><br><span class="line"><span class="built_in">print</span>(time1 - time2);  <span class="comment">//-25:01:01.001001</span></span><br><span class="line"><span class="comment">// 乘</span></span><br><span class="line"><span class="built_in">print</span>(time1 * <span class="number">2</span>);    <span class="comment">//50:02:02.002002</span></span><br><span class="line"><span class="comment">// 除(取整)</span></span><br><span class="line"><span class="built_in">print</span>(time2 ~/ <span class="number">3</span>);  <span class="comment">//16:40:40.667334</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较</span></span><br><span class="line"><span class="built_in">print</span>(time1 &gt; time2);  <span class="comment">//false</span></span><br><span class="line"><span class="built_in">print</span>(time1 &gt;= time2);  <span class="comment">//false</span></span><br><span class="line"><span class="built_in">print</span>(time1 == time2);  <span class="comment">//false</span></span><br><span class="line"><span class="built_in">print</span>(time1 &lt; time2);  <span class="comment">//true</span></span><br><span class="line"><span class="built_in">print</span>(time1 &lt;= time2); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取相反值</span></span><br><span class="line"><span class="built_in">print</span>(-time1);  <span class="comment">//-25:01:01.001001</span></span><br><span class="line"><span class="built_in">print</span>(-(time1 - time2));  <span class="comment">//25:01:01.001001</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="相关函数-1"><a href="#相关函数-1" class="headerlink" title="相关函数"></a>相关函数</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Duration</span> time3 = -<span class="built_in">Duration</span>(days: <span class="number">1</span>, hours: <span class="number">1</span>, minutes: <span class="number">1</span>, seconds: <span class="number">1</span>, milliseconds: <span class="number">1</span>, microseconds: <span class="number">1</span>);</span><br><span class="line"><span class="built_in">print</span>(time3);  <span class="comment">//-25:01:01.001001</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取绝对值</span></span><br><span class="line"><span class="built_in">print</span>(time3.abs());  <span class="comment">//25:01:01.001001</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较, 返回值, 0: 相等, -1: time1 &lt; time2, 1: time1 &gt; time2</span></span><br><span class="line"><span class="built_in">print</span>(time1.compareTo(time2));  <span class="comment">//-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串形式</span></span><br><span class="line"><span class="built_in">print</span>(time1.toString());</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="DateTime"><a href="#DateTime" class="headerlink" title="DateTime"></a>DateTime</h2><ul>
+<li>表示一个时间点</li>
+<li>通过构造函数或解析格式化的字符串创建<code>DateTime</code>对象，并且符合<code>ISO 8601</code>标准的子集，小时是24小时制，范围在0-23之间</li>
+<li><code>DateTime</code>对象创建之后，将是固定不变的, 不可被修改</li>
+<li><code>DateTime</code>对象默认使用的是本地时区，除非显示地指定<code>UTC</code>时区</li>
+</ul>
+<h3 id="创建时间点"><a href="#创建时间点" class="headerlink" title="创建时间点"></a>创建时间点</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当前时间</span></span><br><span class="line"><span class="keyword">var</span> date1 = <span class="keyword">new</span> <span class="built_in">DateTime</span>.now();</span><br><span class="line"><span class="built_in">print</span>(date1);  <span class="comment">//2019-02-23 16:43:15.505305</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 构造一个指定为本地时区的DateTime</span></span><br><span class="line"><span class="comment">//DateTime(int year, [int month = 1, int day = 1, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microsecond = 0])</span></span><br><span class="line"><span class="keyword">var</span> date2 = <span class="keyword">new</span> <span class="built_in">DateTime</span>(<span class="number">2018</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">12</span>, <span class="number">23</span>, <span class="number">34</span>, <span class="number">562</span>, <span class="number">1002</span>);</span><br><span class="line"><span class="built_in">print</span>(date2);  <span class="comment">//2018-10-03 12:23:34.563002</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用微秒创建</span></span><br><span class="line"><span class="keyword">var</span> date3 = <span class="keyword">new</span> <span class="built_in">DateTime</span>.fromMicrosecondsSinceEpoch(<span class="number">1000222</span>);</span><br><span class="line"><span class="comment">// isUtc: true: UTC时区, 默认false</span></span><br><span class="line"><span class="keyword">var</span> date31 =  <span class="keyword">new</span> <span class="built_in">DateTime</span>.fromMicrosecondsSinceEpoch(<span class="number">1000222</span>, isUtc: <span class="keyword">true</span>);</span><br><span class="line"><span class="built_in">print</span>(date3);  <span class="comment">//1970-01-01 08:00:01.000222</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 用毫秒创建</span></span><br><span class="line"><span class="keyword">var</span> date4 = <span class="keyword">new</span> <span class="built_in">DateTime</span>.fromMillisecondsSinceEpoch(<span class="number">1000222</span>);</span><br><span class="line"><span class="comment">// isUtc: true: UTC时区, 默认false</span></span><br><span class="line"><span class="keyword">var</span> date41 = <span class="keyword">new</span> <span class="built_in">DateTime</span>.fromMillisecondsSinceEpoch(<span class="number">1000222</span>, isUtc: <span class="keyword">true</span>);</span><br><span class="line"><span class="built_in">print</span>(date4);  <span class="comment">//1970-01-01 08:16:40.222</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定为UTC时区的时间</span></span><br><span class="line"><span class="keyword">var</span> date5 = <span class="keyword">new</span> <span class="built_in">DateTime</span>.utc(<span class="number">1969</span>, <span class="number">7</span>, <span class="number">20</span>, <span class="number">20</span>, <span class="number">18</span>, <span class="number">04</span>);</span><br><span class="line"><span class="built_in">print</span>(date5);  <span class="comment">//1969-07-20 20:18:04.000Z</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="parse"><a href="#parse" class="headerlink" title="parse"></a>parse</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">DateTime</span> parse(<span class="built_in">String</span> formattedString)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>基于时间字符串, 创建<code>DateTime</code></li>
+<li>如果输入的字符串无法解析，将抛出异常</li>
+<li>当前接受的字符串为：<ul>
+<li>日期：一个有正负号之分的4-6位数的年份，2位数的月份，2位数的号数<ul>
+<li>年、月、日相互间可选-进行分割</li>
+<li>例如：”19700101”，”-0004-12-24”，”81030-04-01”</li>
+</ul>
+</li>
+<li>时间部分为可选项，从日期处以<code>T</code>或一个空格分开<ul>
+<li>对于时间部分，包括2位数的小时，然后2位数的分钟值可选，然后2位数的秒钟值可选， 然后 <code>.</code> 加1-6位数的秒数可选</li>
+<li>分和秒可以用<code>:</code>分隔</li>
+<li>如：”12”，”12:30:24.124”，”123010.50”</li>
+</ul>
+</li>
+<li>时区偏移量为可选项，可能用空格与之前的部分分隔开<ul>
+<li>时区是<code>z</code>或<code>Z</code>，或者是一个有正负之分的2位数的小时部分，和可选的2位数的分钟部分</li>
+<li>符号必须是<code>+</code>或<code>-</code>，并且不能省略</li>
+<li>分钟和小时可能用<code>:</code>分隔</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>接受的字符串例子：<ul>
+<li><code>&quot;2012-02-27 13:27:00&quot;</code></li>
+<li><code>&quot;2012-02-27 13:27:00.123456z&quot;</code></li>
+<li><code>&quot;20120227 13:27:00&quot;</code></li>
+<li><code>&quot;20120227T132700&quot;</code></li>
+<li><code>&quot;20120227&quot;</code></li>
+<li><code>&quot;+20120227&quot;</code></li>
+<li><code>&quot;2012-02-27T14Z&quot;</code></li>
+<li><code>&quot;2012-02-27T14+00:00&quot;</code></li>
+<li><code>&quot;-123450101 00:00:00 Z&quot;</code>：年份为-12345</li>
+<li><code>&quot;2002-02-27T14:00:00-0500&quot;</code>: 与<code>&quot;2002-02-27T19:00:00Z&quot;</code>相同</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 格式化时间字符串</span></span><br><span class="line"><span class="keyword">var</span> date6 = <span class="built_in">DateTime</span>.parse(<span class="string">&quot;2012-02-27 13:27:00&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> date7 = <span class="built_in">DateTime</span>.parse(<span class="string">&#x27;20120227T132700&#x27;</span>);</span><br><span class="line"><span class="built_in">print</span>(date6);  <span class="comment">// 2012-02-27 13:27:00.000</span></span><br><span class="line"><span class="built_in">print</span>(date7);  <span class="comment">// 2012-02-27 13:27:00.000</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="属性值"><a href="#属性值" class="headerlink" title="属性值"></a>属性值</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> time = <span class="built_in">DateTime</span>.parse(<span class="string">&quot;2019-02-25 13:27:04&quot;</span>);</span><br><span class="line"><span class="comment">// 获取年-月-日-周几</span></span><br><span class="line"><span class="built_in">print</span>(time.year);   <span class="comment">//2019</span></span><br><span class="line"><span class="built_in">print</span>(time.month);  <span class="comment">//2</span></span><br><span class="line"><span class="built_in">print</span>(time.day);    <span class="comment">//25</span></span><br><span class="line"><span class="built_in">print</span>(time.weekday);<span class="comment">//1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取时-分-秒-毫秒-微秒</span></span><br><span class="line"><span class="built_in">print</span>(time.hour);       <span class="comment">//13</span></span><br><span class="line"><span class="built_in">print</span>(time.minute);     <span class="comment">//27</span></span><br><span class="line"><span class="built_in">print</span>(time.second);     <span class="comment">//4</span></span><br><span class="line"><span class="built_in">print</span>(time.millisecond);<span class="comment">//0</span></span><br><span class="line"><span class="built_in">print</span>(time.microsecond);<span class="comment">//0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 是不是utc时区</span></span><br><span class="line"><span class="built_in">print</span>(time.isUtc);</span><br><span class="line"></span><br><span class="line"><span class="comment">//1970-01-01T00:00:00Z (UTC)开始经过的微秒数</span></span><br><span class="line"><span class="built_in">print</span>(time.microsecondsSinceEpoch);</span><br><span class="line"></span><br><span class="line"><span class="comment">//1970-01-01T00:00:00Z (UTC)开始经过的毫秒数</span></span><br><span class="line"><span class="built_in">print</span>(time.millisecondsSinceEpoch);</span><br><span class="line"></span><br><span class="line"><span class="comment">//平台提供的时区名称</span></span><br><span class="line"><span class="built_in">print</span>(time.timeZoneName);</span><br><span class="line"></span><br><span class="line"><span class="comment">//时区偏移量，即本地时间和UTC之间的时间差</span></span><br><span class="line"><span class="built_in">print</span>(time.timeZoneOffset);</span><br></pre></td></tr></table></figure>
+
+<h3 id="相关函数-2"><a href="#相关函数-2" class="headerlink" title="相关函数"></a>相关函数</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取当前时间</span></span><br><span class="line"><span class="built_in">DateTime</span> today = <span class="keyword">new</span> <span class="built_in">DateTime</span>.now();</span><br><span class="line"><span class="built_in">print</span>(today);  <span class="comment">//2019-02-28 11:18:16.198088</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//加上duration，返回一个新的DateTime实例</span></span><br><span class="line"><span class="built_in">DateTime</span> newDay = today.add(<span class="keyword">new</span> <span class="built_in">Duration</span>(days: <span class="number">60</span>));</span><br><span class="line"><span class="built_in">print</span>(newDay);  <span class="comment">//2019-04-29 11:18:16.198088</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//减去duration，返回一个新的DateTime实例</span></span><br><span class="line"><span class="built_in">DateTime</span> newDay1 = today.subtract(<span class="keyword">new</span> <span class="built_in">Duration</span>(days: <span class="number">60</span>));</span><br><span class="line"><span class="built_in">print</span>(newDay1);  <span class="comment">//2018-12-30 11:25:31.741382</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较两个时间值的大小, 0: 相等, -1: 前值&lt;后值, 1: 前值&gt;后值</span></span><br><span class="line"><span class="keyword">var</span> isCom = today.compareTo(newDay);</span><br><span class="line"><span class="built_in">print</span>(isCom);  <span class="comment">// -1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算两个时间的差值</span></span><br><span class="line"><span class="built_in">Duration</span> duration = today.difference(newDay);</span><br><span class="line"><span class="built_in">print</span>(duration);  <span class="comment">//-1440:00:00.000000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较两个时间</span></span><br><span class="line"><span class="built_in">print</span>(today.isAfter(newDay));  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">print</span>(today.isBefore(newDay)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较是否是同一时刻</span></span><br><span class="line"><span class="built_in">print</span>(today.isAtSameMomentAs(newDay));  <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回此DateTime在本地时区的值</span></span><br><span class="line"><span class="built_in">print</span>(today.toLocal());  <span class="comment">//2019-02-28 11:30:51.713069</span></span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://dart.goodev.org/guides/language/language-tour">Dart官网语法介绍-中文版</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.dartlang.org/guides/language/language-tour">Dart官网语法介绍-英文版</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.shutongye.com/dartapi/dart-core/Map-class.html">Dart语言中文社区</a></li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/4facfb40.html" title="Flutter开发之Dart的数据类型02">https://titanjun.top/post/4facfb40.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/flutter/" rel="tag"> <i class="fa fa-tag"></i> Flutter</a>
+              <a href="/tags/dart/" rel="tag"> <i class="fa fa-tag"></i> Dart</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/36f41dd2.html" rel="prev" title="ReactNative之手势识别">
+                  <i class="fa fa-chevron-left"></i> ReactNative之手势识别
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/d6a5aafa.html" rel="next" title="Flutter开发之Dart的数据类型01">
+                  Flutter开发之Dart的数据类型01 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/4facfb40.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

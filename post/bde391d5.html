@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Swift的属性(Property)">
+<meta property="og:url" content="https://titanjun.top/post/bde391d5.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/always.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/square1.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/square2.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/square3.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/property.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/property.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/property1.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/property2.png">
+<meta property="article:published_time" content="2019-12-20T10:20:40.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.905Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="Property">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun">
+
+
+<link rel="canonical" href="https://titanjun.top/post/bde391d5.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/bde391d5.html","path":"post/bde391d5.html","title":"浅谈Swift的属性(Property)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>浅谈Swift的属性(Property) | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">属性分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">实例属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">存储属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">计算属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E7%9A%84rawValue"><span class="nav-number">2.3.</span> <span class="nav-text">枚举的rawValue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%E5%AD%98%E5%82%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">2.4.</span> <span class="nav-text">延迟存储属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E8%A7%82%E5%AF%9F%E5%99%A8"><span class="nav-number">2.5.</span> <span class="nav-text">属性观察器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E5%B1%9E%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">类型属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#static"><span class="nav-number">3.1.</span> <span class="nav-text">static</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class"><span class="nav-number">3.2.</span> <span class="nav-text">class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90"><span class="nav-number">3.3.</span> <span class="nav-text">内存分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">3.4.</span> <span class="nav-text">线程安全</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/bde391d5.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="浅谈Swift的属性(Property) | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浅谈Swift的属性(Property)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-20 18:20:40" itemprop="dateCreated datePublished" datetime="2019-12-20T18:20:40+08:00">2019-12-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/swift%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">Swift底层原理</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun" alt="Swift"></p>
+<span id="more"></span>
+
+
+<ul>
+<li>今年期待已久的<code>Swift5.0</code>稳定版就已经发布了, 感兴趣的小伙伴可看我的这篇博客:<a target="_blank" rel="noopener" href="https://www.titanjun.top/2019/01/28/Swift%205.0%E6%96%B0%E7%89%B9%E6%80%A7%E6%9B%B4%E6%96%B0/">Swift 5.0新特性更新</a></li>
+<li>这篇博客可主要分享<code>Swift</code>的属性的相关介绍和剖析, 测试环境: <code>Xcode 11.2.1</code>, <code>Swift 5.1.2</code></li>
+</ul>
+<h2 id="属性分类"><a href="#属性分类" class="headerlink" title="属性分类"></a>属性分类</h2><p>在<code>Swift</code>中, 严格意义上来讲属性可以分为两大类: 实例属性和类型属性</p>
+<ul>
+<li>实例属性(<code>Instance Property</code>): 只能通过实例去访问的属性<ul>
+<li>存储实例属性(<code>Stored Instance Property</code>): 存储在市里的内存中, 每个实例都只有一份</li>
+<li>计算实例属性(<code>Computed Instance Property</code>)</li>
+</ul>
+</li>
+<li>类型属性(<code>Type Property</code>): 只能通过类型去访问的属性<ul>
+<li>存储类型属性(<code>Stored Type Property</code>): 整个程序运行过程中就只有一份内存(类似全局变量)</li>
+<li>计算类型属性(<code>Computed Type Property</code>)</li>
+<li>类型属性可以通过<code>static</code>关键字定义; 如果是类也可以通过<code>class</code>关键字定义</li>
+</ul>
+</li>
+<li>实例属性属于一个特定类型的实例，每创建一个实例，实例都拥有属于自己的一套属性值，实例之间的属性相互独立</li>
+<li>为类型本身定义属性，无论创建了多少个该类型的实例，这些属性全局都只有唯一一份，这种属性就是类型属性</li>
+</ul>
+<h2 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a>实例属性</h2><p>上面提到<code>Swift</code>中跟市里相关的属性可以分为两大类:存储属性和计算属性</p>
+<ul>
+<li>存储属性(<code>Stored Property</code>)<ul>
+<li>类似于成员变量，系统会为其分配内存空间，存储属性存储在实例的内存中</li>
+<li>存储属性可以是变量存储属性(用关键字<code>var</code>定义)，也可以是常量存储属性(用关键字<code>let</code>定义)</li>
+<li>结构体和类可以定义存储属性, 枚举不可以定义存储属性</li>
+</ul>
+</li>
+<li>计算属性(<code>Computed Property</code>)<ul>
+<li>计算属性其本质就是方法(函数), 系统不会为其分配内存空间, 所以计算属性不会占用实例对象的内存</li>
+<li>计算属性不直接存储值，而是提供一个<code>getter</code>和一个可选的<code>setter</code>，来间接获取和设置其他属性或变量的值</li>
+<li>枚举、绝构体和类都可以定义计算属性</li>
+</ul>
+</li>
+</ul>
+<h3 id="存储属性"><a href="#存储属性" class="headerlink" title="存储属性"></a>存储属性</h3><ul>
+<li>在<code>Swift</code>中存储属性可以是<code>var</code>修饰的变量, 也可以是<code>let</code>修饰的常量</li>
+<li>但是在创建类或结构体的实例时, 必须为所有的存储属性设置一个合适的初始值, 否则会报错的</li>
+<li>可以在定义属性的时候, 为其设置一个初始值</li>
+<li>可以在<code>init</code>初始化器里为存储实行设置一个初始值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="comment">// 定义的时候设置初始值</span></span><br><span class="line">    <span class="keyword">var</span> age: <span class="type">Int</span> <span class="operator">=</span> <span class="number">24</span></span><br><span class="line">    <span class="keyword">var</span> weight: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用init初始化器设置初始值</span></span><br><span class="line"><span class="keyword">var</span> person1 <span class="operator">=</span> <span class="type">Person</span>(weight: <span class="number">75</span>)</span><br><span class="line"><span class="keyword">var</span> person2 <span class="operator">=</span> <span class="type">Person</span>(age: <span class="number">25</span>, weight: <span class="number">80</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面两个属性是会占用实例的内存空间的</li>
+<li>可以使用<code>MemoryLayout</code>获取数据类型占用的内存大小</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Person结构体实际占用的内存大小</span></span><br><span class="line"><span class="type">MemoryLayout</span>&lt;<span class="type">Person</span>&gt;.size         <span class="comment">// 16</span></span><br><span class="line"><span class="comment">// 系统为Person分配的内存大小</span></span><br><span class="line"><span class="type">MemoryLayout</span>&lt;<span class="type">Person</span>&gt;.stride       <span class="comment">// 16</span></span><br><span class="line"><span class="comment">// 内存对其参数</span></span><br><span class="line"><span class="type">MemoryLayout</span>&lt;<span class="type">Person</span>&gt;.alignment    <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+
+<div class="note primary"><p>还有一种使用方式, 输出结果一致</p></div>
+
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person <span class="operator">=</span> <span class="type">Person</span>(weight: <span class="number">75</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">MemoryLayout</span>.size(ofValue: person)</span><br><span class="line"><span class="type">MemoryLayout</span>.stride(ofValue: person)</span><br><span class="line"><span class="type">MemoryLayout</span>.alignment(ofValue: person)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h3><ul>
+<li>枚举、绝构体和类都可以定义计算属性</li>
+<li>计算属性不直接存储值，而是提供一个<code>getter</code>和一个可选的<code>setter</code>，来间接获取和设置其他属性或变量的值</li>
+<li>计算属性其本质就是方法(函数), 系统不会为其分配内存空间, 所以计算属性不会占用实例对象的内存</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Square</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> side: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">var</span> girth: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            side <span class="operator">=</span> newValue <span class="operator">/</span> <span class="number">4</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> side <span class="operator">*</span> <span class="number">4</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其中set也可以使用下面方式</span></span><br><span class="line"><span class="keyword">set</span>(newGirth) &#123;</span><br><span class="line">    side <span class="operator">=</span> newGirth <span class="operator">/</span> <span class="number">4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面我们先看一下<code>Square</code>所占用的内存大小, 这里方便查看都去掉了<code>print</code>函数</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> squ <span class="operator">=</span> <span class="type">Square</span>(side: <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">MemoryLayout</span>.size(ofValue: squ)        <span class="comment">// 8</span></span><br><span class="line"><span class="type">MemoryLayout</span>.stride(ofValue: squ)      <span class="comment">// 8</span></span><br><span class="line"><span class="type">MemoryLayout</span>.alignment(ofValue: squ)   <span class="comment">// 8</span></span><br></pre></td></tr></table></figure>
+
+<p>从上面输出结果可以看出, <code>Square</code>只占用8个内存大小, 也就是一个<code>Int</code>占用的内存大小, 如果还是看不出来, 可以看一下下面这个</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Square</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> girth: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">4</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="type">MemoryLayout</span>&lt;<span class="type">Square</span>&gt;.size)   <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>从上面两个输出结果可以看出, 计算属性并不占用内存空间</li>
+<li>此外, 计算属性虽然不直接存储值, 但是却需要<code>get、set</code>方法来取值或赋值</li>
+<li>其中通过<code>set</code>方法修改其他相关联的属性的值; 如果该计算属性是只读的, 则不需要<code>set</code>方法, 传入的新值默认值<code>newValue</code>, 也可以自定义</li>
+<li>通过<code>get</code>方法获取该计算属性的值, 即使是只读的, 计算属性的值也是可能发生改变的</li>
+<li>定义计算属性只能使用<code>var</code>, 不能使用<code>let</code></li>
+<li>下面我们通过汇编的方式来看一下执行过程, 在下图中勾上<code>Always Show Disassembly</code>, 右断点时<code>Xcode</code>就会在运行过程中自动跳到断点的汇编代码中</li>
+</ul>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/always.png" alt="Disassembly"></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> squ <span class="operator">=</span> <span class="type">Square</span>(side: <span class="number">4</span>)</span><br><span class="line"><span class="keyword">var</span> c <span class="operator">=</span> squ.girth    <span class="comment">// 在此处加上断点时</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码的执行流程, 通过汇编的方式看, 核心代码如下所示</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/square1.png" alt="Square1"></p>
+<p>下面是在iOS模拟器环境下一些汇编常用的指令</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将rax的值赋值给rdi</span></span><br><span class="line">movq   %rax, %rdi</span><br><span class="line"><span class="comment">// 将rbp-0x18这个地址值赋值给rsi</span></span><br><span class="line">leaq   <span class="number">-0x18</span>(%rbp), %rsi</span><br><span class="line"><span class="comment">// 函数跳转指令</span></span><br><span class="line">callq  <span class="number">0x100005428</span> </span><br></pre></td></tr></table></figure>
+
+
+<p>从上图可以看到上面代码对应的汇编代码, 其核心代码大概可以分为四部分</p>
+<ol>
+<li><code>Square</code>调用<code>init</code>初始化器, 即<code>Square</code>的初始化(详细汇编代码可进入<code>callq  0x100001300</code>中查看)</li>
+<li>讲已经出初始化的<code>Square</code>的对象的内存地址赋值给一个全局变量, 即<code>squ</code></li>
+<li>调用<code>Square</code>对象里面<code>girth</code>计算属性的<code>getter</code>方法, 获取<code>girth</code>的值</li>
+<li>把获取的<code>girth</code>的值赋值给一个全局变量</li>
+</ol>
+<blockquote>
+<p>如上图中中断点位置, 当断点执行到此处时, 执行<code>si</code>命令即可查看<code>getter</code>函数的的执行过程, 如下图所示, 其中<code>imulq</code>是执行乘法指令</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把rdx和rax的相乘的结果在赋值给rax</span></span><br><span class="line">imulq  %rdx, %rax</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/square2.png" alt="Square1"></p>
+<p>下面再看一下, 计算属性的赋值操作, 代码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var squ = Square(side: 4)</span><br><span class="line">squ.girth = 12;</span><br><span class="line">print(squ.side)   // 3</span><br></pre></td></tr></table></figure>
+
+<p>对应的汇编代码如下, 执行流程和上面的取值操作类似, 不同的是赋值操作最后执行的是<code>girth</code>的<code>setter</code>方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0x1000010c9</span> &lt;+<span class="number">25</span>&gt;: callq  <span class="number">0x100001300</span>               ; SwiftLanguage.Square.init(side: Swift.Int) -&gt; SwiftLanguage.Square at main.swift:<span class="number">11</span></span><br><span class="line"><span class="number">0x1000010ce</span> &lt;+<span class="number">30</span>&gt;: leaq   <span class="number">0x6123</span>(%rip), %rsi        ; SwiftLanguage.squ : SwiftLanguage.Square</span><br><span class="line"><span class="number">0x1000010d5</span> &lt;+<span class="number">37</span>&gt;: xorl   %ecx, %ecx</span><br><span class="line"><span class="number">0x1000010d7</span> &lt;+<span class="number">39</span>&gt;: movq   %rax, <span class="number">0x611a</span>(%rip)        ; SwiftLanguage.squ : SwiftLanguage.Square</span><br><span class="line"><span class="number">0x1000010de</span> &lt;+<span class="number">46</span>&gt;: movq   %rsi, %rdi</span><br><span class="line"><span class="number">0x1000010e1</span> &lt;+<span class="number">49</span>&gt;: leaq   <span class="number">-0x20</span>(%rbp), %rsi</span><br><span class="line"><span class="number">0x1000010e5</span> &lt;+<span class="number">53</span>&gt;: movl   $<span class="number">0x21</span>, %edx</span><br><span class="line"><span class="number">0x1000010ea</span> &lt;+<span class="number">58</span>&gt;: callq  <span class="number">0x10000540a</span>               ; symbol stub <span class="keyword">for</span>: swift_beginAccess</span><br><span class="line"><span class="number">0x1000010ef</span> &lt;+<span class="number">63</span>&gt;: movl   $<span class="number">0xc</span>, %edi</span><br><span class="line"><span class="number">0x1000010f4</span> &lt;+<span class="number">68</span>&gt;: leaq   <span class="number">0x60fd</span>(%rip), %r13        ; SwiftLanguage.squ : SwiftLanguage.Square</span><br><span class="line"><span class="number">0x1000010fb</span> &lt;+<span class="number">75</span>&gt;: callq  <span class="number">0x100001200</span>               ; SwiftLanguage.Square.girth.setter : Swift.Int at main.swift:<span class="number">14</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>只读计算属性, 只有<code>get</code>没有<code>set</code> </li>
+<li>只读计算属性的值, 则是根据关联值的变化而变化, 不可被赋值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 你可以这样写</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Square</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> side: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">var</span> girth: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> side <span class="operator">*</span> <span class="number">4</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以这样写</span></span><br><span class="line"><span class="keyword">var</span> girth: <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> side <span class="operator">*</span> <span class="number">4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 还可以这样写</span></span><br><span class="line"><span class="keyword">var</span> girth: <span class="type">Int</span> &#123; side <span class="operator">*</span> <span class="number">4</span> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> squ <span class="operator">=</span> <span class="type">Square</span>(side: <span class="number">4</span>)</span><br><span class="line"><span class="comment">// 不可赋值修改</span></span><br><span class="line"><span class="comment">//squ.girth = 12;</span></span><br><span class="line"><span class="built_in">print</span>(squ.girth)</span><br></pre></td></tr></table></figure>
+
+<h3 id="枚举的rawValue"><a href="#枚举的rawValue" class="headerlink" title="枚举的rawValue"></a>枚举的rawValue</h3><p>枚举的<code>rawValue</code>的本质就是计算属性, 而且是只读的计算属性</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Test</span>: <span class="title class_">Int</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> test1 <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> test2 <span class="operator">=</span> <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c <span class="operator">=</span> <span class="type">Test</span>.test1.rawValue</span><br><span class="line"><span class="built_in">print</span>(c)    <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>至于如何确定, 那么久简单粗暴点, 看汇编</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/square3.png" alt="Square"></p>
+<ul>
+<li>上图中可以看到获取<code>rawValue</code>的值, 其实就是调用的<code>rawValue</code>的<code>getter</code>方法</li>
+<li>另外如下所示, 我们对<code>rawValue</code>进行重新赋值, 会报错</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Test</span>.test1.rawValue <span class="operator">=</span> <span class="number">2</span></span><br><span class="line"><span class="comment">// 这里报错: Cannot assign to property: &#x27;rawValue&#x27; is immutable</span></span><br></pre></td></tr></table></figure>
+
+<p>那么我们就可以根据<code>rawValue</code>的计算属性修改<code>rawValue</code>的值</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Test</span>: <span class="title class_">Int</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> test1 <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> test2 <span class="operator">=</span> <span class="number">2</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> rawValue: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> <span class="keyword">self</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> .test1:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">10</span></span><br><span class="line">        <span class="keyword">case</span> .test2:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">20</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c <span class="operator">=</span> <span class="type">Test</span>.test1.rawValue   <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="延迟存储属性"><a href="#延迟存储属性" class="headerlink" title="延迟存储属性"></a>延迟存储属性</h3><ul>
+<li>使用<code>lazy</code>可以定义一个延迟存储属性(<code>Lazy Stored Property</code>), 延迟存储属性只有在第一次使用的时候才会进行初始化</li>
+<li><code>lazy</code>属性修饰必须是<code>var</code>, 不能是<code>let</code></li>
+<li><code>let</code>修饰的常量必须在实例的初始化方法完成之前就拥有值</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Car</span> &#123;</span><br><span class="line">    <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Car init&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">run</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Car is runing&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">lazy</span> <span class="keyword">var</span> car  <span class="operator">=</span> <span class="type">Car</span>()</span><br><span class="line">    <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Person init&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">goOut</span>() &#123;</span><br><span class="line">        car.run()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person <span class="operator">=</span> <span class="type">Person</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;--------&quot;</span>)</span><br><span class="line">person.goOut()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// Person init</span></span><br><span class="line"><span class="comment">// --------</span></span><br><span class="line"><span class="comment">// Car init</span></span><br><span class="line"><span class="comment">// Car is runing</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码, 在初始化<code>car</code>的时候如果没有<code>lazy</code>, 则输出结果如下</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Car init</span></span><br><span class="line"><span class="comment">Person init</span></span><br><span class="line"><span class="comment">--------</span></span><br><span class="line"><span class="comment">Car is runing</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这也就证明了延迟存储属性只有在第一次使用的时候才会被初始化</li>
+<li>此外还有一种复杂的延迟存储属性, 有点类似于<code>OC</code>中的懒加载</li>
+<li>下面代码中实际上是一个闭包, 可以吧相关逻辑处理放在闭包中处理</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Preview &#123;</span><br><span class="line">    lazy var image: Image = &#123;</span><br><span class="line">        let url = &quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/square3.png&quot;</span><br><span class="line">        let data = Data.init(contentsOf: url)</span><br><span class="line">        return Image(data: data)</span><br><span class="line">    &#125;()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="属性观察器"><a href="#属性观察器" class="headerlink" title="属性观察器"></a>属性观察器</h3><p>在<code>Swift</code>中可以为非<code>lazy</code>的并且只能是<code>var</code>修饰的存储属性设置属性观察器, 形式如下</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> age: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">willSet</span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;willSet&quot;</span>, newValue)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;didSet&quot;</span>, oldValue, age)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">self</span>.age <span class="operator">=</span> <span class="number">3</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Person init&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p <span class="operator">=</span> <span class="type">Person</span>()</span><br><span class="line">p.age <span class="operator">=</span> <span class="number">10</span></span><br><span class="line"><span class="built_in">print</span>(p.age)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出结果</span></span><br><span class="line"><span class="comment">Person init</span></span><br><span class="line"><span class="comment">willSet 10</span></span><br><span class="line"><span class="comment">didSet 3 10</span></span><br><span class="line"><span class="comment">10</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在存储属性中定义<code>willSet</code>或<code>didSet</code>观察者，来观察和响应属性值的变化, 从上述输出结果我们也可以看到<ul>
+<li><code>willSet</code>会传递新值, 在存储值之前被调用, 其默认的参数名是<code>newValue</code></li>
+<li><code>didSet</code>会传递旧值, 在存储新值之后立即被调用, 其默认的参数名是<code>oldValue</code></li>
+</ul>
+</li>
+<li>当每次给存储属性设置新值时，都会调用属性观察者，即使属性的新值与当前值相同</li>
+<li>在初始化器中设置属性和在定义属性是设置初始值都不会触发<code>willSet</code>或<code>didSet</code></li>
+</ul>
+<h2 id="类型属性"><a href="#类型属性" class="headerlink" title="类型属性"></a>类型属性</h2><ul>
+<li>存储类型属性(<code>Stored Type Property</code>): 整个程序运行过程中就只有一份内存(类似全局变量)</li>
+<li>计算类型属性(<code>Computed Type Property</code>): 不占用系统内存</li>
+<li>类型属性可以通过<code>static</code>关键字定义; 如果是类也可以通过<code>class</code>关键字定义</li>
+<li>存储类型属性可以声明为变量或常量，计算类型属性只能被声明为变量</li>
+<li>存储类型属性必须设置初始值, 因为存数类型属性没有<code>init</code>初始化器去设置初始值的方式</li>
+<li>存储类型属性默认就是延迟属性(<code>lazy</code>), 不需要使用<code>lazy</code>修饰符标记, 只会在第一次使用的时候初始化, 即使是被多个线程访问, 也能保证只会被初始化一次</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在结构体中只能使用static</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> weight: <span class="type">Int</span> <span class="operator">=</span> <span class="number">30</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> height: <span class="type">Int</span> <span class="operator">=</span> <span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取值</span></span><br><span class="line"><span class="keyword">let</span> a <span class="operator">=</span> <span class="type">Person</span>.weight</span><br><span class="line"><span class="keyword">let</span> b <span class="operator">=</span> <span class="type">Person</span>.height</span><br><span class="line"></span><br><span class="line"><span class="comment">// 赋值</span></span><br><span class="line"><span class="type">Person</span>.weight <span class="operator">=</span> <span class="number">12</span></span><br><span class="line"><span class="comment">// let修饰的不可被赋值</span></span><br><span class="line"><span class="comment">//Person.height = 10</span></span><br></pre></td></tr></table></figure>
+
+<div class="note info"><p>在类中可以使用`static`和`class`</p></div>
+
+
+
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> name: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;name&quot;</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">var</span> <span class="title class_">age</span>: <span class="title class_">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取值</span></span><br><span class="line"><span class="keyword">let</span> a1 <span class="operator">=</span> <span class="type">Animal</span>.name</span><br><span class="line"><span class="keyword">let</span> a2 <span class="operator">=</span> <span class="type">Animal</span>.age</span><br><span class="line"></span><br><span class="line"><span class="comment">// 赋值</span></span><br><span class="line"><span class="type">Animal</span>.name <span class="operator">=</span> <span class="string">&quot;animal&quot;</span></span><br><span class="line"><span class="comment">// class定义的属性是只读的</span></span><br><span class="line"><span class="comment">// Animal.age = 20</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a><code>static</code></h3><ul>
+<li>可以修饰<code>class</code>、<code>struct</code>、<code>enum</code>类型的属性或者方法</li>
+<li>被修饰的<code>class</code>中的属性和方法不可以在子类中被重写, 重写会报错</li>
+<li>修饰存储属性</li>
+<li>修饰计算属性</li>
+<li>修饰类型方法</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="comment">// 存储属性</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> weight: <span class="type">Int</span> <span class="operator">=</span> <span class="number">30</span></span><br><span class="line">    <span class="comment">// 计算属性</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> height: <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="number">140</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 类型方法</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">func</span> <span class="title function_">goShoping</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Person shoping&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="class"><a href="#class" class="headerlink" title="class"></a><code>class</code></h3><ul>
+<li>只能修饰类的计算属性和方法</li>
+<li>不能修饰类的存储属性</li>
+<li>修饰的计算属性和方法可以被子类重写</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="comment">// 计算属性</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">var</span> <span class="title class_">height</span>: <span class="title class_">Int</span> &#123;</span><br><span class="line">        <span class="keyword">get</span> &#123; <span class="number">140</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 类型方法</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">func</span> <span class="title class_">running</span>() &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Person running&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="内存分析"><a href="#内存分析" class="headerlink" title="内存分析"></a>内存分析</h3><p>先看下下面这行代码的内存地址</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1 <span class="operator">=</span> <span class="number">3</span></span><br><span class="line"><span class="keyword">var</span> num2 <span class="operator">=</span> <span class="number">5</span></span><br><span class="line"><span class="keyword">var</span> num3 <span class="operator">=</span> <span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>看到的核心汇编代码如下所示, 就是把3, 5, 7分别赋值给了三个全局变量</li>
+<li>在汇编语言中, <code>rip</code>作为指令指针,</li>
+<li><code>rip</code>中存储着<code>CPU</code>下一条要执行的指令的地址</li>
+<li>一旦<code>CPU</code>读取一条指令, <code>rip</code>会自动指向下一条指令(存储下一条指令的地址)</li>
+<li>比如下面代码中第二条指令中的<code>rip</code>存储的地址就是第三条指令的地址<code>0x10000138c</code></li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0x10000137f</span> &lt;+<span class="number">15</span>&gt;:  xorl   %ecx, %ecx</span><br><span class="line"><span class="comment">// $0x3赋值给num1, 则num1的地址值就是: 0x10000138c + 0x5e6c = 0x1000071F8</span></span><br><span class="line"><span class="number">0x100001381</span> &lt;+<span class="number">17</span>&gt;:  movq   $<span class="number">0x3</span>, <span class="number">0x5e6c</span>(%rip)        ; lazy cache variable <span class="keyword">for</span> type metadata <span class="keyword">for</span> Swift.Array&lt;Swift.UInt8&gt; + <span class="number">4</span></span><br><span class="line"><span class="comment">// $0x5赋值给num2, 则num2的地址值就是: 0x100001397 + 0x5e69 = 0x100007200</span></span><br><span class="line"><span class="number">0x10000138c</span> &lt;+<span class="number">28</span>&gt;:  movq   $<span class="number">0x5</span>, <span class="number">0x5e69</span>(%rip)        ; SwiftLanguage.num1 : Swift.Int + <span class="number">4</span></span><br><span class="line"><span class="comment">// $0x7赋值给num3, 则num3的地址值就是: 0x1000013a2 + 0x5e66 = 0x100007208</span></span><br><span class="line"><span class="number">0x100001397</span> &lt;+<span class="number">39</span>&gt;:  movq   $<span class="number">0x7</span>, <span class="number">0x5e66</span>(%rip)        ; SwiftLanguage.num2 : Swift.Int + <span class="number">4</span></span><br><span class="line"><span class="number">0x1000013a2</span> &lt;+<span class="number">50</span>&gt;:  movl   %edi, <span class="number">-0x1c</span>(%rbp)</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>从上面三个内存地址可以看出三个全局变量的内存地址是相邻的</li>
+<li>并且彼此相差8个字节, 因为每一个<code>Int</code>就占用8个字节</li>
+<li>下面再看一下类型属性和全局变量的内存地址</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">var</span> age: <span class="type">Int</span> <span class="operator">=</span> <span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> num1 <span class="operator">=</span> <span class="number">3</span></span><br><span class="line"><span class="type">Animal</span>.age <span class="operator">=</span> <span class="number">7</span></span><br><span class="line"><span class="keyword">var</span> num2 <span class="operator">=</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<div class="note info"><p>相关汇编代码如图所示</p></div>
+
+
+
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/property.png" alt="property"></p>
+<p>根据图中的相关核心代码, 分别计算出<code>num1</code>, <code>age</code>和<code>num2</code>的内存地址如下</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// $0x3赋值给num1, 则num1的地址值就是: 0x100000fd3 + 0x6785 = 0x100007330</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过register命令得到rax的地址为0x100007338, 即为age所在的内存地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// $0x5赋值给num2, 则num2的地址值就是: 0x100001027 + 0x6319 = 0x100007340</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">0x100007330</span></span><br><span class="line"><span class="comment">0x100007338</span></span><br><span class="line"><span class="comment">0x100007340</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 上述三个内存地址同样也是相邻, 并且彼此相差8个字节</span></span><br></pre></td></tr></table></figure>
+
+
+<div class="note success"><p>所以</p></div>
+
+<p>类型属性也可以理解为全局变量, 不同的是全局变量可以直接访问, 类型属性必须通过类名访问, 有一定的访问限制而已</p>
+<h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><ul>
+<li>上面有提到, 存储类型属性默认就是延迟属性(<code>lazy</code>), 不需要使用<code>lazy</code>修饰符标记, 只会在第一次使用的时候初始化</li>
+<li>即使是被多个线程访问, 也能保证只会被初始化一次, 是线程安全的</li>
+</ul>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/property.png" alt="property"></p>
+<ul>
+<li>从图中可以看出, 在断点处给类型属性<code>age</code>赋值之前, 执行了很多汇编代码</li>
+<li>其中最重要的一条函数跳转指令<code>callq</code></li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 进入查看具体执行的那些操作</span></span><br><span class="line"><span class="number">0x100000fda</span> &lt;+<span class="number">26</span>&gt;:  callq  <span class="number">0x1000010d0</span>  ; SwiftLanguage.Animal.age.unsafeMutableAddressor : Swift.Int at main.swift</span><br></pre></td></tr></table></figure>
+
+<p>将断点加在此处, 执行<code>si</code>指令即可进入该模块</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/property1.png" alt="property1"></p>
+<ul>
+<li>这里看到<code>swift_once</code>, 自然就能够联想到<code>dispatch_once</code>和<code>OC</code>中的单例模式</li>
+<li>那就继续向下看, 看看<code>swift_once</code>里面到底是如何操作的, 还是在<code>swift_once</code>加上断点, 并执行<code>si</code>指令, 如下图所示</li>
+</ul>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/swift/property2.png" alt="property2"></p>
+<div class="note success"><p>所以</p></div>
+
+<ul>
+<li>类型属性的线程安全最终就是通过<code>dispatch_once</code>实现的</li>
+<li>属性的赋值操作相当于就是放在<code>dispatch_once</code>里面执行的, 保证<code>age</code>的初始化操作永远只被执行一次, 类似<code>OC</code>中的单例</li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/bde391d5.html" title="浅谈Swift的属性(Property)">https://titanjun.top/post/bde391d5.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/swift/" rel="tag"> <i class="fa fa-tag"></i> Swift</a>
+              <a href="/tags/property/" rel="tag"> <i class="fa fa-tag"></i> Property</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/30039fb5.html" rel="prev" title="浅谈Swift的内存管理">
+                  <i class="fa fa-chevron-left"></i> 浅谈Swift的内存管理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/de12f33.html" rel="next" title="Sign In with Apple">
+                  Sign In with Apple <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/bde391d5.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

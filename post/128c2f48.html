@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="iOS的静态库和动态库">
+<meta property="og:url" content="https://titanjun.top/post/128c2f48.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/staticFramework.jpg?x-oss-process=style/titanjun">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-b8f9c74fc0185ddd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-086dd1629ebb028b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/697/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-1b00f7f45a6654c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/930/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-727056aa929e2c7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/707/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-b1f80d56eccf1990.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/331/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-88dc3d5139099895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-88dc3d5139099895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/764/format/webp">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-6e40f428fc01b99b.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-768361c8b9d2c1a7.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-b71694440807f1f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/424/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-dc1006500bfeecb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/454/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-f60b374e5952d639.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/764/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-7b193d311de70e01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/412/format/webp">
+<meta property="article:published_time" content="2018-09-12T03:56:26.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.903Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/staticFramework.jpg?x-oss-process=style/titanjun">
+
+
+<link rel="canonical" href="https://titanjun.top/post/128c2f48.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/128c2f48.html","path":"post/128c2f48.html","title":"iOS的静态库和动态库"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>iOS的静态库和动态库 | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">静态库简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">什么是库?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">静态库与动态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E5%BA%93%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">为什么要使用静态库？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E7%94%9F%E6%88%90%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">.a静态库的生成和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">静态库的架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%A4%9A%E6%9E%B6%E6%9E%84%E9%9D%99%E6%80%81%E5%BA%93"><span class="nav-number">2.2.</span> <span class="nav-text">编译多架构静态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-number">2.3.</span> <span class="nav-text">静态库的版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90-a%E5%92%8C-h%E6%96%87%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text">生成.a和.h文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#framework%E9%9D%99%E6%80%81%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">.framework静态库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90-framework%E9%9D%99%E6%80%81%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">生成.framework静态库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9framework"><span class="nav-number">3.1.1.</span> <span class="nav-text">选择framework</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83"><span class="nav-number">3.1.2.</span> <span class="nav-text">选择编译环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81%E5%BA%93"><span class="nav-number">3.1.3.</span> <span class="nav-text">手动设置静态库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%89%88%E6%9C%AC"><span class="nav-number">3.1.4.</span> <span class="nav-text">静态库版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%AC%E5%BC%80%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.5.</span> <span class="nav-text">添加公开头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">3.1.6.</span> <span class="nav-text">编译</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bundle%E5%8A%A0%E8%BD%BD%E8%B5%84%E6%BA%90"><span class="nav-number">3.2.</span> <span class="nav-text">bundle加载资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E6%B5%8B%E8%AF%95"><span class="nav-number">3.3.</span> <span class="nav-text">静态库的测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%89%93%E5%8C%85"><span class="nav-number">3.4.</span> <span class="nav-text">自动打包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%81%E6%9C%89%E5%BA%93%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">私有库的二进制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E9%9D%99%E6%80%81%E5%BA%93"><span class="nav-number">4.1.</span> <span class="nav-text">打包静态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9podspec%E6%96%87%E4%BB%B6"><span class="nav-number">4.2.</span> <span class="nav-text">修改podspec文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E9%9D%99%E6%80%81%E5%BA%93"><span class="nav-number">4.2.1.</span> <span class="nav-text">引入静态库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E6%BA%90%E7%A0%81"><span class="nav-number">4.2.2.</span> <span class="nav-text">切换静态库和源码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E7%9A%84%E9%9D%99%E6%80%81%E5%BA%93"><span class="nav-number">4.3.</span> <span class="nav-text">有依赖关系的静态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E5%BA%93%E6%89%93%E5%8C%85"><span class="nav-number">4.4.</span> <span class="nav-text">多分类的静态库打包</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/128c2f48.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="iOS的静态库和动态库 | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          iOS的静态库和动态库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-12 11:56:26" itemprop="dateCreated datePublished" datetime="2018-09-12T11:56:26+08:00">2018-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">组件化开发</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/staticFramework.jpg?x-oss-process=style/titanjun" alt="staticFramework"></p>
+<span id="more"></span>
+
+<h2 id="静态库简介"><a href="#静态库简介" class="headerlink" title="静态库简介"></a>静态库简介</h2><h3 id="什么是库"><a href="#什么是库" class="headerlink" title="什么是库?"></a>什么是库?</h3><ul>
+<li>库从本质上来说是一种可执行代码的二进制格式，可以被载入内存中执行</li>
+<li>库就是程序代码的集合, 是共享程序代码的一种方式</li>
+<li>库从广义上可分为开源库和闭源库, 而闭源库才分为静态库和动态库<ul>
+<li>开源库: 对外公开源代码, 能看到具体的代码实现, 例如<code>Github</code>上面的第三方开源库都称之为开源库</li>
+<li>闭源库: 不公开源代码, 文件是经过编译后的二进制文件, 看不到具体实现, 例如<code>.a</code>文件和<code>.framework</code>文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="静态库与动态库"><a href="#静态库与动态库" class="headerlink" title="静态库与动态库"></a>静态库与动态库</h3><ul>
+<li>静态库：链接时完整地拷贝至可执行文件中，被多次使用就有多份冗余拷贝<ul>
+<li>静态库有两种存在形式: <code>.a</code>和<code>.framework</code></li>
+</ul>
+</li>
+<li>动态库：动态库则不会复制, 只有一份. 程序运行时动态加载到内存; 系统只加载一次, 多个程序共用, 节省内存<ul>
+<li>动态库有两种存在形式: <code>.dylib</code>和<code>.framework</code></li>
+<li>需要注意的是: 系统的<code>.framework</code>是动态库，我们自己建立的<code>.framework</code>是静态库</li>
+</ul>
+</li>
+<li>但是项目中如果使用到自己的动态库, 苹果是不允许上架!</li>
+<li>再但是<code>WWDC2014</code>上公布的苹果对<code>ios8</code>开放动态加载<code>dylib</code>的接口 也就是说 开放了动态库挂载, 但是目前几乎没有上架的项目使用</li>
+</ul>
+ <div class="note info"><p>`.a`与`.framework`的区别</p></div>
+
+<ul>
+<li><code>.a</code>是一个纯二进制文件不能直接使用, 必须要有<code>.h</code>文件才能使用, <code>.h</code>文件对外提供接口, <code>.a</code>文件是代码的具体实现, 即<code>.m</code></li>
+<li><code>.framework</code>中除了有二进制文件之外还有资源文件, 可以直接使用</li>
+<li>所以开发中建议使用<code>.framework</code></li>
+</ul>
+<h3 id="为什么要使用静态库？"><a href="#为什么要使用静态库？" class="headerlink" title="为什么要使用静态库？"></a>为什么要使用静态库？</h3><ul>
+<li>保护自己的核心代码, 国内的企业，掌握有核心技术，同时是又希望更多的程序员来使用其技术，因此采用”闭源”的方式开发使用</li>
+<li>实现iOS项目的组件化, 可以把固定的业务模块编译成静态库</li>
+<li>开发第三方SDK, 例如: 友盟SDK, 百度地图SDK….</li>
+<li>提高项目的编译速度, 比如项目的组件化, 虽然使用了组件化, 但依然是源码, 如果工程庞大, 编译速度依然非常慢, 但是如果把响应的功能和业务组件编译成静态库, 将会大大提高项目的编译速度</li>
+</ul>
+<h2 id="a静态库的生成和使用"><a href="#a静态库的生成和使用" class="headerlink" title=".a静态库的生成和使用"></a><code>.a</code>静态库的生成和使用</h2><p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-b8f9c74fc0185ddd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="staticLibrary"></p>
+<ul>
+<li>生成<code>.a</code>静态库, 这里我们选择第二个创建</li>
+<li>静态库分真机和模拟机两种环境<ul>
+<li>在真机环境下编译出来的是只适用于真机的静态库</li>
+<li>在模拟机环境下编译出来的是只使用模拟机的静态库</li>
+<li>同事使用真机和模拟机的静态库, 后面会提到, 暂不赘述</li>
+</ul>
+</li>
+<li>在不同的环境下静态库支持的架构也是不同的, 模拟器下的静态库和真机下的静态库不能共用, 不同型号编译的静态库也是不能共用的</li>
+<li>不同设备使用的CPU不同，从而使用的CPU架构（指令集）也不同，静态库有其支持的CPU架构，若静态库在不支持的CPU架构上运行程序就会崩溃</li>
+</ul>
+<h3 id="静态库的架构"><a href="#静态库的架构" class="headerlink" title="静态库的架构"></a>静态库的架构</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 模拟器使用的CPU架构： </span></span><br><span class="line">iphone4s - iphone5 : i386 </span><br><span class="line">iPhone5s - iPhoneX ：x86_64</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 真机使用的CPU架构： </span></span><br><span class="line">iPhone3gs - iPhone4s：armv7 </span><br><span class="line">iPhone5 - iPhone5c：armv7s </span><br><span class="line">iPhone5s - iPhoneX：armv64 </span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>如果想要查看不同的机型所支持的架构, 可分别使用不同的模拟器或者真机, 编译出不同的静态库</li>
+<li>然后使用终端, cd 到静态库所在的目录</li>
+<li>在执行<code>lipo -info 静态库名称</code>即可</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 执行lipo -info的输出结果</span></span><br><span class="line">$ lipo -info libStateLib.a </span><br><span class="line">input file libStateLib.a is not a fat file</span><br><span class="line">Non-fat file: libStateLib.a is architecture: x86_64</span><br></pre></td></tr></table></figure>
+
+<h3 id="编译多架构静态库"><a href="#编译多架构静态库" class="headerlink" title="编译多架构静态库"></a>编译多架构静态库</h3><ul>
+<li>在调试不同机型的过程中, 需要选中每一个模拟器进行编译, 生成支持对应架构的静态库然后合并, 非常蛋疼</li>
+<li>怎样一次编译支持多个架构的的静态库?</li>
+</ul>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-086dd1629ebb028b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/697/format/webp" alt="bundleActive"></p>
+<ul>
+<li>该选项默认是<code>YES</code>, 也就是只编译当前活跃环境的架构, 设置成<code>No</code>即可</li>
+<li>模拟器环境编译出来的就支持所有的模拟机型号, 真机亦是如此</li>
+</ul>
+<h3 id="静态库的版本"><a href="#静态库的版本" class="headerlink" title="静态库的版本"></a>静态库的版本</h3><ul>
+<li>和<code>iOS</code>证书一样分调试版本(<code>Debug</code>)和发布版本<code>Release</code></li>
+<li>真机-<code>Debug</code>版本 </li>
+<li>真机-<code>Release</code>版本 </li>
+<li>模拟器-<code>Debug</code>版本 </li>
+<li>模拟器-<code>Release</code>版本</li>
+</ul>
+<div class="note info"><p>调试版本`Debug`</p></div>
+
+<ul>
+<li>真机-<code>Debug</code>版本和模拟器-<code>Debug</code>版本 </li>
+<li>调试版本的特点<ul>
+<li>调试版本会包含完整的符号信息，以方便调试</li>
+<li>调试版本不会对代码进行优化</li>
+</ul>
+</li>
+</ul>
+<div class="note info"><p>发布版本`Release`</p></div>
+
+<ul>
+<li>真机-<code>Release</code>版本和模拟器-<code>Release</code>版本 </li>
+<li>发布版本的特点<ul>
+<li>发布版本不会包含完整的符号信息， </li>
+<li>发布版本的执行代码是进行过优化的， </li>
+<li>发布版本的大小会比调试版本的略小， </li>
+<li>在执行速度方面，发布版本会更快些，但不意味着会有显著的提升</li>
+</ul>
+</li>
+</ul>
+<div class="note primary"><p>生成不同版本的静态库</p></div>
+
+<p>选择项目 <code>-&gt; Edit Scheme -&gt; Run -&gt; Release/Debug</code> 分别进行编译, 即可得到不同版本的静态库</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-1b00f7f45a6654c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/930/format/webp" alt="EditScheme"></p>
+<h3 id="生成-a和-h文件"><a href="#生成-a和-h文件" class="headerlink" title="生成.a和.h文件"></a>生成<code>.a</code>和<code>.h</code>文件</h3><ul>
+<li>正常情况下, 生成的<code>.h</code>文件是在<code>../include/$(PRODUCT_NAME)</code>目录下的, <code>$(PRODUCT_NAME)</code>指的是项目的名字</li>
+<li>修改图中2处的路径地址, 即可修改<code>.h</code>文件生成的路径, 填空即为和<code>.a</code>文件在同级目录下</li>
+</ul>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-727056aa929e2c7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/707/format/webp" alt="image"></p>
+<p>最后编写好代码, <code>command+B</code>编译之后, 如图所示操作即可找到生成的静态库</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-b1f80d56eccf1990.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/331/format/webp" alt="image"></p>
+<div class="note success"><p>合并静态库</p></div>
+
+<ul>
+<li>因为静态库针对于模拟器和真机生成了不同版本(支持不同架构), 所以没法同时运行</li>
+<li>合并后的静态库既可以在真机上调试，也可以在模拟器上调试, 省去了来回切换的诸多烦恼</li>
+<li>但是合并后的静态库大小是模拟器和真机的大小之和，如果静态库太大，合并打包后，会非常大，因此很多第三方的静态库的<code>.a</code>是区分版本的</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下所有方式得到的静态库都可以通过lipo -info xx.a方式检测现有的架构, 注意要在xx.a所在的目录下</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 合并静态库</span></span><br><span class="line">lipo -create 静态库<span class="number">1</span>路径 静态库<span class="number">2</span>路径 -output 合并后的静态库名称</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例</span></span><br><span class="line">lipo -create /Users/xxx/Debug-iphoneos/libStateLib.a /Users/xxx/Debug-iphonesimulator/libStateLib.a -output hahah.a</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 移除某一个架构</span></span><br><span class="line">lipo -remove 架构名称 静态库绝对路径 -output 新的静态库名字</span><br><span class="line">lipo -remove arm64 /Users/xxx/Build/Products/hahah.a -output ha_arm64.a</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 拆分出一个单独架构的静态库</span></span><br><span class="line">lipo -thin 架构名称 静态库绝对路径 -output 新的静态库名字</span><br><span class="line">lipo -thin arm64 /Users/xxx/Build/Products/hahah.a -output only_arm64.a</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="framework静态库"><a href="#framework静态库" class="headerlink" title=".framework静态库"></a><code>.framework</code>静态库</h2><h3 id="生成-framework静态库"><a href="#生成-framework静态库" class="headerlink" title="生成.framework静态库"></a>生成<code>.framework</code>静态库</h3><h4 id="选择framework"><a href="#选择framework" class="headerlink" title="选择framework"></a>选择<code>framework</code></h4><p>创建新工程, 选择第一个创建<code>Framework</code>工程</p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-88dc3d5139099895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="staticLibrary"></p>
+<h4 id="选择编译环境"><a href="#选择编译环境" class="headerlink" title="选择编译环境"></a>选择编译环境</h4><p>选择适配所有真机或者适配所有模拟器(编译所有架构), <code>Build Settings -&gt; Build Active Architecture Only</code>选项设为<code>NO</code></p>
+<h4 id="手动设置静态库"><a href="#手动设置静态库" class="headerlink" title="手动设置静态库"></a>手动设置静态库</h4><p>刚创建的工程默认创建的是动态库, 需要手动设置链接类型, <code>Build Settings -&gt; Mach-o Type</code>设置成<code>Static Library</code></p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-88dc3d5139099895.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/764/format/webp" alt="machtype"></p>
+<h4 id="静态库版本"><a href="#静态库版本" class="headerlink" title="静态库版本"></a>静态库版本</h4><p>设置静态库的版本, 选择项目 -&gt; <code>Edit Scheme -&gt; Run -&gt; Release/Debug</code> 分别进行编译, 即可得到不同版本的静态库</p>
+<h4 id="添加公开头文件"><a href="#添加公开头文件" class="headerlink" title="添加公开头文件"></a>添加公开头文件</h4><p><code>Target-&gt;Build Phases-&gt;Headers</code>中的<code>Project</code>中要暴露的头文件拖拽到<code>Pulic</code>里面： </p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-6e40f428fc01b99b.gif?imageMogr2/auto-orient/strip" alt="headerfile"></p>
+<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><p>分别选择<code>Generic iOS Device</code>和任意一个模拟器各编译一次。编译完，工程中<code>Products</code>文件夹下的<code>xxx.framework</code>由红色变成了黑色，然后<code>show in finder</code>，看看生成的文件 </p>
+<div class="note warning"><p>注意事项</p></div>
+
+<ul>
+<li>如果静态库中有<code>category</code>类，则在使用静态库的项目配置中<code>Other Linker Flags</code>需要添加参数<code>-ObjC</code>或者<code>-all_load</code> </li>
+<li>如果创建的<code>framework</code>类中使用了<code>.tbd</code>，则需要在实际项目中导入<code>.tbd</code>动态库。</li>
+<li><code>.framework</code>静态库的合并和拆分和<code>.a</code>静态库的方式一样, 就不在赘述了</li>
+</ul>
+<h3 id="bundle加载资源"><a href="#bundle加载资源" class="headerlink" title="bundle加载资源"></a><code>bundle</code>加载资源</h3><ul>
+<li>由于<code>Xcode</code>默认在编译时会把所有的素材文件导入到<code>mainBundle</code>中，可能会让宿主工程与使用静态库的程序冲突。</li>
+<li>在创建静态库的项目中又是难免会用到一些图片或者<code>xib</code>等资源, 类似这些资源在静态库中又如何进行管理呢</li>
+<li>这里我们就要引入一个<code>bundle</code>文件, 对资源进行管理, 用以存放<code>xib</code>文件或者图片等资源</li>
+<li><code>bundle</code>文件是是静态的，不进行编译的资源文件, 所以使用时需要找到相应的资源路径</li>
+</ul>
+<div class="note success"><p>创建方式</p></div>
+
+<ul>
+<li>把包含资源文件的文件夹的后缀改为<code>.bundle</code>, 这时他就变成一个<code>bundle</code>文件</li>
+<li>或者右键显示包内容就可以把对应的图片资源等放进文件中，然后把他丢进工程中就可以使用了</li>
+<li>调用该图片时, 需要在图片名前加上<code>xxx.bundle</code>前缀</li>
+</ul>
+<h3 id="静态库的测试"><a href="#静态库的测试" class="headerlink" title="静态库的测试"></a>静态库的测试</h3><ul>
+<li>静态库本身就是一个小项目, 实现某些功能, 但是这些功能在开发中也需要测试. 而测试代码又不能作为静态库的一部分</li>
+<li>建议创建一个复合项目, 在宿主工程中添加一个静态库的工程</li>
+</ul>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-768361c8b9d2c1a7.gif?imageMogr2/auto-orient/strip" alt="allStatic"></p>
+<h3 id="自动打包"><a href="#自动打包" class="headerlink" title="自动打包"></a>自动打包</h3><ul>
+<li>上面介绍的都是手动打包的方式, 虽然麻烦一些, 但是相对更不容易出错, 而且可以对本地代码打包</li>
+<li>还有一种自动打包方式, 只需一条命令<code>package</code>, 便可对静态库进行打包, 但是前提是: 代码必须已经上传到远程仓库</li>
+<li>首先安装<code>package</code>: <ul>
+<li><code>sudo gem install cocoapods-packager</code></li>
+</ul>
+</li>
+<li>使用</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前提是代码必须已经上传到远程仓库, 否则报错不会成功</span></span><br><span class="line"><span class="comment">// 1. cd 到podspec文件所在的根目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 执行</span></span><br><span class="line">pod package xxx.podspec</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="私有库的二进制"><a href="#私有库的二进制" class="headerlink" title="私有库的二进制"></a>私有库的二进制</h2><ul>
+<li>在组件化开发的过程选中, 虽然使用了组件化, 但依然是源码, 如果工程庞大, 编译速度依然非常慢</li>
+<li>所以,为了加快编译速度可以直接把私有库打包成为一个静态库库文件, 进行使用</li>
+<li>在每一个私有库里面都有一个这样的测试工程, 但是这个工程不能打包成静态库</li>
+<li>但是, 如果为了打包静态库单独分离出一个工程用于打包, 那么我们后期就需要维护和更新两套代码, 过于繁琐</li>
+<li>所以我们可以用符合工程进行处理, 在<code>Example</code>所在的测试工程中添加一个静态库的工程, 如<a href="#%E9%9D%99%E6%80%81%E5%BA%93%E7%9A%84%E6%B5%8B%E8%AF%95">静态库的测试</a>所示</li>
+</ul>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-b71694440807f1f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/424/format/webp" alt="exampleTest"></p>
+<h3 id="打包静态库"><a href="#打包静态库" class="headerlink" title="打包静态库"></a>打包静态库</h3><p>这里我们是以<code>framework</code>静态库为例, 静态库工程添加之后, 左侧会多出一个类似<code>BaseLib</code>的文件夹, 该文件夹用于存放需要打包的文件, 即<code>TitanBase/Classes</code>目录下的文件</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-dc1006500bfeecb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/454/format/webp" alt="image"></p>
+<ul>
+<li>导入文件的时候需要注意, 一定不能勾选<code>Copy Items</code>选项, 因为我们需要的是引用<code>Classes</code>目录下的文件, 而不是拷贝</li>
+<li>如果是拷贝, 静态库和<code>Classes</code>目录使用的将会是两套不同的代码(虽然内容可能一样), 由乙方改变, 另一方的代码不会改变</li>
+<li>引用则可以做到一改全改</li>
+</ul>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-f60b374e5952d639.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/764/format/webp" alt="copyItem"></p>
+<ul>
+<li>接下来选择静态库的工程, 并修改打包静态库的相应的配置, 步骤参考<a href="#%E7%94%9F%E6%88%90.framework%E9%9D%99%E6%80%81%E5%BA%93">生成.framework静态库</a></li>
+<li>这里生成的静态库的目录是系统默认, 我们也可以自行设置: <code>File -&gt; WorkSpace Setting</code></li>
+</ul>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-7b193d311de70e01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/412/format/webp" alt="selectLib"></p>
+<ul>
+<li>最后在<code>Classes</code>的统计目录下创建一个<code>Products</code>的目录(自定义创建, 你开心就好)</li>
+<li>把打包好的<code>.framework</code>或者<code>.a</code>的静态库, 放到<code>Products</code>目录下</li>
+</ul>
+<h3 id="修改podspec文件"><a href="#修改podspec文件" class="headerlink" title="修改podspec文件"></a>修改<code>podspec</code>文件</h3><h4 id="引入静态库"><a href="#引入静态库" class="headerlink" title="引入静态库"></a>引入静态库</h4><p>完成了静态库的打包, 下面就是修改<code>podspec</code>文件中相应的配置了</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s.source_files = <span class="string">&#x27;TitanBase/Classes/**/*.h&#x27;</span></span><br><span class="line">s.vendored_frameworks = <span class="string">&quot;TitanBase/Products/BaseLib.framework&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>source_files</code>: 需要导入的文件, 现在只需要导入<code>.h</code>文件即可</li>
+<li><code>vendored_frameworks</code>: 需要导入的<code>framework</code>静态库</li>
+<li>最后重新对测试工程进行<code>pod install</code>即可, 更多配置相关信息可参考<a target="_blank" rel="noopener" href="https://guides.cocoapods.org/syntax/podspec.html#specification">官方文档</a></li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表示依赖的系统类库，比如libz.dylib等</span></span><br><span class="line">s.libraries     = <span class="string">&#x27;z&#x27;</span>, <span class="string">&#x27;sqlite3&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 表示依赖系统的框架</span></span><br><span class="line">s.frameworks    = <span class="string">&#x27;UIKit&#x27;</span>,<span class="string">&#x27;AVFoundation&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 依赖的第三方/自己的framework静态库</span></span><br><span class="line">s.vendored_frameworks = <span class="string">&#x27;YJKit/YJKit.framework&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 表示依赖第三方/自己的静态库（比如libWeChatSDK.a）</span></span><br><span class="line">s.vendored_libraries = <span class="string">&#x27;Library/Classes/libWeChatSDK.a&#x27;</span> </span><br><span class="line"><span class="comment"># 依赖的第三方的或者自己的静态库文件必须以lib为前缀进行命名，否则会出现找不到的情况，这一点非常重要</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="切换静态库和源码"><a href="#切换静态库和源码" class="headerlink" title="切换静态库和源码"></a>切换静态库和源码</h4><ul>
+<li>开发过程中如果需要调试代码的时候, 需要查看源码进行调试</li>
+<li>但是静态库却只能看到头文件, 没有源码, 无法进行调试</li>
+<li>在导入的私有库中, 静态库和源码如何进行切换呢</li>
+<li>这里我们在<code>podspec</code>配置文件中引入一个<code>if-else</code>语句, 如下所示</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="variable constant_">ENV</span>[<span class="string">&#x27;IS_SOURCE&#x27;</span>]</span><br><span class="line">    s.source_files = <span class="string">&#x27;TitanBase/Classes/**/*&#x27;</span></span><br><span class="line">    s.dependency <span class="string">&#x27;AFNetworking&#x27;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    s.source_files = <span class="string">&#x27;TitanBase/Classes/**/*.h&#x27;</span></span><br><span class="line">    s.vendored_frameworks = <span class="string">&quot;TitanBase/Products/BaseLib.framework&quot;</span></span><br><span class="line">    s.dependency <span class="string">&#x27;AFNetworking&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>此时如果需要切换为源码, 只需要执行<code>IS_SOURCE=1 pod install</code>即可(或者任意非0的数字, 非0即为真)</li>
+<li>执行<code>pod install</code>, 就会执行<code>else</code>后面的语句, 即导入静态库</li>
+<li>但是如果所有的组件都加了类似的判断, 切判断条件都是<code>IS_SOURCE</code>, 那么每次重新切换, 所有的组件都会导入源码或者导入静态库</li>
+<li>建议每一语句可以加两个判断条件, 一个统一的判断条件, 一个只对每一个组件的条件</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="variable constant_">ENV</span>[<span class="string">&#x27;IS_SOURCE&#x27;</span>] |<span class="params"></span>| <span class="variable constant_">ENV</span>[<span class="string">&#x27;IS_BASE&#x27;</span>]</span><br><span class="line">   ...</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="有依赖关系的静态库"><a href="#有依赖关系的静态库" class="headerlink" title="有依赖关系的静态库"></a>有依赖关系的静态库</h3><ul>
+<li>对单独的静态库工程打包静态库的时候, 默认不会将第三方库的内容打包进去, 是可以使用的</li>
+<li>对包含静态库工程的复合工程打包的时候, 可能会出现引用的第三方头文件找不到的问题或者出现打包出的静态库包含第三方库的代码和资源, 这样打包出来的静态库<ul>
+<li>第一: 打包好的静态库应该是不能使用的</li>
+<li>第二: 打包好的静态库中包含第三方库的所有代码和资源, 所以打包的静态库会很大</li>
+</ul>
+</li>
+<li>所以我们打包静态库, 是不需要把第三方的任何东西打包进去的</li>
+<li>在复合工程中建议的办法: 修改<code>Podfile</code>文件, 如下</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">target <span class="string">&#x27;CoreImage_Example&#x27;</span> <span class="keyword">do</span></span><br><span class="line">  pod <span class="string">&#x27;CoreImage&#x27;</span>, <span class="symbol">:path</span> =&gt; <span class="string">&#x27;../&#x27;</span></span><br><span class="line"></span><br><span class="line">  target <span class="string">&#x27;CoreImage_Tests&#x27;</span> <span class="keyword">do</span></span><br><span class="line">    inherit! <span class="symbol">:search_paths</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 以下添加的部分, CoreImgLib: 为静态库的名称, 需要在静态库中重新引用pod库的部分</span></span><br><span class="line">  target <span class="string">&#x27;CoreImgLib&#x27;</span> <span class="keyword">do</span></span><br><span class="line">      </span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>在引用第三方头文件的地方</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果使用&quot;&quot;方式报错</span></span><br><span class="line"><span class="meta">#import <span class="string">&quot;AFNetworking.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可改成以下方式引用</span></span><br><span class="line"><span class="meta">#import <span class="string">&lt;AFNetworking/AFNetworking.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>接下来在重新打包就可以了</p>
+<h3 id="多分类的静态库打包"><a href="#多分类的静态库打包" class="headerlink" title="多分类的静态库打包"></a>多分类的静态库打包</h3><p>类似<code>AFNetworking</code>的多分类框架</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-&gt; AFNetworking (<span class="number">3.2</span>.<span class="number">1</span>)</span><br><span class="line">   A delightful iOS <span class="keyword">and</span> <span class="variable constant_">OS</span> X networking framework.</span><br><span class="line">   pod <span class="string">&#x27;AFNetworking&#x27;</span>, <span class="string">&#x27;~&gt; 3.2.1&#x27;</span></span><br><span class="line">   - <span class="symbol">Homepage:</span> <span class="symbol">https:</span>/<span class="regexp">/github.com/</span>AFNetworking/AFNetworking</span><br><span class="line">   - <span class="symbol">Source:</span>   <span class="symbol">https:</span>/<span class="regexp">/github.com/</span>AFNetworking/AFNetworking.git</span><br><span class="line">   - <span class="symbol">Versions:</span> <span class="number">3.2</span>.<span class="number">1</span>, ......,<span class="number">0.5</span>.<span class="number">1</span> [master repo]</span><br><span class="line">   - <span class="symbol">Subspecs:</span></span><br><span class="line">     - AFNetworking/Serialization (<span class="number">3.2</span>.<span class="number">1</span>)</span><br><span class="line">     - AFNetworking/Security (<span class="number">3.2</span>.<span class="number">1</span>)</span><br><span class="line">     - AFNetworking/Reachability (<span class="number">3.2</span>.<span class="number">1</span>)</span><br><span class="line">     - AFNetworking/NSURLSession (<span class="number">3.2</span>.<span class="number">1</span>)</span><br><span class="line">     - AFNetworking/UIKit (<span class="number">3.2</span>.<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>对于有多个分类的私有库, 如果要打包成静态库<ul>
+<li>一: 可以每个分类单独处理, 分别打包, 很麻烦不建议这么做(也没必要)</li>
+<li>二: 把分类整合到一起, 打包成一个静态库</li>
+</ul>
+</li>
+<li>如下, 如果使用源码, 按照分类导入, 如果使用静态库, 打包成一个静态库导入</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="variable constant_">ENV</span>[<span class="string">&#x27;IS_SOURCE&#x27;</span>]</span><br><span class="line">    <span class="comment"># 静态库</span></span><br><span class="line">    s.source_files = <span class="string">&#x27;TKDownloadPlayer/Classes/**/*.h&#x27;</span></span><br><span class="line">    s.vendored_frameworks = <span class="string">&#x27;TKDownloadPlayer/Products/TKDownPlayerLib.framework&#x27;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="comment"># 源码</span></span><br><span class="line">    s.subspec <span class="string">&#x27;TKDownload&#x27;</span> <span class="keyword">do</span> |<span class="params">dl</span>|</span><br><span class="line">        dl.source_files = <span class="string">&#x27;TKDownloadPlayer/Classes/TKDownload/**/*&#x27;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    s.subspec <span class="string">&#x27;TKRemotePlayer&#x27;</span> <span class="keyword">do</span> |<span class="params">rp</span>|</span><br><span class="line">        rp.source_files = <span class="string">&#x27;TKDownloadPlayer/Classes/TKRemotePlayer/**/*&#x27;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/128c2f48.html" title="iOS的静态库和动态库">https://titanjun.top/post/128c2f48.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/ios/" rel="tag"> <i class="fa fa-tag"></i> iOS</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/641ca9b6.html" rel="prev" title="Hexo博客不蒜子统计不显示">
+                  <i class="fa fa-chevron-left"></i> Hexo博客不蒜子统计不显示
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/d1078e95.html" rel="next" title="移动开发之Fastlane自动化">
+                  移动开发之Fastlane自动化 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/128c2f48.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

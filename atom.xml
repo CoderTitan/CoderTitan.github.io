@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>TitanKing</title>
+  <icon>https://titanjun.top/icon.png</icon>
+  <subtitle>技术博客</subtitle>
+  <link href="https://titanjun.top/atom.xml" rel="self"/>
+  
+  <link href="https://titanjun.top/"/>
+  <updated>2023-01-20T13:14:39.893Z</updated>
+  <id>https://titanjun.top/</id>
+  
+  <author>
+    <name>TitanKing</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NexT主题配置个性化设置</title>
+    <link href="https://titanjun.top/post/9eda55ce.html"/>
+    <id>https://titanjun.top/post/9eda55ce.html</id>
+    <published>2022-08-18T07:03:13.000Z</published>
+    <updated>2023-01-20T13:14:39.893Z</updated>
+    
+    
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;最近基于&lt;code&gt;NexT&lt;/code&gt;主题重新搭建了自己的&lt;a href=&quot;https://www.titanjun.top/&quot;&gt;个人技术博客&lt;/a&gt;, 现在主要是总结分享关于&lt;code&gt;NexT(8.12.2)&lt;/code&gt;主题的相关配置和优化&lt;/li&gt;
+&lt;li&gt;我现在用的是&lt;code&gt;NexT&lt;/code&gt;主题, 这是作者提供的&lt;a href=&quot;http://theme-next.iissnan.com/&quot;&gt;NexT主题中文配置&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Hexo博客" scheme="https://titanjun.top/categories/hexo%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="Hexo" scheme="https://titanjun.top/tags/hexo/"/>
+    
+    <category term="NexT" scheme="https://titanjun.top/tags/next/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Swift学习数据结构和算法</title>
+    <link href="https://titanjun.top/post/a192b018.html"/>
+    <id>https://titanjun.top/post/a192b018.html</id>
+    <published>2021-08-04T04:16:40.000Z</published>
+    <updated>2023-01-20T13:14:39.903Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/stract.png?x-oss-process=style/titanjun&quot; alt=&quot;stract.png&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据结构和算法" scheme="https://titanjun.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="Swift" scheme="https://titanjun.top/tags/swift/"/>
+    
+    <category term="数据结构" scheme="https://titanjun.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="算法" scheme="https://titanjun.top/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter必备开源项目推荐</title>
+    <link href="https://titanjun.top/post/60a03ea8.html"/>
+    <id>https://titanjun.top/post/60a03ea8.html</id>
+    <published>2020-11-20T12:16:40.000Z</published>
+    <updated>2023-01-20T13:14:39.890Z</updated>
+    
+    
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;这段时间内一直学习&lt;code&gt;Flutter&lt;/code&gt;, 自行设计完成了一个实战项目&lt;code&gt;mahua_pet&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;项目中用到了&lt;code&gt;flutter&lt;/code&gt;中的大部分的组件, 界面也涉及了很多功能(可能很多地方还有待完善)&lt;/li&gt;
+&lt;li&gt;项目目前也还是处在开发待完成阶段, 主要内容差不多已经完成&lt;/li&gt;
+&lt;li&gt;下面是一些UI界面展示, 后面推见一些比较好的开源项目&lt;/li&gt;
+&lt;li&gt;验证码登录和密码登录都可以登录, 账号: 123 密码: 123&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/CoderTitan/mahuaPet&quot;&gt;GitHub项目地址&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/categories/flutter/"/>
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/tags/flutter/"/>
+    
+    <category term="Dart" scheme="https://titanjun.top/tags/dart/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter中Widget的生命周期和渲染原理</title>
+    <link href="https://titanjun.top/post/f26f2a71.html"/>
+    <id>https://titanjun.top/post/f26f2a71.html</id>
+    <published>2020-05-20T16:00:00.000Z</published>
+    <updated>2023-01-20T13:14:39.888Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/maxresdefault.png?x-oss-process=style/titanjun&quot; alt=&quot;widget&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/categories/flutter/"/>
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/tags/flutter/"/>
+    
+    <category term="Widget" scheme="https://titanjun.top/tags/widget/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter开发之Dart中的类和对象</title>
+    <link href="https://titanjun.top/post/ee7c7428.html"/>
+    <id>https://titanjun.top/post/ee7c7428.html</id>
+    <published>2020-05-20T16:00:00.000Z</published>
+    <updated>2023-01-20T13:14:39.889Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/dart-logo.png?x-oss-process=style/titanjun&quot; alt=&quot;dart-logo&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/categories/flutter/"/>
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/tags/flutter/"/>
+    
+    <category term="Dart" scheme="https://titanjun.top/tags/dart/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈Swift的内存管理</title>
+    <link href="https://titanjun.top/post/30039fb5.html"/>
+    <id>https://titanjun.top/post/30039fb5.html</id>
+    <published>2019-12-31T16:00:00.000Z</published>
+    <updated>2023-01-20T13:14:39.904Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun&quot; alt=&quot;Swift&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Swift底层原理" scheme="https://titanjun.top/categories/swift%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/"/>
+    
+    
+    <category term="Swift" scheme="https://titanjun.top/tags/swift/"/>
+    
+    <category term="内存管理" scheme="https://titanjun.top/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈Swift的属性(Property)</title>
+    <link href="https://titanjun.top/post/bde391d5.html"/>
+    <id>https://titanjun.top/post/bde391d5.html</id>
+    <published>2019-12-20T10:20:40.000Z</published>
+    <updated>2023-01-20T13:14:39.905Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun&quot; alt=&quot;Swift&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Swift底层原理" scheme="https://titanjun.top/categories/swift%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/"/>
+    
+    
+    <category term="Swift" scheme="https://titanjun.top/tags/swift/"/>
+    
+    <category term="Property" scheme="https://titanjun.top/tags/property/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sign In with Apple</title>
+    <link href="https://titanjun.top/post/de12f33.html"/>
+    <id>https://titanjun.top/post/de12f33.html</id>
+    <published>2019-09-30T09:36:20.000Z</published>
+    <updated>2023-01-20T13:14:39.898Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/appleicon.png?x-oss-process=style/titanjun&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="iOS" scheme="https://titanjun.top/categories/ios/"/>
+    
+    
+    <category term="iOS" scheme="https://titanjun.top/tags/ios/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS13适配深色模式(Dark Mode)</title>
+    <link href="https://titanjun.top/post/da0e549f.html"/>
+    <id>https://titanjun.top/post/da0e549f.html</id>
+    <published>2019-09-25T10:36:20.000Z</published>
+    <updated>2023-01-20T13:14:39.902Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/ios13icon.jpeg&quot; alt=&quot;iOS 13&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="iOS" scheme="https://titanjun.top/categories/ios/"/>
+    
+    
+    <category term="iOS" scheme="https://titanjun.top/tags/ios/"/>
+    
+    <category term="Swift" scheme="https://titanjun.top/tags/swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NSRunLoop底层原理详解</title>
+    <link href="https://titanjun.top/post/76b52ee.html"/>
+    <id>https://titanjun.top/post/76b52ee.html</id>
+    <published>2019-08-20T14:06:21.000Z</published>
+    <updated>2023-01-20T13:14:39.892Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/runloopmode.png&quot; alt=&quot;NSRunLoop&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="OC底层原理" scheme="https://titanjun.top/categories/oc%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/"/>
+    
+    
+    <category term="NSRunLoop" scheme="https://titanjun.top/tags/nsrunloop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ReactNative之iOS原生和JavaScript的交互</title>
+    <link href="https://titanjun.top/post/4c196968.html"/>
+    <id>https://titanjun.top/post/4c196968.html</id>
+    <published>2019-08-17T06:21:01.000Z</published>
+    <updated>2023-01-20T13:14:39.896Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/ReactNative/rn-js-ios.png?x-oss-process=style/titanjun&quot; alt=&quot;js-ios&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="ReactNaive" scheme="https://titanjun.top/categories/reactnaive/"/>
+    
+    
+    <category term="iOS" scheme="https://titanjun.top/tags/ios/"/>
+    
+    <category term="JavaScript" scheme="https://titanjun.top/tags/javascript/"/>
+    
+    <category term="ReactNative" scheme="https://titanjun.top/tags/reactnative/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈OC中Block的本质</title>
+    <link href="https://titanjun.top/post/2080e3a.html"/>
+    <id>https://titanjun.top/post/2080e3a.html</id>
+    <published>2019-06-27T12:36:20.000Z</published>
+    <updated>2023-01-20T13:14:39.904Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/block-ios.jpeg&quot; alt=&quot;Block&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="OC底层原理" scheme="https://titanjun.top/categories/oc%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/"/>
+    
+    
+    <category term="Objective-C" scheme="https://titanjun.top/tags/objective-c/"/>
+    
+    <category term="Block" scheme="https://titanjun.top/tags/block/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>探索KVC和KVO的本质</title>
+    <link href="https://titanjun.top/post/478f6c1.html"/>
+    <id>https://titanjun.top/post/478f6c1.html</id>
+    <published>2019-06-12T10:36:20.000Z</published>
+    <updated>2023-01-20T13:14:39.904Z</updated>
+    
+    
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;这篇文章主要介绍&lt;code&gt;KVO&lt;/code&gt;和&lt;code&gt;KVC&lt;/code&gt;, 机器底层是如何实现的&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;KVO&lt;/code&gt;的全称是&lt;code&gt;Key-Value Observing&lt;/code&gt;，俗称键值监听，可以用于监听某个对象属性值的改变&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;KVO&lt;/code&gt;是使用获取其他对象的特定属性变化的通知机制,控制器层的绑定技术就是严重依赖键值观察获得模型层和控制器层的变化通知的&lt;/li&gt;
+&lt;li&gt;对于不依赖控制器层类的应用程序，键值观察提供了一种简化的方法来实现检查器并更新用户界面值&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;KVC&lt;/code&gt;和&lt;code&gt;KVO&lt;/code&gt;都是基于&lt;code&gt;OC&lt;/code&gt;的动态特性和&lt;code&gt;Runtime&lt;/code&gt;机制的&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="OC底层原理" scheme="https://titanjun.top/categories/oc%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/"/>
+    
+    
+    <category term="Objective-C" scheme="https://titanjun.top/tags/objective-c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>简析OC中对象占用内存的原理</title>
+    <link href="https://titanjun.top/post/84ca04ec.html"/>
+    <id>https://titanjun.top/post/84ca04ec.html</id>
+    <published>2019-06-10T12:16:20.000Z</published>
+    <updated>2023-01-20T13:14:39.905Z</updated>
+    
+    
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;OC&lt;/code&gt;即&lt;code&gt;Objective-C&lt;/code&gt;, 是&lt;code&gt;iOS&lt;/code&gt;的开发语言之一, 其底层都是通过&lt;code&gt;C/C++&lt;/code&gt;实现&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OC&lt;/code&gt;代码在编译过程中都会被转成&lt;code&gt;C/C++&lt;/code&gt;代码, 之后再转成汇编语言, 最后才转成机器语言(0和1)&lt;/li&gt;
+&lt;li&gt;所以&lt;code&gt;OC&lt;/code&gt;的面向对象都是基于&lt;code&gt;C/C++&lt;/code&gt;的数据结构实现的, 具体一点就是通过机构提实现的(这个后面会详解)&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="OC底层原理" scheme="https://titanjun.top/categories/oc%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/"/>
+    
+    
+    <category term="Objective-C" scheme="https://titanjun.top/tags/objective-c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter之可滑动Widget</title>
+    <link href="https://titanjun.top/post/3ab4e07d.html"/>
+    <id>https://titanjun.top/post/3ab4e07d.html</id>
+    <published>2019-05-17T12:21:11.000Z</published>
+    <updated>2023-01-20T13:14:39.888Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_scroll.png&quot; alt=&quot;可滚动Widget&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/categories/flutter/"/>
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/tags/flutter/"/>
+    
+    <category term="Widget" scheme="https://titanjun.top/tags/widget/"/>
+    
+    <category term="Dart" scheme="https://titanjun.top/tags/dart/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter中App的主题和导航</title>
+    <link href="https://titanjun.top/post/425f3607.html"/>
+    <id>https://titanjun.top/post/425f3607.html</id>
+    <published>2019-05-05T13:01:11.000Z</published>
+    <updated>2023-01-20T13:14:39.887Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_appbar.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/categories/flutter/"/>
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/tags/flutter/"/>
+    
+    <category term="Widget" scheme="https://titanjun.top/tags/widget/"/>
+    
+    <category term="Dart" scheme="https://titanjun.top/tags/dart/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter之容器类Widget</title>
+    <link href="https://titanjun.top/post/e3d2ac3e.html"/>
+    <id>https://titanjun.top/post/e3d2ac3e.html</id>
+    <published>2019-04-29T09:11:11.000Z</published>
+    <updated>2023-01-20T13:14:39.889Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_container.png&quot; alt=&quot;Flutter&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/categories/flutter/"/>
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/tags/flutter/"/>
+    
+    <category term="Widget" scheme="https://titanjun.top/tags/widget/"/>
+    
+    <category term="Dart" scheme="https://titanjun.top/tags/dart/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter之基础Widget之TextField</title>
+    <link href="https://titanjun.top/post/88da4080.html"/>
+    <id>https://titanjun.top/post/88da4080.html</id>
+    <published>2019-04-26T10:31:40.000Z</published>
+    <updated>2023-01-20T13:14:39.888Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/widget_field.png?x-oss-process=style/titanjun&quot; alt=&quot;Flutter&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/categories/flutter/"/>
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/tags/flutter/"/>
+    
+    <category term="Widget" scheme="https://titanjun.top/tags/widget/"/>
+    
+    <category term="Dart" scheme="https://titanjun.top/tags/dart/"/>
+    
+    <category term="TextField" scheme="https://titanjun.top/tags/textfield/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter之布局类Widget</title>
+    <link href="https://titanjun.top/post/20517d5b.html"/>
+    <id>https://titanjun.top/post/20517d5b.html</id>
+    <published>2019-04-24T09:21:20.000Z</published>
+    <updated>2023-01-20T13:14:39.889Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_layout.png?x-oss-process=style/titanjun&quot; alt=&quot;Flutter&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/categories/flutter/"/>
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/tags/flutter/"/>
+    
+    <category term="Widget" scheme="https://titanjun.top/tags/widget/"/>
+    
+    <category term="Dart" scheme="https://titanjun.top/tags/dart/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flutter之基础Widget</title>
+    <link href="https://titanjun.top/post/ebbecb82.html"/>
+    <id>https://titanjun.top/post/ebbecb82.html</id>
+    <published>2019-04-19T10:21:20.000Z</published>
+    <updated>2023-01-20T13:14:39.888Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img data-src=&quot;https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/widget_base.png?x-oss-process=style/titanjun&quot; alt=&quot;Flutter&quot;&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/categories/flutter/"/>
+    
+    
+    <category term="Flutter" scheme="https://titanjun.top/tags/flutter/"/>
+    
+    <category term="Widget" scheme="https://titanjun.top/tags/widget/"/>
+    
+    <category term="Dart" scheme="https://titanjun.top/tags/dart/"/>
+    
+  </entry>
+  
+</feed>

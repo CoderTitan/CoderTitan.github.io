@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="iOS黑科技之(CoreImage)静态人脸识别(一)">
+<meta property="og:url" content="https://titanjun.top/post/81c63b4c.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-3f1d091e07de5a9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-a8af4dc80c214d1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-424e5a9f1da0e4b5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
+<meta property="article:published_time" content="2017-11-22T06:39:00.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.903Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="AVFoundation">
+<meta property="article:tag" content="CoreImage">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4122543-3f1d091e07de5a9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+<link rel="canonical" href="https://titanjun.top/post/81c63b4c.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/81c63b4c.html","path":"post/81c63b4c.html","title":"iOS黑科技之(CoreImage)静态人脸识别(一)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>iOS黑科技之(CoreImage)静态人脸识别(一) | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%B1%BB%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">主要类介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">项目代码介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA"><span class="nav-number">2.1.</span> <span class="nav-text">创建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%99%E9%87%8C%E8%A6%81%E5%85%88%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%E6%A3%80%E6%B5%8B%E5%99%A8%E7%9A%84%E7%B1%BB%E5%88%AB"><span class="nav-number">2.1.1.</span> <span class="nav-text">这里要先介绍一下检测器的类别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">参数设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CIFaceFeature%E6%A6%82%E8%BF%B0"><span class="nav-number">2.3.</span> <span class="nav-text">CIFaceFeature概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core-Image%E5%9D%90%E6%A0%87%E7%B3%BB%E9%97%AE%E9%A2%98"><span class="nav-number">2.4.</span> <span class="nav-text">Core Image坐标系问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B-%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="nav-number">2.5.</span> <span class="nav-text">人脸检测(核心代码)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="nav-number">2.6.</span> <span class="nav-text">检测结果展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.7.</span> <span class="nav-text">注意事项:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub%E2%80%93Demo%E5%9C%B0%E5%9D%80"><span class="nav-number">2.8.</span> <span class="nav-text">GitHub–Demo地址</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/81c63b4c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="iOS黑科技之(CoreImage)静态人脸识别(一) | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          iOS黑科技之(CoreImage)静态人脸识别(一)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-11-22 14:39:00" itemprop="dateCreated datePublished" datetime="2017-11-22T14:39:00+08:00">2017-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/swift%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Swift框架</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-3f1d091e07de5a9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Core Image框架图.png"></p>
+<span id="more"></span>
+
+
+<blockquote>
+<p>人脸识别原理简介：每一张图片都是由每一个像素点组成，而每一个像素点中又有对应的颜色值(如RGB)，人的面部特征中，不同的五官，颜色值肯定存在差异，而人脸识别技术就是通过对照片中每一个像素的识别进行大量的算法处理，最终得出五官的轮廓</p>
+</blockquote>
+<ul>
+<li>这里我们将使用<code>CoreImage</code>框架,进行静态的人脸识别(类似照片, 图像等)</li>
+<li>苹果原生的人脸识别并不是一个独立的框架，而是放在<code>CoreImage</code>框架中</li>
+<li>Apple 已经帮我们把image的分类处理好了</li>
+<li>CoreImage是iOS5新增的强大类库之一，它可以处理图片的各种效果，什么饱和度啊，旋转变形啊，色彩啊等等。</li>
+<li>在使用CoreImage之前要导入CoreImage.framework框架</li>
+</ul>
+<h2 id="主要类介绍"><a href="#主要类介绍" class="headerlink" title="主要类介绍"></a>主要类介绍</h2><ul>
+<li><p>CIImage</p>
+<ul>
+<li>Core Image中的图像类，类似于UIKit中的UIImage类。</li>
+</ul>
+</li>
+<li><p>CIContext: 上下文对象</p>
+<ul>
+<li>所有图像处理都在CIContext对象中实现，通过Quartz 2D、OpenGL渲染CIImage对象; 如滤镜、颜色等渲染处理</li>
+</ul>
+</li>
+<li><p>CIColor：颜色</p>
+<ul>
+<li>图片的关联与画布、图片像素颜色的处理。</li>
+</ul>
+</li>
+<li><p>CIVector：向量</p>
+<ul>
+<li>图片的坐标向量等几何方法处理。</li>
+</ul>
+</li>
+<li><p>CIDetector<br>特征识别类</p>
+<ul>
+<li>该类集成了苹果有关特征识别的一些功能。</li>
+<li>可检测图片中人脸的眼睛、嘴巴、等等</li>
+</ul>
+</li>
+<li><p>CIFilter</p>
+<ul>
+<li>滤镜类，包含一个字典结构，对各种滤镜定义了属于自己的属性</li>
+<li>CIFilter 产生一个CIImage</li>
+<li>接受一到多的图片作为输入，经过一些过滤操作，产生指定输出的图片</li>
+</ul>
+</li>
+<li><p>CIFeature: 代表由 detector处理后产生的特征</p>
+</li>
+</ul>
+<h2 id="项目代码介绍"><a href="#项目代码介绍" class="headerlink" title="项目代码介绍"></a>项目代码介绍</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><h4 id="这里要先介绍一下检测器的类别"><a href="#这里要先介绍一下检测器的类别" class="headerlink" title="这里要先介绍一下检测器的类别"></a>这里要先介绍一下检测器的类别</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//人脸检测器</span></span><br><span class="line">public let <span class="built_in">CIDetectorTypeFace</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//矩形识别</span></span><br><span class="line">public let <span class="built_in">CIDetectorTypeRectangle</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//二维码识别</span></span><br><span class="line">public let <span class="built_in">CIDetectorTypeQRCode</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//文本识别</span></span><br><span class="line">public let <span class="built_in">CIDetectorTypeText</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//指定检测精度</span></span><br><span class="line">public let <span class="built_in">CIDetectorAccuracy</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//指定使用特征跟踪，这个功能就像相机中的人脸跟踪功能</span></span><br><span class="line">public let <span class="built_in">CIDetectorTracking</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置将要识别的特征的最小尺寸</span></span><br><span class="line">public let <span class="built_in">CIDetectorMinFeatureSize</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//针对矩形探测器的，用于设置返回矩形特征的最多个数。</span></span><br><span class="line"><span class="comment">//这个关键字的值是一个1~...的NSNumber值。有效范围1 &lt; = CIDetectorMaxFeatureCount &lt; = 256。默认值为1</span></span><br><span class="line">public let <span class="built_in">CIDetectorMaxFeatureCount</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//脸部透视数, 值为包含1、3、5、7、9、11的NSNumber对象</span></span><br><span class="line">public let <span class="built_in">CIDetectorNumberOfAngles</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置识别方向，值是一个从1 ~ 8的整型的NSNumber</span></span><br><span class="line">public let <span class="built_in">CIDetectorImageOrientation</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置这个参数为true(bool类型的NSNumber)，识别器将提取眨眼特征</span></span><br><span class="line">public let <span class="built_in">CIDetectorEyeBlink</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果设置这个参数为ture(bool类型的NSNumber)，识别器将提取微笑特征</span></span><br><span class="line">public let <span class="built_in">CIDetectorSmile</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//用于设置每帧焦距，值得类型为floot类型的NSNumber</span></span><br><span class="line">public let <span class="built_in">CIDetectorFocalLength</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//用于设置矩形的长宽比，值得类型为floot类型的NSNumber</span></span><br><span class="line">public let <span class="built_in">CIDetectorAspectRatio</span>: String</span><br><span class="line"></span><br><span class="line"><span class="comment">//控制文本检测器是否应该检测子特征。默认值是否，值的类型为bool类型的NSNumber</span></span><br><span class="line">public let <span class="built_in">CIDetectorReturnSubFeatures</span>: String</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里需要的是人脸识别的<code>CIDetectorTypeFace</code></li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 创建上下文对象</span></span><br><span class="line">let context = <span class="built_in">CIContext</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">//2. UIImage转成CIImage</span></span><br><span class="line">guard let image = imageView.image  <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">guard let ciImage = <span class="built_in">CIImage</span>(image: image) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3. 参数设置(精度设置)</span></span><br><span class="line">let parmes = [<span class="built_in">CIDetectorAccuracy</span>: <span class="built_in">CIDetectorAccuracyHigh</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//4. 创建识别类</span></span><br><span class="line">let detector = <span class="built_in">CIDetector</span>(ofType: <span class="built_in">CIDetectorTypeFace</span>, context: context, options: parmes)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><ul>
+<li>这里设置了一个识别精度CIDetectorAccuracy，识别精度的值有：</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//识别精度低，但识别速度快、性能高</span></span><br><span class="line">public let <span class="built_in">CIDetectorAccuracyLow</span>: String </span><br><span class="line"></span><br><span class="line"><span class="comment">// 识别精度高，但识别速度慢、性能低</span></span><br><span class="line">public let <span class="built_in">CIDetectorAccuracyHigh</span>: String </span><br></pre></td></tr></table></figure>
+<ul>
+<li>除了精度的设置，还有<code>CIDetectorMinFeatureSize</code>用于设置将要识别的特征的最小尺寸，也就是说小于这个尺寸的特征将不识别。<ul>
+<li>对于人脸检测器，这个关键字的值是从0.0 ~ 1.0的<code>NSNumber</code>值，这个值表示：基于输入图像短边长度的百分比。有效值范围:0.01 &lt;&#x3D; <code>CIDetectorMinFeatureSize</code> &lt;&#x3D; 0.5。为这个参数设定更高值仅用于提高性能。默认值是0.15。</li>
+<li>对于矩形探测器，这个关键字的值是从0.0 ~ 1.0的<code>NSNumber</code>值，这个值表示：基于输入图像短边长度的百分比。有效值范围:0.2 &lt;&#x3D; <code>CIDetectorMinFeatureSize</code> &lt;&#x3D; 1.0的默认值是0.2。</li>
+<li>对于文本探测器，这个关键字的值是一个范围从0.0 ~ 1.0的<code>NSNumber</code>值，这个值表示：基于输入图像高度的百分比。有效值范围:0.0 &lt;&#x3D; <code>CIDetectorMinFeatureSize</code> &lt;&#x3D; 1.0。默认值是10&#x2F;(输入图像的高度)</li>
+</ul>
+</li>
+</ul>
+<h3 id="CIFaceFeature概述"><a href="#CIFaceFeature概述" class="headerlink" title="CIFaceFeature概述"></a>CIFaceFeature概述</h3><ul>
+<li><code>CIFaceFeature</code>是保存脸部所有信息的类</li>
+<li><code>CIFaceFeature</code>是<code>CIFeature</code>的子类</li>
+<li><code>CIFeature</code>类只保存基本信息， 所有的附加信息由子类(<code>CIFaceFeature</code>)保存</li>
+<li>各属性简介:</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//检测到的脸部在图片中的frame</span></span><br><span class="line">open var bounds: <span class="built_in">CGRect</span> &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否检测到左眼的位置</span></span><br><span class="line">open var hasLeftEyePosition: Bool &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//左眼的位置</span></span><br><span class="line">open var leftEyePosition: <span class="built_in">CGPoint</span> &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否检测到右眼的位置</span></span><br><span class="line">open var hasRightEyePosition: Bool &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//右眼的位置</span></span><br><span class="line">open var rightEyePosition: <span class="built_in">CGPoint</span> &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否检测到嘴巴的位置</span></span><br><span class="line">open var hasMouthPosition: Bool &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//嘴巴的位置</span></span><br><span class="line">open var mouthPosition: <span class="built_in">CGPoint</span> &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//脸部是否倾斜    </span></span><br><span class="line">open var hasFaceAngle: Bool &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//脸部倾斜角度</span></span><br><span class="line">open var faceAngle: Float &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//是否微笑    </span></span><br><span class="line">open var hasSmile: Bool &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//左眼是否闭上</span></span><br><span class="line">open var leftEyeClosed: Bool &#123; get &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//右眼是否闭上</span></span><br><span class="line">open var rightEyeClosed: Bool &#123; get &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Core-Image坐标系问题"><a href="#Core-Image坐标系问题" class="headerlink" title="Core Image坐标系问题"></a><code>Core Image</code>坐标系问题</h3><ul>
+<li>如图:</li>
+</ul>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-a8af4dc80c214d1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt="坐标系对比.png"></p>
+<ul>
+<li><code>UIView</code>坐标系<ul>
+<li>图中上半部分坐标系</li>
+<li>Y轴自上而下依次增大</li>
+</ul>
+</li>
+<li><code>Core Image</code>坐标系<ul>
+<li>图中下半部分显示坐标系</li>
+<li>X轴与<code>UIView</code>坐标系相同, Y轴坐标系最底部为0, 自下而上依次增大, 与<code>UIView</code>坐标系相反</li>
+<li>所以需要对以次坐标设置frame的控件, 做一次针对Y轴的翻转, 如下:</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resultView.transform = <span class="built_in">CGAffineTransform</span>(scaleX: <span class="number">1</span>, y: <span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="人脸检测-核心代码"><a href="#人脸检测-核心代码" class="headerlink" title="人脸检测(核心代码)"></a>人脸检测(核心代码)</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 通过人脸识别提取有效的人脸图片</span></span><br><span class="line"><span class="keyword">static</span> func faceImagesByFaceRecognition(imageView: <span class="built_in">UIImageView</span>, resultCallback: @escaping ((_ count: Int) -&gt; ())) &#123;</span><br><span class="line">    <span class="comment">//0. 删除子控件</span></span><br><span class="line">    let subViews = imageView.subviews</span><br><span class="line">    <span class="keyword">for</span> subview <span class="keyword">in</span> subViews &#123;</span><br><span class="line">        <span class="keyword">if</span> subview.isKind(of: <span class="built_in">UIView</span>.self) &#123;</span><br><span class="line">            subview.removeFromSuperview()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//1. 创建上下文对象</span></span><br><span class="line">    let context = <span class="built_in">CIContext</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2. UIImage转成CIImage</span></span><br><span class="line">    guard let image = imageView.image  <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    guard let ciImage = <span class="built_in">CIImage</span>(image: image) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//3. 参数设置(精度设置)</span></span><br><span class="line">    let parmes = [<span class="built_in">CIDetectorAccuracy</span>: <span class="built_in">CIDetectorAccuracyHigh</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//4. 创建识别类</span></span><br><span class="line">    let detector = <span class="built_in">CIDetector</span>(ofType: <span class="built_in">CIDetectorTypeFace</span>, context: context, options: parmes)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//5. 找到识别其中的人连对象</span></span><br><span class="line">    guard let faceArr = detector?.features(<span class="keyword">in</span>: ciImage) <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//6. 添加识别的红框</span></span><br><span class="line">    let resultView = <span class="built_in">UIView</span>(frame: <span class="built_in">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: imageView.frame.width, height: imageView.frame.height))</span><br><span class="line">    imageView.addSubview(resultView)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//7. 遍历扫描结果</span></span><br><span class="line">    <span class="keyword">for</span> faceFeature <span class="keyword">in</span> faceArr &#123;</span><br><span class="line">        resultView.addSubview(addRedrectangleView(rect: faceFeature.bounds))</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//7.1 如果识别到眼睛</span></span><br><span class="line">        guard let feature = faceFeature as? <span class="built_in">CIFaceFeature</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        <span class="comment">//左眼</span></span><br><span class="line">        <span class="keyword">if</span> feature.hasLeftEyePosition &#123;</span><br><span class="line">            let leftView = addRedrectangleView(rect: <span class="built_in">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">5</span>, height: <span class="number">5</span>))</span><br><span class="line">            leftView.center = feature.leftEyePosition</span><br><span class="line">            resultView.addSubview(leftView)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//右眼</span></span><br><span class="line">        <span class="keyword">if</span> feature.hasRightEyePosition &#123;</span><br><span class="line">            let rightView = addRedrectangleView(rect: <span class="built_in">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">5</span>, height: <span class="number">5</span>))</span><br><span class="line">            rightView.setValue(feature.rightEyePosition, forKey: <span class="string">&quot;center&quot;</span>)</span><br><span class="line">            resultView.addSubview(rightView)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//7.2 识别嘴巴</span></span><br><span class="line">        <span class="keyword">if</span> feature.hasMouthPosition &#123;</span><br><span class="line">            let mouthView = addRedrectangleView(rect: <span class="built_in">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">10</span>, height: <span class="number">5</span>))</span><br><span class="line">            mouthView.setValue(feature.mouthPosition, forKey: <span class="string">&quot;center&quot;</span>)</span><br><span class="line">            resultView.addSubview(mouthView)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//8. 将resultView沿x轴翻转</span></span><br><span class="line">    resultView.transform = <span class="built_in">CGAffineTransform</span>(scaleX: <span class="number">1</span>, y: <span class="number">-1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//9. 结果回调</span></span><br><span class="line">    resultCallback(faceArr.count)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="检测结果展示"><a href="#检测结果展示" class="headerlink" title="检测结果展示"></a>检测结果展示</h3><ul>
+<li>检测到的人脸部位展示红色矩形框</li>
+<li>眼镜和嘴巴部位显示红色矩形框</li>
+<li>照片随机选取的, 不喜勿喷</li>
+</ul>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-424e5a9f1da0e4b5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="WechatIMG29.jpeg"></p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项:"></a>注意事项:</h3><ul>
+<li>image的实际尺寸需要和imageView的尺寸完全一样,获取的脸部各个部位的尺寸才能完全吻合</li>
+<li>这里我只做了简单的尺寸比例转换</li>
+<li>代码如下:</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> func getScale(imageView: <span class="built_in">UIImageView</span>, image: <span class="built_in">UIImage</span>) -&gt; <span class="built_in">CGFloat</span>&#123;</span><br><span class="line">    let viewSize = imageView.frame.size</span><br><span class="line">    let imageSize = image.size</span><br><span class="line">    </span><br><span class="line">    let widthScale = imageSize.width / viewSize.width</span><br><span class="line">    let heightScale = imageSize.height / viewSize.height</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> widthScale &gt; heightScale ? widthScale : heightScale</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h3 id="GitHub–Demo地址"><a href="#GitHub–Demo地址" class="headerlink" title="GitHub–Demo地址"></a>GitHub–<a target="_blank" rel="noopener" href="https://github.com/coderQuanjun/JunFaceRecognition">Demo地址</a></h3><ul>
+<li>注意:  </li>
+<li>这里只是列出了主要的核心代码,具体的代码逻辑请参考demo</li>
+<li>文中相关介绍有的地方如果有不是很详细或者有更好建议的,欢迎联系小编</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/81c63b4c.html" title="iOS黑科技之(CoreImage)静态人脸识别(一)">https://titanjun.top/post/81c63b4c.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/swift/" rel="tag"> <i class="fa fa-tag"></i> Swift</a>
+              <a href="/tags/avfoundation/" rel="tag"> <i class="fa fa-tag"></i> AVFoundation</a>
+              <a href="/tags/coreimage/" rel="tag"> <i class="fa fa-tag"></i> CoreImage</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/584be10c.html" rel="prev" title="iOS黑科技之(AVFoundation)动态人脸识别(二)">
+                  <i class="fa fa-chevron-left"></i> iOS黑科技之(AVFoundation)动态人脸识别(二)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/433291c1.html" rel="next" title="Swift之二维码的生成、识别和扫描">
+                  Swift之二维码的生成、识别和扫描 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/81c63b4c.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

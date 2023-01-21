@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Flutter之容器类Widget">
+<meta property="og:url" content="https://titanjun.top/post/e3d2ac3e.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_container.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/container_min.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/flutterchina/flutter-in-action@1.0/docs/imgs/image-20180910105830808.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/graintColor.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/gradientmode.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/transform_rotate.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/transform_translate.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/flutterchina/flutter-in-action@1.0/docs/imgs/image-20180910164454967.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/flutterchina/flutter-in-action@1.0/docs/imgs/image-20180910170603964.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/flutterchina/flutter-in-action@1.0/docs/imgs/image-20180910205356331.png">
+<meta property="article:published_time" content="2019-04-29T09:11:11.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.889Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Flutter">
+<meta property="article:tag" content="Widget">
+<meta property="article:tag" content="Dart">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_container.png">
+
+
+<link rel="canonical" href="https://titanjun.top/post/e3d2ac3e.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/e3d2ac3e.html","path":"post/e3d2ac3e.html","title":"Flutter之容器类Widget"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Flutter之容器类Widget | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Padding"><span class="nav-number">1.</span> <span class="nav-text">Padding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConstrainedBox"><span class="nav-number">2.</span> <span class="nav-text">ConstrainedBox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BoxConstraints"><span class="nav-number">3.</span> <span class="nav-text">BoxConstraints</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SizedBox"><span class="nav-number">4.</span> <span class="nav-text">SizedBox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UnconstrainedBox"><span class="nav-number">5.</span> <span class="nav-text">UnconstrainedBox</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AspectRatio"><span class="nav-number"></span> <span class="nav-text">AspectRatio</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FractionallySizedBox"><span class="nav-number">1.</span> <span class="nav-text">FractionallySizedBox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LimitedBox"><span class="nav-number">2.</span> <span class="nav-text">LimitedBox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DecoratedBox"><span class="nav-number">3.</span> <span class="nav-text">DecoratedBox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BoxDecoration"><span class="nav-number">4.</span> <span class="nav-text">BoxDecoration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#image"><span class="nav-number">4.1.</span> <span class="nav-text">image</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#image-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">image</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#colorFilter"><span class="nav-number">4.1.2.</span> <span class="nav-text">colorFilter</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#border"><span class="nav-number">4.2.</span> <span class="nav-text">border</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#boxShadow"><span class="nav-number">4.3.</span> <span class="nav-text">boxShadow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gradient"><span class="nav-number">4.4.</span> <span class="nav-text">gradient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shape"><span class="nav-number">4.5.</span> <span class="nav-text">shape</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transform"><span class="nav-number">5.</span> <span class="nav-text">Transform</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transform-1"><span class="nav-number">5.1.</span> <span class="nav-text">Transform</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%8B%E8%BD%AC"><span class="nav-number">5.1.1.</span> <span class="nav-text">旋转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B3%E7%A7%BB"><span class="nav-number">5.1.2.</span> <span class="nav-text">平移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%A9%E6%94%BE"><span class="nav-number">5.1.3.</span> <span class="nav-text">缩放</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">5.2.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RotatedBox"><span class="nav-number">5.3.</span> <span class="nav-text">RotatedBox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Matrix4"><span class="nav-number">5.4.</span> <span class="nav-text">Matrix4</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Container"><span class="nav-number">6.</span> <span class="nav-text">Container</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="nav-number">6.1.</span> <span class="nav-text">使用实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">8.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/e3d2ac3e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Flutter之容器类Widget | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter之容器类Widget
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-29 17:11:11" itemprop="dateCreated datePublished" datetime="2019-04-29T17:11:11+08:00">2019-04-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>18k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>17 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_container.png" alt="Flutter"></p>
+<span id="more"></span>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.titanjun.top/categories/Flutter%E7%AC%94%E8%AE%B0/">Flutter和Dart系列文章</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/CoderTitan/Flutter_Widget">项目GitHub地址</a></li>
+<li>容器类<code>Widget</code>和布局类<code>Widget</code>都作用于其子<code>Widget</code>，不同的是：<ul>
+<li>布局类<code>Widget</code>一般都需要接收一个<code>widget</code>数组（<code>children</code>)，他们直接或间接继承自（或包含）<code>MultiChildRenderObjectWidget</code> </li>
+<li>而容器类<code>Widget</code>一般只需要接受一个子<code>Widget</code>（<code>child</code>），他们直接或间接继承自（或包含）<code>SingleChildRenderObjectWidget</code></li>
+<li>布局类<code>Widget</code>是按照一定的排列方式来对其子<code>Widget</code>进行排列</li>
+<li>而容器类<code>Widget</code>一般只是包装其子<code>Widget</code>，对其添加一些修饰（补白或背景色等）、变换(旋转或剪裁等)、或限制(大小等)。</li>
+</ul>
+</li>
+<li><code>Flutter</code>官方并没有对<code>Widget</code>进行官方分类，我们对其分类主要是为了方便讨论和对<code>Widget</code>功能的区分记忆</li>
+<li>相关容器类<code>Widget</code>主要分为以下几种<ul>
+<li>填充类容器<code>Padding</code></li>
+<li>布局限制类容器<code>ConstrainedBox</code>、<code>SizeBox</code></li>
+<li>装饰类容器<code>DecoratedBox</code></li>
+<li>变换类容器<code>Transform</code></li>
+<li>组合容器<code>Container</code></li>
+<li>导航类容器<code>Scaffold</code>、<code>TabBar</code>、<code>AppBar</code>等</li>
+</ul>
+</li>
+</ul>
+<h2 id="Padding"><a href="#Padding" class="headerlink" title="Padding"></a>Padding</h2><p><code>Padding</code>可以给其子元素设置内边距</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Padding</span> <span class="keyword">extends</span> <span class="title">SingleChildRenderObjectWidget</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> Padding(&#123;</span><br><span class="line">        Key key,</span><br><span class="line">        <span class="comment">// 内边距</span></span><br><span class="line">        <span class="meta">@required</span> <span class="keyword">this</span>.padding,</span><br><span class="line">        Widget child,</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">final</span> EdgeInsetsGeometry padding;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>EdgeInsetsGeometry</code>是一个抽象类，一般情况都使用<code>EdgeInsets</code>，它是<code>EdgeInsetsGeometry</code>的一个子类, 下面是的定义的一些方法</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EdgeInsets</span> <span class="keyword">extends</span> <span class="title">EdgeInsetsGeometry</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 根据上下左右分别设置边距</span></span><br><span class="line">    <span class="keyword">const</span> EdgeInsets.fromLTRB(<span class="keyword">this</span>.left, <span class="keyword">this</span>.top, <span class="keyword">this</span>.right, <span class="keyword">this</span>.bottom);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 统一设置四周边距</span></span><br><span class="line">    <span class="keyword">const</span> EdgeInsets.all(<span class="built_in">double</span> value)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 只设置其中某几个边距</span></span><br><span class="line">    <span class="keyword">const</span> EdgeInsets.only(&#123;</span><br><span class="line">        <span class="comment">// 下面的都是默认值</span></span><br><span class="line">        <span class="keyword">this</span>.left = <span class="number">0.0</span>,</span><br><span class="line">        <span class="keyword">this</span>.top = <span class="number">0.0</span>,</span><br><span class="line">        <span class="keyword">this</span>.right = <span class="number">0.0</span>,</span><br><span class="line">        <span class="keyword">this</span>.bottom = <span class="number">0.0</span></span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 根据水平和垂直方向设置, 上下间距一样, 左右间距一样</span></span><br><span class="line">    <span class="keyword">const</span> EdgeInsets.symmetric(&#123; <span class="built_in">double</span> vertical = <span class="number">0.0</span>,</span><br><span class="line">                             <span class="built_in">double</span> horizontal = <span class="number">0.0</span> &#125;)</span><br><span class="line">                             </span><br><span class="line">    <span class="comment">// 静态变量, 上下左右, 都是0</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> EdgeInsets zero = EdgeInsets.only();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Padding(</span><br><span class="line">      padding: EdgeInsets.all(<span class="number">20</span>),</span><br><span class="line">      child: Icon(Icons.phone, color: Colors.cyan,),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ConstrainedBox"><a href="#ConstrainedBox" class="headerlink" title="ConstrainedBox"></a>ConstrainedBox</h2><ul>
+<li><code>ConstrainedBox</code>和<code>SizedBox</code>都是通过<code>RenderConstrainedBox</code>来渲染的</li>
+<li><code>SizedBox</code>只是<code>ConstrainedBox</code>一个定制</li>
+<li><code>ConstrainedBox</code>主要用于对子<code>widget</code>添加额外的约束</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConstrainedBox</span> <span class="keyword">extends</span> <span class="title">SingleChildRenderObjectWidget</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  ConstrainedBox(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.constraints,</span><br><span class="line">    Widget child</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">给子widget添加约束</span></span></span><br><span class="line">  <span class="keyword">final</span> BoxConstraints constraints;</span><br></pre></td></tr></table></figure>
+
+<h2 id="BoxConstraints"><a href="#BoxConstraints" class="headerlink" title="BoxConstraints"></a>BoxConstraints</h2><p><code>BoxConstraints</code>设置<code>Widget</code>的约束, 内部设置了四个属性: 最大&#x2F;小宽度和最大小高度, 下面是其相关构造函数和实例函数</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BoxConstraints</span> <span class="keyword">extends</span> <span class="title">Constraints</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// <span class="language-markdown">构造函数</span></span></span><br><span class="line">  <span class="keyword">const</span> BoxConstraints(&#123;</span><br><span class="line">    <span class="comment">// 最小宽度</span></span><br><span class="line">    <span class="keyword">this</span>.minWidth = <span class="number">0.0</span>,</span><br><span class="line">    <span class="comment">// 最大宽度</span></span><br><span class="line">    <span class="keyword">this</span>.maxWidth = <span class="built_in">double</span>.infinity,</span><br><span class="line">    <span class="comment">// 最小高度</span></span><br><span class="line">    <span class="keyword">this</span>.minHeight = <span class="number">0.0</span>,</span><br><span class="line">    <span class="comment">// 最大高度</span></span><br><span class="line">    <span class="keyword">this</span>.maxHeight = <span class="built_in">double</span>.infinity</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">根据指定的Size设置约束</span></span></span><br><span class="line">  BoxConstraints.tight(Size size)</span><br><span class="line">    : minWidth = size.width,</span><br><span class="line">      maxWidth = size.width,</span><br><span class="line">      minHeight = size.height,</span><br><span class="line">      maxHeight = size.height;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据指定的宽高设置, 参数可为空</span></span><br><span class="line">  <span class="keyword">const</span> BoxConstraints.tightFor(&#123;</span><br><span class="line">    <span class="built_in">double</span> width,</span><br><span class="line">    <span class="built_in">double</span> height</span><br><span class="line">  &#125;): minWidth = width != <span class="keyword">null</span> ? width : <span class="number">0.0</span>,</span><br><span class="line">      maxWidth = width != <span class="keyword">null</span> ? width : <span class="built_in">double</span>.infinity,</span><br><span class="line">      minHeight = height != <span class="keyword">null</span> ? height : <span class="number">0.0</span>,</span><br><span class="line">      maxHeight = height != <span class="keyword">null</span> ? height : <span class="built_in">double</span>.infinity;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 默认宽高都是最大值, 参数可为空</span></span><br><span class="line">  <span class="keyword">const</span> BoxConstraints.tightForFinite(&#123;</span><br><span class="line">    <span class="built_in">double</span> width = <span class="built_in">double</span>.infinity,</span><br><span class="line">    <span class="built_in">double</span> height = <span class="built_in">double</span>.infinity</span><br><span class="line">  &#125;): minWidth = width != <span class="built_in">double</span>.infinity ? width : <span class="number">0.0</span>,</span><br><span class="line">      maxWidth = width != <span class="built_in">double</span>.infinity ? width : <span class="built_in">double</span>.infinity,</span><br><span class="line">      minHeight = height != <span class="built_in">double</span>.infinity ? height : <span class="number">0.0</span>,</span><br><span class="line">      maxHeight = height != <span class="built_in">double</span>.infinity ? height : <span class="built_in">double</span>.infinity;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据Size参数, 设置其最大值, 最小值为0</span></span><br><span class="line">  BoxConstraints.loose(Size size)</span><br><span class="line">    : minWidth = <span class="number">0.0</span>,</span><br><span class="line">      maxWidth = size.width,</span><br><span class="line">      minHeight = <span class="number">0.0</span>,</span><br><span class="line">      maxHeight = size.height;</span><br><span class="line">      </span><br><span class="line">  <span class="comment">// 根据宽高设置, 如果参数为空则默认为最大值</span></span><br><span class="line">  <span class="keyword">const</span> BoxConstraints.expand(&#123;</span><br><span class="line">    <span class="built_in">double</span> width,</span><br><span class="line">    <span class="built_in">double</span> height</span><br><span class="line">  &#125;): minWidth = width != <span class="keyword">null</span> ? width : <span class="built_in">double</span>.infinity,</span><br><span class="line">      maxWidth = width != <span class="keyword">null</span> ? width : <span class="built_in">double</span>.infinity,</span><br><span class="line">      minHeight = height != <span class="keyword">null</span> ? height : <span class="built_in">double</span>.infinity,</span><br><span class="line">      maxHeight = height != <span class="keyword">null</span> ? height : <span class="built_in">double</span>.infinity;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用实例</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConstrainedBoxView</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement build</span></span><br><span class="line">    <span class="keyword">return</span> ConstrainedBox(</span><br><span class="line">      constraints: BoxConstraints(</span><br><span class="line">        minWidth: <span class="built_in">double</span>.infinity,  <span class="comment">// 宽度设置最大</span></span><br><span class="line">        minHeight: <span class="number">50</span>,    <span class="comment">// 高度最小值设置50</span></span><br><span class="line">      ),</span><br><span class="line">      child: Container(</span><br><span class="line">        height: <span class="number">10</span>,   <span class="comment">// 设置高度为10</span></span><br><span class="line">        child: DecoratedBox(decoration: BoxDecoration(color: Colors.orange)),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/container_min.png" alt="image"></p>
+<ul>
+<li>可以看到, 虽然将<code>Container</code>的高度设置为10像素，但是最终却是50像素，这正是<code>ConstrainedBox</code>的最小高度限制生效了</li>
+<li>如果将<code>Container</code>的高度设置为80像素，那么最终红色区域的高度也会是80像素，因为在此示例中，<code>ConstrainedBox</code>只限制了最小高度，并未限制最大高度</li>
+</ul>
+<h2 id="SizedBox"><a href="#SizedBox" class="headerlink" title="SizedBox"></a>SizedBox</h2><p><code>SizedBox</code>用于给子<code>widget</code>指定固定的宽高</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SizedBox的几种构造函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SizedBox</span> <span class="keyword">extends</span> <span class="title">SingleChildRenderObjectWidget</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// <span class="language-markdown">设置固定的高度</span></span></span><br><span class="line">  <span class="keyword">const</span> SizedBox(&#123; Key key, <span class="keyword">this</span>.width, <span class="keyword">this</span>.height, Widget child &#125;)</span><br><span class="line">    : <span class="keyword">super</span>(key: key, child: child);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">创建一个最大宽高的box</span></span></span><br><span class="line">  <span class="keyword">const</span> SizedBox.expand(&#123; Key key, Widget child &#125;)</span><br><span class="line">    : width = <span class="built_in">double</span>.infinity,</span><br><span class="line">      height = <span class="built_in">double</span>.infinity,</span><br><span class="line">      <span class="keyword">super</span>(key: key, child: child);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">创建一个最小宽高(都是0)的box</span></span></span><br><span class="line">  <span class="keyword">const</span> SizedBox.shrink(&#123; Key key, Widget child &#125;)</span><br><span class="line">    : width = <span class="number">0.0</span>,</span><br><span class="line">      height = <span class="number">0.0</span>,</span><br><span class="line">      <span class="keyword">super</span>(key: key, child: child);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">创建一个指定size 的box</span></span></span><br><span class="line">  SizedBox.fromSize(&#123; Key key, Widget child, Size size &#125;)</span><br><span class="line">    : width = size?.width,</span><br><span class="line">      height = size?.height,</span><br><span class="line">      <span class="keyword">super</span>(key: key, child: child);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们创建一个指定宽高的<code>Widget</code></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SizedBoxView</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement build</span></span><br><span class="line">    <span class="keyword">return</span> SizedBox(</span><br><span class="line">      width: <span class="number">80</span>,</span><br><span class="line">      height: <span class="number">80</span>,</span><br><span class="line">      child: Container(</span><br><span class="line">        child: DecoratedBox(decoration: BoxDecoration(color: Colors.orange)),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实际上SizedBox和只是ConstrainedBox一个定制, 上面的代码等价于</span></span><br><span class="line">ConstrainedBox(</span><br><span class="line">  constraints: BoxConstraints.tightFor(width: <span class="number">80.0</span>,height: <span class="number">80.0</span>),</span><br><span class="line">  child: Container(</span><br><span class="line">    child: DecoratedBox(decoration: BoxDecoration(color: Colors.orange)),</span><br><span class="line">  ),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>而实际上<code>ConstrainedBox</code>和<code>SizedBox</code>都是通过<code>RenderConstrainedBox</code>来渲染的，我们可以看到<code>ConstrainedBox</code>和<code>SizedBox</code>的<code>createRenderObject()</code>方法都返回的是一个<code>RenderConstrainedBox</code>对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// SizedBox</span><br><span class="line">class SizedBox extends SingleChildRenderObjectWidget &#123;</span><br><span class="line"> RenderConstrainedBox createRenderObject(BuildContext context) &#123;</span><br><span class="line">    return RenderConstrainedBox(</span><br><span class="line">      additionalConstraints: _additionalConstraints,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  BoxConstraints get _additionalConstraints &#123;</span><br><span class="line">    return BoxConstraints.tightFor(width: width, height: height);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// ConstrainedBox</span><br><span class="line">class ConstrainedBox extends SingleChildRenderObjectWidget &#123;</span><br><span class="line">  RenderConstrainedBox createRenderObject(BuildContext context) &#123;</span><br><span class="line">    return RenderConstrainedBox(additionalConstraints: constraints);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  final BoxConstraints constraints;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><p>多重限制问题</p></div>
+
+<ul>
+<li>如果某一个<code>widget</code>有多个父<code>ConstrainedBox</code>限制</li>
+<li>对于<code>minWidth</code>和<code>minHeight</code>来说，是取父子中相应数值较大的。只有这样才能保证父限制与子限制不冲突</li>
+<li>对于<code>maxWidth</code>和<code>maxHeight</code>来说, 无效, 最终宽高都是0</li>
+</ul>
+<h2 id="UnconstrainedBox"><a href="#UnconstrainedBox" class="headerlink" title="UnconstrainedBox"></a>UnconstrainedBox</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> UnconstrainedBox(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    Widget child,</span><br><span class="line">    <span class="comment">// TextDirection, 表示水平方向子widget的布局顺序</span></span><br><span class="line">    <span class="keyword">this</span>.textDirection,</span><br><span class="line">    <span class="comment">// 子Widget在主轴上的对其方式</span></span><br><span class="line">    <span class="keyword">this</span>.alignment = Alignment.center,</span><br><span class="line">    <span class="comment">// 设置约束的轴, 水平or垂直, Axis.horizontal</span></span><br><span class="line">    <span class="keyword">this</span>.constrainedAxis,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>UnconstrainedBox</code>不会对子<code>Widget</code>产生任何限制，它允许其子<code>Widget</code>按照其本身大小绘制</li>
+<li>一般情况下，我们会很少直接使用此<code>widget</code>，但在”去除”多重限制的时候也许会有帮助</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ConstrainedBox(</span><br><span class="line">  constraints: BoxConstraints(</span><br><span class="line">    minWidth: <span class="number">60</span>,</span><br><span class="line">    minHeight: <span class="number">100</span>,</span><br><span class="line">  ),</span><br><span class="line">  child: UnconstrainedBox(  <span class="comment">// “去除”父级限制</span></span><br><span class="line">    textDirection: TextDirection.ltr,</span><br><span class="line">    alignment: Alignment.center,</span><br><span class="line">    constrainedAxis: Axis.horizontal,</span><br><span class="line">    child: ConstrainedBox(</span><br><span class="line">      constraints: BoxConstraints(</span><br><span class="line">        minWidth: <span class="number">90</span>,</span><br><span class="line">        minHeight: <span class="number">20</span>,</span><br><span class="line">      ),</span><br><span class="line">      child: DecoratedBox(decoration: BoxDecoration(color: Colors.red)),</span><br><span class="line">    ),</span><br><span class="line">  )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面代码中，如果没有中间的<code>UnconstrainedBox</code>，那么根据上面所述的多重限制规则，那么最终将显示一个90×100的红色框</li>
+<li>但是由于<code>UnconstrainedBox</code>“去除”了父<code>ConstrainedBox</code>的限制，则最终会按照子<code>ConstrainedBox</code>的限制来绘制红色框，即90×20：</li>
+</ul>
+<p><img data-src="https://cdn.jsdelivr.net/gh/flutterchina/flutter-in-action@1.0/docs/imgs/image-20180910105830808.png" alt="image"></p>
+<ul>
+<li>但是需要注意，<code>UnconstrainedBox</code>对父限制的“去除”并非是真正的去除，上面例子中虽然红色区域大小是90×20，但上方仍然有80的空白空间。</li>
+<li>也就是说父限制的<code>minHeight</code>(100.0)仍然是生效的，只不过它不影响最终子元素的大小，但仍然还是占有相应的空间，可以认为此时的父<code>ConstrainedBox</code>是作用于子<code>ConstrainedBox</code>上，而红色框只受子<code>ConstrainedBox</code>限制，这一点请读者务必注意</li>
+<li>并且目前没有什么方式能够彻底去除父<code>BoxConstraints</code>的限制</li>
+<li>在定义一个通用的<code>widget</code>时，如果对子<code>widget</code>指定限制时一定要注意，因为一旦指定限制条件，子<code>widget</code>如果要进行相关自定义大小时将可能非常困难，因为子<code>widget</code>在不更改父<code>widget</code>的代码的情况下无法彻底去除其限制条件</li>
+</ul>
+<h1 id="AspectRatio"><a href="#AspectRatio" class="headerlink" title="AspectRatio"></a>AspectRatio</h1><p><code>AspectRatio</code>组件是固定宽高比的组件</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> AspectRatio(&#123;</span><br><span class="line">  Key key,</span><br><span class="line">  <span class="comment">// 宽高比，可以直接写成分数的形式，也可以写成小数的形式，但建议写成分数的形式，可读性更高</span></span><br><span class="line">  <span class="meta">@required</span> <span class="keyword">this</span>.aspectRatio,</span><br><span class="line">  Widget child,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果组件的宽度固定，希望高是宽的1&#x2F;2，可以用<code>AspectRatio</code>实现此效果</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AspectRatio(</span><br><span class="line">  aspectRatio: <span class="number">2</span> / <span class="number">1</span>,</span><br><span class="line">  child: Container(color: Colors.red),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="FractionallySizedBox"><a href="#FractionallySizedBox" class="headerlink" title="FractionallySizedBox"></a>FractionallySizedBox</h2><p>设置一个控件的尺寸是相对尺寸时，比如当前按钮的宽度占父组件的70%，可以使用<code>FractionallySizedBox</code>来实现此效果</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> FractionallySizedBox(&#123;</span><br><span class="line">  Key key,</span><br><span class="line">  <span class="comment">// 控制子组件显示的位置</span></span><br><span class="line">  <span class="keyword">this</span>.alignment = Alignment.center,</span><br><span class="line">  <span class="comment">// 设置宽度系数，系数值的范围是0-1</span></span><br><span class="line">  <span class="keyword">this</span>.widthFactor,</span><br><span class="line">  <span class="comment">// 设置高度系数，系数值的范围是0-1</span></span><br><span class="line">  <span class="keyword">this</span>.heightFactor,</span><br><span class="line">  Widget child,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="LimitedBox"><a href="#LimitedBox" class="headerlink" title="LimitedBox"></a>LimitedBox</h2><p><code>LimitedBox</code>组件是当不受父组件约束时限制它的尺寸, <code>LimitedBox</code>的父组件受到约束，此时<code>LimitedBox</code>将会不做任何操作，我们可以认为没有这个组件</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> LimitedBox(&#123;</span><br><span class="line">  Key key,</span><br><span class="line">  <span class="keyword">this</span>.maxWidth = <span class="built_in">double</span>.infinity,</span><br><span class="line">  <span class="keyword">this</span>.maxHeight = <span class="built_in">double</span>.infinity,</span><br><span class="line">  Widget child,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="DecoratedBox"><a href="#DecoratedBox" class="headerlink" title="DecoratedBox"></a>DecoratedBox</h2><p><code>DecoratedBox</code>可以在其子<code>widget</code>绘制前(或后)绘制一个装饰<code>Decoration</code>（如背景、边框、渐变等）, 构造函数如下</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> DecoratedBox(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.decoration,</span><br><span class="line">    <span class="keyword">this</span>.position = DecorationPosition.background,</span><br><span class="line">    Widget child</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>decoration</code>: 代表将要绘制的装饰，它类型为<code>Decoration</code>是一个抽象类，它定义了一个接口 <code>createBoxPainter()</code>，子类的主要职责是需要通过实现它来创建一个装饰器, 所以后面我们将使用<code>BoxDecoration</code>来实现该属性</li>
+<li><code>position</code>：此属性决定在哪里绘制<code>Decoration</code>，它接收<code>DecorationPosition</code>的枚举类型，该枚举类两个值：<ul>
+<li><code>background</code>：在子<code>widget</code>之后绘制，即背景装饰(是默认值)</li>
+<li><code>foreground</code>：在子<code>widget</code>之上绘制，即前景</li>
+</ul>
+</li>
+</ul>
+<h2 id="BoxDecoration"><a href="#BoxDecoration" class="headerlink" title="BoxDecoration"></a>BoxDecoration</h2><p><code>BoxDecoration</code>是一个<code>Decoration</code>的子类, 通常我们都是使用它来实现上面的类似<code>decoration</code>的相关属性</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> BoxDecoration(&#123;</span><br><span class="line">    <span class="comment">// 背景颜色</span></span><br><span class="line">    <span class="keyword">this</span>.color,</span><br><span class="line">    <span class="comment">// 背景图片, DecorationImage</span></span><br><span class="line">    <span class="keyword">this</span>.image,</span><br><span class="line">    <span class="comment">// 边框</span></span><br><span class="line">    <span class="keyword">this</span>.border,</span><br><span class="line">    <span class="comment">// 圆角</span></span><br><span class="line">    <span class="keyword">this</span>.borderRadius,</span><br><span class="line">    <span class="comment">// 阴影</span></span><br><span class="line">    <span class="keyword">this</span>.boxShadow,</span><br><span class="line">    <span class="comment">// 渐变色</span></span><br><span class="line">    <span class="keyword">this</span>.gradient,</span><br><span class="line">    <span class="comment">// 背景颜色和背景图片的混合渲染模式`BlendMode`, 下面会介绍该枚举值</span></span><br><span class="line">    <span class="keyword">this</span>.backgroundBlendMode,</span><br><span class="line">    <span class="comment">// 形状</span></span><br><span class="line">    <span class="keyword">this</span>.shape = BoxShape.rectangle,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="image"><a href="#image" class="headerlink" title="image"></a>image</h3><p>设置背景图片<code>DecorationImage</code></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> DecorationImage(&#123;</span><br><span class="line">    <span class="comment">// ImageProvider类型</span></span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.image,</span><br><span class="line">    <span class="keyword">this</span>.colorFilter,</span><br><span class="line">    <span class="keyword">this</span>.fit,</span><br><span class="line">    <span class="keyword">this</span>.alignment = Alignment.center,</span><br><span class="line">    <span class="keyword">this</span>.centerSlice,</span><br><span class="line">    <span class="keyword">this</span>.repeat = ImageRepeat.noRepeat,</span><br><span class="line">    <span class="keyword">this</span>.matchTextDirection = <span class="keyword">false</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="image-1"><a href="#image-1" class="headerlink" title="image"></a>image</h4><ul>
+<li>图片的设置方式, 是<code>ImageProvider</code>类型的</li>
+<li><code>ImageProvider</code>是一个抽象类, 需要使用其子类实现<ul>
+<li><code>NetworkImage</code></li>
+<li><code>FileImage</code></li>
+<li><code>MemoryImage</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="colorFilter"><a href="#colorFilter" class="headerlink" title="colorFilter"></a>colorFilter</h4><ul>
+<li>在绘制图像之前应用于图像的滤色器, 这个属性值是<code>ColorFilter</code>类</li>
+<li><code>ColorFilter</code>的构造方法中有两个属性, 分别设置颜色图像和图片图像, 后面也将使用这两个名词解释各个枚举值</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个属性, 分别设置颜色图像和图片图像</span></span><br><span class="line"><span class="keyword">const</span> ColorFilter.mode(Color color, BlendMode blendMode)</span><br></pre></td></tr></table></figure>
+
+<p><code>BlendMode</code>有以下枚举值, 带有<code>src</code>表示图片图像不显示, <code>dst</code>表示颜色图像不显示</p>
+<table>
+<thead>
+<tr>
+<th><code>blendMode</code></th>
+<th>枚举值意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>clear</code></td>
+<td>颜色图像和图片图像都不显示</td>
+</tr>
+<tr>
+<td><code>src</code></td>
+<td>显示颜色图像不显示图片图像</td>
+</tr>
+<tr>
+<td><code>dst</code></td>
+<td>显示图片图像不显示颜色图像</td>
+</tr>
+<tr>
+<td><code>srcOver</code></td>
+<td>颜色图像在图片图像的上面</td>
+</tr>
+<tr>
+<td><code>dstOver</code></td>
+<td>颜色图像在图片图像的下面</td>
+</tr>
+<tr>
+<td><code>srcIn</code></td>
+<td>显示图片图像, 但只显示和颜色图像重合的部分(两者的交集)</td>
+</tr>
+<tr>
+<td><code>dstIn</code></td>
+<td>显示颜色图像, 但只显示和图片图像重合的部分(两者的交集)</td>
+</tr>
+<tr>
+<td><code>srcOut</code></td>
+<td>显示图片图像, 但只显示和颜色图像不重合的部分(两者的差集)</td>
+</tr>
+<tr>
+<td><code>dstOut</code></td>
+<td>显示颜色图像, 但只显示和图片图像不重合的部分(两者的差集), 一般都是空了</td>
+</tr>
+<tr>
+<td><code>srcATop</code></td>
+<td>将图片图像合成到颜色图像上面, 只合成交集的部分</td>
+</tr>
+<tr>
+<td><code>dstATop</code></td>
+<td>将颜色图像合成到图片图像上面, 只合成交集的部分</td>
+</tr>
+<tr>
+<td><code>xor</code></td>
+<td>图片图像和颜色图像合成的结果</td>
+</tr>
+<tr>
+<td><code>plus</code></td>
+<td>图片和颜色的合成, 但是会受透明度的影响</td>
+</tr>
+<tr>
+<td><code>modulate</code></td>
+<td>将图片图像和颜色图像的颜色分量相乘。这只能产生相同或较暗的颜色（乘以白色，1.0，结果不变;乘以黑色，0.0，结果为黑色</td>
+</tr>
+<tr>
+<td><code>screen</code></td>
+<td>将图片图像和颜色图像的颜色分量的倒数相乘, 并反转结果</td>
+</tr>
+<tr>
+<td><code>overlay</code></td>
+<td>在调整图片图像和颜色图像的组件以使其有利于目标之后，将其相乘</td>
+</tr>
+<tr>
+<td><code>darken</code></td>
+<td>通过从每个颜色通道中选择最低值来合成图片图像和颜色图像</td>
+</tr>
+<tr>
+<td><code>lighten</code></td>
+<td>通过从每个颜色通道中选择最高值来合成图片图像和颜色图像</td>
+</tr>
+</tbody></table>
+<p>除此之外还有好几个枚举值, 但是我确实不知道该怎么解释了, 上面的解释好像也不是很清晰, 模模糊糊, 还是建议大家自测看效果图吧, 或者看看官方文档, 也有效果图, 其实很多枚举值还是用不到的, 如果有比较好的解释的话, 欢迎大家多多提出建议………大写的尴尬</p>
+<h3 id="border"><a href="#border" class="headerlink" title="border"></a>border</h3><p>设置边框的样式,<code>BoxBorder</code>是一个抽象类, 有以下两个类共三种实现方式</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Border的两种实现方式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Border</span> <span class="keyword">extends</span> <span class="title">BoxBorder</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> Border(&#123;</span><br><span class="line">    <span class="keyword">this</span>.top = BorderSide.none,</span><br><span class="line">    <span class="keyword">this</span>.right = BorderSide.none,</span><br><span class="line">    <span class="keyword">this</span>.bottom = BorderSide.none,</span><br><span class="line">    <span class="keyword">this</span>.left = BorderSide.none,</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">factory</span> Border.all(&#123;</span><br><span class="line">    Color color = <span class="keyword">const</span> Color(<span class="number">0xFF000000</span>),</span><br><span class="line">    <span class="built_in">double</span> width = <span class="number">1.0</span>,</span><br><span class="line">    BorderStyle style = BorderStyle.solid,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面是BorderSide的构造函数, 之前的文字中都介绍过, 这里就不在提及了</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BorderSide</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> BorderSide(&#123;</span><br><span class="line">    <span class="keyword">this</span>.color = <span class="keyword">const</span> Color(<span class="number">0xFF000000</span>),</span><br><span class="line">    <span class="keyword">this</span>.width = <span class="number">1.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.style = BorderStyle.solid,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BorderDirectional的构造函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BorderDirectional</span> <span class="keyword">extends</span> <span class="title">BoxBorder</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> BorderDirectional(&#123;</span><br><span class="line">    <span class="keyword">this</span>.top = BorderSide.none,</span><br><span class="line">    <span class="keyword">this</span>.start = BorderSide.none,</span><br><span class="line">    <span class="keyword">this</span>.end = BorderSide.none,</span><br><span class="line">    <span class="keyword">this</span>.bottom = BorderSide.none,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="boxShadow"><a href="#boxShadow" class="headerlink" title="boxShadow"></a>boxShadow</h3><p>设置盒子的阴影, 这个阴影和盒子的形状保持一致, 接受的值是一个存储<code>BoxShadow</code>的列表, 下面下看一下<code>BoxShadow</code>的构造函数</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> BoxShadow(&#123;</span><br><span class="line">    <span class="comment">// 颜色</span></span><br><span class="line">    Color color = <span class="keyword">const</span> Color(<span class="number">0xFF000000</span>),</span><br><span class="line">    <span class="comment">// 阴影相对于盒子的偏移量</span></span><br><span class="line">    Offset offset = Offset.zero,</span><br><span class="line">    <span class="comment">// 阴影的模糊程度, 值越大阴影越模糊</span></span><br><span class="line">    <span class="built_in">double</span> blurRadius = <span class="number">0.0</span>,</span><br><span class="line">    <span class="comment">// 阴影向相反方向增加的像素值</span></span><br><span class="line">    <span class="keyword">this</span>.spreadRadius = <span class="number">0.0</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 演示示例, 四个边都添加阴影</span></span><br><span class="line">[</span><br><span class="line">    BoxShadow(color: Colors.grey, offset: Offset(<span class="number">-5</span>, <span class="number">-5</span>), blurRadius: <span class="number">10</span>, spreadRadius: <span class="number">0</span>),</span><br><span class="line">    BoxShadow(color: Colors.red, offset: Offset(<span class="number">5</span>, <span class="number">5</span>), blurRadius: <span class="number">10</span>, spreadRadius: <span class="number">0</span>),</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<h3 id="gradient"><a href="#gradient" class="headerlink" title="gradient"></a>gradient</h3><p>设置背景颜色为渐变色, <code>Gradient</code>又是一个抽象类, 如下一共有三个子类</p>
+<ul>
+<li><code>LinearGradient</code></li>
+<li><code>RadialGradient</code></li>
+<li><code>SweepGradient</code></li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 线性渐变</span></span><br><span class="line"><span class="keyword">const</span> LinearGradient(&#123;</span><br><span class="line">    <span class="comment">// 起始点</span></span><br><span class="line">    <span class="keyword">this</span>.begin = Alignment.centerLeft,</span><br><span class="line">    <span class="comment">// 终点</span></span><br><span class="line">    <span class="keyword">this</span>.end = Alignment.centerRight,</span><br><span class="line">    <span class="comment">// 色值数组</span></span><br><span class="line">    <span class="meta">@required</span> <span class="built_in">List</span>&lt;Color&gt; colors,</span><br><span class="line">    <span class="comment">// 值列表，装有0.0到1.0的数值</span></span><br><span class="line">    <span class="built_in">List</span>&lt;<span class="built_in">double</span>&gt; stops,</span><br><span class="line">    <span class="comment">// 渐变平铺模式，指定在开始和结束以外的区域平铺模式</span></span><br><span class="line">    <span class="keyword">this</span>.tileMode = TileMode.clamp,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 圆形渐变, </span></span><br><span class="line"><span class="keyword">const</span> RadialGradient(&#123;</span><br><span class="line">    <span class="comment">// 渐变的中心)</span></span><br><span class="line">    <span class="keyword">this</span>.center = Alignment.center,</span><br><span class="line">    <span class="comment">// 渐变的半径，浮点型，具体数值需要乘以盒子的宽度</span></span><br><span class="line">    <span class="keyword">this</span>.radius = <span class="number">0.5</span>,</span><br><span class="line">    <span class="meta">@required</span> <span class="built_in">List</span>&lt;Color&gt; colors,</span><br><span class="line">    <span class="built_in">List</span>&lt;<span class="built_in">double</span>&gt; stops,</span><br><span class="line">    <span class="keyword">this</span>.tileMode = TileMode.clamp,</span><br><span class="line">    <span class="keyword">this</span>.focal,</span><br><span class="line">    <span class="keyword">this</span>.focalRadius = <span class="number">0.0</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> SweepGradient(&#123;</span><br><span class="line">    <span class="comment">// 位置的中心点</span></span><br><span class="line">    <span class="keyword">this</span>.center = Alignment.center,</span><br><span class="line">    <span class="comment">// 起始点的角度</span></span><br><span class="line">    <span class="keyword">this</span>.startAngle = <span class="number">0.0</span>,</span><br><span class="line">    <span class="comment">// 终点的角度</span></span><br><span class="line">    <span class="keyword">this</span>.endAngle = math.pi * <span class="number">2</span>,</span><br><span class="line">    <span class="meta">@required</span> <span class="built_in">List</span>&lt;Color&gt; colors,</span><br><span class="line">    <span class="built_in">List</span>&lt;<span class="built_in">double</span>&gt; stops,</span><br><span class="line">    <span class="keyword">this</span>.tileMode = TileMode.clamp,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>三种渐变色效果如下所示</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/graintColor.png" alt="image"></p>
+<p><code>LinearGradient</code>线性渐变色下, 渐变模式<code>TileMode</code>各枚举值对应的效果如下</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/gradientmode.png" alt="image"></p>
+<h3 id="shape"><a href="#shape" class="headerlink" title="shape"></a>shape</h3><p>设置背景的形状, 针对背景色, 背景图片和渐变色, <code>BoxShape</code>类型是个枚举值</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> BoxShape &#123;</span><br><span class="line">  <span class="comment">// 保持不变</span></span><br><span class="line">  rectangle,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 剪切成圆形, 和borderRadius属性冲突</span></span><br><span class="line">  circle,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Transform"><a href="#Transform" class="headerlink" title="Transform"></a>Transform</h2><ul>
+<li><code>Transform</code>可以在其子<code>Widget</code>绘制时对其进行一个矩阵变换, 可以对<code>child</code>做平移、旋转、缩放等操作</li>
+<li><code>Matrix4</code>是一个4D矩阵，通过它可以实现各种矩阵操作</li>
+</ul>
+<h3 id="Transform-1"><a href="#Transform-1" class="headerlink" title="Transform"></a>Transform</h3><p>先来看下<code>Transform</code>的一些构造函数吧</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Transform</span> <span class="keyword">extends</span> <span class="title">SingleChildRenderObjectWidget</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 创建一个矩阵变换Widget</span></span><br><span class="line">  <span class="keyword">const</span> Transform(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 矩阵执行的变换操作, 接受一个Matrix4对象</span></span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.transform,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 旋转点，相对于左上角顶点的偏移。默认旋转点事左上角顶点, </span></span><br><span class="line">    <span class="comment">// 接受一个Offset对象</span></span><br><span class="line">    <span class="keyword">this</span>.origin,</span><br><span class="line">    <span class="comment">// 对其方式</span></span><br><span class="line">    <span class="keyword">this</span>.alignment,</span><br><span class="line">    <span class="comment">// 点击区域是否也做相应的改变</span></span><br><span class="line">    <span class="keyword">this</span>.transformHitTests = <span class="keyword">true</span>,</span><br><span class="line">    Widget child,</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 创建一个旋转变换矩阵</span></span><br><span class="line">  Transform.rotate(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 设置旋转角度</span></span><br><span class="line">    <span class="meta">@required</span> <span class="built_in">double</span> angle,</span><br><span class="line">    <span class="keyword">this</span>.origin,</span><br><span class="line">    <span class="keyword">this</span>.alignment = Alignment.center,</span><br><span class="line">    <span class="keyword">this</span>.transformHitTests = <span class="keyword">true</span>,</span><br><span class="line">    Widget child,</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 创建一个平移矩阵</span></span><br><span class="line">  Transform.translate(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> Offset offset,</span><br><span class="line">    <span class="keyword">this</span>.transformHitTests = <span class="keyword">true</span>,</span><br><span class="line">    Widget child,</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 创建一个缩放矩阵</span></span><br><span class="line">  Transform.scale(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 设置缩放比例, 0-1的数值</span></span><br><span class="line">    <span class="meta">@required</span> <span class="built_in">double</span> scale,</span><br><span class="line">    <span class="keyword">this</span>.origin,</span><br><span class="line">    <span class="keyword">this</span>.alignment = Alignment.center,</span><br><span class="line">    <span class="keyword">this</span>.transformHitTests = <span class="keyword">true</span>,</span><br><span class="line">    Widget child,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面是每一种变换形式的具体示例</p>
+<h4 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h4><p><code>Transform.rotate</code>可以对子<code>widget</code>进行旋转变换, 如下代码</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Container(</span><br><span class="line">  color: Colors.black,</span><br><span class="line">  child: Transform.rotate(</span><br><span class="line">    <span class="comment">// 这里☞旋转的角度, math.pi是指180度</span></span><br><span class="line">    angle: -math.pi / <span class="number">4</span>,</span><br><span class="line">    child: Container(</span><br><span class="line">      padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">8.0</span>),</span><br><span class="line">      color: <span class="keyword">const</span> Color(<span class="number">0xFFE8581C</span>),</span><br><span class="line">      child: <span class="keyword">const</span> Text(<span class="string">&#x27;https://titanjun.top&#x27;</span>),</span><br><span class="line">    ),</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/transform_rotate.png" alt="image"></p>
+<h4 id="平移"><a href="#平移" class="headerlink" title="平移"></a>平移</h4><p><code>Transform.translate</code>接收一个<code>offset</code>参数，可以在绘制时沿x、y轴对子<code>widget</code>平移指定的距离</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Container(</span><br><span class="line">  color: Colors.black,</span><br><span class="line">  child: Transform.translate(</span><br><span class="line">    <span class="comment">// 默认原点为左上角，右移5像素，向下平移15像素 </span></span><br><span class="line">    offset: <span class="keyword">const</span> Offset(<span class="number">5.0</span>, <span class="number">15.0</span>),</span><br><span class="line">    child: Container(</span><br><span class="line">      padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">8.0</span>),</span><br><span class="line">      color: <span class="keyword">const</span> Color(<span class="number">0xFF7F7F7F</span>),</span><br><span class="line">      child: <span class="keyword">const</span> Text(<span class="string">&#x27;Quarter&#x27;</span>),</span><br><span class="line">    ),</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/transform_translate.png" alt="image"></p>
+<h4 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h4><p><code>Transform.scale</code>可以对子<code>Widget</code>进行缩小或放大</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Container(</span><br><span class="line">  color: Colors.black,</span><br><span class="line">  child: Transform.scale(</span><br><span class="line">    origin: Offset(<span class="number">5</span>, <span class="number">5</span>),</span><br><span class="line">    <span class="comment">// 缩小为原来的0.5倍</span></span><br><span class="line">    scale: <span class="number">0.5</span>,</span><br><span class="line">    child: Container(</span><br><span class="line">      padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">8.0</span>),</span><br><span class="line">      color: <span class="keyword">const</span> Color(<span class="number">0xFFE8581C</span>),</span><br><span class="line">      child: <span class="keyword">const</span> Text(<span class="string">&#x27;Bad Ideas&#x27;</span>),</span><br><span class="line">    ),</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><ul>
+<li><code>Transform</code>的变换是应用在绘制阶段，而并不是应用在布局(<code>layout</code>)阶段</li>
+<li>所以无论对子widget应用何种变化，其占用空间的大小和在屏幕上的位置都是固定不变的，因为这些是在布局阶段就确定的</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Row(</span><br><span class="line">  mainAxisAlignment: MainAxisAlignment.center,</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">    DecoratedBox(</span><br><span class="line">      decoration:BoxDecoration(color: Colors.red),</span><br><span class="line">      child: Transform.scale(scale: <span class="number">1.5</span>,</span><br><span class="line">          child: Text(<span class="string">&quot;Hello world&quot;</span>)</span><br><span class="line">      )</span><br><span class="line">    ),</span><br><span class="line">    Text(<span class="string">&quot;你好&quot;</span>, style: TextStyle(color: Colors.green, fontSize: <span class="number">18.0</span>),)</span><br><span class="line">  ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://cdn.jsdelivr.net/gh/flutterchina/flutter-in-action@1.0/docs/imgs/image-20180910164454967.png" alt="image"></p>
+<ul>
+<li>由于第一个<code>Text</code>应用变换(放大)后，其在绘制时会放大，但其占用的空间依然为红色部分，所以第二个<code>text</code>会紧挨着红色部分，最终就会出现文字有重合部分。</li>
+<li>由于矩阵变化只会作用在绘制阶段，所以在某些场景下，在UI需要变化时，可以直接通过矩阵变化来达到视觉上的UI改变，而不需要去重新触发build流程，这样会节省<code>layout</code>的开销，所以性能会比较好</li>
+<li>如之前介绍的<code>Flow widget</code>，它内部就是用矩阵变换来更新UI，除此之外，<code>Flutter</code>的动画<code>widget</code>中也大量使用了<code>Transform</code>以提高性能</li>
+</ul>
+<h3 id="RotatedBox"><a href="#RotatedBox" class="headerlink" title="RotatedBox"></a>RotatedBox</h3><ul>
+<li><code>RotatedBox</code>和<code>Transform.rotate</code>功能相似，它们都可以对子<code>widget</code>进行旋转变换，但是有一点不同：<code>RotatedBox</code>的变换是在<code>layout</code>阶段，会影响在子<code>widget</code>的位置和大小</li>
+<li>我们将上面介绍<code>Transform.rotate</code>时的示例改一下</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Row(</span><br><span class="line">  mainAxisAlignment: MainAxisAlignment.center,</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">    DecoratedBox(</span><br><span class="line">      decoration: BoxDecoration(color: Colors.red),</span><br><span class="line">      <span class="comment">//将Transform.rotate换成RotatedBox  </span></span><br><span class="line">      child: RotatedBox(</span><br><span class="line">        <span class="comment">// int类型</span></span><br><span class="line">        quarterTurns: <span class="number">1</span>, <span class="comment">//旋转90度(1/4圈)</span></span><br><span class="line">        child: Text(<span class="string">&quot;Hello world&quot;</span>),</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">    Text(<span class="string">&quot;你好&quot;</span>, style: TextStyle(color: Colors.green, fontSize: <span class="number">18.0</span>),)</span><br><span class="line">  ],</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://cdn.jsdelivr.net/gh/flutterchina/flutter-in-action@1.0/docs/imgs/image-20180910170603964.png" alt="image"></p>
+<blockquote>
+<p>由于<code>RotatedBox</code>是作用于<code>layout</code>阶段，所以<code>widget</code>会旋转90度（而不只是绘制的内容），<code>decoration</code>会作用到<code>widget</code>所占用的实际空间上，所以就是上图的效果。读者可以和前面<code>Transform.rotate</code>示例对比理解</p>
+</blockquote>
+<h3 id="Matrix4"><a href="#Matrix4" class="headerlink" title="Matrix4"></a>Matrix4</h3><p>一个4D变换矩阵, <code>Transform</code>使用<code>Matrix4</code>使其子<code>Widget</code>进行矩阵变换, 下面是其相关构造函数</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4 x 4矩阵</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4(<span class="built_in">double</span> arg0, <span class="built_in">double</span> arg1, <span class="built_in">double</span> arg2, <span class="built_in">double</span> arg3, <span class="built_in">double</span> arg4, <span class="built_in">double</span> arg5, <span class="built_in">double</span> arg6, <span class="built_in">double</span> arg7, <span class="built_in">double</span> arg8, <span class="built_in">double</span> arg9, <span class="built_in">double</span> arg10, <span class="built_in">double</span> arg11, <span class="built_in">double</span> arg12, <span class="built_in">double</span> arg13, <span class="built_in">double</span> arg14, <span class="built_in">double</span> arg15)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置一个新的矩阵</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.columns(Vector4 arg0, Vector4 arg1, Vector4 arg2, Vector4 arg3)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 复合平移、旋转、缩放，形成新的转换矩阵</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.compose(Vector3 translation, Quaternion rotation, Vector3 scale)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 复制一个4*4的张量(矩阵)</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.copy(Matrix4 other)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缩放矩阵, Vector3(double x, double y, double z)</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.diagonal3(Vector3 scale)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缩放矩阵, 只是参数不同而已</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.diagonal3Values(<span class="built_in">double</span> x, <span class="built_in">double</span> y, <span class="built_in">double</span> z)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Matrix4.fromBuffer(ByteBuffer buffer, <span class="built_in">int</span> offset)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用给定的Float64List构造Matrix4 </span></span><br><span class="line">Matrix4.fromFloat64List(Float64List _m4storage)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将一个16位的一维数组转换成4*4的矩阵</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.fromList(<span class="built_in">List</span>&lt;<span class="built_in">double</span>&gt; values)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 恢复初始状态，也就是4*4的单位矩阵</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.identity()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取相反的矩阵，就是反着来</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.inverted(Matrix4 other)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 两个4维向量的乘积合并</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.outer(Vector4 u, Vector4 v)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 围绕X轴旋转</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.rotationX(<span class="built_in">double</span> radians)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 围绕Y轴旋转</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.rotationY(<span class="built_in">double</span> radians)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 围绕Z轴旋转</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.rotationZ(<span class="built_in">double</span> radians)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 扭曲变换</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.skew(<span class="built_in">double</span> alpha, <span class="built_in">double</span> beta)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 沿着x轴扭曲</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.skewX(<span class="built_in">double</span> alpha)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 沿着y轴扭曲</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.skewY(<span class="built_in">double</span> beta)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移动矩阵</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.translation(Vector3 translation)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移动矩阵, 参数不同而已</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.translationValues(<span class="built_in">double</span> x, <span class="built_in">double</span> y, <span class="built_in">double</span> z)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全是0的4*4的张量</span></span><br><span class="line"><span class="keyword">factory</span> Matrix4.zero()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h2><ul>
+<li><code>Container</code>是一个容器类<code>widget</code>，它本身不对应具体的<code>RenderObject</code>，它是<code>DecoratedBox</code>、<code>ConstrainedBox</code>、<code>Transform</code>、<code>Padding</code>、<code>Align</code>等<code>widget</code>的一个组合widget</li>
+<li>所以我们只需通过一个<code>Container</code>可以实现同时需要装饰、变换、限制的场景</li>
+<li>下面是<code>Container</code>的相关定义</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Container(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 对其方式</span></span><br><span class="line">    <span class="keyword">this</span>.alignment,</span><br><span class="line">    <span class="comment">// 内边距</span></span><br><span class="line">    <span class="keyword">this</span>.padding,</span><br><span class="line">    <span class="comment">// 背景颜色</span></span><br><span class="line">    Color color,</span><br><span class="line">    <span class="comment">// 背景装饰</span></span><br><span class="line">    Decoration decoration,</span><br><span class="line">    <span class="comment">// 前景装饰</span></span><br><span class="line">    <span class="keyword">this</span>.foregroundDecoration,</span><br><span class="line">    <span class="built_in">double</span> width,</span><br><span class="line">    <span class="built_in">double</span> height,</span><br><span class="line">    <span class="comment">//容器大小的限制条件</span></span><br><span class="line">    BoxConstraints constraints,</span><br><span class="line">    <span class="comment">// 容器的外边距, EdgeInsets</span></span><br><span class="line">    <span class="keyword">this</span>.margin,</span><br><span class="line">    <span class="comment">// 设置变换矩阵</span></span><br><span class="line">    <span class="keyword">this</span>.transform,</span><br><span class="line">    <span class="keyword">this</span>.child,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>容器的大小可以通过<code>width</code>、<code>height</code>属性来指定，也可以通过<code>constraints</code>来指定，如果同时存在时，<code>width</code>、<code>height</code>优先。实际上<code>Container</code>内部会根据<code>width</code>、<code>height</code>来生成一个<code>constraints</code></li>
+<li><code>color</code>和<code>decoration</code>是互斥的，实际上，当指定<code>color</code>时，<code>Container</code>内会自动创建一个<code>decoration</code></li>
+</ul>
+<h3 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h3><p>通过使用来实现如下效果</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/flutterchina/flutter-in-action@1.0/docs/imgs/image-20180910205356331.png" alt="image"></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Container(</span><br><span class="line">  margin: EdgeInsets.only(top: <span class="number">50.0</span>, left: <span class="number">120.0</span>), <span class="comment">//容器外补白</span></span><br><span class="line">  constraints: BoxConstraints.tightFor(width: <span class="number">200.0</span>, height: <span class="number">150.0</span>), <span class="comment">//卡片大小</span></span><br><span class="line">  decoration: BoxDecoration(<span class="comment">//背景装饰</span></span><br><span class="line">      gradient: RadialGradient( <span class="comment">//背景径向渐变</span></span><br><span class="line">          colors: [Colors.red, Colors.orange],</span><br><span class="line">          center: Alignment.topLeft,</span><br><span class="line">          radius: <span class="number">.98</span></span><br><span class="line">      ),</span><br><span class="line">      boxShadow: [ <span class="comment">//卡片阴影</span></span><br><span class="line">        BoxShadow(</span><br><span class="line">            color: Colors.black54,</span><br><span class="line">            offset: Offset(<span class="number">2.0</span>, <span class="number">2.0</span>),</span><br><span class="line">            blurRadius: <span class="number">4.0</span></span><br><span class="line">        )</span><br><span class="line">      ]</span><br><span class="line">  ),</span><br><span class="line">  transform: Matrix4.rotationZ(<span class="number">.2</span>), <span class="comment">//卡片倾斜变换</span></span><br><span class="line">  alignment: Alignment.center, <span class="comment">//卡片内文字居中</span></span><br><span class="line">  child: Text( <span class="comment">//卡片文字</span></span><br><span class="line">    <span class="string">&quot;5.20&quot;</span>, style: TextStyle(color: Colors.white, fontSize: <span class="number">40.0</span>),</span><br><span class="line">  ),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><code>ConstrainedBox</code>：适用于需要设置最大&#x2F;小宽高，组件大小以来子组件大小，但不能超过设置的界限。</li>
+<li><code>UnconstrainedBox</code>：用到情况不多，当作<code>ConstrainedBox</code>的子组件可以“突破”<code>ConstrainedBox</code>的限制，超出界限的部分会被截取。</li>
+<li><code>SizedBox</code>：适用于固定宽高的情况，常用于当作2个组件之间间隙组件。</li>
+<li><code>AspectRatio</code>：适用于固定宽高比的情况。</li>
+<li><code>FractionallySizedBox</code>：适用于占父组件百分比的情况。</li>
+<li><code>LimitedBox</code>：适用于没有父组件约束的情况。</li>
+<li><code>Container</code>：适用于不仅有尺寸的约束，还有装饰（颜色、边框、等）、内外边距等需求的情况。</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://book.flutterchina.club/chapter5/">Flutter容器类Widget–中文网</a></li>
+<li><a target="_blank" rel="noopener" href="https://flutterchina.club/widgets/painting/">Flutter官网</a></li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/e3d2ac3e.html" title="Flutter之容器类Widget">https://titanjun.top/post/e3d2ac3e.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/flutter/" rel="tag"> <i class="fa fa-tag"></i> Flutter</a>
+              <a href="/tags/widget/" rel="tag"> <i class="fa fa-tag"></i> Widget</a>
+              <a href="/tags/dart/" rel="tag"> <i class="fa fa-tag"></i> Dart</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/425f3607.html" rel="prev" title="Flutter中App的主题和导航">
+                  <i class="fa fa-chevron-left"></i> Flutter中App的主题和导航
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/88da4080.html" rel="next" title="Flutter之基础Widget之TextField">
+                  Flutter之基础Widget之TextField <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/e3d2ac3e.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

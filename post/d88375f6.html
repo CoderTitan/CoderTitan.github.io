@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Swift之Facebook的POP动画使用和实战">
+<meta property="og:url" content="https://titanjun.top/post/d88375f6.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-a85faa1b734ebc00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-1efeb167ad71b59d.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-070c23772942ed82.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-737cf17a9cb95542.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300">
+<meta property="article:published_time" content="2017-10-17T13:18:38.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.900Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Swift">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4122543-a85faa1b734ebc00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+<link rel="canonical" href="https://titanjun.top/post/d88375f6.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/d88375f6.html","path":"post/d88375f6.html","title":"Swift之Facebook的POP动画使用和实战"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Swift之Facebook的POP动画使用和实战 | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#POP%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">POP自我介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POP%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">POP参数介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.</span> <span class="nav-text">相关属性介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.1.</span> <span class="nav-text">属性简单介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB%E5%8F%AF%E9%85%8D%E7%BD%AE%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.2.</span> <span class="nav-text">动画可配置属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#POPBasicAnimation%E5%8F%AF%E9%85%8D%E7%BD%AE%E7%9A%84%E5%B1%9E%E6%80%A7%E4%B8%8E%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%BA"><span class="nav-number">2.1.3.</span> <span class="nav-text">POPBasicAnimation可配置的属性与默认值为</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POPBasicAnimation%E5%9F%BA%E7%A1%80%E5%8A%A8%E7%94%BB"><span class="nav-number">3.</span> <span class="nav-text">POPBasicAnimation基础动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E7%9C%8B%E4%B8%80%E4%B8%8B%E6%95%88%E6%9E%9C-%E5%85%B6%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C%E5%A6%82%E4%B8%8B"><span class="nav-number">3.1.</span> <span class="nav-text">先看一下效果, 其动画效果如下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%EF%BC%8C%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E5%8A%A8%E7%94%BB%E6%9C%80%E5%B0%91%E4%BB%85%E9%9C%80%E4%B8%89%E6%AD%A5"><span class="nav-number">3.3.</span> <span class="nav-text">可以看到，添加一个动画最少仅需三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Core-Animation-%E5%92%8C-POP-%E8%BF%90%E8%A1%8C%E5%8A%A8%E7%94%BB%E5%AF%B9%E6%AF%94"><span class="nav-number">3.4.</span> <span class="nav-text">Core Animation 和 POP 运行动画对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POPSpringAnimation%E5%BC%B9%E6%80%A7%E5%8A%A8%E7%94%BB"><span class="nav-number">4.</span> <span class="nav-text">POPSpringAnimation弹性动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.1.</span> <span class="nav-text">属性介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.2.</span> <span class="nav-text">代码示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POPDecayAnimation"><span class="nav-number">5.</span> <span class="nav-text">POPDecayAnimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="nav-number">6.</span> <span class="nav-text">自定义属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E5%8A%9B%E6%A8%A1%E5%9D%97"><span class="nav-number">6.1.</span> <span class="nav-text">实力模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E4%BB%8B%E7%BB%8D-1"><span class="nav-number">6.2.</span> <span class="nav-text">属性介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">6.3.</span> <span class="nav-text">完整代码示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E4%B8%AD%E9%97%B4%E5%8F%91%E5%B8%83%E6%8C%89%E9%92%AE%E5%BC%B9%E5%87%BA%E5%8A%A8%E7%94%BB"><span class="nav-number">7.</span> <span class="nav-text">类似微博中间发布按钮弹出动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E7%9C%8B%E4%B8%80%E4%B8%8B%E6%95%88%E6%9E%9C%E5%90%A7"><span class="nav-number">7.1.</span> <span class="nav-text">先看一下效果吧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E9%9D%A2%E6%9D%A5%E7%9C%8B%E4%B8%80%E4%B8%8B%E9%83%A8%E5%88%86%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="nav-number">7.2.</span> <span class="nav-text">下面来看一下部分的核心代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AD%E4%B8%AA%E6%8C%89%E9%92%AE%E7%9A%84%E5%BC%B9%E5%87%BA%E5%92%8C%E6%B6%88%E5%A4%B1%E5%8A%A8%E7%94%BB"><span class="nav-number">7.2.1.</span> <span class="nav-text">六个按钮的弹出和消失动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E4%B8%8A%E9%83%A8%E5%88%86%E6%A0%87%E8%AF%AD%E7%9A%84%E5%BC%B9%E5%87%BA%E5%92%8C%E6%B6%88%E5%A4%B1"><span class="nav-number">7.2.2.</span> <span class="nav-text">最上部分标语的弹出和消失</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/d88375f6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Swift之Facebook的POP动画使用和实战 | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Swift之Facebook的POP动画使用和实战
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-10-17 21:18:38" itemprop="dateCreated datePublished" datetime="2017-10-17T21:18:38+08:00">2017-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ios%E7%BB%84%E4%BB%B6%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">iOS组件库</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-a85faa1b734ebc00.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<span id="more"></span>
+
+
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebook/pop">POP</a>是一个来自于Facebook，在iOS与OSX上通用的极具扩展性的动画引擎。它在基本的静态动画的基础上增加的弹簧动画与衰减动画，使之能创造出更真实更具物理性的交互动画。</li>
+<li><code>Pop Animation</code>在使用上和<code>Core Animation</code>很相似，都涉及<code>Animation</code>对象以及<code>Animation</code>的载体的概念</li>
+<li>关于<code>Core Animation</code>的相关详解, 可参考我的上一篇文章<a target="_blank" rel="noopener" href="http://blog.csdn.net/ShmilyCoder/article/details/78219044">Core Animation(核心动画)</a></li>
+<li>不同的是<code>Core Animation</code>的载体只能是<code>CALayer</code>，而<code>Pop Animation</code>可以是任意基于<code>NSObject</code>的对象</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebook/pop">POP</a> 使用 <code>Objective-C++</code> 编写，<code>Objective-C++</code> 是对 <code>C++</code> 的扩展</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/coderQuanjun/POPAnimationDemo">GitHub项目地址</a></li>
+</ul>
+<h2 id="POP自我介绍"><a href="#POP自我介绍" class="headerlink" title="POP自我介绍"></a>POP自我介绍</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebook/pop">POP</a> 目前由四部分组成：1. Animations；2. Engine；3. Utility；4. WebCore。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebook/pop">POP</a> 动画极为流畅，主要在于Enimator 里，POP 通过 CADisplayLink 高达 60 FPS 的特性，打造了一个游戏级的动画引擎。</li>
+<li>CADisplayLink 是类似 NSTimer 的定时器，不同之处在于，NSTimer 用于我们定义任务的执行周期、资料的更新周期，他的执行受到 CPU 的阻塞影响，而 CADisplayLink 则用于定义画面的重绘、动画的演变，他的执行基于 frames 的间隔。</li>
+<li>通过 CADisplayLink，Apple 允许你将 App 的重绘速度设定到和屏幕刷新频率一致，由此你可以获得非常流畅的交互动画，这项技术的应用在游戏中非常常见，著名的 Cocos-2D 也应用了这个重要的技术。</li>
+<li><a target="_blank" rel="noopener" href="https://opensource.apple.com/source/WebCore/">WebCore</a> 里包含了一些从 Apple 的开源的网页渲染引擎里拿出的源文件，与 Utility 里的组件一并，提供了 POP 的各项复杂计算的基本支持</li>
+</ul>
+<h2 id="POP参数介绍"><a href="#POP参数介绍" class="headerlink" title="POP参数介绍"></a>POP参数介绍</h2><ul>
+<li>POP默认支持三种动画，但同时也支持自定义动画<ul>
+<li><code>POPBasicAnimation</code>   &#x2F;&#x2F;基础动画</li>
+<li><code>POPSpringAnimation</code>  &#x2F;&#x2F;弹簧动画</li>
+<li><code>POPDecayAnimation</code>   &#x2F;&#x2F;衰减动画</li>
+<li><code>POPCustomAnimation</code>  &#x2F;&#x2F;自定义动画</li>
+</ul>
+</li>
+</ul>
+<h3 id="相关属性介绍"><a href="#相关属性介绍" class="headerlink" title="相关属性介绍"></a>相关属性介绍</h3><h4 id="属性简单介绍"><a href="#属性简单介绍" class="headerlink" title="属性简单介绍"></a>属性简单介绍</h4><ul>
+<li>POP动画大部分属性和CoreAnimation(核心动画)的含义和用法一样</li>
+<li>具体可参考<a target="_blank" rel="noopener" href="http://blog.csdn.net/ShmilyCoder/article/details/78219044">Core Animation(核心动画)</a></li>
+<li>每种动画的特殊属性会在下文中继续介绍</li>
+</ul>
+<h4 id="动画可配置属性"><a href="#动画可配置属性" class="headerlink" title="动画可配置属性"></a>动画可配置属性</h4><ul>
+<li>CALayer层各属性(比较简单,就不加注释了)</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> Common CALayer property names.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerBackgroundColor;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerBounds;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerCornerRadius;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerBorderWidth;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerBorderColor;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerOpacity;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerPosition;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerPositionX;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerPositionY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerRotation;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerRotationX;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerRotationY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerScaleX;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerScaleXY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerScaleY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSize;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSubscaleXY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSubtranslationX;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSubtranslationXY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSubtranslationY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerSubtranslationZ;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerTranslationX;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerTranslationXY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerTranslationY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerTranslationZ;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerZPosition;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerShadowColor;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerShadowOffset;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerShadowOpacity;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLayerShadowRadius;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>UIVIew层</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> Common UIView property names.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewAlpha;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewBackgroundColor;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewBounds;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewCenter;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewFrame;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewScaleX;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewScaleXY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewScaleY;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewSize;</span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPViewTintColor;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>其他层视图层</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> Common UINavigationBar property names.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPNavigationBarBarTintColor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> Common UIToolbar property names.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPToolbarBarTintColor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> Common UITabBar property names.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPTabBarBarTintColor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> Common UILabel property names.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> kPOPLabelTextColor;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以上仅仅列出了常用的一些属性,更多控件&#x2F;更多参考框架里面类<br>POPAnimatableProperty.h</p>
+</blockquote>
+<h4 id="POPBasicAnimation可配置的属性与默认值为"><a href="#POPBasicAnimation可配置的属性与默认值为" class="headerlink" title="POPBasicAnimation可配置的属性与默认值为"></a>POPBasicAnimation可配置的属性与默认值为</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">POPBasicAnimation *basic = [POPBasicAnimation linearAnimation];</span><br><span class="line">basic.fromValue = @(<span class="number">0</span>);<span class="comment">//从0开始    basic.toValue = @(3*60);//180秒后结束</span></span><br><span class="line">basic.duration = <span class="number">3</span>*<span class="number">60</span>;<span class="comment">//持续3分钟</span></span><br><span class="line">[lab pop_addAnimation:basic forKey:<span class="literal">nil</span>];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let basic1 = POPBasicAnimation(propertyNamed: kPOPLayerPositionX)</span><br><span class="line">basic1?.fromValue = redView.layer.position.x</span><br><span class="line">basic1?.toValue = <span class="number">300</span></span><br><span class="line">basic1?.beginTime = <span class="built_in">CFTimeInterval</span>() + <span class="number">1.0</span></span><br><span class="line">redView.pop_add(basic1, forKey: <span class="string">&quot;position.x&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="POPBasicAnimation基础动画"><a href="#POPBasicAnimation基础动画" class="headerlink" title="POPBasicAnimation基础动画"></a>POPBasicAnimation基础动画</h2><h3 id="先看一下效果-其动画效果如下"><a href="#先看一下效果-其动画效果如下" class="headerlink" title="先看一下效果, 其动画效果如下"></a>先看一下效果, 其动画效果如下</h3><p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-1efeb167ad71b59d.gif?imageMogr2/auto-orient/strip" alt="image"></p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let basic1 = POPBasicAnimation(propertyNamed: kPOPLayerPositionX)</span><br><span class="line">basic1?.toValue = <span class="number">300</span></span><br><span class="line"><span class="comment">//开始时间</span></span><br><span class="line">basic1?.beginTime = <span class="built_in">CFTimeInterval</span>() + <span class="number">1.0</span></span><br><span class="line">redView.pop_add(basic1, forKey: <span class="string">&quot;position.x&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="可以看到，添加一个动画最少仅需三步"><a href="#可以看到，添加一个动画最少仅需三步" class="headerlink" title="可以看到，添加一个动画最少仅需三步"></a>可以看到，添加一个动画最少仅需三步</h3><ul>
+<li>1）定义一个<code>animation</code>对象，并指定对应的动画属性（<code>kPOPLayerPositionX</code>）</li>
+<li>2）设置初始值结束值(初始值可以不指定，会默认从当前值开始）</li>
+<li>3）添加到想产生动画的对象上</li>
+</ul>
+<h3 id="Core-Animation-和-POP-运行动画对比"><a href="#Core-Animation-和-POP-运行动画对比" class="headerlink" title="Core Animation 和 POP 运行动画对比"></a>Core Animation 和 POP 运行动画对比</h3><ul>
+<li>由于 POP 是基于定时器定时刷新添加动画的原理，那么如果将动画库运行在主线程上，会由于线程阻塞的问题导致动画效果出现卡顿、不流畅的情况。</li>
+<li>更为关键的是，你不能将动画效果放在子线程，因为你不能将对 view 和 layer 的操作放到主线程之外</li>
+<li>POP 受主线程阻塞的影响很大，在使用过程中，应避免在有可能发生主线程阻塞的情况下使用 POP ，避免制作卡顿的动画效果，产生不好的用户体验</li>
+</ul>
+<h2 id="POPSpringAnimation弹性动画"><a href="#POPSpringAnimation弹性动画" class="headerlink" title="POPSpringAnimation弹性动画"></a>POPSpringAnimation弹性动画</h2><h3 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h3><ul>
+<li><code>velocity</code>: 设置动画开始速度</li>
+<li><code>springBounciness</code>: 振幅, 可以设置的范围是0-20，默认为4。值越大振动的幅度越大</li>
+<li><code>springSpeed</code>: 速度, 可以设置的范围是0-20，默认为12.值越大速度越快，结束的越快</li>
+<li><code>dynamicsMass</code>: 质量, 质量越大，动画的速度越慢，振动的幅度越大，结束的越慢</li>
+<li><code>dynamicsTension</code>: 拉力 拉力越大，动画的速度越快，结束的越快</li>
+<li><code>dynamicsFriction</code>: 摩擦力, 摩擦力越大，动画的速度越慢，振动的幅度越小。</li>
+</ul>
+<blockquote>
+<p>注意: 以上的六个属性中一般只会设置<code>springBounciness</code>和<code>springSpeed</code>, 如有特殊需求才会设置其他属性</p>
+</blockquote>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let spring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)</span><br><span class="line"><span class="comment">//注意: 这里改变的是x和y的比例,参数赋值也要传两个; 若只需要其中一个,则可设置</span></span><br><span class="line"><span class="comment">//`spring?.fromValue = 0.4`即可</span></span><br><span class="line">spring?.fromValue = <span class="built_in">CGSize</span>(width: <span class="number">0.3</span>, height: <span class="number">0.3</span>)</span><br><span class="line">spring?.toValue = <span class="built_in">CGSize</span>(width: <span class="number">2</span>, height: <span class="number">2</span>)</span><br><span class="line">spring?.springSpeed = <span class="number">5</span></span><br><span class="line">spring?.springBounciness = <span class="number">15</span></span><br><span class="line">lightBlue.pop_add(spring, forKey: <span class="string">&quot;scale&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="POPDecayAnimation"><a href="#POPDecayAnimation" class="headerlink" title="POPDecayAnimation"></a>POPDecayAnimation</h2><ul>
+<li><code>POPDecayAnimation</code>提供一个过阻尼效果（其实<code>Spring</code>是一种欠阻尼效果）可以实现类似<code>UIScrollView</code>的滑动衰减效果（是的你可以靠它来自己实现一个<code>UIScrollView</code>）</li>
+</ul>
+<blockquote>
+<p>属性介绍</p>
+</blockquote>
+<ul>
+<li><code>deceleration</code> （负加速度, 衰减系数(越小则衰减得越快)） 是一个你会很少用到的值，默认是就是我们地球的 0.998，如果你开发APP给火星人用，那么这个值你使用 0.376 会更合适</li>
+<li><code>velocity</code> 也是必须和你操作的属性有相同的结构，如果你操作的是 bounds, 传CGRect类型;如果 velocity 是负值，那么就会反向递减</li>
+</ul>
+<blockquote>
+<p>代码示例</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let decay = POPDecayAnimation(propertyNamed: kPOPViewSize)</span><br><span class="line">decay?.velocity = <span class="built_in">CGSize</span>(width: <span class="number">300</span>, height: pictureBtn.frame.height)</span><br><span class="line"><span class="comment">//延迟1秒后执行</span></span><br><span class="line">decay?.beginTime = <span class="built_in">CACurrentMediaTime</span>() + <span class="number">1.0</span></span><br><span class="line">pictureBtn.pop_add(decay, forKey: <span class="string">&quot;size&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h2><p>POP默认支持的三种动画都继承自<code>POPPropertyAnimation</code>,  <code>POPPropertyAnimation</code>中定义了一个叫<code>property</code>的属性（之前没有用到它是因为POP根据不同的默认动画属性帮你生成了默认的<code>property</code>这个属性则是用来驱动POP的动画效果中的重要一环</p>
+<h3 id="实力模块"><a href="#实力模块" class="headerlink" title="实力模块"></a>实力模块</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> let proper = POPAnimatableProperty.property(withName: <span class="string">&quot;prop&quot;</span>, initializer: &#123; (prop) <span class="keyword">in</span></span><br><span class="line">    guard let prop = prop <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    <span class="comment">//read</span></span><br><span class="line">    prop.readBlock = &#123; (obj, values) <span class="keyword">in</span></span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">            </span><br><span class="line">    <span class="comment">//write</span></span><br><span class="line">    prop.writeBlock = &#123;(obj, values) <span class="keyword">in</span></span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">    prop.threshold = <span class="number">0.01</span></span><br><span class="line">            </span><br><span class="line">&#125;) as? POPAnimatableProperty &#123;</span><br><span class="line">    anim.property = proper</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="属性介绍-1"><a href="#属性介绍-1" class="headerlink" title="属性介绍"></a>属性介绍</h3><blockquote>
+<p>其组成就是一个readBlock一个writeBlock和一个threashold</p>
+</blockquote>
+<ul>
+<li><code>readBlock</code>告诉POP当前的属性值</li>
+<li><code>writeBlock</code>中修改变化后的属性值</li>
+<li><code>threashold</code>决定了动画变化间隔的阈值 值越大<code>writeBlock</code>的调用次数越少</li>
+</ul>
+<p>POPAnimatableProperty其实是POP中一个比较重要的东西 像上面提到的POP自带的动画属性 查看源代码可以看到也只是POP自动帮你设置好了POPAnimatableProperty而已 其作用就是当动画的某个时间片被触发时 告诉系统如何根据当前时间片做出变化</p>
+<blockquote>
+<p>还是以一个实际的例子来说明如何使用自定义属性 比如我们要实现一个像系统的时钟APP里秒表计时的一个效果</p>
+</blockquote>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-070c23772942ed82.gif?imageMogr2/auto-orient/strip" alt="计时器效果"></p>
+<h3 id="完整代码示例"><a href="#完整代码示例" class="headerlink" title="完整代码示例"></a>完整代码示例</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> let proper = POPAnimatableProperty.property(withName: <span class="string">&quot;prop&quot;</span>, initializer: &#123; (prop) <span class="keyword">in</span></span><br><span class="line">    guard let prop = prop <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">    <span class="comment">//read</span></span><br><span class="line">    prop.readBlock = &#123; (obj, values) <span class="keyword">in</span></span><br><span class="line">        guard let array = values <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        print(array[<span class="number">0</span>])</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//write</span></span><br><span class="line">    prop.writeBlock = &#123;(obj, values) <span class="keyword">in</span></span><br><span class="line">        guard let button = obj as? <span class="built_in">UIButton</span>, let array = values <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        let value = array[<span class="number">0</span>]</span><br><span class="line">        button.setTitle(String(format: <span class="string">&quot;%02d:%02d:%02d&quot;</span>, Int(value / <span class="number">60</span>), Int(value.truncatingRemainder(dividingBy: <span class="number">60</span>)), Int((value * <span class="number">100</span>).truncatingRemainder(dividingBy: <span class="number">100</span>))), <span class="keyword">for</span>: .normal)</span><br><span class="line">    &#125;</span><br><span class="line">    prop.threshold = <span class="number">0.01</span></span><br><span class="line">    </span><br><span class="line">&#125;) as? POPAnimatableProperty &#123;</span><br><span class="line">    <span class="keyword">if</span> let popBasic = POPBasicAnimation.linear() &#123;</span><br><span class="line">        <span class="comment">//秒表用线性的时间函数初始化</span></span><br><span class="line">        popBasic.property = proper</span><br><span class="line">        popBasic.fromValue = <span class="number">0</span> <span class="comment">//从0开始</span></span><br><span class="line">        popBasic.toValue = <span class="number">18</span>  <span class="comment">//到18秒</span></span><br><span class="line">        popBasic.duration = <span class="number">18</span> <span class="comment">//持续18秒</span></span><br><span class="line">        popBasic.beginTime = <span class="built_in">CACurrentMediaTime</span>() + <span class="number">2</span> <span class="comment">//延迟2秒开始</span></span><br><span class="line">        pictureBtn.pop_add(popBasic, forKey: <span class="string">&quot;linear&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><p>注意:</p></div>
+
+<ul>
+<li>在Swift4.0版本(4.0之前版本未知)中,初始化出来的对象都是可选类型</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebook/pop">POP</a>官方的建议是添加<code>if</code>条件判断,详情可到GitHub上查看示例</li>
+<li>正如上段代码所示: 闭包中涉及的可选类型都添加了<code>guard</code>判断</li>
+</ul>
+<h2 id="类似微博中间发布按钮弹出动画"><a href="#类似微博中间发布按钮弹出动画" class="headerlink" title="类似微博中间发布按钮弹出动画"></a>类似微博中间发布按钮弹出动画</h2><h3 id="先看一下效果吧"><a href="#先看一下效果吧" class="headerlink" title="先看一下效果吧"></a>先看一下效果吧</h3><p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-737cf17a9cb95542.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/300" alt="微博动画效果图"></p>
+<blockquote>
+<p>动画分为两个部分</p>
+</blockquote>
+<ul>
+<li>中间六个按钮依次执行动画弹出</li>
+<li>上面标题图片最后动画落下</li>
+</ul>
+<h3 id="下面来看一下部分的核心代码"><a href="#下面来看一下部分的核心代码" class="headerlink" title="下面来看一下部分的核心代码"></a>下面来看一下部分的核心代码</h3><h4 id="六个按钮的弹出和消失动画"><a href="#六个按钮的弹出和消失动画" class="headerlink" title="六个按钮的弹出和消失动画"></a>六个按钮的弹出和消失动画</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0.</span>.&lt;titles.count &#123;</span><br><span class="line">    let button = BaseButton()</span><br><span class="line">    button.setTitle(titles[i], <span class="keyword">for</span>: .normal)</span><br><span class="line">    button.setImage(<span class="built_in">UIImage</span>(named: images[i]), <span class="keyword">for</span>: .normal)</span><br><span class="line">    button.addTarget(<span class="keyword">self</span>, action: <span class="meta">#selector(buttonClick(button:)), for: .touchUpInside)</span></span><br><span class="line">    addSubview(button)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//计算X/Y</span></span><br><span class="line">    let row = i / maxCols</span><br><span class="line">    let col = i % maxCols</span><br><span class="line">    let buttonX = btnStsrtX + <span class="built_in">CGFloat</span>(col) * (xMargin + buttonW)</span><br><span class="line">    let buttonEndY = btnStartY + <span class="built_in">CGFloat</span>(row) * buttonH</span><br><span class="line">    let buttonStartY = buttonEndY - kScreenHeight</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//按钮动画</span></span><br><span class="line">    let popSpring = POPSpringAnimation(propertyNamed: kPOPViewFrame)</span><br><span class="line">    popSpring?.fromValue = <span class="built_in">CGRect</span>(x: buttonX, y: buttonStartY, width: buttonW, height: buttonH)</span><br><span class="line">    popSpring?.toValue = <span class="built_in">CGRect</span>(x: buttonX, y: buttonEndY, width: buttonW, height: buttonH)</span><br><span class="line">    popSpring?.springBounciness = kSpringFactor</span><br><span class="line">    popSpring?.springSpeed = kSpringFactor</span><br><span class="line">    popSpring?.beginTime = <span class="built_in">CACurrentMediaTime</span>() + kAnimationDelay * Double(i)</span><br><span class="line">    button.pop_add(popSpring, forKey: <span class="string">&quot;spring&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="最上部分标语的弹出和消失"><a href="#最上部分标语的弹出和消失" class="headerlink" title="最上部分标语的弹出和消失"></a>最上部分标语的弹出和消失</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//z执行动画</span></span><br><span class="line">let imagePOP = POPSpringAnimation(propertyNamed: kPOPViewCenter)</span><br><span class="line">imagePOP?.fromValue = <span class="built_in">CGPoint</span>(x: kScreenWidth * <span class="number">0.5</span>, y: <span class="number">0.2</span> * kScreenHeight - kScreenHeight)</span><br><span class="line">imagePOP?.toValue = <span class="built_in">CGPoint</span>(x: kScreenWidth * <span class="number">0.5</span>, y: <span class="number">0.2</span> * kScreenHeight)</span><br><span class="line">imagePOP?.springSpeed = kSpringFactor</span><br><span class="line">imagePOP?.springBounciness = kSpringFactor</span><br><span class="line">imagePOP?.beginTime = <span class="built_in">CACurrentMediaTime</span>() + Double(btnCount) * kAnimationDelay</span><br><span class="line">imagePOP?.completionBlock = &#123; popAnim, finished <span class="keyword">in</span></span><br><span class="line">    <span class="comment">//所有动画执行完毕,回复View点击事件</span></span><br><span class="line">    kRootView?.isUserInteractionEnabled = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">self</span>.isUserInteractionEnabled = <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line">topImage.pop_add(imagePOP, forKey: <span class="literal">nil</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>以上是类似微博动画的部分核心代码, 具体代码详见<a target="_blank" rel="noopener" href="https://github.com/coderQuanjun/POPAnimationDemo">GitHub项目</a>, 喜欢请star</p>
+</blockquote>
+<ul>
+<li>折叠图片</li>
+<li>音量震动条</li>
+<li>活动指示器</li>
+<li>微博动画</li>
+<li>倒计时-计时器</li>
+<li>类似QQ信息条数的粘性动画</li>
+<li>类似雷达-水波纹动画</li>
+</ul>
+<blockquote>
+<p>注: 项目持续更新中……</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/d88375f6.html" title="Swift之Facebook的POP动画使用和实战">https://titanjun.top/post/d88375f6.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/swift/" rel="tag"> <i class="fa fa-tag"></i> Swift</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/19ce3e28.html" rel="prev" title="ReactNaive之CSS和Flex布局">
+                  <i class="fa fa-chevron-left"></i> ReactNaive之CSS和Flex布局
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/b47e4a7d.html" rel="next" title="iOS出门必备之CoreAnimation(核心动画)">
+                  iOS出门必备之CoreAnimation(核心动画) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/d88375f6.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

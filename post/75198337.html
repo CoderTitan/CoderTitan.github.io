@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在开发过程中一定会用到一些第三方框架, 只要安装了CocoaPods, 然后通过pod install命令, 就可以集成框架到项目中了 可是如果想要把自己的框架或者组件也开源出去, 让别人也可以使用, 那该如何入手 ? 对于CocoaPods还不是很了解的或者没有安装的童鞋, 可自行百度或者参考用CocoaPods做程序的依赖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="发布开源框架到CocoaPods入坑指南">
+<meta property="og:url" content="https://titanjun.top/post/75198337.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:description" content="在开发过程中一定会用到一些第三方框架, 只要安装了CocoaPods, 然后通过pod install命令, 就可以集成框架到项目中了 可是如果想要把自己的框架或者组件也开源出去, 让别人也可以使用, 那该如何入手 ? 对于CocoaPods还不是很了解的或者没有安装的童鞋, 可自行百度或者参考用CocoaPods做程序的依赖">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-d600fd516421d3a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/714/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-a7ec0659f716c755.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-cc70f97600d6b4bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/785/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-de1a8d5fe072d85b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-860729c04860ca64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/649/format/webp">
+<meta property="article:published_time" content="2018-06-29T12:06:20.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.904Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="CocoaPods">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/4122543-d600fd516421d3a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/714/format/webp">
+
+
+<link rel="canonical" href="https://titanjun.top/post/75198337.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/75198337.html","path":"post/75198337.html","title":"发布开源框架到CocoaPods入坑指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>发布开源框架到CocoaPods入坑指南 | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">搭建框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">创建仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">上传文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8CocoaPods"><span class="nav-number">1.3.</span> <span class="nav-text">使用CocoaPods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A3%80%E7%B4%A2%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6"><span class="nav-number">1.3.1.</span> <span class="nav-text">检索第三方框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6"><span class="nav-number">1.3.2.</span> <span class="nav-text">安装第三方框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CocoaPods%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.3.</span> <span class="nav-text">CocoaPods相关操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CocoaPods%E7%9B%B8%E5%85%B3%E8%B7%AF%E5%BE%84"><span class="nav-number">1.3.4.</span> <span class="nav-text">CocoaPods相关路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAPodspec%E6%8F%8F%E8%BF%B0%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">创建Podspec描述文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B9%E7%9B%AE%E6%89%93%E6%88%90tag"><span class="nav-number">1.5.</span> <span class="nav-text">将自己的项目打成tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0Podspec"><span class="nav-number">1.6.</span> <span class="nav-text">上传Podspec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%87%AA%E5%B7%B1%E7%9A%84cocoapods"><span class="nav-number">1.7.</span> <span class="nav-text">测试自己的cocoapods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E6%95%B4%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">错误整理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-number">2.1.</span> <span class="nav-text">版本号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%B8%A6v%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.1.</span> <span class="nav-text">不带v方式:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%A6v%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.2.</span> <span class="nav-text">带v方式:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4"><span class="nav-number">3.1.</span> <span class="nav-text">终端命令</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/75198337.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="发布开源框架到CocoaPods入坑指南 | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          发布开源框架到CocoaPods入坑指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-06-29 20:06:20" itemprop="dateCreated datePublished" datetime="2018-06-29T20:06:20+08:00">2018-06-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">组件化开发</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li>在开发过程中一定会用到一些第三方框架, 只要安装了<code>CocoaPods</code>, 然后通过<code>pod install</code>命令, 就可以集成框架到项目中了</li>
+<li>可是如果想要把自己的框架或者组件也开源出去, 让别人也可以使用, 那该如何入手 ?</li>
+<li>对于<code>CocoaPods</code>还不是很了解的或者没有安装的童鞋, 可自行百度或者参考<a target="_blank" rel="noopener" href="http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/">用CocoaPods做程序的依赖</a></li>
+</ul>
+<span id="more"></span>
+
+<h2 id="搭建框架"><a href="#搭建框架" class="headerlink" title="搭建框架"></a>搭建框架</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><ul>
+<li><code>CocoaPods</code>项目的源码在<code>Github</code>上管理,所以第一步我们需要创建一个属于自己的仓库</li>
+<li>根据图下图所示创建自己的项目</li>
+</ul>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-d600fd516421d3a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/714/format/webp" alt="创建仓库"></p>
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><ul>
+<li>要开发框架必然就要上传文件, 这里推荐<code>SourceTree</code>和<code>GitHub</code>客户端, 当然也可以使用终端命令上传</li>
+<li>使用<code>git</code>管理工具我们这里暂不赘述, 不懂得可以自行百度</li>
+<li>终端使用<code>git</code>命令上传, 主要命令如下</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//cd到当前文件夹</span></span><br><span class="line"><span class="comment">// 创建本地仓库</span></span><br><span class="line">git init</span><br><span class="line"><span class="comment">// 添加名称为origin的远程连接</span></span><br><span class="line">git remote add origin <span class="string">&#x27;你的github项目地址&#x27;</span></span><br><span class="line"><span class="comment">// 将本地代码加入本地仓库里</span></span><br><span class="line">git add .</span><br><span class="line"><span class="comment">// 提交修改到本地仓库</span></span><br><span class="line">git commit -m <span class="string">&#x27;你的修改记录&#x27;</span></span><br><span class="line"><span class="comment">// 推送master分支的代码到名称为origin的远程仓库</span></span><br><span class="line">git push origin master</span><br><span class="line"><span class="comment">//本地打标签备份</span></span><br><span class="line">git tag <span class="string">&quot;v0.0.1&quot;</span></span><br><span class="line"><span class="comment">//提交标签</span></span><br><span class="line">git push --tags</span><br><span class="line"><span class="comment">//删除本地标签</span></span><br><span class="line">git tag -d 标签名称</span><br><span class="line"><span class="comment">//删除远程标签</span></span><br><span class="line">git push origin: 标签名称</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="使用CocoaPods"><a href="#使用CocoaPods" class="headerlink" title="使用CocoaPods"></a>使用CocoaPods</h3><h4 id="检索第三方框架"><a href="#检索第三方框架" class="headerlink" title="检索第三方框架"></a>检索第三方框架</h4><ul>
+<li>使用命令<code>pod search xxx</code></li>
+<li>从本地缓存的–第三方框架描述信息–生成的检索文件中检索到响应的框架信息</li>
+<li>本地缓存的框架描述信息位置: <code>~/Library/Caches/CocoaPods/search_index.json</code></li>
+<li>如执行命令时出现错误, 可删除改索引文件, 执行命令: <code>rm ~/Library/Caches/CocoaPods/search_index.json</code></li>
+</ul>
+<h4 id="安装第三方框架"><a href="#安装第三方框架" class="headerlink" title="安装第三方框架"></a>安装第三方框架</h4><ul>
+<li>创建<code>Podfile</code>文件, 到自己工程内(一级目录): <code>pod init</code><ul>
+<li><code>Podfile</code>文件: 答: 其实就是使用<code>ruby</code>语法编写的 “框架依赖描述文件”; 就是告诉<code>cocoapods</code>需要下载集成哪些框架</li>
+</ul>
+</li>
+<li>安装框架<ul>
+<li><code>pod install</code></li>
+<li><code>cocoapods</code>在1.0.1以后版本, 会直接就是根据<code>Podfile</code>文件找到, 框架信息, 然后下载集成</li>
+<li>但是1.0.1之前的版本, 会先更新本地的框架描述信息(非常耗时), 然后再根据文件下载</li>
+<li>下载完成后会生成一个<code>Podfile.lock</code>文件, 记录着上一次下载的框架最新版本</li>
+</ul>
+</li>
+<li><code>pod install</code>和<code>pod update</code><ul>
+<li><code>pod install</code><ul>
+<li>如果<code>Podfile.lock</code>文件存在, 直接从此文件中读取框架信息下载安装</li>
+<li>如果不存在, 依然会读取<code>Podfile</code>文件内的框架信息, 下载好之后, 再根据下载好的框架信息, 生成<code>Podfile.lock</code>文件</li>
+</ul>
+</li>
+<li><code>pod update</code><ul>
+<li>不管<code>Podfile.lock</code>是否存在, 都会读取<code>Podfile</code>文件的的框架信息去下载</li>
+<li>下载好之后, 再根据下载好的框架信息, 生成<code>Podfile.lock</code>文件</li>
+</ul>
+</li>
+<li>主要区别在于, <code>Podfile</code>文件内的框架信息, 版本描述没有指定具体版本</li>
+<li>一般情况下, 每个人从共享库把项目下载下来之后, 都会执行<code>pod install</code>命令安装!这样可以保证大家使用的第三方框架版本一致!!如果以后大家需要统一升级第三方框架, 那么每个人在执行 pod update</li>
+</ul>
+</li>
+</ul>
+<h4 id="CocoaPods相关操作"><a href="#CocoaPods相关操作" class="headerlink" title="CocoaPods相关操作"></a>CocoaPods相关操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//创建Podfile文件</span><br><span class="line">pod init</span><br><span class="line">//搜索框架</span><br><span class="line">pod search</span><br><span class="line">//安装框架</span><br><span class="line">pod install</span><br><span class="line">//更新框架</span><br><span class="line">pod update</span><br><span class="line"></span><br><span class="line">//初始化(下载服务器中所有的第三方框架信息缓存到电脑本地)</span><br><span class="line">pod setup</span><br><span class="line">//查看第三方框架仓库源</span><br><span class="line">pod repo</span><br><span class="line">//移除仓库源</span><br><span class="line">pod repo remove master</span><br><span class="line">//添加仓库源</span><br><span class="line">//pod repo add master https://xxxx....</span><br></pre></td></tr></table></figure>
+
+<h4 id="CocoaPods相关路径"><a href="#CocoaPods相关路径" class="headerlink" title="CocoaPods相关路径"></a><code>CocoaPods</code>相关路径</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//索引缓存路径</span><br><span class="line">//如果发现框架信息本地已经缓存, 但是就是无法搜索框架, 可以删除这个索引文件, 重新生成</span><br><span class="line"> ~/Library/Caches/CocoaPods/</span><br><span class="line"> </span><br><span class="line"> //pod命令安装路径</span><br><span class="line"> /usr/local/bin</span><br><span class="line"> </span><br><span class="line"> //pod框架索引信息缓存路径</span><br><span class="line"> /Users/apple/.cocoapods/repos/master</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="创建Podspec描述文件"><a href="#创建Podspec描述文件" class="headerlink" title="创建Podspec描述文件"></a>创建Podspec描述文件</h3><ul>
+<li>该文件为<code>Cocoapods</code>依赖库的描述文件，每个<code>Cocoapods</code>依赖库必须有且仅有那么一个描述文件</li>
+<li>简单地讲就是让<code>CocoaPods</code>搜索引擎知道你的代码的作者、版本号、源代码地址、依赖库等信息的文件</li>
+<li>文件名称要和我们想创建的依赖库名称保持一致</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pod spec create 框架名字</span><br><span class="line"></span><br><span class="line"><span class="comment">// 示例:</span></span><br><span class="line">pod spec create TitanModel</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>该命令将在本目录产生一个名为<code>TitanModel.podspec</code>文件</li>
+<li>可用<code>Sublime Text</code>或者<code>Atom</code>打开该文件，里面已经有非常丰富的说明文档, 但是很多都是我们不需要的</li>
+<li>官方<code>Podspec</code>文件的编写格式可参考 <a target="_blank" rel="noopener" href="https://guides.cocoapods.org/syntax/podspec.html">Podspec Syntax Reference</a></li>
+<li>下面介绍如何声明第三方库的代码目录和资源目录，还有该第三方库所依赖<code>ios</code>核心框架和第三方库</li>
+<li>去掉文件中的一些注释信息, 可以看到也就剩下以下内容了</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Pod::Spec</span>.new <span class="keyword">do</span> |<span class="params">s</span>|</span><br><span class="line">    s.name          = <span class="string">&#x27;TitanModel&#x27;</span> <span class="comment">#项目名</span></span><br><span class="line">    s.version       = <span class="string">&#x27;0.1.0&#x27;</span> <span class="comment">#相应的版本号</span></span><br><span class="line">    s.summary       = <span class="string">&#x27;A short description of YJDemoSDK.&#x27;</span> <span class="comment">#简述</span></span><br><span class="line">    s.description   = &lt;&lt;‐ <span class="variable constant_">DESC</span> <span class="comment">#详细描述</span></span><br><span class="line">    <span class="variable constant_">TODO</span>: Add long description of the pod here.</span><br><span class="line">                      <span class="variable constant_">DESC</span></span><br><span class="line">    s.homepage      = <span class="string">&#x27;https://github.com/CoderTitan/TitanModel&#x27;</span> <span class="comment">#项目主页</span></span><br><span class="line">    s.license       = &#123; <span class="symbol">:type</span> =&gt; <span class="string">&#x27;MIT&#x27;</span>, <span class="symbol">:file</span> =&gt; <span class="string">&#x27;LICENSE&#x27;</span> &#125; <span class="comment">#开源协议</span></span><br><span class="line">    s.author        = &#123; <span class="string">&#x27;CoderTitan&#x27;</span> =&gt; <span class="string">&#x27;quanjunt@163.com&#x27;</span> &#125; <span class="comment">#作者</span></span><br><span class="line">    s.platform      = <span class="symbol">:ios</span>, <span class="string">&#x27;8.0&#x27;</span> <span class="comment">#支持的平台</span></span><br><span class="line">    s.requires_arc  = <span class="literal">true</span> <span class="comment">#arc和mrc选项</span></span><br><span class="line">    s.libraries     = <span class="string">&#x27;z&#x27;</span>, <span class="string">&#x27;sqlite3&#x27;</span> <span class="comment">#表示依赖的系统类库，比如libz.dylib等</span></span><br><span class="line">    s.frameworks    = <span class="string">&#x27;UIKit&#x27;</span>,<span class="string">&#x27;AVFoundation&#x27;</span> <span class="comment">#表示依赖系统的框架</span></span><br><span class="line">    s.ios.vendored_frameworks = <span class="string">&#x27;TKBase/TKBase.framework&#x27;</span> <span class="comment"># 依赖的第三方/自己的framework</span></span><br><span class="line">    s.vendored_libraries = <span class="string">&#x27;Library/Classes/libWeChatSDK.a&#x27;</span> <span class="comment">#表示依赖第三方/自己的静态库（比如libWeChatSDK.a）</span></span><br><span class="line">    <span class="comment">#依赖的第三方的或者自己的静态库文件必须以lib为前缀进行命名，否则会出现找不到的情况，这一点非常重要</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#平台信息</span></span><br><span class="line">    s.platform      = <span class="symbol">:ios</span>, <span class="string">&#x27;7.0&#x27;</span></span><br><span class="line">    s.ios.deployment_target = <span class="string">&#x27;7.0&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#文件配置项</span></span><br><span class="line">    s.source        = &#123; <span class="symbol">:git</span> =&gt; <span class="string">&#x27;https://github.com/CoderTitan/TitanModel.git&#x27;</span>, <span class="symbol">:tag</span> =&gt; s.version.to_s &#125;</span><br><span class="line">    <span class="comment">#配置项目的目标路径，如果不是本地开发，pod init/update会从这个路去拉去代码</span></span><br><span class="line"></span><br><span class="line">    s.source_files = <span class="string">&#x27;TitanModel/Classes/**/*&#x27;</span> <span class="comment">#你的源码位置</span></span><br><span class="line">    s.resources     = [<span class="string">&#x27;TitanModel/Assets/*&#x27;</span>] <span class="comment">#资源，比如图片，音频文件等</span></span><br><span class="line">    s.public_header_files = <span class="string">&#x27;TitanModel/Classes/TitanModel.h&#x27;</span>   <span class="comment">#需要对外开放的头文件</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#依赖的项目内容 可以多个</span></span><br><span class="line">    s.dependency <span class="string">&#x27;MJExtension&#x27;</span></span><br><span class="line">    s.dependency <span class="string">&#x27;AFNetworking&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>s.name</code>：名称，<code>pod search</code>搜索的关键词,注意这里一定要和<code>.podspec</code>的名称一样,否则报错</li>
+<li><code>s.version</code>：版本号，<code>to_s</code>：返回一个字符串</li>
+<li><code>s.summary</code>: 项目简短的简介</li>
+<li><code>s.description</code>: 这个是详细的描述, 要注意的是字数要比<code>summary</code>的长, 否则上传的时候可能会爆出警告</li>
+<li><code>s.homepage</code>: 项目主页地址</li>
+<li><code>s.license</code>: 许可证</li>
+<li><code>s.author</code>: 作者</li>
+<li><code>s.source</code>: 项目源码所在地址</li>
+<li><code>s.platform</code>: 项目支持平台</li>
+<li><code>s.requires_arc</code>: 是否支持<code>ARC</code></li>
+<li><code>s.source_files</code>: 需要包含的源文件</li>
+<li><code>s.public_header_files</code>: 需要包含的头文件</li>
+<li><code>s.ios.deployment_target</code>: 支持的<code>pod</code>最低版本</li>
+<li><code>s.social_media_url</code>: 社交网址</li>
+<li><code>s.resources</code>: 资源文件</li>
+<li><code>s.dependency</code>: 依赖库，不能依赖未发布的库</li>
+</ul>
+<blockquote>
+<p><code>source_files</code>写法及含义</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;TitanModel&quot;</span></span><br><span class="line"><span class="string">&quot;Classes/**/*.&#123;h,m&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>*</code>表示匹配所有文件</li>
+<li><code>*.&#123;h,m&#125;</code>表示匹配所有以<code>.h</code>和<code>.m</code>结尾的文件</li>
+<li><code>**</code>表示匹配所有子目录</li>
+</ul>
+<h3 id="将自己的项目打成tag"><a href="#将自己的项目打成tag" class="headerlink" title="将自己的项目打成tag"></a>将自己的项目打成<code>tag</code></h3><ul>
+<li>因为<code>cocoapods</code>是依赖<code>tag</code>版本的,所以必须打<code>tag</code>,以后再次更新只需要把你的项目打一个<code>tag</code>，然后修改<code>.podspec</code>文件中的版本接着提交到<code>cocoapods</code>官方就可以了</li>
+<li>要注意的是, 这里提交的版本号要和<code>TitanModel.podspec</code>文件中的版本号一致</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag &quot;v0.0.1&quot;  </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传Podspec"><a href="#上传Podspec" class="headerlink" title="上传Podspec"></a>上传<code>Podspec</code></h3><ul>
+<li><code>Podspec</code>修改完成后, 上传到服务器时, 我们需要使用<code>trunk</code>进行上传</li>
+<li>首先要注册<code>trunk</code>, 在注册<code>trunk</code>之前，我们需要确认当前的<code>CocoaPods</code>版本是否足够新。<code>trunk</code>需要<code>pod</code>在<code>0.33</code>及以上版本，如果你不满足要求, 需要重新安装<code>pod</code></li>
+<li>更新结束后，我们开始注册<code>trunk</code>, 可参考官方文档<a target="_blank" rel="noopener" href="https://guides.cocoapods.org/making/getting-setup-with-trunk.html">Getting setup with Trunk</a></li>
+<li>终端输入以下命令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pod trunk register 邮箱地址 &#x27;用户名&#x27; --description=&#x27;描述&#x27;</span><br><span class="line"></span><br><span class="line">// 示例</span><br><span class="line">pod trunk register quanjunt@163.com &#x27;CoderTitan&#x27; --description=&#x27;macbook&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>执行该命令后, 你的邮箱会受到一封邮件, 但是邮件要到垃圾邮件中才能找到, 打开邮件找到邮件中的网址并打开</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-a7ec0659f716c755.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="image"></p>
+<p>如果打开邮件中的链接和下面的页面一样, 则表示注册成功</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-cc70f97600d6b4bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/785/format/webp" alt="注册成功"></p>
+<p>最后输入如下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push TitanModel.podspec</span><br></pre></td></tr></table></figure>
+
+<p>时间较长，耐性等待，大概5-10分钟, 成功后结果如下</p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-de1a8d5fe072d85b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="trunk"></p>
+<ul>
+<li>上面图片中可以看到执行了<code>Updating spec repo master</code>命令, 该命令主要就是更新本地的<code>Specs</code>文件</li>
+<li>查看文件夹位置, 打开访达文件夹, <code>Shift+command+G</code>快捷键, 打开前往文件夹操作, 输入如下目录即可查看</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.cocoapods/repos/master/Specs</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试自己的cocoapods"><a href="#测试自己的cocoapods" class="headerlink" title="测试自己的cocoapods"></a>测试自己的cocoapods</h3><ul>
+<li>终端输入<code>pod search TitanModel</code>查看</li>
+<li>但是如果输入上述命令后, 终端输出如下错误</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[!] Unable to find a pod with name, author, summary, or description matching `TitanModel`</span><br></pre></td></tr></table></figure>
+
+<p>这是因为你的框架已经上传, 但是你的本地的搜索文件<code>search_index.json</code>没有更新, 所以搜索不到, 可以执行下面命令删除<code>search_index.json</code>文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm ~/Library/Caches/CocoaPods/search_index.json</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>也可以直接找到该文件删除</li>
+<li>查看文件夹位置, 打开访达文件夹, <code>Shift+command+G</code>快捷键, 打开前往文件夹操作, 输入如下目录即可查看</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Library/Caches/CocoaPods/</span><br></pre></td></tr></table></figure>
+
+<div class="note success"><p>搜索成功</p></div>
+
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-860729c04860ca64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/649/format/webp" alt="search"></p>
+<h2 id="错误整理"><a href="#错误整理" class="headerlink" title="错误整理"></a>错误整理</h2><h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><ul>
+<li>设置版本号的时候一般有两种方式, 一种是前面带<code>v</code>的, 如: <code>v0.0.1</code>;另 一种是前面不带<code>v</code>的, 如:<code> 0.0.1</code></li>
+<li>因为<code>v</code>而导致的报错</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">warning: Could not find remote branch 0.0.1 to clone.</span><br><span class="line"></span><br><span class="line">fatal: Remote branch 0.0.1 not found in upstream origin</span><br></pre></td></tr></table></figure>
+
+<p>为解决以上问题, 设置版本号的方式和<code>spec</code>文件内的版本号方式一定要一致</p>
+<h4 id="不带v方式"><a href="#不带v方式" class="headerlink" title="不带v方式:"></a>不带v方式:</h4><p>设置版本号时:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 这里设置时, 不要带v</span><br><span class="line">git tag &#x27;0.0.1&#x27;  </span><br><span class="line">git push --tags  </span><br></pre></td></tr></table></figure>
+
+<p><code>spec</code>文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//这里不要带v</span><br><span class="line">s.version = &quot;0.0.2&quot;</span><br><span class="line">s.source = &#123; :git =&gt; &quot;https://github.com/CoderTitan/TitanModell.git&quot;, :tag =&gt; s.version &#125;</span><br><span class="line">//这里的tag也可以设置成具体的版本号, 只要与上面一样就好</span><br></pre></td></tr></table></figure>
+
+<h4 id="带v方式"><a href="#带v方式" class="headerlink" title="带v方式:"></a>带v方式:</h4><p>设置版本号时:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 这里设置时, 要带v</span><br><span class="line">git tag &#x27;v0.0.1&#x27;  </span><br><span class="line">git push --tags  </span><br></pre></td></tr></table></figure>
+
+<p><code>spec</code>文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//这里要带v</span><br><span class="line">s.version = &quot;v0.0.2&quot;</span><br><span class="line">s.source = &#123; :git =&gt; &quot;https://github.com/CoderTitan/TitanModell.git&quot;, :tag =&gt; &quot;v#&#123;s.version&#125; &#125;</span><br><span class="line">//这里的tag也可以设置成具体的版本号, 只要与上面一样就好</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>最后对上述涉及到的终端命令做一个简单的总结</p>
+<h3 id="终端命令"><a href="#终端命令" class="headerlink" title="终端命令"></a>终端命令</h3><ol>
+<li>开源库发布之后，需要给项目打上<code>tag</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag &quot;0.0.1&quot;  </span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>进入到项目根目录下，创建<code>podspec</code>文件</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec create TitanModel</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>编辑<code>podspec</code>文件中的相关信息，有两个比较重要的地方<code>s.source</code>和<code>s.source_files</code>, 修改完成后, 验证是否有误</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint TitanModel.podspec</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>注册<code>pod trunk</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk register orta@cocoapods.org &#x27;Orta Therox&#x27; --description=&#x27;macbook air&#x27;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>发布到<code>trunk</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push TitanModel.podspec</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>搜索发布的框架</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod search TitanModel</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/75198337.html" title="发布开源框架到CocoaPods入坑指南">https://titanjun.top/post/75198337.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/cocoapods/" rel="tag"> <i class="fa fa-tag"></i> CocoaPods</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/85d9cd1f.html" rel="prev" title="Python中常用的模块">
+                  <i class="fa fa-chevron-left"></i> Python中常用的模块
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/7f54d88f.html" rel="next" title="Python之高阶函数">
+                  Python之高阶函数 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/75198337.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

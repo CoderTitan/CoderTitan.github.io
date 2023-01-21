@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Flutter之可滑动Widget">
+<meta property="og:url" content="https://titanjun.top/post/3ab4e07d.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_scroll.png">
+<meta property="article:published_time" content="2019-05-17T12:21:11.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.888Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Flutter">
+<meta property="article:tag" content="Widget">
+<meta property="article:tag" content="Dart">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_scroll.png">
+
+
+<link rel="canonical" href="https://titanjun.top/post/3ab4e07d.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/3ab4e07d.html","path":"post/3ab4e07d.html","title":"Flutter之可滑动Widget"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Flutter之可滑动Widget | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scrollbar"><span class="nav-number">1.</span> <span class="nav-text">Scrollbar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SingleChildScrollView"><span class="nav-number">2.</span> <span class="nav-text">SingleChildScrollView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scrollDirection"><span class="nav-number">2.1.</span> <span class="nav-text">scrollDirection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reverse"><span class="nav-number">2.2.</span> <span class="nav-text">reverse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#physics"><span class="nav-number">2.3.</span> <span class="nav-text">physics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#controller"><span class="nav-number">2.4.</span> <span class="nav-text">controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-number">2.5.</span> <span class="nav-text">代码示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ListView"><span class="nav-number">3.</span> <span class="nav-text">ListView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.1.</span> <span class="nav-text">属性介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#shrinkWrap"><span class="nav-number">3.1.1.</span> <span class="nav-text">shrinkWrap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#itemExtent"><span class="nav-number">3.1.2.</span> <span class="nav-text">itemExtent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addAutomaticKeepAlives"><span class="nav-number">3.1.3.</span> <span class="nav-text">addAutomaticKeepAlives</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addRepaintBoundaries"><span class="nav-number">3.1.4.</span> <span class="nav-text">addRepaintBoundaries</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.1.5.</span> <span class="nav-text">使用示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListTile"><span class="nav-number">3.2.</span> <span class="nav-text">ListTile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListView-builder"><span class="nav-number">3.3.</span> <span class="nav-text">ListView.builder</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#itemCount"><span class="nav-number">3.3.1.</span> <span class="nav-text">itemCount</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#itemBuilder"><span class="nav-number">3.3.2.</span> <span class="nav-text">itemBuilder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B-1"><span class="nav-number">3.3.3.</span> <span class="nav-text">代码示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListView-separated"><span class="nav-number">3.4.</span> <span class="nav-text">ListView.separated</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#separatorBuilder"><span class="nav-number">3.4.1.</span> <span class="nav-text">separatorBuilder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B-2"><span class="nav-number">3.4.2.</span> <span class="nav-text">代码示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Divider"><span class="nav-number">3.5.</span> <span class="nav-text">Divider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListView-custom"><span class="nav-number">3.6.</span> <span class="nav-text">ListView.custom</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#childrenDelegate"><span class="nav-number">3.6.1.</span> <span class="nav-text">childrenDelegate</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GridView"><span class="nav-number">4.</span> <span class="nav-text">GridView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SliverGridDelegateWithFixedCrossAxisCount"><span class="nav-number">4.1.</span> <span class="nav-text">SliverGridDelegateWithFixedCrossAxisCount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GridView-count"><span class="nav-number">4.2.</span> <span class="nav-text">GridView.count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SliverGridDelegateWithMaxCrossAxisExtent"><span class="nav-number">4.3.</span> <span class="nav-text">SliverGridDelegateWithMaxCrossAxisExtent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GridView-extent"><span class="nav-number">4.4.</span> <span class="nav-text">GridView.extent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GridView-builder"><span class="nav-number">4.5.</span> <span class="nav-text">GridView.builder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GridView-custom"><span class="nav-number">4.6.</span> <span class="nav-text">GridView.custom</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CustomScrollView"><span class="nav-number">5.</span> <span class="nav-text">CustomScrollView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SliverAppBar"><span class="nav-number">5.1.</span> <span class="nav-text">SliverAppBar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B-1"><span class="nav-number">5.2.</span> <span class="nav-text">使用示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ScrollController"><span class="nav-number">6.</span> <span class="nav-text">ScrollController</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">相关属性和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#offset"><span class="nav-number">6.1.1.</span> <span class="nav-text">offset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jumpTo"><span class="nav-number">6.1.2.</span> <span class="nav-text">jumpTo()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animateTo"><span class="nav-number">6.1.3.</span> <span class="nav-text">animateTo()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#positions"><span class="nav-number">6.1.4.</span> <span class="nav-text">positions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E7%9B%91%E5%90%AC"><span class="nav-number">6.1.5.</span> <span class="nav-text">滚动监听</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ScrollController%E6%8E%A7%E5%88%B6%E5%8E%9F%E7%90%86"><span class="nav-number">6.2.</span> <span class="nav-text">ScrollController控制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B-3"><span class="nav-number">6.3.</span> <span class="nav-text">代码示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/3ab4e07d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Flutter之可滑动Widget | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter之可滑动Widget
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-05-17 20:21:11" itemprop="dateCreated datePublished" datetime="2019-05-17T20:21:11+08:00">2019-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>27k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>24 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_scroll.png" alt="可滚动Widget"></p>
+<span id="more"></span>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.titanjun.top/categories/Flutter%E7%AC%94%E8%AE%B0/">Flutter和Dart系列文章</a>和<a target="_blank" rel="noopener" href="https://github.com/CoderTitan/Flutter_Widget">代码GitHub地址</a></li>
+<li>在<code>Flutter</code>中, 当内容超过显示视图时，如果没有特殊处理，<code>Flutter</code>则会提示<code>Overflow</code>错误</li>
+<li><code>Flutter</code>提供了多种可滚动（<code>Scrollable Widget</code>）用于显示列表和长布局</li>
+<li>可滚动<code>Widget</code>都直接或间接包含一个<code>Scrollable</code>, 下面是常用的几个可滚动的<code>Widget</code><ul>
+<li><code>SingleChildScrollView</code></li>
+<li><code>ListView</code></li>
+<li><code>GridView</code></li>
+<li><code>CustomScrollView</code></li>
+<li>滚动监听及控制<code>ScrollController</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Scrollbar"><a href="#Scrollbar" class="headerlink" title="Scrollbar"></a>Scrollbar</h2><ul>
+<li><code>Scrollbar</code>是一个<code>Material</code>风格的滚动指示器（滚动条），如果要给可滚动<code>widget</code>添加滚动条，只需将<code>Scrollbar</code>作为可滚动<code>widget</code>的父<code>widget</code>即可</li>
+<li><code>CupertinoScrollbar</code>是<code>iOS</code>风格的滚动条，如果你使用的是<code>Scrollbar</code>，那么在<code>iOS</code>平台它会自动切换为<code>CupertinoScrollbar</code></li>
+<li><code>Scrollbar</code>和<code>CupertinoScrollbar</code>都是通过<code>ScrollController</code>来监听滚动事件来确定滚动条位置，关于<code>ScrollController</code>详细的内容我们将在后面专门一节介绍</li>
+<li>下面是<code>Scrollbar</code>和<code>CupertinoScrollbar</code>的构造函数, 都只有一个<code>child</code>属性, 用于接受一个可滚动的<code>Widget</code></li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Scrollbar(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.child,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> CupertinoScrollbar(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.child,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<div class="note info"><p>主轴和纵轴</p></div>
+
+<ul>
+<li>在可滚动<code>widget</code>的坐标描述中，通常将滚动方向称为主轴，非滚动方向称为纵轴。</li>
+<li>由于可滚动<code>widget</code>的默认方向一般都是沿垂直方向，所以默认情况下主轴就是指垂直方向，水平方向同理</li>
+</ul>
+<h2 id="SingleChildScrollView"><a href="#SingleChildScrollView" class="headerlink" title="SingleChildScrollView"></a>SingleChildScrollView</h2><p><code>SingleChildScrollView</code>类似于开发中常用的<code>ScrollView</code>, 不再详细介绍了, 下面看一下具体使用介绍吧</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SingleChildScrollView(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 设置滚动的方向, 默认垂直方向</span></span><br><span class="line">    <span class="keyword">this</span>.scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="comment">// 设置显示方式</span></span><br><span class="line">    <span class="keyword">this</span>.reverse = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 内边距</span></span><br><span class="line">    <span class="keyword">this</span>.padding,</span><br><span class="line">    <span class="comment">// 是否使用默认的controller</span></span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    <span class="comment">// 设置可滚动Widget如何响应用户操作</span></span><br><span class="line">    <span class="keyword">this</span>.physics,</span><br><span class="line">    <span class="keyword">this</span>.controller,</span><br><span class="line">    <span class="keyword">this</span>.child,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="scrollDirection"><a href="#scrollDirection" class="headerlink" title="scrollDirection"></a>scrollDirection</h3><p>设置视图的滚动方向(默认垂直方向), 需要对应的设置其子<code>Widget</code>是<code>Column</code>或者<code>Row</code>, 否则会报<code>Overflow</code>错误</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scrollDirection: Axis.vertical,</span><br><span class="line"></span><br><span class="line"><span class="comment">// 枚举值</span></span><br><span class="line"><span class="keyword">enum</span> Axis &#123;</span><br><span class="line">  <span class="comment">/// <span class="language-markdown">水平滚动</span></span></span><br><span class="line">  horizontal,</span><br><span class="line">  <span class="comment">/// <span class="language-markdown">垂直滚动</span></span></span><br><span class="line">  vertical,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h3><ul>
+<li>是否按照阅读方向相反的方向滑动</li>
+<li>设置水平滚动时<ul>
+<li>若<code>reverse: false</code>，则滚动内容头部和左侧对其, 那么滑动方向就是从左向右</li>
+<li><code>reverse: true</code>时，则滚动内容尾部和右侧对其, 那么滑动方向就是从右往左。</li>
+</ul>
+</li>
+<li>其实此属性本质上是决定可滚动<code>widget</code>的初始滚动位置是在头还是尾，取<code>false</code>时，初始滚动位置在头，反之则在尾</li>
+</ul>
+<h3 id="physics"><a href="#physics" class="headerlink" title="physics"></a>physics</h3><ul>
+<li>此属性接受一个<code>ScrollPhysics</code>对象，它决定可滚动<code>Widget</code>如何响应用户操作</li>
+<li>比如用户滑动完抬起手指后，继续执行动画；或者滑动到边界时，如何显示。</li>
+<li>默认情况下，<code>Flutter</code>会根据具体平台分别使用不同的<code>ScrollPhysics</code>对象，应用不同的显示效果，如当滑动到边界时，继续拖动的话，在<code>iOS</code>上会出现弹性效果，而在<code>Android</code>上会出现微光效果。</li>
+<li>如果你想在所有平台下使用同一种效果，可以显式指定，<code>Flutter SDK</code>中包含了两个<code>ScrollPhysics</code>的子类可以直接使用：<ul>
+<li><code>ClampingScrollPhysics</code>：安卓下微光效果。</li>
+<li><code>BouncingScrollPhysics</code>：<code>iOS</code>下弹性效果。</li>
+</ul>
+</li>
+</ul>
+<h3 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h3><ul>
+<li>此属性接受一个<code>ScrollController</code>对象</li>
+<li><code>ScrollController</code>的主要作用是控制滚动位置和监听滚动事件。</li>
+<li>默认情况下，<code>widget</code>中会有一个默认的<code>PrimaryScrollController</code>，如果子<code>widget</code>中的可滚动<code>widget</code>没有显式的指定<code>controller</code>并且<code>primary</code>属性值为<code>true</code>时（默认就为<code>true</code>），可滚动<code>widget</code>会使用这个默认的<code>PrimaryScrollController</code></li>
+<li>这种机制带来的好处是父<code>widget</code>可以控制子树中可滚动<code>widget</code>的滚动，例如，<code>Scaffold</code>使用这种机制在<code>iOS</code>中实现了”回到顶部”的手势</li>
+</ul>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScrollView</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="built_in">String</span> str = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> Scrollbar(</span><br><span class="line">      child: SingleChildScrollView(</span><br><span class="line">        scrollDirection: Axis.vertical,</span><br><span class="line">        reverse: <span class="keyword">true</span>,</span><br><span class="line">        padding: EdgeInsets.all(<span class="number">0.0</span>),</span><br><span class="line">        physics: BouncingScrollPhysics(),</span><br><span class="line">        child: Center(</span><br><span class="line">          child: Column( </span><br><span class="line">            <span class="comment">//动态创建一个List&lt;Widget&gt;  </span></span><br><span class="line">            children: str.split(<span class="string">&quot;&quot;</span>) </span><br><span class="line">                <span class="comment">//每一个字母都用一个Text显示,字体为原来的两倍</span></span><br><span class="line">                .map((c) =&gt; Text(c, textScaleFactor: <span class="number">2.0</span>)) </span><br><span class="line">                .toList(),</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="ListView"><a href="#ListView" class="headerlink" title="ListView"></a>ListView</h2><ul>
+<li><code>ListView</code>是最常用的可滚动<code>widget</code>，它可以沿一个方向线性排布所有子<code>widget</code>, 类似于<code>ReactNative</code>中的<code>ListView</code></li>
+<li><code>ListView</code>共有四种构造函数<ul>
+<li><code>ListView()</code>默认构造函数</li>
+<li><code>ListView.builder()</code></li>
+<li><code>ListView.separated()</code></li>
+<li><code>ListView custom()</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">ListView(&#123;</span><br><span class="line">    <span class="comment">// 公共参数上面都介绍过了</span></span><br><span class="line">    Key key,</span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    EdgeInsetsGeometry padding,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 是否根据子widget的总长度来设置ListView的长度，默认值为false</span></span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// cell高度</span></span><br><span class="line">    <span class="keyword">this</span>.itemExtent,</span><br><span class="line">    <span class="comment">// 子widget是否包裹在AutomaticKeepAlive中</span></span><br><span class="line">    <span class="built_in">bool</span> addAutomaticKeepAlives = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">// 子widget是否包裹在RepaintBoundary中</span></span><br><span class="line">    <span class="built_in">bool</span> addRepaintBoundaries = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addSemanticIndexes = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">// 设置预加载的区域, moren 0.0</span></span><br><span class="line">    <span class="built_in">double</span> cacheExtent,</span><br><span class="line">    <span class="comment">//子widget列表</span></span><br><span class="line">    <span class="built_in">List</span>&lt;Widget&gt; children = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">    <span class="comment">// 子widget的个数</span></span><br><span class="line">    <span class="built_in">int</span> semanticChildCount,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h3><h4 id="shrinkWrap"><a href="#shrinkWrap" class="headerlink" title="shrinkWrap"></a>shrinkWrap</h4><ul>
+<li>表示是否根据子<code>widget</code>的总长度来设置<code>ListView</code>的长度，默认值为<code>false</code> 。</li>
+<li>默认情况下，<code>ListView</code>的会在滚动方向尽可能多的占用空间</li>
+<li>当<code>ListView</code>在一个无边界(滚动方向上)的容器中时，<code>shrinkWrap</code>必须为<code>true</code></li>
+</ul>
+<h4 id="itemExtent"><a href="#itemExtent" class="headerlink" title="itemExtent"></a>itemExtent</h4><ul>
+<li>该参数如果不为<code>null</code>，则会强制<code>children</code>的”长度”为<code>itemExtent</code>的值</li>
+<li>这里的”长度”是指滚动方向上子<code>widget</code>的长度，即如果滚动方向是垂直方向，则代表子<code>widget</code>的高度，如果滚动方向为水平方向，则代表子<code>widget</code>的长度</li>
+<li>在<code>ListView</code>中，指定<code>itemExtent</code>比让子<code>widget</code>自己决定自身长度会更高效，这是因为指定<code>itemExtent</code>后，滚动系统可以提前知道列表的长度，而不是总是动态去计算，尤其是在滚动位置频繁变化时</li>
+</ul>
+<h4 id="addAutomaticKeepAlives"><a href="#addAutomaticKeepAlives" class="headerlink" title="addAutomaticKeepAlives"></a>addAutomaticKeepAlives</h4><ul>
+<li>表示是否将列表项包裹在<code>AutomaticKeepAlive</code>中</li>
+<li>在一个懒加载列表中，如果将列表项包裹在<code>AutomaticKeepAlive</code>中，在该列表项滑出视口时该列表项不会被GC，它会使用<code>KeepAliveNotification</code>来保存其状态</li>
+<li>如果列表项自己维护其<code>KeepAlive</code>状态，那么此参数必须置为<code>false</code></li>
+</ul>
+<h4 id="addRepaintBoundaries"><a href="#addRepaintBoundaries" class="headerlink" title="addRepaintBoundaries"></a>addRepaintBoundaries</h4><ul>
+<li>性表示是否将列表项包裹在<code>RepaintBoundary</code>中</li>
+<li>当可滚动<code>widget</code>滚动时，将列表项包裹在<code>RepaintBoundary</code>中可以避免列表项重绘，但是当列表项重绘的开销非常小（如一个颜色块，或者一个较短的文本）时，不添加<code>RepaintBoundary</code>反而会更高效</li>
+<li>和<code>addAutomaticKeepAlive</code>一样，如果列表项自己维护其<code>KeepAlive</code>状态，那么此参数必须置为<code>false</code></li>
+</ul>
+<h4 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScrollView</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> ListView(</span><br><span class="line">      itemExtent: <span class="number">60</span>,</span><br><span class="line">      cacheExtent: <span class="number">100</span>,</span><br><span class="line">      addAutomaticKeepAlives: <span class="keyword">false</span>,</span><br><span class="line">      children: renderCell(),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">List</span>&lt;Widget&gt; renderCell() &#123;</span><br><span class="line">    <span class="built_in">String</span> str = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> str.split(<span class="string">&quot;&quot;</span>)</span><br><span class="line">    .map((item) =&gt; ListTile(</span><br><span class="line">      title: Text(<span class="string">&#x27;字母--<span class="subst">$item</span>&#x27;</span>),</span><br><span class="line">      subtitle: Text(<span class="string">&#x27;这是字母列表&#x27;</span>),</span><br><span class="line">      leading: Icon(Icons.wifi),</span><br><span class="line">    )).toList();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ListTile"><a href="#ListTile" class="headerlink" title="ListTile"></a>ListTile</h3><ul>
+<li><code>ListTile</code>是<code>Flutter</code>给我们准备好的用于创建<code>ListView</code>的子<code>widget</code> </li>
+<li>提供非常常见的构造和定义方式，包括文字，icon，点击事件，一般是能够满足基本需求，但是就不能自己定义了</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ListTile(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 前置(左侧)图标, Widget类型</span></span><br><span class="line">    <span class="keyword">this</span>.leading,</span><br><span class="line">    <span class="comment">// 标题, Widget类型</span></span><br><span class="line">    <span class="keyword">this</span>.title,</span><br><span class="line">    <span class="comment">// 副标题, Widget类型</span></span><br><span class="line">    <span class="keyword">this</span>.subtitle,</span><br><span class="line">    <span class="comment">// 后置(右侧)图标, Widget类型</span></span><br><span class="line">    <span class="keyword">this</span>.trailing,</span><br><span class="line">    <span class="comment">// 是否三行显示, subtitle不为空时才能使用</span></span><br><span class="line">    <span class="keyword">this</span>.isThreeLine = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 设置为true后字体变小</span></span><br><span class="line">    <span class="keyword">this</span>.dense,</span><br><span class="line">    <span class="comment">// 内容的内边距</span></span><br><span class="line">    <span class="keyword">this</span>.contentPadding,</span><br><span class="line">    <span class="comment">// 是否可被点击</span></span><br><span class="line">    <span class="keyword">this</span>.enabled = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">// 点击事件</span></span><br><span class="line">    <span class="keyword">this</span>.onTap,</span><br><span class="line">    <span class="comment">// 长按操作事件</span></span><br><span class="line">    <span class="keyword">this</span>.onLongPress,</span><br><span class="line">    <span class="comment">// 是否是选中状态</span></span><br><span class="line">    <span class="keyword">this</span>.selected = <span class="keyword">false</span>,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line"><span class="keyword">return</span> ListTile(</span><br><span class="line">  title: Text(<span class="string">&#x27;index--<span class="subst">$index</span>&#x27;</span>),</span><br><span class="line">  subtitle: Text(<span class="string">&#x27;我是一只小鸭子, 咿呀咿呀哟; 我是一只小鸭子, 咿呀咿呀哟; 我是一只小鸭子, 咿呀咿呀哟;&#x27;</span>),</span><br><span class="line">  leading: Icon(Icons.wifi),</span><br><span class="line">  trailing: Icon(Icons.keyboard_arrow_right),</span><br><span class="line">  isThreeLine: <span class="keyword">true</span>,</span><br><span class="line">  dense: <span class="keyword">false</span>,</span><br><span class="line">  contentPadding: EdgeInsets.all(<span class="number">10</span>),</span><br><span class="line">  enabled: index % <span class="number">3</span> != <span class="number">0</span>,</span><br><span class="line">  onTap: () =&gt; <span class="built_in">print</span>(<span class="string">&#x27;index = <span class="subst">$index</span>&#x27;</span>),</span><br><span class="line">  onLongPress: () =&gt; <span class="built_in">print</span>(<span class="string">&#x27;long-Index = <span class="subst">$index</span>&#x27;</span>),</span><br><span class="line">  selected: index % <span class="number">2</span> == <span class="number">0</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="ListView-builder"><a href="#ListView-builder" class="headerlink" title="ListView.builder"></a>ListView.builder</h3><ul>
+<li><code>ListView.builder</code>适合列表项比较多（或者无限）的情况，因为只有当子<code>Widget</code>真正显示的时候才会被创建</li>
+<li>适用于自定义子<code>Widget</code>且所有子<code>Widget</code>的样式一样</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">ListView.builder(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    EdgeInsetsGeometry padding,</span><br><span class="line">    <span class="keyword">this</span>.itemExtent,</span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">    <span class="meta">@required</span> IndexedWidgetBuilder itemBuilder,</span><br><span class="line">    <span class="comment">// 列表项的数量，如果为null，则为无限列表</span></span><br><span class="line">    <span class="built_in">int</span> itemCount,</span><br><span class="line">    <span class="built_in">bool</span> addAutomaticKeepAlives = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addRepaintBoundaries = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addSemanticIndexes = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">double</span> cacheExtent,</span><br><span class="line">    <span class="built_in">int</span> semanticChildCount,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="itemCount"><a href="#itemCount" class="headerlink" title="itemCount"></a>itemCount</h4><p>列表项的数量，如果为null，则为无限列表</p>
+<h4 id="itemBuilder"><a href="#itemBuilder" class="headerlink" title="itemBuilder"></a>itemBuilder</h4><ul>
+<li>它是列表项的构建器，类型为<code>IndexedWidgetBuilder</code>，返回值为一个<code>widget</code></li>
+<li>当列表滚动到具体的<code>index</code>位置时，会调用该构建器构建列表项</li>
+</ul>
+<h4 id="代码示例-1"><a href="#代码示例-1" class="headerlink" title="代码示例"></a>代码示例</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListBuild</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    Widget build(BuildContext context) &#123;</span><br><span class="line">      <span class="keyword">return</span> ListView.builder(</span><br><span class="line">        itemCount: <span class="number">30</span>,</span><br><span class="line">        itemBuilder: (content, index) &#123;</span><br><span class="line">          <span class="keyword">return</span> ListTile(</span><br><span class="line">            title: Text(<span class="string">&#x27;index--<span class="subst">$index</span>&#x27;</span>),</span><br><span class="line">            subtitle: Text(<span class="string">&#x27;数字列表&#x27;</span>),</span><br><span class="line">            leading: Icon(Icons.wifi),</span><br><span class="line">          );</span><br><span class="line">        &#125;,</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ListView-separated"><a href="#ListView-separated" class="headerlink" title="ListView.separated"></a>ListView.separated</h3><p><code>ListView.separated</code>可以生成列表项之间的分割器，它除了比<code>ListView.builder</code>多了一个<code>separatorBuilder</code>参数外, 其他参数都一样</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ListView.separated(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    EdgeInsetsGeometry padding,</span><br><span class="line">    <span class="meta">@required</span> IndexedWidgetBuilder itemBuilder,</span><br><span class="line">    <span class="comment">// 一个分割生成器</span></span><br><span class="line">    <span class="meta">@required</span> IndexedWidgetBuilder separatorBuilder,</span><br><span class="line">    <span class="meta">@required</span> <span class="built_in">int</span> itemCount,</span><br><span class="line">    <span class="built_in">bool</span> addAutomaticKeepAlives = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addRepaintBoundaries = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addSemanticIndexes = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">double</span> cacheExtent,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="separatorBuilder"><a href="#separatorBuilder" class="headerlink" title="separatorBuilder"></a>separatorBuilder</h4><p>该参数是一个分割生成器, 同样是一个<code>IndexedWidgetBuilder</code>类型的参数</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> IndexedWidgetBuilder = Widget <span class="built_in">Function</span>(BuildContext context, <span class="built_in">int</span> index);</span><br></pre></td></tr></table></figure>
+
+<h4 id="代码示例-2"><a href="#代码示例-2" class="headerlink" title="代码示例"></a>代码示例</h4><p>奇数行添加一条红色下划线，偶数行添加一条蓝色下划线。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">lass SeparatedList <span class="keyword">extends</span> StatelessWidget &#123;</span><br><span class="line">  <span class="comment">//下划线widget预定义以供复用。  </span></span><br><span class="line">  Widget lineView1 = Divider(color: Colors.red, height: <span class="number">2</span>, indent: <span class="number">10</span>,);</span><br><span class="line">  Widget lineView2 = Divider(color: Colors.blue, height: <span class="number">5</span>, indent: <span class="number">30</span>);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement build</span></span><br><span class="line">    <span class="keyword">return</span> ListView.separated(</span><br><span class="line">      itemCount: <span class="number">30</span>,</span><br><span class="line">        itemBuilder: (content, index) &#123;</span><br><span class="line">          <span class="keyword">return</span> ListTile(</span><br><span class="line">            title: Text(<span class="string">&#x27;index--<span class="subst">$index</span>&#x27;</span>),</span><br><span class="line">            subtitle: Text(<span class="string">&#x27;数字列表&#x27;</span>),</span><br><span class="line">            leading: Icon(Icons.wifi),</span><br><span class="line">          );</span><br><span class="line">        &#125;,</span><br><span class="line">        separatorBuilder: (context, index) &#123;</span><br><span class="line">          <span class="keyword">return</span> index % <span class="number">2</span> == <span class="number">0</span> ? lineView1 : lineView2;</span><br><span class="line">        &#125;,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Divider"><a href="#Divider" class="headerlink" title="Divider"></a>Divider</h3><p>设置每一个子<code>WIdget</code>的分割线</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Divider(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 分割线所在的SizedBox的高度, 除内边距之外的距离上面的间距</span></span><br><span class="line">    <span class="keyword">this</span>.height = <span class="number">16.0</span>,</span><br><span class="line">    <span class="comment">// 分割线左侧间距</span></span><br><span class="line">    <span class="keyword">this</span>.indent = <span class="number">0.0</span>,</span><br><span class="line">    <span class="comment">// 分割线颜色</span></span><br><span class="line">    <span class="keyword">this</span>.color</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="ListView-custom"><a href="#ListView-custom" class="headerlink" title="ListView.custom"></a>ListView.custom</h3><ul>
+<li>大家可能对前两种比较熟悉，分别是传入一个子元素列表或是传入一个根据索引创建子元素的函数。</li>
+<li>其实前两种方式都是<code>custom</code>方式的“快捷方式”</li>
+<li><code>ListView</code>内部是靠这个<code>childrenDelegate</code>属性动态初始化子元素的</li>
+<li>我们使用<code>builder</code>和<code>separated</code>比较多，这个<code>custom</code>相对来说就比较少了</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ListView.custom(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    EdgeInsetsGeometry padding,</span><br><span class="line">    <span class="keyword">this</span>.itemExtent,</span><br><span class="line">    <span class="comment">// 动态初始化子元素</span></span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.childrenDelegate,</span><br><span class="line">    <span class="built_in">double</span> cacheExtent,</span><br><span class="line">    <span class="built_in">int</span> semanticChildCount,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="childrenDelegate"><a href="#childrenDelegate" class="headerlink" title="childrenDelegate"></a>childrenDelegate</h4><p>其实在<code>ListView</code>的前面几种构造函数中, 都默认设置了<code>childrenDelegate</code>这个属性, 更多可参考官方文档</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ListView</span></span><br><span class="line">ListView(&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;) : childrenDelegate = SliverChildListDelegate(</span><br><span class="line">         children,</span><br><span class="line">         addAutomaticKeepAlives: addAutomaticKeepAlives,</span><br><span class="line">         addRepaintBoundaries: addRepaintBoundaries,</span><br><span class="line">         addSemanticIndexes: addSemanticIndexes,</span><br><span class="line">       ), <span class="keyword">super</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// ListView.builder</span></span><br><span class="line">ListView.builder(&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;) : childrenDelegate = SliverChildBuilderDelegate(</span><br><span class="line">         itemBuilder,</span><br><span class="line">         childCount: itemCount,</span><br><span class="line">         addAutomaticKeepAlives: addAutomaticKeepAlives,</span><br><span class="line">         addRepaintBoundaries: addRepaintBoundaries,</span><br><span class="line">         addSemanticIndexes: addSemanticIndexes,</span><br><span class="line">       ), <span class="keyword">super</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// ListView.separated</span></span><br><span class="line">ListView.separated(&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;) : childrenDelegate = SliverChildBuilderDelegate(</span><br><span class="line">         <span class="comment">// ...</span></span><br><span class="line">       ), <span class="keyword">super</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面代码中可见，这里自动帮我们创建了一个<code>SliverChildListDelegate</code>的实例</li>
+<li>而<code>SliverChildListDelegate</code>是抽象类<code>SliverChildDelegate</code>的子类</li>
+<li><code>SliverChildListDelegate</code>中主要逻辑就是实现了<code>SliverChildDelegate</code>中定义的<code>build</code>方法</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Widget build(BuildContext context, <span class="built_in">int</span> index) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(builder != <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">if</span> (index &lt; <span class="number">0</span> || (childCount != <span class="keyword">null</span> &amp;&amp; index &gt;= childCount))</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    Widget child;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      child = builder(context, index);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (exception, stackTrace) &#123;</span><br><span class="line">      child = _createErrorWidget(exception, stackTrace);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (child == <span class="keyword">null</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (addRepaintBoundaries)</span><br><span class="line">      child = RepaintBoundary.wrap(child, index);</span><br><span class="line">    <span class="keyword">if</span> (addSemanticIndexes) &#123;</span><br><span class="line">      <span class="keyword">final</span> <span class="built_in">int</span> semanticIndex = semanticIndexCallback(child, index);</span><br><span class="line">      <span class="keyword">if</span> (semanticIndex != <span class="keyword">null</span>)</span><br><span class="line">        child = IndexedSemantics(index: semanticIndex + semanticIndexOffset, child: child);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (addAutomaticKeepAlives)</span><br><span class="line">      child = AutomaticKeepAlive(child: child);</span><br><span class="line">    <span class="keyword">return</span> child;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>从上面代码的逻辑可以看出, 就是根据传入的索引返回<code>children</code>列表中对应的元素</li>
+<li>每当<code>ListView</code>的底层实现需要加载一个元素时，就会把该元素的索引传递给<code>SliverChildDelegate</code>的<code>build</code>方法，由该方法返回具体的元素</li>
+<li>另外在<code>SliverChildDelegate</code>内部，除了定义了<code>build</code>方法外，还定义了 一个名为<code>didFinishLayout</code>的方法</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> didFinishLayout() &#123;</span><br><span class="line">    <span class="keyword">assert</span>(debugAssertChildListLocked());</span><br><span class="line">    <span class="keyword">final</span> <span class="built_in">int</span> firstIndex = _childElements.firstKey() ?? <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="built_in">int</span> lastIndex = _childElements.lastKey() ?? <span class="number">0</span>;</span><br><span class="line">    widget.delegate.didFinishLayout(firstIndex, lastIndex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>每当<code>ListView</code>完成一次<code>layout</code>之后都会调用该方法, 同时传入两个索引值</li>
+<li>这两个值分别是此次<code>layout</code>中第一个元素和最后一个元素在<code>ListView</code>所有子元素中的索引值, 也就是可视区域内的元素在子元素列表中的位置</li>
+<li>然而不论是<code>SliverChildListDelegate</code>还是<code>SliverChildBuilderDelegate</code>的代码中，都没有<code>didFinishLayout</code>的具体实现。所以我们需要编写一个它们的子类</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySliverBuilderDelegate</span> <span class="keyword">extends</span> <span class="title">SliverChildBuilderDelegate</span> </span>&#123;</span><br><span class="line">  MySliverBuilderDelegate(</span><br><span class="line">    Widget <span class="built_in">Function</span>(BuildContext, <span class="built_in">int</span>) builder, &#123;</span><br><span class="line">    <span class="built_in">int</span> childCount,</span><br><span class="line">    <span class="built_in">bool</span> addAutomaticKeepAlives = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addRepaintBoundaries = <span class="keyword">true</span>,</span><br><span class="line">  &#125;) : <span class="keyword">super</span>(builder,</span><br><span class="line">            childCount: childCount,</span><br><span class="line">            addAutomaticKeepAlives: addAutomaticKeepAlives,</span><br><span class="line">            addRepaintBoundaries: addRepaintBoundaries);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> didFinishLayout(<span class="built_in">int</span> firstIndex, <span class="built_in">int</span> lastIndex) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;firstIndex: <span class="subst">$firstIndex</span>, lastIndex: <span class="subst">$lastIndex</span>&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们创建一个<code>ListView.custom</code>的列表视图</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomList</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement build</span></span><br><span class="line">    <span class="keyword">return</span> ListView.custom(</span><br><span class="line">      childrenDelegate: MySliverBuilderDelegate(</span><br><span class="line">        (BuildContext context, <span class="built_in">int</span> index) &#123;</span><br><span class="line">          <span class="keyword">return</span> ListTile(</span><br><span class="line">            title: Text(<span class="string">&#x27;index--<span class="subst">$index</span>&#x27;</span>),</span><br><span class="line">            subtitle: Text(<span class="string">&#x27;数字列表&#x27;</span>),</span><br><span class="line">            leading: Icon(Icons.wifi),</span><br><span class="line">          );</span><br><span class="line">        &#125;, childCount: <span class="number">30</span>,</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="GridView"><a href="#GridView" class="headerlink" title="GridView"></a>GridView</h2><p><code>GridView</code>可以构建二维网格列表, 系统给出了五中构造函数</p>
+<ul>
+<li><code>GridView()</code></li>
+<li><code>GridView.count</code></li>
+<li><code>GridView.extent</code></li>
+<li><code>GridView.builder</code></li>
+<li><code>GridView.custom</code></li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认构造函数</span></span><br><span class="line">GridView(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    EdgeInsetsGeometry padding,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.gridDelegate,</span><br><span class="line">    <span class="built_in">bool</span> addAutomaticKeepAlives = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addRepaintBoundaries = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addSemanticIndexes = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">double</span> cacheExtent,</span><br><span class="line">    <span class="built_in">List</span>&lt;Widget&gt; children = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">    <span class="built_in">int</span> semanticChildCount,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可以看到, 除了<code>gridDelegate</code>属性外, 其他属性和<code>ListView</code>的属性都一样, 含义也都相同</li>
+<li><code>gridDelegate</code>参数的类型是<code>SliverGridDelegate</code>，它的作用是控制<code>GridView</code>子<code>widget</code>如何排列</li>
+<li><code>SliverGridDelegate</code>是一个抽象类，定义了<code>GridView</code>排列相关接口，子类需要通过实现它们来实现具体的布局算法</li>
+<li><code>Flutter</code>中提供了两个<code>SliverGridDelegate</code>的子类<code>SliverGridDelegateWithFixedCrossAxisCount</code>和<code>SliverGridDelegateWithMaxCrossAxisExtent</code>, 下面我们分别介绍</li>
+</ul>
+<h3 id="SliverGridDelegateWithFixedCrossAxisCount"><a href="#SliverGridDelegateWithFixedCrossAxisCount" class="headerlink" title="SliverGridDelegateWithFixedCrossAxisCount"></a>SliverGridDelegateWithFixedCrossAxisCount</h3><p>该子类实现了一个横轴为固定数量子元素的排列算法，其构造函数为：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SliverGridDelegateWithFixedCrossAxisCount(&#123;</span><br><span class="line">    <span class="comment">// 横轴子元素的数量,此属性值确定后子元素在横轴的长度就确定了,即ViewPort横轴长度/crossAxisCount。</span></span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.crossAxisCount,</span><br><span class="line">    <span class="comment">// 主轴方向的间距</span></span><br><span class="line">    <span class="keyword">this</span>.mainAxisSpacing = <span class="number">0.0</span>,</span><br><span class="line">    <span class="comment">// 侧轴方向子元素的间距</span></span><br><span class="line">    <span class="keyword">this</span>.crossAxisSpacing = <span class="number">0.0</span>,</span><br><span class="line">    <span class="comment">// 子元素在侧轴长度和主轴长度的比例, 由于crossAxisCount指定后子元素横轴长度就确定了，然后通过此参数值就可以确定子元素在主轴的长度</span></span><br><span class="line">    <span class="keyword">this</span>.childAspectRatio = <span class="number">1.0</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>从上面的个属性可以发现，子元素的大小是通过<code>crossAxisCount</code>和<code>childAspectRatio</code>两个参数共同决定的。注意，这里的子元素指的是子<code>widget</code>的最大显示空间，注意确保子<code>widget</code>的实际大小不要超出子元素的空间, 代码示例如下</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScrollView</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> GridView(</span><br><span class="line">      padding: EdgeInsets.all(<span class="number">10</span>),</span><br><span class="line">      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(</span><br><span class="line">        crossAxisCount: <span class="number">3</span>,</span><br><span class="line">        childAspectRatio: <span class="number">1</span>,</span><br><span class="line">        mainAxisSpacing: <span class="number">10</span>,</span><br><span class="line">        crossAxisSpacing: <span class="number">10</span></span><br><span class="line">      ),</span><br><span class="line">      children: &lt;Widget&gt;[</span><br><span class="line">        Container(color: Colors.orange),</span><br><span class="line">        Container(color: Colors.blue),</span><br><span class="line">        Container(color: Colors.orange),</span><br><span class="line">        Container(color: Colors.yellow),</span><br><span class="line">        Container(color: Colors.pink)</span><br><span class="line">      ],</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="GridView-count"><a href="#GridView-count" class="headerlink" title="GridView.count"></a>GridView.count</h3><p><code>GridView.count</code>构造函数内部使用了<code>SliverGridDelegateWithFixedCrossAxisCount</code>，我们通过它可以快速的创建横轴固定数量子元素的<code>GridView</code></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">GridView.count(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    EdgeInsetsGeometry padding,</span><br><span class="line">    <span class="meta">@required</span> <span class="built_in">int</span> crossAxisCount,</span><br><span class="line">    <span class="built_in">double</span> mainAxisSpacing = <span class="number">0.0</span>,</span><br><span class="line">    <span class="built_in">double</span> crossAxisSpacing = <span class="number">0.0</span>,</span><br><span class="line">    <span class="built_in">double</span> childAspectRatio = <span class="number">1.0</span>,</span><br><span class="line">    <span class="built_in">bool</span> addAutomaticKeepAlives = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addRepaintBoundaries = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addSemanticIndexes = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">double</span> cacheExtent,</span><br><span class="line">    <span class="built_in">List</span>&lt;Widget&gt; children = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">    <span class="built_in">int</span> semanticChildCount,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上面<code>SliverGridDelegateWithFixedCrossAxisCount</code>中给出的示例代码等价于：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CountGridView</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement build</span></span><br><span class="line">    <span class="keyword">return</span> GridView.count(</span><br><span class="line">      padding: EdgeInsets.all(<span class="number">10</span>),</span><br><span class="line">      crossAxisCount: <span class="number">3</span>,</span><br><span class="line">      mainAxisSpacing: <span class="number">10</span>,</span><br><span class="line">      crossAxisSpacing: <span class="number">10</span>,</span><br><span class="line">      childAspectRatio: <span class="number">1</span>,</span><br><span class="line">      children: &lt;Widget&gt;[</span><br><span class="line">        Container(color: Colors.orange),</span><br><span class="line">        Container(color: Colors.blue),</span><br><span class="line">        Container(color: Colors.orange),</span><br><span class="line">        Container(color: Colors.yellow),</span><br><span class="line">        Container(color: Colors.pink)</span><br><span class="line">      ],</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="SliverGridDelegateWithMaxCrossAxisExtent"><a href="#SliverGridDelegateWithMaxCrossAxisExtent" class="headerlink" title="SliverGridDelegateWithMaxCrossAxisExtent"></a>SliverGridDelegateWithMaxCrossAxisExtent</h3><p>该子类实现了一个侧轴子元素为固定最大长度的排列算法，其构造函数为：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SliverGridDelegateWithMaxCrossAxisExtent(&#123;</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.maxCrossAxisExtent,</span><br><span class="line">    <span class="keyword">this</span>.mainAxisSpacing = <span class="number">0.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.crossAxisSpacing = <span class="number">0.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.childAspectRatio = <span class="number">1.0</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>maxCrossAxisExtent</code>为子元素在侧轴上的最大长度，之所以是“最大”长度，是因为横轴方向每个子元素的长度仍然是等分的</li>
+<li>同样侧轴上子<code>Widget</code>的个数, 也是由该属性决定</li>
+<li>其它参数和<code>SliverGridDelegateWithFixedCrossAxisCount</code>相同</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExtentScrollView</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> GridView(</span><br><span class="line">      padding: EdgeInsets.all(<span class="number">10</span>),</span><br><span class="line">      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(</span><br><span class="line">        maxCrossAxisExtent: <span class="number">100</span>,</span><br><span class="line">        childAspectRatio: <span class="number">1</span>,</span><br><span class="line">        mainAxisSpacing: <span class="number">10</span>,</span><br><span class="line">        crossAxisSpacing: <span class="number">10</span></span><br><span class="line">      ),</span><br><span class="line">      children: &lt;Widget&gt;[</span><br><span class="line">        Container(color: Colors.orange),</span><br><span class="line">        Container(color: Colors.blue),</span><br><span class="line">        Container(color: Colors.orange),</span><br><span class="line">        Container(color: Colors.yellow),</span><br><span class="line">        Container(color: Colors.pink)</span><br><span class="line">      ],</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="GridView-extent"><a href="#GridView-extent" class="headerlink" title="GridView.extent"></a>GridView.extent</h3><p>同样<code>GridView.extent</code>构造函数内部使用了<code>SliverGridDelegateWithMaxCrossAxisExtent</code>，我们通过它可以快速的创建侧轴子元素为固定最大长度的的<code>GridView</code></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">GridView.extent(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    EdgeInsetsGeometry padding,</span><br><span class="line">    <span class="meta">@required</span> <span class="built_in">double</span> maxCrossAxisExtent,</span><br><span class="line">    <span class="built_in">double</span> mainAxisSpacing = <span class="number">0.0</span>,</span><br><span class="line">    <span class="built_in">double</span> crossAxisSpacing = <span class="number">0.0</span>,</span><br><span class="line">    <span class="built_in">double</span> childAspectRatio = <span class="number">1.0</span>,</span><br><span class="line">    <span class="built_in">bool</span> addAutomaticKeepAlives = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addRepaintBoundaries = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addSemanticIndexes = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">List</span>&lt;Widget&gt; children = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">    <span class="built_in">int</span> semanticChildCount,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上面<code>SliverGridDelegateWithMaxCrossAxisExtent</code>中给出的示例代码等价于：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExtentScrollView</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> GridView.extent(</span><br><span class="line">      padding: EdgeInsets.all(<span class="number">10</span>),</span><br><span class="line">      maxCrossAxisExtent: <span class="number">100</span>,</span><br><span class="line">      childAspectRatio: <span class="number">1</span>,</span><br><span class="line">      mainAxisSpacing: <span class="number">10</span>,</span><br><span class="line">      crossAxisSpacing: <span class="number">10</span>,</span><br><span class="line">      children: &lt;Widget&gt;[</span><br><span class="line">        Container(color: Colors.orange),</span><br><span class="line">        Container(color: Colors.blue),</span><br><span class="line">        Container(color: Colors.orange),</span><br><span class="line">        Container(color: Colors.yellow),</span><br><span class="line">        Container(color: Colors.pink)</span><br><span class="line">      ],</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="GridView-builder"><a href="#GridView-builder" class="headerlink" title="GridView.builder"></a>GridView.builder</h3><ul>
+<li>上面我们介绍的<code>GridView</code>都需要一个<code>Widget</code>数组作为其子元素，这些方式都会提前将所有子<code>widget</code>都构建好，所以只适用于子<code>Widget</code>数量比较少时</li>
+<li>当子<code>widget</code>比较多时，我们可以通过<code>GridView.builder</code>来动态创建子<code>Widget</code></li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">GridView.builder(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    EdgeInsetsGeometry padding,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.gridDelegate,</span><br><span class="line">    <span class="meta">@required</span> IndexedWidgetBuilder itemBuilder,</span><br><span class="line">    <span class="built_in">int</span> itemCount,</span><br><span class="line">    <span class="built_in">bool</span> addAutomaticKeepAlives = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addRepaintBoundaries = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">bool</span> addSemanticIndexes = <span class="keyword">true</span>,</span><br><span class="line">    <span class="built_in">double</span> cacheExtent,</span><br><span class="line">    <span class="built_in">int</span> semanticChildCount,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可以看出<code>GridView.builder</code>必须指定的参数有两个,其中<code>gridDelegate</code>之前已经介绍过了</li>
+<li>属性<code>itemBuilder</code>在之前<code>ListView</code>中也有介绍过类似的, 用于构建子<code>Widget</code></li>
+<li>使用示例如下</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BuilderGridView</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> GridView.builder(</span><br><span class="line">      itemCount: <span class="number">50</span>,</span><br><span class="line">      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(</span><br><span class="line">        crossAxisCount: <span class="number">4</span>,</span><br><span class="line">        mainAxisSpacing: <span class="number">10</span>,</span><br><span class="line">        crossAxisSpacing: <span class="number">10</span></span><br><span class="line">      ),</span><br><span class="line">      itemBuilder: (content, index) &#123;</span><br><span class="line">        <span class="keyword">return</span> Container(</span><br><span class="line">          color: Colors.orange,</span><br><span class="line">          child: Center(</span><br><span class="line">            child: Text(<span class="string">&#x27;<span class="subst">$index</span>&#x27;</span>),</span><br><span class="line">          ),</span><br><span class="line">        );</span><br><span class="line">      &#125;,</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="GridView-custom"><a href="#GridView-custom" class="headerlink" title="GridView.custom"></a>GridView.custom</h3><p>和<code>ListView.custom</code>一样, 用于构建自定义子<code>Widget</code>, 有两个必须指定的参数, 这里就不在赘述了</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> GridView.custom(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    EdgeInsetsGeometry padding,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.gridDelegate,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.childrenDelegate,</span><br><span class="line">    <span class="built_in">double</span> cacheExtent,</span><br><span class="line">    <span class="built_in">int</span> semanticChildCount,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="CustomScrollView"><a href="#CustomScrollView" class="headerlink" title="CustomScrollView"></a>CustomScrollView</h2><ul>
+<li><code>CustomScrollView</code>使用<code>sliver</code>来自定义滚动模型（效果, 它可以包含多种滚动模型</li>
+<li>假设有一个页面，顶部需要一个<code>GridView</code>，底部需要一个<code>ListView</code>，而要求整个页面的滑动效果是统一的，即它们看起来是一个整体</li>
+<li>如果使用<code>GridView+ListView</code>来实现的话，就不能保证一致的滑动效果，因为它们的滚动效果是分离的，所以这时就需要一个”胶水”，把这些彼此独立的可滚动<code>widget</code>“粘”起来，而<code>CustomScrollView</code>的功能就相当于“胶水”</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CustomScrollView(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 滑动方向</span></span><br><span class="line">    Axis scrollDirection = Axis.vertical,</span><br><span class="line">    <span class="built_in">bool</span> reverse = <span class="keyword">false</span>,</span><br><span class="line">    ScrollController controller,</span><br><span class="line">    <span class="built_in">bool</span> primary,</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    <span class="built_in">bool</span> shrinkWrap = <span class="keyword">false</span>,</span><br><span class="line">    <span class="built_in">double</span> cacheExtent,</span><br><span class="line">    <span class="keyword">this</span>.slivers = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">    <span class="built_in">int</span> semanticChildCount,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上述属性除了<code>slivers</code>之外, 前面都有提到过, 接受一个<code>Widget</code>数组, 但是这里的<code>Widget</code>必须是<code>Sliver</code>类型的, 至于原因, 下面会详解</p>
+<div class="note warning"><p>什么是Sliver ?</p></div>
+
+<ul>
+<li>在<code>Flutter</code>中，<code>Sliver</code>通常指具有特定滚动效果的可滚动块</li>
+<li>可滚动<code>widget</code>，如<code>ListView</code>、<code>GridView</code>等都有对应的<code>Sliver</code>实现如<code>SliverList</code>、<code>SliverGrid</code>等</li>
+<li>对于大多数<code>Sliver</code>来说，它们和可滚动<code>Widget</code>最主要的区别是<code>Sliver</code>不会包含<code>Scrollable</code>，也就是说<code>Sliver</code>本身不包含滚动交互模型</li>
+<li>正因如此，<code>CustomScrollView</code>才可以将多个<code>Sliver</code>“粘”在一起，这些<code>Sliver</code>共用<code>CustomScrollView</code>的<code>Scrollable</code>，最终实现统一的滑动效果</li>
+<li>前面之所以说“大多数“<code>Sliver</code>都和可滚动<code>Widget</code>对应，是由于还有一些如<code>SliverPadding</code>、<code>SliverAppBar</code>等是和可滚动<code>Widget</code>无关的</li>
+<li>它们主要是为了结合<code>CustomScrollView</code>一起使用，这是因为<code>CustomScrollView</code>的子<code>widget</code>必须都是<code>Sliver</code></li>
+<li>下面是常用的一些<code>Sliver</code>：<ul>
+<li><code>SliverToBoxAdapter</code>: 将各种视图组合在一起, 类似于<code>Container</code></li>
+<li><code>SliverPersistentHeader</code>: 实现<code>sticky</code>吸顶的效果的<code>Sliver</code></li>
+<li><code>SliverList</code>：类似于我们之前使用过的<code>ListView</code>；</li>
+<li><code>SliverFixedExtentList</code>：类似于<code>SliverList</code>只是可以设置滚动的高度；</li>
+<li><code>SliverGrid</code>：类似于我们之前使用过的<code>GridView</code></li>
+<li><code>SliverPadding</code>：设置<code>Sliver</code>的内边距，因为可能要单独给<code>Sliver</code>设置内边距；</li>
+<li><code>SliverAppBar</code>：添加一个<code>AppBar</code>，通常用来作为<code>CustomScrollView</code>的<code>HeaderView</code></li>
+<li><code>SliverSafeArea</code>：设置内容显示在安全区域（比如不让齐刘海挡住我们的内容）</li>
+</ul>
+</li>
+</ul>
+<h3 id="SliverAppBar"><a href="#SliverAppBar" class="headerlink" title="SliverAppBar"></a>SliverAppBar</h3><ul>
+<li><code>AppBar</code>和<code>SliverAppBar</code>是<code>Material Design</code>中的导航栏</li>
+<li><code>AppBar</code>和<code>SliverAppBar</code>都是继承<code>StatefulWidget</code>类，二者的区别在于<code>AppBar</code>位置的固定的应用最上面的；而<code>SliverAppBar</code>是可以跟随内容滚动的</li>
+<li>其中大部分的属性和<code>AppBar</code>都一样</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SliverAppBar(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">// 导航栏左侧weidget</span></span><br><span class="line">    <span class="keyword">this</span>.leading,</span><br><span class="line">    <span class="comment">// 如果leading为null，是否自动实现默认的leading按钮</span></span><br><span class="line">    <span class="keyword">this</span>.automaticallyImplyLeading = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">// 导航栏标题</span></span><br><span class="line">    <span class="keyword">this</span>.title,</span><br><span class="line">    <span class="comment">// 导航栏右侧按钮, 接受一个数组</span></span><br><span class="line">    <span class="keyword">this</span>.actions,</span><br><span class="line">    <span class="comment">// 一个显示在AppBar下方的控件，高度和AppBar高度一样，可以实现一些特殊的效果，该属性通常在SliverAppBar中使用</span></span><br><span class="line">    <span class="keyword">this</span>.flexibleSpace,</span><br><span class="line">    <span class="comment">// 一个AppBarBottomWidget对象, 设置TabBar</span></span><br><span class="line">    <span class="keyword">this</span>.bottom,</span><br><span class="line">    <span class="comment">//中控件的z坐标顺序，默认值为4，对于可滚动的SliverAppBar，当 SliverAppBar和内容同级的时候，该值为0，当内容滚动 SliverAppBar 变为 Toolbar 的时候，修改elevation的值</span></span><br><span class="line">    <span class="keyword">this</span>.elevation = <span class="number">4.0</span>,</span><br><span class="line">    <span class="comment">// 背景颜色，默认值为 ThemeData.primaryColor。改值通常和下面的三个属性一起使用</span></span><br><span class="line">    <span class="keyword">this</span>.backgroundColor,</span><br><span class="line">    <span class="comment">// 状态栏的颜色, 黑白两种, 取值: Brightness.dark</span></span><br><span class="line">    <span class="keyword">this</span>.brightness,</span><br><span class="line">    <span class="comment">// 设置导航栏上图标的颜色、透明度、和尺寸信息</span></span><br><span class="line">    <span class="keyword">this</span>.iconTheme,</span><br><span class="line">    <span class="comment">// 设置导航栏上文字样式</span></span><br><span class="line">    <span class="keyword">this</span>.textTheme,</span><br><span class="line">    <span class="comment">// 导航栏的内容是否显示在顶部, 状态栏的下面</span></span><br><span class="line">    <span class="keyword">this</span>.primary = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">// 标题是否居中显示，默认值根据不同的操作系统，显示方式不一样</span></span><br><span class="line">    <span class="keyword">this</span>.centerTitle,</span><br><span class="line">    <span class="comment">// 标题间距，如果希望title占用所有可用空间，请将此值设置为0.0</span></span><br><span class="line">    <span class="keyword">this</span>.titleSpacing = NavigationToolbar.kMiddleSpacing,</span><br><span class="line">    <span class="comment">// 展开的最大高度</span></span><br><span class="line">    <span class="keyword">this</span>.expandedHeight,</span><br><span class="line">    <span class="comment">// 是否随着华东隐藏标题</span></span><br><span class="line">    <span class="keyword">this</span>.floating = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 是否固定在顶部</span></span><br><span class="line">    <span class="keyword">this</span>.pinned = <span class="keyword">false</span>,</span><br><span class="line">    <span class="comment">// 只跟floating相对应，如果为true，floating必须为true，也就是向下滑动一点儿，整个大背景就会动画显示全部，网上滑动整个导航栏的内容就会消失</span></span><br><span class="line">    <span class="keyword">this</span>.snap = <span class="keyword">false</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用示例-1"><a href="#使用示例-1" class="headerlink" title="使用示例"></a>使用示例</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomScrollViewTestRoute</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="comment">//因为本路由没有使用Scaffold，为了让子级Widget(如Text)使用</span></span><br><span class="line">    <span class="comment">//Material Design 默认的样式风格,我们使用Material作为本路由的根。</span></span><br><span class="line">    <span class="keyword">return</span> Material(</span><br><span class="line">      child: CustomScrollView(</span><br><span class="line">        slivers: &lt;Widget&gt;[</span><br><span class="line">          <span class="comment">//AppBar，包含一个导航栏</span></span><br><span class="line">          SliverAppBar(</span><br><span class="line">            pinned: <span class="keyword">true</span>,</span><br><span class="line">            expandedHeight: <span class="number">250.0</span>,</span><br><span class="line">            flexibleSpace: FlexibleSpaceBar(</span><br><span class="line">              title: <span class="keyword">const</span> Text(<span class="string">&#x27;Demo&#x27;</span>),</span><br><span class="line">              background: Image.asset(</span><br><span class="line">                <span class="string">&quot;./images/avatar.png&quot;</span>, fit: BoxFit.cover,),</span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line"></span><br><span class="line">          SliverPadding(</span><br><span class="line">            padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">8.0</span>),</span><br><span class="line">            sliver: <span class="keyword">new</span> SliverGrid( <span class="comment">//Grid</span></span><br><span class="line">              gridDelegate: <span class="keyword">new</span> SliverGridDelegateWithFixedCrossAxisCount(</span><br><span class="line">                crossAxisCount: <span class="number">2</span>, <span class="comment">//Grid按两列显示</span></span><br><span class="line">                mainAxisSpacing: <span class="number">10.0</span>,</span><br><span class="line">                crossAxisSpacing: <span class="number">10.0</span>,</span><br><span class="line">                childAspectRatio: <span class="number">4.0</span>,</span><br><span class="line">              ),</span><br><span class="line">              delegate: <span class="keyword">new</span> SliverChildBuilderDelegate(</span><br><span class="line">                    (BuildContext context, <span class="built_in">int</span> index) &#123;</span><br><span class="line">                  <span class="comment">//创建子widget      </span></span><br><span class="line">                  <span class="keyword">return</span> <span class="keyword">new</span> Container(</span><br><span class="line">                    alignment: Alignment.center,</span><br><span class="line">                    color: Colors.cyan[<span class="number">100</span> * (index % <span class="number">9</span>)],</span><br><span class="line">                    child: <span class="keyword">new</span> Text(<span class="string">&#x27;grid item <span class="subst">$index</span>&#x27;</span>),</span><br><span class="line">                  );</span><br><span class="line">                &#125;,</span><br><span class="line">                childCount: <span class="number">20</span>,</span><br><span class="line">              ),</span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">          <span class="comment">//List</span></span><br><span class="line">          <span class="keyword">new</span> SliverFixedExtentList(</span><br><span class="line">            itemExtent: <span class="number">50.0</span>,</span><br><span class="line">            delegate: <span class="keyword">new</span> SliverChildBuilderDelegate(</span><br><span class="line">                    (BuildContext context, <span class="built_in">int</span> index) &#123;</span><br><span class="line">                  <span class="comment">//创建列表项      </span></span><br><span class="line">                  <span class="keyword">return</span> <span class="keyword">new</span> Container(</span><br><span class="line">                    alignment: Alignment.center,</span><br><span class="line">                    color: Colors.lightBlue[<span class="number">100</span> * (index % <span class="number">9</span>)],</span><br><span class="line">                    child: <span class="keyword">new</span> Text(<span class="string">&#x27;list item <span class="subst">$index</span>&#x27;</span>),</span><br><span class="line">                  );</span><br><span class="line">                &#125;,</span><br><span class="line">                childCount: <span class="number">50</span> <span class="comment">//50个列表项</span></span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">        ],</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="ScrollController"><a href="#ScrollController" class="headerlink" title="ScrollController"></a>ScrollController</h2><ul>
+<li><code>ScrollController</code>用于控制可滚动<code>widget</code>的滚动位置，这里以<code>ListView</code>为例，展示一下<code>ScrollController</code>的具体用法</li>
+<li>最后再介绍一下路由切换时如何来保存滚动位置</li>
+<li>下面先看一下<code>ScrollController</code>的构造函数</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ScrollController(&#123;</span><br><span class="line">    <span class="comment">// 初始滚动位置</span></span><br><span class="line">    <span class="built_in">double</span> initialScrollOffset = <span class="number">0.0</span>,</span><br><span class="line">    <span class="comment">// 是否保存滚动位置</span></span><br><span class="line">    <span class="keyword">this</span>.keepScrollOffset = <span class="keyword">true</span>,</span><br><span class="line">    <span class="comment">// 调试使用的输出标签</span></span><br><span class="line">    <span class="keyword">this</span>.debugLabel,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="相关属性和方法"><a href="#相关属性和方法" class="headerlink" title="相关属性和方法"></a>相关属性和方法</h3><h4 id="offset"><a href="#offset" class="headerlink" title="offset"></a>offset</h4><p>可滚动<code>Widget</code>当前滚动的位置</p>
+<h4 id="jumpTo"><a href="#jumpTo" class="headerlink" title="jumpTo()"></a>jumpTo()</h4><p>跳转到指定的位置, 没有动画效果</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> jumpTo(<span class="built_in">double</span> value) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_positions.isNotEmpty, <span class="string">&#x27;ScrollController not attached to any scroll views.&#x27;</span>);</span><br><span class="line">    <span class="keyword">for</span> (ScrollPosition position <span class="keyword">in</span> <span class="built_in">List</span>&lt;ScrollPosition&gt;.from(_positions))</span><br><span class="line">      position.jumpTo(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="animateTo"><a href="#animateTo" class="headerlink" title="animateTo()"></a>animateTo()</h4><p>跳转到指定的位置, 跳转时会有一个动画效果</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="keyword">void</span>&gt; animateTo(<span class="built_in">double</span> offset, &#123;</span><br><span class="line">    <span class="meta">@required</span> <span class="built_in">Duration</span> duration,</span><br><span class="line">    <span class="meta">@required</span> Curve curve,</span><br><span class="line">  &#125;) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_positions.isNotEmpty, <span class="string">&#x27;ScrollController not attached to any scroll views.&#x27;</span>);</span><br><span class="line">    <span class="keyword">final</span> <span class="built_in">List</span>&lt;Future&lt;<span class="keyword">void</span>&gt;&gt; animations = <span class="built_in">List</span>&lt;Future&lt;<span class="keyword">void</span>&gt;&gt;(_positions.length);</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; _positions.length; i += <span class="number">1</span>)</span><br><span class="line">      animations[i] = _positions[i].animateTo(offset, duration: duration, curve: curve);</span><br><span class="line">    <span class="keyword">return</span> Future.wait&lt;<span class="keyword">void</span>&gt;(animations).then&lt;<span class="keyword">void</span>&gt;((<span class="built_in">List</span>&lt;<span class="keyword">void</span>&gt; _) =&gt; <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="positions"><a href="#positions" class="headerlink" title="positions"></a>positions</h4><ul>
+<li>一个<code>ScrollController</code>可以同时被多个<code>Scrollable</code>使用，<code>ScrollController</code>会为每一个<code>Scrollable</code>创建一个<code>ScrollPosition</code>对象，这些<code>ScrollPosition</code>保存在<code>ScrollController</code>的<code>positions</code>属性中(是一个数组)</li>
+<li><code>ScrollPosition</code>是真正保存滑动位置信息的对象，<code>offset</code>只是一个便捷属性, 其他更多属性可查看相关官方文档</li>
+<li>一个<code>ScrollController</code>虽然可以对应多个<code>Scrollable</code>，但是有一些操作，如读取滚动位置<code>offset</code>，则需要一对一，但是我们仍然可以在一对多的情况下，通过其它方法读取滚动位置</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// controller的offset属性</span></span><br><span class="line"><span class="built_in">double</span> <span class="keyword">get</span> offset =&gt; position.pixels;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取相关的滚动位置</span></span><br><span class="line">controller.positions.elementAt(<span class="number">0</span>).pixels</span><br><span class="line">controller.positions.elementAt(<span class="number">1</span>).pixels</span><br></pre></td></tr></table></figure>
+
+<h4 id="滚动监听"><a href="#滚动监听" class="headerlink" title="滚动监听"></a>滚动监听</h4><p><code>ScrollController</code>间接继承自<code>Listenable</code>，我们可以根据<code>ScrollController</code>来监听滚动事件。如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">controller.addListener(()=&gt;<span class="built_in">print</span>(controller.offset))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="ScrollController控制原理"><a href="#ScrollController控制原理" class="headerlink" title="ScrollController控制原理"></a>ScrollController控制原理</h3><p>先看一下<code>ScrollController</code>另外几个方法的实现</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个存储位置信息的ScrollPosition</span></span><br><span class="line"> ScrollPosition createScrollPosition(</span><br><span class="line">    ScrollPhysics physics,</span><br><span class="line">    ScrollContext context,</span><br><span class="line">    ScrollPosition oldPosition,</span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">return</span> ScrollPositionWithSingleContext(</span><br><span class="line">      physics: physics,</span><br><span class="line">      context: context,</span><br><span class="line">      initialPixels: initialScrollOffset,</span><br><span class="line">      keepScrollOffset: keepScrollOffset,</span><br><span class="line">      oldPosition: oldPosition,</span><br><span class="line">      debugLabel: debugLabel,</span><br><span class="line">    );</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 注册位置信息</span></span><br><span class="line"> <span class="keyword">void</span> attach(ScrollPosition position) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(!_positions.contains(position));</span><br><span class="line">    _positions.add(position);</span><br><span class="line">    position.addListener(notifyListeners);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 注销位置信息</span></span><br><span class="line">  <span class="keyword">void</span> detach(ScrollPosition position) &#123;</span><br><span class="line">    <span class="keyword">assert</span>(_positions.contains(position));</span><br><span class="line">    position.removeListener(notifyListeners);</span><br><span class="line">    _positions.remove(position);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 销毁ScrollController</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> dispose() &#123;</span><br><span class="line">    <span class="keyword">for</span> (ScrollPosition position <span class="keyword">in</span> _positions)</span><br><span class="line">      position.removeListener(notifyListeners);</span><br><span class="line">    <span class="keyword">super</span>.dispose();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当<code>ScrollController</code>和<code>Scrollable</code>关联时，<code>Scrollable</code>首先会调用<code>ScrollController</code>的<code>createScrollPosition()</code>方法来创建一个<code>ScrollPosition</code>来存储滚动位置信息</li>
+<li>然后<code>Scrollable</code>会调用<code>attach()</code>方法，将创建的<code>ScrollPosition</code>添加到<code>ScrollController</code>的<code>positions</code>属性中，这一步称为“注册位置”，只有注册后<code>animateTo()</code>和<code>jumpTo()</code>才可以被调用</li>
+<li>当<code>Scrollable</code>销毁时，会调用<code>ScrollController</code>的<code>detach()</code>方法，将其<code>ScrollPosition</code>对象从<code>ScrollController</code>的<code>positions</code>属性中移除，这一步称为“注销位置”，注销后<code>animateTo()</code>和<code>jumpTo()</code>将不能再被调用</li>
+<li>需要注意的是，<code>ScrollController</code>的<code>animateTo()</code>和<code>jumpTo()</code>内部会调用所有<code>ScrollPosition</code>的<code>animateTo()</code>和<code>jumpTo()</code>，以实现所有和该<code>ScrollController</code>关联的<code>Scrollable</code>都滚动到指定的位置</li>
+</ul>
+<h3 id="代码示例-3"><a href="#代码示例-3" class="headerlink" title="代码示例"></a>代码示例</h3><p>创建一个<code>ListView</code>，当滚动位置发生变化时，我们先打印出当前滚动位置，然后判断当前位置是否超过1000像素，如果超过则在屏幕右下角显示一个“返回顶部”的按钮，该按钮点击后可以使<code>ListView</code>恢复到初始位置；如果没有超过1000像素，则隐藏“返回顶部”按钮。代码如下</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScrollControllerTestRoute</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  ScrollControllerTestRouteState createState() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ScrollControllerTestRouteState();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScrollControllerTestRouteState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">ScrollControllerTestRoute</span>&gt; </span>&#123;</span><br><span class="line">  ScrollController _controller = <span class="keyword">new</span> ScrollController();</span><br><span class="line">  <span class="built_in">bool</span> showToTopBtn = <span class="keyword">false</span>; <span class="comment">//是否显示“返回到顶部”按钮</span></span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> initState() &#123;</span><br><span class="line">    <span class="comment">//监听滚动事件，打印滚动位置</span></span><br><span class="line">    _controller.addListener(() &#123;</span><br><span class="line">      <span class="built_in">print</span>(_controller.offset); <span class="comment">//打印滚动位置</span></span><br><span class="line">      <span class="keyword">if</span> (_controller.offset &lt; <span class="number">1000</span> &amp;&amp; showToTopBtn) &#123;</span><br><span class="line">        setState(() &#123;</span><br><span class="line">          showToTopBtn = <span class="keyword">false</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (_controller.offset &gt;= <span class="number">1000</span> &amp;&amp; showToTopBtn == <span class="keyword">false</span>) &#123;</span><br><span class="line">        setState(() &#123;</span><br><span class="line">          showToTopBtn = <span class="keyword">true</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> dispose() &#123;</span><br><span class="line">    <span class="comment">//为了避免内存泄露，需要调用_controller.dispose</span></span><br><span class="line">    _controller.dispose();</span><br><span class="line">    <span class="keyword">super</span>.dispose();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Scaffold(</span><br><span class="line">      appBar: AppBar(title: Text(<span class="string">&quot;滚动控制&quot;</span>)),</span><br><span class="line">      body: Scrollbar(</span><br><span class="line">        child: ListView.builder(</span><br><span class="line">            itemCount: <span class="number">100</span>,</span><br><span class="line">            itemExtent: <span class="number">50.0</span>, <span class="comment">//列表项高度固定时，显式指定高度是一个好习惯(性能消耗小)</span></span><br><span class="line">            controller: _controller,</span><br><span class="line">            itemBuilder: (context, index) &#123;</span><br><span class="line">              <span class="keyword">return</span> ListTile(title: Text(<span class="string">&quot;<span class="subst">$index</span>&quot;</span>),);</span><br><span class="line">            &#125;</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">      floatingActionButton: !showToTopBtn ? <span class="keyword">null</span> : FloatingActionButton(</span><br><span class="line">          child: Icon(Icons.arrow_upward),</span><br><span class="line">          onPressed: () &#123;</span><br><span class="line">            <span class="comment">//返回到顶部时执行动画</span></span><br><span class="line">            _controller.animateTo(<span class="number">.0</span>,</span><br><span class="line">                duration: <span class="built_in">Duration</span>(milliseconds: <span class="number">200</span>),</span><br><span class="line">                curve: Curves.ease</span><br><span class="line">            );</span><br><span class="line">          &#125;</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://book.flutterchina.club/chapter6/">Flutter可滚动Widget</a></li>
+<li><a target="_blank" rel="noopener" href="https://flutterchina.club/widgets/scrolling/">Flutter中文网–可滚动Widget</a></li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/3ab4e07d.html" title="Flutter之可滑动Widget">https://titanjun.top/post/3ab4e07d.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/flutter/" rel="tag"> <i class="fa fa-tag"></i> Flutter</a>
+              <a href="/tags/widget/" rel="tag"> <i class="fa fa-tag"></i> Widget</a>
+              <a href="/tags/dart/" rel="tag"> <i class="fa fa-tag"></i> Dart</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/84ca04ec.html" rel="prev" title="简析OC中对象占用内存的原理">
+                  <i class="fa fa-chevron-left"></i> 简析OC中对象占用内存的原理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/425f3607.html" rel="next" title="Flutter中App的主题和导航">
+                  Flutter中App的主题和导航 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/3ab4e07d.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

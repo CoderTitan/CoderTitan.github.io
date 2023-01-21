@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Flutter之布局类Widget">
+<meta property="og:url" content="https://titanjun.top/post/20517d5b.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_layout.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_start.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_end.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_center.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_between.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_around.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_evenly.png">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_column.png">
+<meta property="article:published_time" content="2019-04-24T09:21:20.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.889Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Flutter">
+<meta property="article:tag" content="Widget">
+<meta property="article:tag" content="Dart">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_layout.png?x-oss-process=style/titanjun">
+
+
+<link rel="canonical" href="https://titanjun.top/post/20517d5b.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/20517d5b.html","path":"post/20517d5b.html","title":"Flutter之布局类Widget"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Flutter之布局类Widget | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E5%B1%80%E7%B1%BBWidget"><span class="nav-number">1.</span> <span class="nav-text">布局类Widget</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%B8%83%E5%B1%80"><span class="nav-number">2.</span> <span class="nav-text">线性布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B1%9E%E6%80%A7%E5%A6%82%E4%B8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">相关属性如下</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mainAxisAlignment"><span class="nav-number">2.1.1.</span> <span class="nav-text">mainAxisAlignment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mainAxisSize"><span class="nav-number">2.1.2.</span> <span class="nav-text">mainAxisSize</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#verticalDirection"><span class="nav-number">2.1.3.</span> <span class="nav-text">verticalDirection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#crossAxisAlignment"><span class="nav-number">2.1.4.</span> <span class="nav-text">crossAxisAlignment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#textDirection"><span class="nav-number">2.1.5.</span> <span class="nav-text">textDirection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#textBaseline"><span class="nav-number">2.1.6.</span> <span class="nav-text">textBaseline</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81"><span class="nav-number">2.2.</span> <span class="nav-text">使用代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80"><span class="nav-number">3.</span> <span class="nav-text">弹性布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flex"><span class="nav-number">3.1.</span> <span class="nav-text">Flex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expanded"><span class="nav-number">3.2.</span> <span class="nav-text">Expanded</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E5%BC%8F%E5%B8%83%E5%B1%80"><span class="nav-number">4.</span> <span class="nav-text">流式布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wrap"><span class="nav-number">4.1.</span> <span class="nav-text">Wrap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#alignment"><span class="nav-number">4.1.1.</span> <span class="nav-text">alignment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#runAlignment"><span class="nav-number">4.1.2.</span> <span class="nav-text">runAlignment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spacing"><span class="nav-number">4.1.3.</span> <span class="nav-text">spacing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#runSpacing"><span class="nav-number">4.1.4.</span> <span class="nav-text">runSpacing</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flow"><span class="nav-number">4.2.</span> <span class="nav-text">Flow</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%82%E5%8F%A0%E5%B8%83%E5%B1%80"><span class="nav-number">5.</span> <span class="nav-text">层叠布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">5.1.</span> <span class="nav-text">Stack</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#alignment-1"><span class="nav-number">5.1.1.</span> <span class="nav-text">alignment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#textDirection-1"><span class="nav-number">5.1.2.</span> <span class="nav-text">textDirection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fit"><span class="nav-number">5.1.3.</span> <span class="nav-text">fit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#overflow"><span class="nav-number">5.1.4.</span> <span class="nav-text">overflow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.1.5.</span> <span class="nav-text">使用示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Positioned"><span class="nav-number">5.2.</span> <span class="nav-text">Positioned</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/20517d5b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Flutter之布局类Widget | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter之布局类Widget
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-24 17:21:20" itemprop="dateCreated datePublished" datetime="2019-04-24T17:21:20+08:00">2019-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>11k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/flutter_layout.png?x-oss-process=style/titanjun" alt="Flutter"></p>
+<span id="more"></span>
+
+
+<ul>
+<li>相关博客系列文章: <a target="_blank" rel="noopener" href="https://www.titanjun.top/categories/Flutter%E7%AC%94%E8%AE%B0/">Flutter和Dart系列文章</a></li>
+<li>相关<code>Demo</code>地址: <a target="_blank" rel="noopener" href="https://github.com/CoderTitan/Flutter_Widget">GitHub地址</a></li>
+<li>布局类<code>Widget</code>都会包含一个或多个子<code>widget</code>，不同的布局类<code>Widget</code>对子<code>widget</code>排版(<code>layout</code>)方式不同</li>
+<li><a target="_blank" rel="noopener" href="https://www.titanjun.top/Flutter%E4%B9%8BText%E5%92%8CImage.html">上一篇文章</a>中提到: <code>Widget</code>实际上就是<code>Element</code>的配置数据, <code>Widget</code>的功能是描述一个<code>UI</code>元素的一个配置数据, 而真正的<code>UI</code>渲染是由<code>Element</code>构成</li>
+<li>在<code>Flutter</code>中，根据<code>Widget</code>是否需要包含子节点将<code>Widget</code>分为了三类，分别对应三种<code>Element</code>，如下表</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Widget</th>
+<th>对应的Element</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>LeafRenderObjectWidget</code></td>
+<td><code>LeafRenderObjectElement</code></td>
+<td><code>Widget</code>树的叶子节点，用于没有子节点的<code>widget</code>，通常基础<code>widget</code>都属于这一类，如<code>Text</code>、<code>Image</code></td>
+</tr>
+<tr>
+<td><code>SingleChildRenderObjectWidget</code></td>
+<td><code>SingleChildRenderObjectElement</code></td>
+<td>包含一个子<code>Widget</code>，如：<code>ConstrainedBox</code>、<code>DecoratedBox</code>等</td>
+</tr>
+<tr>
+<td><code>MultiChildRenderObjectWidget</code></td>
+<td><code>MultiChildRenderObjectElement</code></td>
+<td>包含多个子<code>Widget</code>，一般都有一个<code>children</code>参数，接受一个<code>Widget</code>数组。如<code>Row</code>、<code>Column</code>、<code>Stack</code>等</td>
+</tr>
+</tbody></table>
+<h2 id="布局类Widget"><a href="#布局类Widget" class="headerlink" title="布局类Widget"></a>布局类Widget</h2><ul>
+<li>布局类<code>Widget</code>就是指直接或间接继承(包含)<code>MultiChildRenderObjectWidget</code>的<code>Widget</code>，它们一般都会有一个<code>children</code>属性用于接收子<code>Widget</code></li>
+<li><code>Widget</code>的继承关系如下:<ul>
+<li><code>Widget</code> &gt; <code>RenderObjectWidget</code> &gt; <code>(Leaf/SingleChild/MultiChild)RenderObjectWidget</code></li>
+</ul>
+</li>
+<li><code>RenderObjectWidget</code>类中定义了创建、更新<code>RenderObject</code>的方法，子类必须实现他们</li>
+<li>对于布局类<code>Widget</code>来说，其布局算法都是通过对应的<code>RenderObject</code>对象来实现的</li>
+<li><code>Flutter</code>中主要有以下几种布局类的<code>Widget</code>：<ul>
+<li>线性布局<code>Row</code>和<code>Column</code></li>
+<li>弹性布局<code>Flex</code></li>
+<li>流式布局<code>Wrap</code>、<code>Flow</code></li>
+<li>层叠布局<code>Stack</code>、<code>Positioned</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="线性布局"><a href="#线性布局" class="headerlink" title="线性布局"></a>线性布局</h2><ul>
+<li><code>Row</code>和<code>Column</code>是一种现行布局的<code>Widget</code>, 都继承自<code>Flex</code></li>
+<li>所谓线性布局，即指沿水平或垂直方向排布<code>子Widget</code></li>
+<li>对于线性布局，有主轴和纵轴之分，如果布局是沿水平方，那么主轴就指是水平方向，而纵轴即垂直方向；如果布局沿垂直方向，那么主轴就是指垂直方向，而纵轴就是水平方向</li>
+<li><code>Row</code>的主轴即为水平方向, <code>Column</code>的主轴是垂直方向, 切两者的属性和使用都一样</li>
+<li>相关下定义的源码如下:</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Row(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,</span><br><span class="line">    MainAxisSize mainAxisSize = MainAxisSize.max,</span><br><span class="line">    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,</span><br><span class="line">    TextDirection textDirection,</span><br><span class="line">    VerticalDirection verticalDirection = VerticalDirection.down,</span><br><span class="line">    TextBaseline textBaseline,</span><br><span class="line">    <span class="built_in">List</span>&lt;Widget&gt; children = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Column(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,</span><br><span class="line">    MainAxisSize mainAxisSize = MainAxisSize.max,</span><br><span class="line">    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,</span><br><span class="line">    TextDirection textDirection,</span><br><span class="line">    VerticalDirection verticalDirection = VerticalDirection.down,</span><br><span class="line">    TextBaseline textBaseline,</span><br><span class="line">    <span class="built_in">List</span>&lt;Widget&gt; children = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">&#125;)  </span><br></pre></td></tr></table></figure>
+
+<h3 id="相关属性如下"><a href="#相关属性如下" class="headerlink" title="相关属性如下"></a>相关属性如下</h3><h4 id="mainAxisAlignment"><a href="#mainAxisAlignment" class="headerlink" title="mainAxisAlignment"></a><code>mainAxisAlignment</code></h4><p>子<code>Widget</code>在主轴方向的排列方式, 为方便以下皆称<code>Widget</code>为组件</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认值</span></span><br><span class="line">MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>start</code>: 子<code>widgets</code>向主轴起点对其, 依次排列</li>
+<li><code>end</code>: 子<code>widgets</code>向主轴终点对其, 依次排列</li>
+<li><code>center</code>: 所有子<code>widgets</code>居中排列</li>
+<li><code>spaceBetween</code>: 均匀分配,相邻<code>widgets</code>间距离相同。每行第一个<code>widgets</code>与行首对齐，每行最后一个<code>widgets</code>与行尾对齐</li>
+<li><code>spaceAround</code>: 均匀分配,相邻<code>widgets</code>间距离相同。每行第一个<code>widgets</code>到行首的距离和每行最后一个<code>widgets</code>到行尾的距离将会是相邻<code>widgets</code>之间距离的一半</li>
+<li><code>spaceEvenly</code>: 均匀分配,相邻<code>widgets</code>间距离相同。每行第一个<code>widgets</code>到行首的距离和每行最后一个<code>widgets</code>到行尾的距离和相邻<code>widgets</code>之间距离相同</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>start</code></td>
+<td><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_start.png" alt="start"></td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_end.png" alt="end"></td>
+</tr>
+<tr>
+<td><code>center</code></td>
+<td><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_center.png" alt="center"></td>
+</tr>
+<tr>
+<td><code>spaceBetween</code></td>
+<td><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_between.png" alt="spaceBetween"></td>
+</tr>
+<tr>
+<td><code>spaceAround</code></td>
+<td><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_around.png" alt="spaceAround"></td>
+</tr>
+<tr>
+<td><code>spaceEvenly</code></td>
+<td><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_evenly.png" alt="spaceEvenly"></td>
+</tr>
+</tbody></table>
+<h4 id="mainAxisSize"><a href="#mainAxisSize" class="headerlink" title="mainAxisSize"></a><code>mainAxisSize</code></h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认值</span></span><br><span class="line">MainAxisSize mainAxisSize = MainAxisSize.max</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>表示<code>Row</code>在主轴(水平)方向占用的空间，默认是<code>MainAxisSize.max</code></li>
+<li><code>max</code>表示尽可能多的占用水平方向的空间，此时无论子<code>widgets</code>实际占用多少水平空间，<code>Row</code>的宽度始终等于水平方向的最大宽度；</li>
+<li><code>MainAxisSize.min</code>表示尽可能少的占用水平空间，当子<code>widgets</code>没有占满水平剩余空间，则<code>Row</code>的实际宽度等于所有子<code>widgets</code>占用的的水平空间</li>
+</ul>
+<h4 id="verticalDirection"><a href="#verticalDirection" class="headerlink" title="verticalDirection"></a><code>verticalDirection</code></h4><p>表示Row纵轴（垂直）的对齐方向, 默认值<code>down</code>，表示从上到下; <code>up</code>表示从下到上</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认值</span></span><br><span class="line">VerticalDirection verticalDirection = VerticalDirection.down</span><br></pre></td></tr></table></figure>
+
+<h4 id="crossAxisAlignment"><a href="#crossAxisAlignment" class="headerlink" title="crossAxisAlignment"></a><code>crossAxisAlignment</code></h4><ul>
+<li>表示子<code>Widgets</code>在纵轴方向的对齐方式，<code>Row</code>的高度等于子<code>Widgets</code>中最高的子元素高度</li>
+<li><code>crossAxisAlignment</code>的参考系是<code>verticalDirection</code></li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认值</span></span><br><span class="line">CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center</span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="language-markdown">/<span class="strong">**</span></span></span></span><br><span class="line"><span class="strong"><span class="language-markdown"><span class="comment"> <span class="emphasis">* VerticalDirection.down时, crossAxisAlignment.start指顶部对齐</span></span></span></span></span><br><span class="line"><span class="emphasis"><span class="strong"><span class="language-markdown"><span class="comment"> *</span> VerticalDirection.up时，crossAxisAlignment.start指底部对齐</span></span></span></span><br><span class="line"><span class="strong"><span class="language-markdown"><span class="comment"> <span class="emphasis">* crossAxisAlignment.end和crossAxisAlignment.start正好相反</span></span></span></span></span><br><span class="line"><span class="emphasis"><span class="strong"><span class="language-markdown"><span class="comment"> *</span>/</span></span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当<code>VerticalDirection.down</code>时, <code>crossAxisAlignment</code>个枚举值如下</li>
+<li><code>start</code>: 顶部对其</li>
+<li><code>end</code>: 底部对其</li>
+<li><code>center</code>: 居中对其</li>
+<li><code>stretch</code>: 侧轴方向上, 子<code>Widget</code>的高度拉伸至和<code>Row</code>的高度相同</li>
+<li><code>baseline</code>: 不论<code>VerticalDirection</code>取值如何, 子<code>Widget</code>的顶部和<code>Row</code>的顶部对其</li>
+</ul>
+<h4 id="textDirection"><a href="#textDirection" class="headerlink" title="textDirection"></a><code>textDirection</code></h4><p>表示水平方向子widget的布局顺序(是从左往右还是从右往左)，默认为系统当前Locale环境的文本方向(如中文、英语都是从左往右，而阿拉伯语是从右往左)</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TextDirection textDirection</span><br><span class="line"><span class="comment"><span class="language-markdown">/<span class="strong">**</span></span></span></span><br><span class="line"><span class="strong"><span class="language-markdown"><span class="comment"> <span class="emphasis">* ltr: 从左往右</span></span></span></span></span><br><span class="line"><span class="emphasis"><span class="strong"><span class="language-markdown"><span class="comment"> *</span> rtl: 从右往左</span></span></span></span><br><span class="line"><span class="strong"><span class="language-markdown"><span class="comment"> <span class="emphasis">*/</span></span></span></span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="textBaseline"><a href="#textBaseline" class="headerlink" title="textBaseline"></a><code>textBaseline</code></h4><p>用于对其文本的水平线, <a target="_blank" rel="noopener" href="http://www.runoob.com/tags/canvas-textbaseline.html">详情可参考</a></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TextBaseline textBaseline</span><br><span class="line"><span class="comment"><span class="language-markdown">/<span class="strong">**</span></span></span></span><br><span class="line"><span class="strong"><span class="language-markdown"><span class="comment"> <span class="emphasis">* alphabetic: 用于对齐普通的字母基线</span></span></span></span></span><br><span class="line"><span class="emphasis"><span class="strong"><span class="language-markdown"><span class="comment"> *</span> ideographic: 用于对齐表意基线</span></span></span></span><br><span class="line"><span class="strong"><span class="language-markdown"><span class="comment"> <span class="emphasis">*/</span></span></span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用代码"><a href="#使用代码" class="headerlink" title="使用代码"></a>使用代码</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Row(</span><br><span class="line">    mainAxisAlignment: MainAxisAlignment.spaceEvenly,</span><br><span class="line">    mainAxisSize: MainAxisSize.min,</span><br><span class="line">    crossAxisAlignment: CrossAxisAlignment.center,</span><br><span class="line">    textDirection: TextDirection.ltr,</span><br><span class="line">    verticalDirection: VerticalDirection.down,</span><br><span class="line">    textBaseline: TextBaseline.ideographic,</span><br><span class="line">    children: &lt;Widget&gt;[</span><br><span class="line">      <span class="keyword">new</span> Container(width: <span class="number">80.0</span>, height:<span class="number">80.0</span>, color: Colors.red,),</span><br><span class="line">      <span class="keyword">new</span> Container(width: <span class="number">80.0</span>, height:<span class="number">90.0</span>, color: Colors.green,),</span><br><span class="line">      <span class="keyword">new</span> Container(width: <span class="number">80.0</span>, height:<span class="number">100.0</span>, color: Colors.blue,),</span><br><span class="line">    ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+<div class="note warning"><p>特别注意</p></div>
+
+<p>在<code>Row</code>和<code>Column</code>中, 如果子<code>widget</code>超出屏幕范围，则会报溢出错误</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/flutter/row_column.png" alt="image"></p>
+<h2 id="弹性布局"><a href="#弹性布局" class="headerlink" title="弹性布局"></a>弹性布局</h2><ul>
+<li>弹性布局允许子<code>widget</code>按照一定比例来分配父容器空间</li>
+<li><code>Flutter</code>中的弹性布局主要通过<code>Flex</code>和<code>Expanded</code>来配合实现</li>
+<li><code>Flex</code>可以沿着水平或垂直方向排列子<code>widget</code></li>
+<li>如果已知主轴方向，建议使用<code>Row</code>或<code>Column</code>，因为<code>Row</code>和<code>Column</code>都继承自<code>Flex</code>，参数基本相同，所以能使用<code>Flex</code>的地方一定可以使用<code>Row</code>或<code>Column</code></li>
+<li><code>Flex</code>本身功能是很强大的，它也可以和<code>Expanded</code>配合实现弹性布局，接下来我们只讨论<code>Flex</code>和弹性布局相关的属性(其它属性已经在介绍<code>Row</code>和<code>Column</code>时介绍过了)</li>
+</ul>
+<h3 id="Flex"><a href="#Flex" class="headerlink" title="Flex"></a>Flex</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Flex(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="comment">//弹性布局的方向</span></span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.direction,</span><br><span class="line">    <span class="keyword">this</span>.mainAxisAlignment = MainAxisAlignment.start,</span><br><span class="line">    <span class="keyword">this</span>.mainAxisSize = MainAxisSize.max,</span><br><span class="line">    <span class="keyword">this</span>.crossAxisAlignment = CrossAxisAlignment.center,</span><br><span class="line">    <span class="keyword">this</span>.textDirection,</span><br><span class="line">    <span class="keyword">this</span>.verticalDirection = VerticalDirection.down,</span><br><span class="line">    <span class="keyword">this</span>.textBaseline,</span><br><span class="line">    <span class="built_in">List</span>&lt;Widget&gt; children = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// direction</span></span><br><span class="line"><span class="comment">// 水平方向</span></span><br><span class="line">Axis direction = Axis.horizontal</span><br><span class="line"><span class="comment">// 垂直方向, 默认为垂直方向</span></span><br><span class="line">Axis direction = Axis.vertical</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Flex</code>继承自<code>MultiChildRenderObjectWidget</code>，对应的<code>RenderObject</code>为<code>RenderFlex</code>，<code>RenderFlex</code>中实现了其布局算法</p>
+</blockquote>
+<h3 id="Expanded"><a href="#Expanded" class="headerlink" title="Expanded"></a>Expanded</h3><p>可以按比例缩放<code>Row</code>、<code>Column</code>和<code>Flex</code>子<code>widget</code>所占用的空间</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Expanded</span> <span class="keyword">extends</span> <span class="title">Flexible</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> Expanded(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="built_in">int</span> flex = <span class="number">1</span>,</span><br><span class="line">    <span class="meta">@required</span> Widget child,</span><br><span class="line">  &#125;) : <span class="keyword">super</span>(key: key, flex: flex, fit: FlexFit.tight, child: child);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>flex</code>为弹性系数，如果为0或<code>null</code>，则<code>child</code>是没有弹性的，即不会被扩伸占用的空间<br>如果大于0，所有的<code>Expanded</code>按照其<code>flex</code>的比例来分割主轴的全部空闲空间</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Row(</span><br><span class="line">    children: &lt;Widget&gt;[</span><br><span class="line">      Container(width: <span class="number">80.0</span>, height:<span class="number">80.0</span>, color: Colors.red,),</span><br><span class="line">      Expanded(</span><br><span class="line">        flex: <span class="number">1</span>,</span><br><span class="line">        child: Container(width: <span class="number">80.0</span>, height:<span class="number">80.0</span>, color: Colors.blue,),</span><br><span class="line">      ),</span><br><span class="line">      Expanded(</span><br><span class="line">        flex: <span class="number">1</span>,</span><br><span class="line">        child: Container(width: <span class="number">80.0</span>, height:<span class="number">80.0</span>, color: Colors.yellow,),</span><br><span class="line">      )</span><br><span class="line">    ],</span><br><span class="line">  ),</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="流式布局"><a href="#流式布局" class="headerlink" title="流式布局"></a>流式布局</h2><ul>
+<li>上面提到在<code>Row</code>和<code>Column</code>中, 如果子<code>widget</code>超出屏幕范围，则会报溢出错误</li>
+<li>这是因为<code>Row</code>默认只有一行，如果超出屏幕不会折行</li>
+<li>我们把超出屏幕显示范围会自动折行的布局称为流式布局</li>
+<li><code>Flutter</code>中通过<code>Wrap</code>和<code>Flow</code>来支持流式布局</li>
+</ul>
+<h3 id="Wrap"><a href="#Wrap" class="headerlink" title="Wrap"></a>Wrap</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Wrap(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="keyword">this</span>.direction = Axis.horizontal,</span><br><span class="line">    <span class="keyword">this</span>.alignment = WrapAlignment.start,</span><br><span class="line">    <span class="keyword">this</span>.spacing = <span class="number">0.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.runAlignment = WrapAlignment.start,</span><br><span class="line">    <span class="keyword">this</span>.runSpacing = <span class="number">0.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.crossAxisAlignment = WrapCrossAlignment.start,</span><br><span class="line">    <span class="keyword">this</span>.textDirection,</span><br><span class="line">    <span class="keyword">this</span>.verticalDirection = VerticalDirection.down,</span><br><span class="line">    <span class="built_in">List</span>&lt;Widget&gt; children = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到<code>Wrap</code>中的很多属性和<code>Row</code>中相同, 这里就不在赘述了, 这里主要看一下<code>Wrap</code>中特有的属性</p>
+<h4 id="alignment"><a href="#alignment" class="headerlink" title="alignment"></a>alignment</h4><p>子<code>Widget</code>在主轴上的对其方式</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认值</span></span><br><span class="line"><span class="keyword">this</span>.alignment = WrapAlignment.start</span><br><span class="line"><span class="comment">// 取值: start, end, center, spaceBetween, spaceAround, spaceEvenly</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="runAlignment"><a href="#runAlignment" class="headerlink" title="runAlignment"></a>runAlignment</h4><p>子<code>Widget</code>在纵轴上的对其方式</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认值</span></span><br><span class="line"><span class="keyword">this</span>.runAlignment = WrapAlignment.start</span><br><span class="line"><span class="comment">// 取值: start, end, center, spaceBetween, spaceAround, spaceEvenly</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="spacing"><a href="#spacing" class="headerlink" title="spacing"></a>spacing</h4><p>主轴方向子<code>widget</code>的间距: <code>spacing: 10</code></p>
+<h4 id="runSpacing"><a href="#runSpacing" class="headerlink" title="runSpacing"></a>runSpacing</h4><p>纵轴方向子<code>widget</code>的间距: <code>runSpacing: 10</code></p>
+<h3 id="Flow"><a href="#Flow" class="headerlink" title="Flow"></a>Flow</h3><ul>
+<li>一般很少会使用<code>Flow</code>，因为其过于复杂，需要自己实现子<code>widget</code>的位置转换，在很多场景下首先要考虑的是<code>Wrap</code>是否满足需求</li>
+<li><code>Flow</code>主要用于一些需要自定义布局的UI或性能要求较高(如动画中)的场景</li>
+<li><code>Flow</code>有如下优点：<ul>
+<li>性能好: <code>Flow</code>是一个对<code>child</code>尺寸以及位置调整非常高效的控件，<code>Flow</code>用转换矩阵对<code>child</code>进行位置调整的时候进行了优化</li>
+<li>在<code>Flow</code>定位过后，如果<code>child</code>的尺寸或者位置发生了变化，在<code>FlowDelegate</code>中的<code>paintChildren()</code>方法中调用<code>context.paintChild</code> 进行重绘，而<code>context.paintChild</code>在重绘时使用了转换矩阵，并没有实际调整<code>Widget</code>位置。</li>
+<li>灵活: 由于我们需要自己实现<code>FlowDelegate</code>的<code>paintChildren()</code>方法，所以我们需要自己计算每一个<code>widget</code>的位置，因此，可以实现自定义布局。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>使用复杂.</li>
+<li>不能自适应子<code>widget</code>大小，必须通过指定父容器大小或重写<code>FlowDelegate</code>的<code>getSize</code>返回固定大小</li>
+</ul>
+</li>
+<li>下面是一个简单的示例代码:</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlowWidget</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement build</span></span><br><span class="line">    <span class="keyword">return</span> Container(</span><br><span class="line">      color: Colors.orange,</span><br><span class="line">      child: Flow(</span><br><span class="line">        delegate: ShowFlowDelegate(margin: EdgeInsets.all(<span class="number">10</span>)),</span><br><span class="line">        children: &lt;Widget&gt;[</span><br><span class="line">          Container(width: <span class="number">100.0</span>, height:<span class="number">100.0</span>, color: Colors.red),</span><br><span class="line">          Container(width: <span class="number">100.0</span>, height:<span class="number">100.0</span>, color: Colors.yellow),</span><br><span class="line">          Container(width: <span class="number">100.0</span>, height:<span class="number">100.0</span>, color: Colors.blue),</span><br><span class="line">          Container(width: <span class="number">100.0</span>, height:<span class="number">100.0</span>, color: Colors.cyan),</span><br><span class="line">          Container(width: <span class="number">100.0</span>, height:<span class="number">100.0</span>, color: Colors.pink)</span><br><span class="line">        ],</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现一个继承自<code>FlowDelegate</code>的类, 并重写响应的方法</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShowFlowDelegate</span> <span class="keyword">extends</span> <span class="title">FlowDelegate</span> </span>&#123;</span><br><span class="line">  EdgeInsets margin =EdgeInsets.zero;</span><br><span class="line">  ShowFlowDelegate(&#123;<span class="keyword">this</span>.margin&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> paintChildren(FlowPaintingContext context) &#123;</span><br><span class="line">    <span class="keyword">var</span> x = margin.left;</span><br><span class="line">    <span class="keyword">var</span> y = margin.top;</span><br><span class="line">    <span class="comment">//计算每一个子widget的位置  </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; context.childCount; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> w = context.getChildSize(i).width + x + margin.right;</span><br><span class="line">      <span class="keyword">if</span> (w &lt; context.size.width) &#123;</span><br><span class="line">        context.paintChild(i,</span><br><span class="line">            transform: <span class="keyword">new</span> Matrix4.translationValues(</span><br><span class="line">                x, y, <span class="number">0.0</span>));</span><br><span class="line">        x = w + margin.left;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        x = margin.left;</span><br><span class="line">        y += context.getChildSize(i).height + margin.top + margin.bottom;</span><br><span class="line">        <span class="comment">//绘制子widget(有优化)  </span></span><br><span class="line">        context.paintChild(i,</span><br><span class="line">            transform: <span class="keyword">new</span> Matrix4.translationValues(</span><br><span class="line">                x, y, <span class="number">0.0</span>));</span><br><span class="line">         x += context.getChildSize(i).width + margin.left + margin.right;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Size getSize(BoxConstraints constraints) &#123;</span><br><span class="line">    <span class="comment">// 设置Flow的大小</span></span><br><span class="line">    <span class="keyword">return</span> Size(<span class="built_in">double</span>.infinity, <span class="number">300</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="built_in">bool</span> shouldRepaint(FlowDelegate oldDelegate) &#123;</span><br><span class="line">    <span class="keyword">return</span> oldDelegate !=<span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="层叠布局"><a href="#层叠布局" class="headerlink" title="层叠布局"></a>层叠布局</h2><ul>
+<li>层叠布局和<code>Web</code>中的绝对定位、<code>iOS</code>中的<code>Frame</code>布局是相似的，子<code>widget</code>可以根据到父容器四个角的位置来确定本身的位置</li>
+<li>绝对定位允许子<code>widget</code>堆叠（按照代码中声明的顺序）</li>
+<li><code>Flutter</code>中使用<code>Stack</code>和<code>Positioned</code>来实现绝对定位，<code>Stack</code>允许子<code>widget</code>堆叠，而<code>Positioned</code>可以给子<code>widget</code>定位</li>
+</ul>
+<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Stack(&#123;</span><br><span class="line">  Key key,</span><br><span class="line">  <span class="keyword">this</span>.alignment = AlignmentDirectional.topStart,</span><br><span class="line">  <span class="keyword">this</span>.textDirection,</span><br><span class="line">  <span class="keyword">this</span>.fit = StackFit.loose,</span><br><span class="line">  <span class="keyword">this</span>.overflow = Overflow.clip,</span><br><span class="line">  <span class="built_in">List</span>&lt;Widget&gt; children = <span class="keyword">const</span> &lt;Widget&gt;[],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="alignment-1"><a href="#alignment-1" class="headerlink" title="alignment"></a>alignment</h4><p>决定子<code>Widget</code>在<code>Stack</code>中的定位</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认值</span></span><br><span class="line"><span class="keyword">this</span>.alignment = AlignmentDirectional.topStart</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取值如下, start和end为水平方向, top和bottom是垂直方向</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> AlignmentDirectional topStart = AlignmentDirectional(<span class="number">-1.0</span>, <span class="number">-1.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> AlignmentDirectional topCenter = AlignmentDirectional(<span class="number">0.0</span>, <span class="number">-1.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> AlignmentDirectional topEnd = AlignmentDirectional(<span class="number">1.0</span>, <span class="number">-1.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> AlignmentDirectional centerStart = AlignmentDirectional(<span class="number">-1.0</span>, <span class="number">0.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> AlignmentDirectional center = AlignmentDirectional(<span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> AlignmentDirectional centerEnd = AlignmentDirectional(<span class="number">1.0</span>, <span class="number">0.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> AlignmentDirectional bottomStart = AlignmentDirectional(<span class="number">-1.0</span>, <span class="number">1.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> AlignmentDirectional bottomCenter = AlignmentDirectional(<span class="number">0.0</span>, <span class="number">1.0</span>);</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> AlignmentDirectional bottomEnd = AlignmentDirectional(<span class="number">1.0</span>, <span class="number">1.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 还可以使用具体数值比例定位, 设置值在0~1之间</span></span><br><span class="line">AlignmentDirectional(<span class="number">0.8</span>, <span class="number">0.9</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="textDirection-1"><a href="#textDirection-1" class="headerlink" title="textDirection"></a>textDirection</h4><p>决定<code>alignment</code>对齐的参考系</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认ltr</span></span><br><span class="line">textDirection: TextDirection.ltr</span><br><span class="line"></span><br><span class="line"><span class="comment">// textDirection的值为TextDirection.ltr，则alignment的start代表左，end代表右</span></span><br><span class="line"><span class="comment">// textDirection的值为TextDirection.rtl，则alignment的start代表右，end代表左</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="fit"><a href="#fit" class="headerlink" title="fit"></a>fit</h4><p>用于决定没有定位的子<code>widget</code>如何去适应<code>Stack</code>的大小</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认值</span></span><br><span class="line"><span class="keyword">this</span>.fit = StackFit.loose</span><br><span class="line"></span><br><span class="line"><span class="comment">// StackFit.loose表示使用子widget的大小</span></span><br><span class="line"><span class="comment">// StackFit.expand表示扩伸到Stack的大小</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="overflow"><a href="#overflow" class="headerlink" title="overflow"></a>overflow</h4><p>决定如何显示超出<code>Stack</code>显示空间的子<code>widget</code></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认值</span></span><br><span class="line"><span class="keyword">this</span>.overflow = Overflow.clip</span><br><span class="line"></span><br><span class="line"><span class="comment">// Overflow.clip时，超出部分会被剪裁（隐藏)</span></span><br><span class="line"><span class="comment">// Overflow.visible时，时则不会被剪裁</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Stack(</span><br><span class="line">  <span class="comment">// alignment: AlignmentDirectional.center,</span></span><br><span class="line">  alignment: AlignmentDirectional(<span class="number">0.8</span>, <span class="number">0.8</span>),</span><br><span class="line">  textDirection: TextDirection.ltr,</span><br><span class="line">  fit: StackFit.loose,</span><br><span class="line">  overflow: Overflow.visible,</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">    Container(width: <span class="number">100.0</span>, height:<span class="number">100.0</span>, color: Colors.red),</span><br><span class="line">    Container(width: <span class="number">100.0</span>, height:<span class="number">100.0</span>, color: Colors.yellow),</span><br><span class="line">  ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Positioned"><a href="#Positioned" class="headerlink" title="Positioned"></a>Positioned</h3><p><code>Positioned</code>和<code>iOS</code>中的<code>Frame</code>设置位置和大小一样, 根据上下左右和宽高设置<code>Widget</code>的定位和大小</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Positioned(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="keyword">this</span>.left,</span><br><span class="line">    <span class="keyword">this</span>.top,</span><br><span class="line">    <span class="keyword">this</span>.right,</span><br><span class="line">    <span class="keyword">this</span>.bottom,</span><br><span class="line">    <span class="keyword">this</span>.width,</span><br><span class="line">    <span class="keyword">this</span>.height,</span><br><span class="line">    <span class="meta">@required</span> Widget child,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>left、top 、right、 bottom</code>分别代表离Stack左、上、右、底四边的距离, <code>width</code>和<code>height</code>用于指定定位元素的宽度和高度</p>
+</blockquote>
+<blockquote>
+<p>注意，此处的width、height 和其它地方的意义稍微有点区别，此处用于配合left、top 、right、 bottom来定位widget，举个例子，在水平方向时，你只能指定left、right、width三个属性中的两个，如指定left和width后，right会自动算出(left+width)，如果同时指定三个属性则会报错，垂直方向同理</p>
+</blockquote>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">child: Stack(</span><br><span class="line">  alignment: AlignmentDirectional.center,</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">    <span class="comment">// 这个widget会根据alignment的设置展示</span></span><br><span class="line">    Container(child: Text(<span class="string">&#x27;https&#x27;</span>, style: TextStyle(color: Colors.red)), color: Colors.yellow,),</span><br><span class="line">    <span class="comment">// 这个widget会根据left和top和width的设置显示和alignment无关了, 实际width为80</span></span><br><span class="line">    Positioned(</span><br><span class="line">      left: <span class="number">10</span>,</span><br><span class="line">      top: <span class="number">30</span>,</span><br><span class="line">      width: <span class="number">80</span>,</span><br><span class="line">      child: Container(width: <span class="number">100.0</span>, height:<span class="number">100.0</span>, color: Colors.red),</span><br><span class="line">    ),</span><br><span class="line">    Positioned(</span><br><span class="line">      right: <span class="number">10</span>,</span><br><span class="line">      bottom: <span class="number">50</span>,</span><br><span class="line">      child: Container(width: <span class="number">100.0</span>, height:<span class="number">100.0</span>, color: Colors.blue),</span><br><span class="line">    )</span><br><span class="line">  ],</span><br><span class="line">),</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>至此, <code>Flutter</code>中布局相关的<code>Widget</code>也都学习完了……接下来就是容器类<code>Widget</code>了</p>
+</blockquote>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://book.flutterchina.club/chapter5/">Flutter实战</a></li>
+<li><a target="_blank" rel="noopener" href="https://flutterchina.club/widgets/layout/">Flutter中文网</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/20517d5b.html" title="Flutter之布局类Widget">https://titanjun.top/post/20517d5b.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/flutter/" rel="tag"> <i class="fa fa-tag"></i> Flutter</a>
+              <a href="/tags/widget/" rel="tag"> <i class="fa fa-tag"></i> Widget</a>
+              <a href="/tags/dart/" rel="tag"> <i class="fa fa-tag"></i> Dart</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/88da4080.html" rel="prev" title="Flutter之基础Widget之TextField">
+                  <i class="fa fa-chevron-left"></i> Flutter之基础Widget之TextField
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/ebbecb82.html" rel="next" title="Flutter之基础Widget">
+                  Flutter之基础Widget <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/20517d5b.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

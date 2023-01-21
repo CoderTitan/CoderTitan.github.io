@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="上一篇ReactiveCocoa使用详解01提到了, RACStream中有两个子类——RACSignal 和 RACSequence 上一篇文章中只介绍了, 关于RACSignal的使用和底层实现原理 这里我们就主要学习一下RACSequence的使用和底层实现 GitHub上的Demo地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactiveCocoa之集合使用详解02">
+<meta property="og:url" content="https://titanjun.top/post/1a5a7051.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:description" content="上一篇ReactiveCocoa使用详解01提到了, RACStream中有两个子类——RACSignal 和 RACSequence 上一篇文章中只介绍了, 关于RACSignal的使用和底层实现原理 这里我们就主要学习一下RACSequence的使用和底层实现 GitHub上的Demo地址">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-4ca3c41197e0fcca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4122543-aa6185bb24ec0073.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800">
+<meta property="article:published_time" content="2018-03-21T14:48:29.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.897Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="ReactiveCocoa">
+<meta property="article:tag" content="函数式">
+<meta property="article:tag" content="响应式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/4122543-4ca3c41197e0fcca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+<link rel="canonical" href="https://titanjun.top/post/1a5a7051.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/1a5a7051.html","path":"post/1a5a7051.html","title":"ReactiveCocoa之集合使用详解02"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ReactiveCocoa之集合使用详解02 | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8ERACTuple"><span class="nav-number">1.</span> <span class="nav-text">关于RACTuple</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RAC%E4%B8%AD%E7%9A%84%E5%85%83%E7%BB%84%E2%80%93RACTuple"><span class="nav-number">1.1.</span> <span class="nav-text">RAC中的元组–RACTuple</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RACTuple%E7%9A%84%E7%9B%B8%E5%85%B3%E7%B1%BB%E2%80%93RACTupleUnpackingTrampoline"><span class="nav-number">1.2.</span> <span class="nav-text">RACTuple的相关类–RACTupleUnpackingTrampoline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RACTuple%E4%B8%AD%E7%9A%84%E5%AE%8F"><span class="nav-number">1.3.</span> <span class="nav-text">RACTuple中的宏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RACTupleSequence"><span class="nav-number">1.4.</span> <span class="nav-text">RACTupleSequence</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RACSequence%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">RACSequence底层实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RACSequence%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">RACSequence的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8Ehead%E5%92%8Ctail"><span class="nav-number">2.1.1.</span> <span class="nav-text">于head和tail</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#objectEnumerator"><span class="nav-number">2.1.2.</span> <span class="nav-text">objectEnumerator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#array"><span class="nav-number">2.1.3.</span> <span class="nav-text">array</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RACSequence%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">RACSequence的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RACSequence%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">RACSequence的初始化方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RACDynamicSequence%E5%B1%9E%E6%80%A7"><span class="nav-number">3.1.1.</span> <span class="nav-text">RACDynamicSequence属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.2.</span> <span class="nav-text">方法的实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%AF%E6%9E%81%E8%BF%90%E7%AE%97%E5%92%8C%E6%83%B0%E6%80%A7%E6%B1%82%E5%80%BC"><span class="nav-number">4.</span> <span class="nav-text">积极运算和惰性求值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%AF%E6%9E%81%E8%BF%90%E7%AE%97"><span class="nav-number">4.1.</span> <span class="nav-text">积极运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%83%B0%E6%80%A7%E8%AE%A1%E7%AE%97"><span class="nav-number">4.2.</span> <span class="nav-text">惰性计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RACSequence%E7%9A%84%E6%96%B9%E6%B3%95-1"><span class="nav-number">5.</span> <span class="nav-text">RACSequence的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%98%E5%8F%A0%E5%87%BD%E6%95%B0"><span class="nav-number">5.1.</span> <span class="nav-text">折叠函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#objectPassingTest"><span class="nav-number">5.2.</span> <span class="nav-text">objectPassingTest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#any-%E5%92%8C-all"><span class="nav-number">5.3.</span> <span class="nav-text">any: 和 all:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RACSequence%E7%9A%84%E5%AD%90%E7%B1%BB%E5%92%8C%E6%89%A9%E5%B1%95"><span class="nav-number">6.</span> <span class="nav-text">RACSequence的子类和扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%B1%BB"><span class="nav-number">6.1.</span> <span class="nav-text">子类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95"><span class="nav-number">6.2.</span> <span class="nav-text">扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NSArray-RACSequenceAdditions"><span class="nav-number">6.2.1.</span> <span class="nav-text">NSArray+RACSequenceAdditions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSDictionary-RACSequenceAdditions"><span class="nav-number">6.2.2.</span> <span class="nav-text">NSDictionary+RACSequenceAdditions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSSet-RACSequenceAdditions"><span class="nav-number">6.2.3.</span> <span class="nav-text">NSSet+RACSequenceAdditions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSString-RACSequenceAdditions"><span class="nav-number">6.2.4.</span> <span class="nav-text">NSString+RACSequenceAdditions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSEnumerator-RACSequenceAdditions"><span class="nav-number">6.2.5.</span> <span class="nav-text">NSEnumerator+RACSequenceAdditions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSIndexSet-RACSequenceAdditions"><span class="nav-number">6.2.6.</span> <span class="nav-text">NSIndexSet+RACSequenceAdditions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSOrderedSet-RACSequenceAdditions"><span class="nav-number">6.2.7.</span> <span class="nav-text">NSOrderedSet+RACSequenceAdditions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/1a5a7051.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ReactiveCocoa之集合使用详解02 | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ReactiveCocoa之集合使用详解02
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-03-21 22:48:29" itemprop="dateCreated datePublished" datetime="2018-03-21T22:48:29+08:00">2018-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ios%E7%BB%84%E4%BB%B6%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">iOS组件库</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>23k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>21 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li>上一篇<a target="_blank" rel="noopener" href="https://www.titanjun.top/2018/03/19/ReactiveCocoa%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A301/">ReactiveCocoa使用详解01</a>提到了, <code>RACStream</code>中有两个子类——<code>RACSignal</code> 和 <code>RACSequence</code></li>
+<li>上一篇文章中只介绍了, 关于<code>RACSignal</code>的使用和底层实现原理</li>
+<li>这里我们就主要学习一下<code>RACSequence</code>的使用和底层实现</li>
+<li>GitHub上的<a target="_blank" rel="noopener" href="https://github.com/CoderTitan/RACObjcDemo">Demo地址</a></li>
+</ul>
+<span id="more"></span>
+
+<h2 id="关于RACTuple"><a href="#关于RACTuple" class="headerlink" title="关于RACTuple"></a>关于RACTuple</h2><ul>
+<li>这里在介绍<code>RACSequence</code>之前，我们先来看看<code>RACTuple</code>的介绍和实现吧! 在RAC中<code>RACTuple</code>是<code>ReactiveCocoa</code>的元组类</li>
+<li>在Swift中, 元组类是一种很重要也很常用的类型, 是一种以下标访问成员变量的类型</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//swift中的元组</span></span><br><span class="line">let tuple = (<span class="number">3</span>, <span class="number">2</span>, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">print(tuple)</span><br><span class="line"><span class="comment">//输出: (3, 2, &quot;a&quot;)</span></span><br><span class="line"></span><br><span class="line">let tuple1 = tuple<span class="number">.0</span></span><br><span class="line">let tuple2 = tuple<span class="number">.2</span></span><br><span class="line">print(tuple1, tuple2)</span><br><span class="line"><span class="comment">//输出: 3 a</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="RAC中的元组–RACTuple"><a href="#RAC中的元组–RACTuple" class="headerlink" title="RAC中的元组–RACTuple"></a>RAC中的元组–<code>RACTuple</code></h3><p>在RAC中<code>RACTuple</code>是继承自<code>NSObject</code>, 并遵循协议<code>NSCoding</code>, <code>NSCopying</code>, <code>NSFastEnumeration</code>的类, 如下</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACTuple</span> : <span class="title">NSObject</span> &lt;<span class="title">NSCoding</span>, <span class="title">NSCopying</span>, <span class="title">NSFastEnumeration</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//元组成员的个数</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSUInteger</span> count;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>, <span class="keyword">nullable</span>) <span class="type">id</span> first;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>, <span class="keyword">nullable</span>) <span class="type">id</span> second;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>, <span class="keyword">nullable</span>) <span class="type">id</span> third;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>, <span class="keyword">nullable</span>) <span class="type">id</span> fourth;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>, <span class="keyword">nullable</span>) <span class="type">id</span> fifth;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>, <span class="keyword">nullable</span>) <span class="type">id</span> last;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用参考</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">RACTuple *tuple = RACTuplePack(@<span class="number">1</span>, @<span class="number">2</span>, <span class="string">@&quot;32&quot;</span>, @<span class="number">23</span>, <span class="string">@&quot;jun&quot;</span>, @<span class="number">2.3</span>, @<span class="number">4.56</span>, @<span class="number">100</span>);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;%lu&quot;</span>, (<span class="type">unsigned</span> <span class="type">long</span>)tuple.count);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;%@--%@--%@&quot;</span>, tuple.first, tuple.last, tuple[<span class="number">6</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*输出:</span></span><br><span class="line"><span class="comment">2018-03-19 20:19:49.139932+0800 ReactiveObjc[23307:1441026] 8</span></span><br><span class="line"><span class="comment">2018-03-19 20:19:49.140112+0800 ReactiveObjc[23307:1441026] 1--100--4.56</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>RACTuple</code>透过底层看上去, 其实就是一个<code>NSArray</code>在进行操作, 无非是针对该数组进行了一些不同的封装和处理</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACTuple</span> ()</span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">instancetype</span>)initWithBackingArray:(<span class="built_in">NSArray</span> *)backingArray <span class="built_in">NS_DESIGNATED_INITIALIZER</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">readonly</span>) <span class="built_in">NSArray</span> *backingArray;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下面我们看一下<code>RACTuple</code>提供的类方法和实例方法</li>
+<li>一共3个实例方法, 3个类方法, 如下</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 类方法</span></span><br><span class="line">+ (<span class="keyword">instancetype</span>)tupleWithObjectsFromArray:(<span class="built_in">NSArray</span> *)array;</span><br><span class="line">+ (<span class="keyword">instancetype</span>)tupleWithObjectsFromArray:(<span class="built_in">NSArray</span> *)array convertNullsToNils:(<span class="type">BOOL</span>)convert;</span><br><span class="line">+ (<span class="keyword">instancetype</span>)tupleWithObjects:(<span class="type">id</span>)object, ... <span class="built_in">NS_REQUIRES_NIL_TERMINATION</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 实例方法</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="type">id</span>)objectAtIndex:(<span class="built_in">NSUInteger</span>)index;</span><br><span class="line">- (<span class="built_in">NSArray</span> *)allObjects;</span><br><span class="line">- (__kindof RACTuple *)tupleByAddingObject:(<span class="keyword">nullable</span> <span class="type">id</span>)obj;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下面我们一个一个简单介绍下</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">instancetype</span>)tupleWithObjectsFromArray:(<span class="built_in">NSArray</span> *)array &#123;</span><br><span class="line">	<span class="keyword">return</span> [<span class="keyword">self</span> tupleWithObjectsFromArray:array convertNullsToNils:<span class="literal">NO</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (<span class="keyword">instancetype</span>)tupleWithObjectsFromArray:(<span class="built_in">NSArray</span> *)array convertNullsToNils:(<span class="type">BOOL</span>)convert &#123;</span><br><span class="line">	<span class="keyword">if</span> (!convert) &#123;</span><br><span class="line">		<span class="keyword">return</span> [[<span class="keyword">self</span> alloc] initWithBackingArray:array];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">NSMutableArray</span> *newArray = [<span class="built_in">NSMutableArray</span> arrayWithCapacity:array.count];</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">id</span> object <span class="keyword">in</span> array) &#123;</span><br><span class="line">		[newArray addObject:(object == <span class="built_in">NSNull</span>.null ? RACTupleNil.tupleNil : object)];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> [[<span class="keyword">self</span> alloc] initWithBackingArray:newArray];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这两个方法都是根据传入的array初始化为<code>RACTuple</code>内部的<code>NSArray</code></li>
+<li>然而这两个初始化方法唯一的不同点就在于<code>convert</code>参数, 区别在于是否把<code>NSNull</code>转换成<code>RACTupleNil</code>类型</li>
+<li>这里还有一个需要注意的就是<code>RACTupleNil</code>, 是一个单例</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ (RACTupleNil *)tupleNil &#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">	<span class="keyword">static</span> RACTupleNil *tupleNil = <span class="literal">nil</span>;</span><br><span class="line">	<span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">		tupleNil = [[<span class="keyword">self</span> alloc] init];</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> tupleNil;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后一个类方法, 与NSArray的类方法相同, 如下:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">instancetype</span>)arrayWithObjects:(ObjectType)firstObj, ... <span class="built_in">NS_REQUIRES_NIL_TERMINATION</span>;</span><br><span class="line">+ (<span class="keyword">instancetype</span>)tupleWithObjects:(<span class="type">id</span>)object, ... <span class="built_in">NS_REQUIRES_NIL_TERMINATION</span>;</span><br></pre></td></tr></table></figure>
+
+<p>简单使用:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">NSArray</span> *arr = [<span class="built_in">NSArray</span> arrayWithObjects:@<span class="number">1</span>, <span class="built_in">NSNull</span>.null, @<span class="number">2</span>, <span class="string">@&quot;jun&quot;</span>, <span class="literal">nil</span>];</span><br><span class="line">    RACTuple *tuple1 = [RACTuple tupleWithObjectsFromArray:arr];</span><br><span class="line">    RACTuple *tuple2 = [RACTuple tupleWithObjectsFromArray:arr convertNullsToNils:<span class="literal">YES</span>];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, tuple1.second);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, tuple2.second);</span><br><span class="line">    </span><br><span class="line">    RACTuple *tuple3 = [RACTuple tupleWithObjects:@<span class="number">1</span>, @<span class="number">3.4</span>, <span class="string">@&quot;jun&quot;</span>, <span class="literal">nil</span>];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;%lu&quot;</span>, (<span class="type">unsigned</span> <span class="type">long</span>)tuple3.count);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*输出结果:</span></span><br><span class="line"><span class="comment">2018-03-19 20:59:14.995245+0800 ReactiveObjc[24150:1545073] &lt;null&gt;</span></span><br><span class="line"><span class="comment">2018-03-19 20:59:14.995557+0800 ReactiveObjc[24150:1545073] (null)</span></span><br><span class="line"><span class="comment">2018-03-19 20:59:14.995866+0800 ReactiveObjc[24150:1545073] 3</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="RACTuple的相关类–RACTupleUnpackingTrampoline"><a href="#RACTuple的相关类–RACTupleUnpackingTrampoline" class="headerlink" title="RACTuple的相关类–RACTupleUnpackingTrampoline"></a><code>RACTuple</code>的相关类–<code>RACTupleUnpackingTrampoline</code></h3><p>关于<code>RACTuple</code>还有2个相关的类，<code>RACTupleUnpackingTrampoline</code>和<code>RACTupleSequence</code></p>
+<p>这里我们先看一下, 该类的属性和方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACTupleUnpackingTrampoline</span> : <span class="title">NSObject</span></span></span><br><span class="line"></span><br><span class="line">+ (<span class="keyword">instancetype</span>)trampoline;</span><br><span class="line">- (<span class="type">void</span>)setObject:(<span class="keyword">nullable</span> RACTuple *)tuple forKeyedSubscript:(<span class="built_in">NSArray</span> *)variables;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>可以看到只有一个单例和一个示例方法, 下面看依稀阿底层的具体实现</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="keyword">instancetype</span>)trampoline &#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">	<span class="keyword">static</span> <span class="type">id</span> trampoline = <span class="literal">nil</span>;</span><br><span class="line">	<span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">		trampoline = [[<span class="keyword">self</span> alloc] init];</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> trampoline;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="type">void</span>)setObject:(RACTuple *)tuple forKeyedSubscript:(<span class="built_in">NSArray</span> *)variables &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(variables != <span class="literal">nil</span>);</span><br><span class="line">	</span><br><span class="line">	[variables enumerateObjectsUsingBlock:^(<span class="built_in">NSValue</span> *value, <span class="built_in">NSUInteger</span> index, <span class="type">BOOL</span> *stop) &#123;</span><br><span class="line">		__<span class="keyword">strong</span> <span class="type">id</span> *ptr = (__<span class="keyword">strong</span> <span class="type">id</span> *)value.pointerValue;</span><br><span class="line">		*ptr = tuple[index];</span><br><span class="line">	&#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该实例方法会遍历传入的<code>NSArray</code>数组, 然后依次取出每一个<code>value</code>的指针, 用这个指针又赋值给了tuple[index], 下面我们就看一下这个方法的具体使用方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">void</span>)setUnpackingTrampoline &#123;</span><br><span class="line">    RACTupleUnpackingTrampoline *line = [RACTupleUnpackingTrampoline trampoline];</span><br><span class="line">    <span class="built_in">NSString</span> *str1;</span><br><span class="line">    <span class="built_in">NSString</span> *str2;</span><br><span class="line">    <span class="built_in">NSString</span> *str3;</span><br><span class="line">    <span class="built_in">NSArray</span> *arr = [<span class="built_in">NSArray</span> arrayWithObjects:[<span class="built_in">NSValue</span> valueWithPointer:&amp;str1], [<span class="built_in">NSValue</span> valueWithPointer:&amp;str2], [<span class="built_in">NSValue</span> valueWithPointer:&amp;str3], <span class="literal">nil</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;处理之前: str1 = %@, str2 = %@, str3 = %@&quot;</span>, str1, str2, str3);</span><br><span class="line">    [line setObject:RACTuplePack(<span class="string">@&quot;tian&quot;</span>, @<span class="number">23</span>, @<span class="number">3.45</span>) forKeyedSubscript:arr];</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;处理之后: str1 = %@, str2 = %@, str3 = %@&quot;</span>, str1, str2, str3);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*输出结果:</span></span><br><span class="line"><span class="comment">     2018-03-20 15:43:28.785571+0800 ReactiveObjc[7074:641560] 处理之前: str1 = (null), str2 = (null), str3 = (null)</span></span><br><span class="line"><span class="comment">     2018-03-20 15:43:28.786078+0800 ReactiveObjc[7074:641560] 处理之后: str1 = tian, str2 = 23, str3 = 3.45</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个方法的作用类似于, 把封装好的<code>RACTuple</code>对象, 一个一个的把它的成员变量解析出来, 说到这里我们就不得不提及两个宏</p>
+<h3 id="RACTuple中的宏"><a href="#RACTuple中的宏" class="headerlink" title="RACTuple中的宏"></a><code>RACTuple</code>中的宏</h3><p>一般使用用两个宏，<code>RACTupleUnpack( )</code> 用来解包，<code>Rc( )</code> 用来装包</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> RACTuplePack(...) \</span></span><br><span class="line"><span class="meta">    RACTuplePack_(__VA_ARGS__)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面RACTuplePack_底层的调用</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RACTuplePack_(...) \</span></span><br><span class="line"><span class="meta">    ([RACTuplePack_class_name(__VA_ARGS__) tupleWithObjectsFromArray:@[ metamacro_foreach(RACTuplePack_object_or_ractuplenil,, __VA_ARGS__) ]])</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面RACTupleUnpack_底层的调用</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RACTupleUnpack_(...) \</span></span><br><span class="line"><span class="meta">    metamacro_foreach(RACTupleUnpack_decl,, __VA_ARGS__) \</span></span><br><span class="line"><span class="meta">    \</span></span><br><span class="line"><span class="meta">    int RACTupleUnpack_state = 0; \</span></span><br><span class="line"><span class="meta">    \</span></span><br><span class="line"><span class="meta">    RACTupleUnpack_after: \</span></span><br><span class="line"><span class="meta">        ; \</span></span><br><span class="line"><span class="meta">        metamacro_foreach(RACTupleUnpack_assign,, __VA_ARGS__) \</span></span><br><span class="line"><span class="meta">        <span class="keyword">if</span> (RACTupleUnpack_state != 0) RACTupleUnpack_state = 2; \</span></span><br><span class="line"><span class="meta">        \</span></span><br><span class="line"><span class="meta">        while (RACTupleUnpack_state != 2) \</span></span><br><span class="line"><span class="meta">            <span class="keyword">if</span> (RACTupleUnpack_state == 1) &#123; \</span></span><br><span class="line"><span class="meta">                goto RACTupleUnpack_after; \</span></span><br><span class="line"><span class="meta">            &#125; <span class="keyword">else</span> \</span></span><br><span class="line"><span class="meta">                for (; RACTupleUnpack_state != 1; RACTupleUnpack_state = 1) \</span></span><br><span class="line"><span class="meta">                    [RACTupleUnpackingTrampoline trampoline][ @[ metamacro_foreach(RACTupleUnpack_value,, __VA_ARGS__) ] ]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里的解包的宏的底层实现就是上面说到的<code>RACTupleUnpackingTrampoline</code>的实例方法</li>
+<li>关于<code>ACTuplePack</code>的使用这里也不在多说了, 下面主要看一下用于解包的宏, 看一下主要用法, 上代码</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//宏的使用</span></span><br><span class="line">RACTuple *tuple4 = RACTuplePack(<span class="string">@&quot;tian&quot;</span>, @<span class="number">23</span>);</span><br><span class="line">RACTupleUnpack(<span class="built_in">NSString</span> *str1, <span class="built_in">NSNumber</span> *num1) = tuple4;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;%@--%d&quot;</span>, str1, num1.intValue);</span><br><span class="line"><span class="comment">///输出: tian--23</span></span><br><span class="line"></span><br><span class="line">RACTuple *tuple3 = [RACTuple tupleWithObjects:<span class="string">@&quot;jun&quot;</span>, @<span class="number">3.4</span>, <span class="literal">nil</span>];</span><br><span class="line">RACTupleUnpack(<span class="built_in">NSString</span> *str2, <span class="built_in">NSNumber</span> *num2) = tuple3;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;%@--%.2f&quot;</span>, str2, num2.floatValue);</span><br><span class="line"><span class="comment">///输出: jun--3.40</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 上面的两种做法等同于下面这种做法</span></span><br><span class="line"><span class="built_in">NSString</span> *str3 = tuple3[<span class="number">0</span>];</span><br><span class="line"><span class="built_in">NSNumber</span> *num3 = tuple3[<span class="number">1</span>];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;%@--%.2f&quot;</span>, str3, num3.floatValue);</span><br><span class="line"><span class="comment">///输出: jun--3.40</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="RACTupleSequence"><a href="#RACTupleSequence" class="headerlink" title="RACTupleSequence"></a><code>RACTupleSequence</code></h3><ul>
+<li>上面提到了<code>RACTuple</code>还有2个相关的类，<code>RACTupleUnpackingTrampoline</code>和<code>RACTupleSequence</code></li>
+<li>而<code>RACTupleUnpackingTrampoline</code>上面我们已经介绍过了</li>
+<li>这里我们来介绍一下<code>RACTupleSequence</code><ul>
+<li>之所以说<code>RACTupleSequence</code>和<code>RACTuple</code>相关, 也只是因为两者的雷鸣里面都有一个<code>Tuple</code></li>
+<li>实际上<code>RACTupleSequence</code>是继承自<code>RACSequence</code>的, 下面看一下定义代码, 只有一个返回值为<code>RACSequence</code>的类方法</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="string">&quot;RACSequence.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">+ (RACSequence *)sequenceWithTupleBackingArray:(<span class="built_in">NSArray</span> *)backingArray offset:(<span class="built_in">NSUInteger</span>)offset;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//方法的实现</span></span><br><span class="line">+ (RACSequence *)sequenceWithTupleBackingArray:(<span class="built_in">NSArray</span> *)backingArray offset:(<span class="built_in">NSUInteger</span>)offset &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(offset &lt;= backingArray.count);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (offset == backingArray.count) <span class="keyword">return</span> <span class="keyword">self</span>.empty;</span><br><span class="line"></span><br><span class="line">	RACTupleSequence *seq = [[<span class="keyword">self</span> alloc] init];</span><br><span class="line">	seq-&gt;_tupleBackingArray = backingArray;</span><br><span class="line">	seq-&gt;_offset = offset;</span><br><span class="line">	<span class="keyword">return</span> seq;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可见:<ul>
+<li><code>RACTupleSequence</code>这个类的目的就是把<code>Tuple</code>转换成<code>Sequence</code></li>
+<li><code>Sequence</code>里面的数组就是<code>Tuple</code>内部的<code>backingArra</code>y。</li>
+<li><code>offset</code>从0开始</li>
+</ul>
+</li>
+</ul>
+<h2 id="RACSequence底层实现"><a href="#RACSequence底层实现" class="headerlink" title="RACSequence底层实现"></a>RACSequence底层实现</h2><p><code>RACSequence</code>是<code>RACStream</code>的子类，主要是<code>ReactiveCocoa</code>里面的集合类, 先来看看关于<code>RACSequence</code>的属性</p>
+<h3 id="RACSequence的属性"><a href="#RACSequence的属性" class="headerlink" title="RACSequence的属性"></a><code>RACSequence</code>的属性</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>, <span class="keyword">readonly</span>, <span class="keyword">nullable</span>) ValueType head;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>, <span class="keyword">readonly</span>, <span class="keyword">nullable</span>) RACSequence&lt;ValueType&gt; *tail;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) <span class="built_in">NSArray</span>&lt;ValueType&gt; *array;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) <span class="built_in">NSEnumerator</span>&lt;ValueType&gt; *objectEnumerator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;ValueType&gt; *eagerSequence;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;ValueType&gt; *lazySequence;</span><br></pre></td></tr></table></figure>
+
+<h4 id="于head和tail"><a href="#于head和tail" class="headerlink" title="于head和tail"></a>于<code>head</code>和<code>tail</code></h4><ul>
+<li><code>RACSequence</code>的所有属性中, 最重要的莫过于<code>head</code>和<code>tail</code>两个属性了, 而<code>tail</code>又是一个<code>RACSequence</code></li>
+<li>这两者就像一个人的头和身体两部分</li>
+<li>测试代码如下</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">RACSequence *sequence = [RACSequence sequenceWithHeadBlock:^<span class="type">id</span> _Nullable&#123;</span><br><span class="line">    <span class="keyword">return</span> @<span class="number">12</span>;</span><br><span class="line">&#125; tailBlock:^RACSequence * _Nonnull&#123;</span><br><span class="line">    <span class="keyword">return</span> @[@<span class="number">23</span>, <span class="string">@&quot;jun&quot;</span>].rac_sequence;</span><br><span class="line">&#125;];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;sequence.head = %@ , sequence.tail =  %@&quot;</span>, sequence.head, sequence.tail);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*输出结果:</span></span><br><span class="line"><span class="comment">sequence.head = 12 , sequence.tail =  &lt;RACArraySequence: 0x6000002325a0&gt;&#123; name = , array = (</span></span><br><span class="line"><span class="comment">    23,</span></span><br><span class="line"><span class="comment">    jun</span></span><br><span class="line"><span class="comment">) &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="objectEnumerator"><a href="#objectEnumerator" class="headerlink" title="objectEnumerator"></a>objectEnumerator</h4><p><code>objectEnumerator</code>是一个快速枚举器, 看一下底层的get方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSEnumerator</span> *)objectEnumerator &#123;</span><br><span class="line">	RACSequenceEnumerator *enumerator = [[RACSequenceEnumerator alloc] init];</span><br><span class="line">	enumerator.sequence = <span class="keyword">self</span>;</span><br><span class="line">	<span class="keyword">return</span> enumerator;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里涉及到一个<code>RACSequenceEnumerator</code>, 底层只有一个属性</li>
+<li>为了更加方便的<code>RACSequence</code>进行遍历, 重写了父类的方法</li>
+<li>有了这个<code>NSEnumerator</code>，就可以从<code>RACSequence</code>的head一直遍历到tail</li>
+<li>而<code>RACSequence</code>里面定义的<code>objectEnumerator</code>，就是为了取出内部的<code>RACSequenceEnumerator</code></li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACSequenceEnumerator</span> : <span class="title">NSEnumerator</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) RACSequence *sequence;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//这里重写了父类的方法</span></span><br><span class="line">- (<span class="type">id</span>)nextObject &#123;</span><br><span class="line">	<span class="type">id</span> object = <span class="literal">nil</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">@synchronized</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">		object = <span class="keyword">self</span>.sequence.head;</span><br><span class="line">		<span class="keyword">self</span>.sequence = <span class="keyword">self</span>.sequence.tail;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> object;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="array"><a href="#array" class="headerlink" title="array"></a><code>array</code></h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">NSArray</span> *)array &#123;</span><br><span class="line">	<span class="built_in">NSMutableArray</span> *array = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">id</span> obj <span class="keyword">in</span> <span class="keyword">self</span>) &#123;</span><br><span class="line">		[array addObject:obj];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> [array <span class="keyword">copy</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>RACSequence</code>的定义里面还有一个<code>array</code>，这个数组就是返回一个<code>NSArray</code></li>
+<li>这个数组里面装满了<code>RACSequence</code>里面所有的对象。</li>
+<li>这里之所以能用<code>for-in</code>，是因为实现了<code>NSFastEnumeration</code>协议。</li>
+<li>至于<code>for-in</code>的效率，完全就看重写<code>NSFastEnumeration</code>协议里面<code>countByEnumeratingWithState: objects: count:</code> 方法里面的执行效率了</li>
+<li>至于剩下的两个属性, 下文中会继续说到</li>
+</ul>
+<h2 id="RACSequence的方法"><a href="#RACSequence的方法" class="headerlink" title="RACSequence的方法"></a>RACSequence的方法</h2><h3 id="RACSequence的初始化方法"><a href="#RACSequence的初始化方法" class="headerlink" title="RACSequence的初始化方法"></a>RACSequence的初始化方法</h3><p><code>RACSequence</code>的初始化方法有且只有一个</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (RACSequence *)sequenceWithHeadBlock:(<span class="type">id</span> (^)(<span class="type">void</span>))headBlock tailBlock:(RACSequence&lt;<span class="type">id</span>&gt; *(^)(<span class="type">void</span>))tailBlock &#123;</span><br><span class="line">	<span class="keyword">return</span> [[RACDynamicSequence sequenceWithHeadBlock:headBlock tailBlock:tailBlock] setNameWithFormat:<span class="string">@&quot;+sequenceWithHeadBlock:tailBlock:&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="RACDynamicSequence属性"><a href="#RACDynamicSequence属性" class="headerlink" title="RACDynamicSequence属性"></a><code>RACDynamicSequence</code>属性</h4><p>上面初始化方法的底层是直接调用了<code>RACDynamicSequence</code>的一个类方法, 而这个类又是<code>RACSequence</code>的子类, 看看主要属性</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACDynamicSequence</span> () </span>&#123;</span><br><span class="line">    <span class="type">id</span> _head;</span><br><span class="line">    RACSequence *_tail;</span><br><span class="line">    <span class="type">id</span> _dependency;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="type">id</span> headBlock;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="type">id</span> tailBlock;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="type">BOOL</span> hasDependency;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="type">id</span> (^dependencyBlock)(<span class="type">void</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>相比大家应该知道, 正常情况下我们定义的<code>block</code>都是用<code>copy</code>修饰的</li>
+<li>而这里, 作者定义了三个<code>block</code>: <code>headBlock</code>, <code>tailBlock</code>，<code>dependencyBlock</code>都是用<code>strong</code>修饰的</li>
+<li>关于这个问题, 可以<a target="_blank" rel="noopener" href="https://github.com/ReactiveCocoa/ReactiveCocoa/issues/505">参考这里</a></li>
+</ul>
+<h4 id="方法的实现"><a href="#方法的实现" class="headerlink" title="方法的实现"></a>方法的实现</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">+ (RACSequence *)sequenceWithHeadBlock:(<span class="type">id</span> (^)(<span class="type">void</span>))headBlock tailBlock:(RACSequence&lt;<span class="type">id</span>&gt; *(^)(<span class="type">void</span>))tailBlock &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(headBlock != <span class="literal">nil</span>);</span><br><span class="line"></span><br><span class="line">	RACDynamicSequence *seq = [[RACDynamicSequence alloc] init];</span><br><span class="line">	seq.headBlock = [headBlock <span class="keyword">copy</span>];</span><br><span class="line">	seq.tailBlock = [tailBlock <span class="keyword">copy</span>];</span><br><span class="line">	seq.hasDependency = <span class="literal">NO</span>;</span><br><span class="line">	<span class="keyword">return</span> seq;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">+ (RACSequence *)sequenceWithLazyDependency:(<span class="type">id</span> (^)(<span class="type">void</span>))dependencyBlock headBlock:(<span class="type">id</span> (^)(<span class="type">id</span> dependency))headBlock tailBlock:(RACSequence *(^)(<span class="type">id</span> dependency))tailBlock &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(dependencyBlock != <span class="literal">nil</span>);</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(headBlock != <span class="literal">nil</span>);</span><br><span class="line"></span><br><span class="line">	RACDynamicSequence *seq = [[RACDynamicSequence alloc] init];</span><br><span class="line">	seq.headBlock = [headBlock <span class="keyword">copy</span>];</span><br><span class="line">	seq.tailBlock = [tailBlock <span class="keyword">copy</span>];</span><br><span class="line">	seq.dependencyBlock = [dependencyBlock <span class="keyword">copy</span>];</span><br><span class="line">	seq.hasDependency = <span class="literal">YES</span>;</span><br><span class="line">	<span class="keyword">return</span> seq;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>hasDependency</code>这个变量是代表是否有<code>dependencyBlock</code>。这个函数里面就只把<code>headBlock</code>和<code>tailBlock</code>保存起来了</li>
+<li>上面第二个方法是带有<code>dependencyBlock</code>的, 也会把<code>dependencyBlock</code>保存起来</li>
+</ul>
+<h2 id="积极运算和惰性求值"><a href="#积极运算和惰性求值" class="headerlink" title="积极运算和惰性求值"></a>积极运算和惰性求值</h2><ul>
+<li>说到惰性求值, 就立马想到了懒加载, 就是在getter里动态返回属性, 也就是等到要用的时候才会计算</li>
+<li>关于这两个概念, 推荐大家看这篇文章<a target="_blank" rel="noopener" href="http://williamzang.com/blog/2016/11/07/liao-yi-liao-ioskai-fa-zhong-de-duo-xing-ji-suan/">聊一聊iOS开发中的惰性计算</a></li>
+</ul>
+<h3 id="积极运算"><a href="#积极运算" class="headerlink" title="积极运算"></a>积极运算</h3><p>在<code>RACSequence</code>中积极运算的代表是<code>RACSequence</code>的一个子类<code>RACArraySequence</code>的子类——<code>RACEagerSequence</code>。它的积极运算表现在其bind函数上</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">- (RACSequence *)bind:(RACSequenceBindBlock (^)(<span class="type">void</span>))block &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(block != <span class="literal">nil</span>);</span><br><span class="line">	RACStreamBindBlock bindBlock = block();</span><br><span class="line">	<span class="built_in">NSArray</span> *currentArray = <span class="keyword">self</span>.array;</span><br><span class="line">	<span class="built_in">NSMutableArray</span> *resultArray = [<span class="built_in">NSMutableArray</span> arrayWithCapacity:currentArray.count];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">id</span> value <span class="keyword">in</span> currentArray) &#123;</span><br><span class="line">		<span class="type">BOOL</span> stop = <span class="literal">NO</span>;</span><br><span class="line">		RACSequence *boundValue = (<span class="type">id</span>)bindBlock(value, &amp;stop);</span><br><span class="line">		<span class="keyword">if</span> (boundValue == <span class="literal">nil</span>) <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">id</span> x <span class="keyword">in</span> boundValue) &#123;</span><br><span class="line">			[resultArray addObject:x];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (stop) <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> [[<span class="keyword">self</span>.class sequenceWithArray:resultArray offset:<span class="number">0</span>] setNameWithFormat:<span class="string">@&quot;[%@] -bind:&quot;</span>, <span class="keyword">self</span>.name];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以看到, 该方法内部执行了两层<code>for-in</code>循环<ul>
+<li>第一层循环遍历的自己<code>RACSequence</code>中的值，然后拿到这个值传入闭包<code>bindBlock()</code>中，返回一个<code>RACSequence</code>，最后用一个<code>NSMutableArray</code>依次把每个<code>RACSequence</code>里面的值都装起来</li>
+<li>第二层循环是在遍历<code>RACSequence</code>，之所以可以用<code>for-in</code>的方式遍历就是因为实现了<code>NSFastEnumeration</code>协议，实现了<code>countByEnumeratingWithState: objects: count: </code>方法</li>
+</ul>
+</li>
+<li>这里就是一个积极运算的例子,在每次循环中都会把闭包<code>block()</code>的值计算出来。值得说明的是，最后返回的<code>RACSequence</code>的类型是<code>self.class</code>类型的，即还是<code>RACEagerSequence</code>类型的</li>
+</ul>
+<h3 id="惰性计算"><a href="#惰性计算" class="headerlink" title="惰性计算"></a>惰性计算</h3><p>等到需要用到的时候才会计算, 我们看一下在<code>RACSequence</code>中，bind函数的实现</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">- (RACSequence *)bind:(RACSequenceBindBlock (^)(<span class="type">void</span>))block &#123;</span><br><span class="line">	RACSequenceBindBlock bindBlock = block();</span><br><span class="line">	<span class="keyword">return</span> [[<span class="keyword">self</span> bind:bindBlock passingThroughValuesFromSequence:<span class="literal">nil</span>] setNameWithFormat:<span class="string">@&quot;[%@] -bind:&quot;</span>, <span class="keyword">self</span>.name];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (RACSequence *)bind:(RACSequenceBindBlock)bindBlock passingThroughValuesFromSequence:(RACSequence *)passthroughSequence &#123;</span><br><span class="line">	__block RACSequence *valuesSeq = <span class="keyword">self</span>;</span><br><span class="line">	__block RACSequence *current = passthroughSequence;</span><br><span class="line">	__block <span class="type">BOOL</span> stop = <span class="literal">NO</span>;</span><br><span class="line"></span><br><span class="line">	RACSequence *sequence = [RACDynamicSequence sequenceWithLazyDependency:^ <span class="type">id</span> &#123;</span><br><span class="line">		<span class="keyword">while</span> (current.head == <span class="literal">nil</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (stop) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line"></span><br><span class="line">			<span class="type">id</span> value = valuesSeq.head;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (value == <span class="literal">nil</span>) &#123;</span><br><span class="line">				stop = <span class="literal">YES</span>;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			current = (<span class="type">id</span>)bindBlock(value, &amp;stop);</span><br><span class="line">			<span class="keyword">if</span> (current == <span class="literal">nil</span>) &#123;</span><br><span class="line">				stop = <span class="literal">YES</span>;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			valuesSeq = valuesSeq.tail;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">NSCAssert</span>([current isKindOfClass:RACSequence.class], <span class="string">@&quot;-bind: block returned an object that is not a sequence: %@&quot;</span>, current);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">	&#125; headBlock:^(<span class="type">id</span> _) &#123;</span><br><span class="line">		<span class="keyword">return</span> current.head;</span><br><span class="line">	&#125; tailBlock:^ <span class="type">id</span> (<span class="type">id</span> _) &#123;</span><br><span class="line">		<span class="keyword">if</span> (stop) <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> [valuesSeq bind:bindBlock passingThroughValuesFromSequence:current.tail];</span><br><span class="line">	&#125;];</span><br><span class="line"></span><br><span class="line">	sequence.name = <span class="keyword">self</span>.name;</span><br><span class="line">	<span class="keyword">return</span> sequence;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在上述方法实现中, 就是用<code>sequenceWithLazyDependency: headBlock: tailBlock:</code>方法生成了一个<code>RACSequence</code>，并返回</li>
+<li>通过调用<code>RACSequence</code>里面的bind操作，并没有执行3个闭包里面的值，只是保存起来了。</li>
+<li>这里就是惰性求值的表现——等到要用的时候才会计算</li>
+<li>下面我们看一段代码示例</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">    <span class="built_in">NSArray</span> *arr = @[@<span class="number">1</span>, @<span class="number">3</span>, @<span class="number">4</span>];</span><br><span class="line">    RACSequence *sequence1 = [arr.rac_sequence map:^<span class="type">id</span> _Nullable(<span class="type">id</span>  _Nullable value) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;sequence&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> @<span class="number">10</span>;</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    RACSequence *lazySequence = [arr.rac_sequence.lazySequence map:^<span class="type">id</span> _Nullable(<span class="type">id</span>  _Nullable value) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;lazySequence&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> @<span class="number">20</span>;</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    RACSequence *eagerSequence = [arr.rac_sequence.eagerSequence map:^<span class="type">id</span> _Nullable(<span class="type">id</span>  _Nullable value) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@&quot;eagerSequence&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> @<span class="number">30</span>;</span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line"><span class="comment">//    [sequence1 array];</span></span><br><span class="line"><span class="comment">//    [lazySequence array];</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*输出:</span></span><br><span class="line"><span class="comment">    2018-03-21 15:53:24.562184+0800 ReactiveObjc[9109:771797] eagerSequence</span></span><br><span class="line"><span class="comment">    2018-03-21 15:53:24.562674+0800 ReactiveObjc[9109:771797] eagerSequence</span></span><br><span class="line"><span class="comment">    2018-03-21 15:53:24.562799+0800 ReactiveObjc[9109:771797] eagerSequence</span></span><br><span class="line"><span class="comment">    */</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>从打印结果可以看出,只有<code>eagerSequence</code>执行了三次, 而其他两个并没有输出</li>
+<li>原因是因为bind闭包只在<code>eagerSequence</code>中真正被调用执行了，而在<code>lazySequence</code>中bind闭包仅仅只是被copy了</li>
+<li>当吧最后两行注释打开之后</li>
+<li>可见在<code>RACSequence</code>中，除去<code>RACEagerSequence</code>是积极运算，其他的<code>Sequence</code>都是惰性求值的。</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2018</span><span class="number">-03</span><span class="number">-21</span> <span class="number">15</span>:<span class="number">53</span>:<span class="number">24.562184</span>+<span class="number">0800</span> ReactiveObjc[<span class="number">9109</span>:<span class="number">771797</span>] eagerSequence</span><br><span class="line"><span class="number">2018</span><span class="number">-03</span><span class="number">-21</span> <span class="number">15</span>:<span class="number">53</span>:<span class="number">24.562674</span>+<span class="number">0800</span> ReactiveObjc[<span class="number">9109</span>:<span class="number">771797</span>] eagerSequence</span><br><span class="line"><span class="number">2018</span><span class="number">-03</span><span class="number">-21</span> <span class="number">15</span>:<span class="number">53</span>:<span class="number">24.562799</span>+<span class="number">0800</span> ReactiveObjc[<span class="number">9109</span>:<span class="number">771797</span>] eagerSequence</span><br><span class="line"><span class="number">2018</span><span class="number">-03</span><span class="number">-21</span> <span class="number">15</span>:<span class="number">53</span>:<span class="number">24.562940</span>+<span class="number">0800</span> ReactiveObjc[<span class="number">9109</span>:<span class="number">771797</span>] sequence</span><br><span class="line"><span class="number">2018</span><span class="number">-03</span><span class="number">-21</span> <span class="number">15</span>:<span class="number">53</span>:<span class="number">24.563403</span>+<span class="number">0800</span> ReactiveObjc[<span class="number">9109</span>:<span class="number">771797</span>] sequence</span><br><span class="line"><span class="number">2018</span><span class="number">-03</span><span class="number">-21</span> <span class="number">15</span>:<span class="number">53</span>:<span class="number">24.563583</span>+<span class="number">0800</span> ReactiveObjc[<span class="number">9109</span>:<span class="number">771797</span>] sequence</span><br><span class="line"><span class="number">2018</span><span class="number">-03</span><span class="number">-21</span> <span class="number">15</span>:<span class="number">53</span>:<span class="number">24.563742</span>+<span class="number">0800</span> ReactiveObjc[<span class="number">9109</span>:<span class="number">771797</span>] lazySequence</span><br><span class="line"><span class="number">2018</span><span class="number">-03</span><span class="number">-21</span> <span class="number">15</span>:<span class="number">53</span>:<span class="number">24.563838</span>+<span class="number">0800</span> ReactiveObjc[<span class="number">9109</span>:<span class="number">771797</span>] lazySequence</span><br><span class="line"><span class="number">2018</span><span class="number">-03</span><span class="number">-21</span> <span class="number">15</span>:<span class="number">53</span>:<span class="number">24.563937</span>+<span class="number">0800</span> ReactiveObjc[<span class="number">9109</span>:<span class="number">771797</span>] lazySequence</span><br></pre></td></tr></table></figure>
+
+<h2 id="RACSequence的方法-1"><a href="#RACSequence的方法-1" class="headerlink" title="RACSequence的方法"></a>RACSequence的方法</h2><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">id</span>)foldLeftWithStart:(<span class="keyword">nullable</span> <span class="type">id</span>)start reduce:(<span class="type">id</span> _Nullable (^)(<span class="type">id</span> _Nullable accumulator, ValueType _Nullable value))reduce;</span><br><span class="line"></span><br><span class="line">- (<span class="type">id</span>)foldRightWithStart:(<span class="keyword">nullable</span> <span class="type">id</span>)start reduce:(<span class="type">id</span> _Nullable (^)(<span class="type">id</span> _Nullable first, RACSequence *rest))reduce;</span><br><span class="line"></span><br><span class="line">- (<span class="type">BOOL</span>)any:(<span class="type">BOOL</span> (^)(ValueType _Nullable value))block;</span><br><span class="line"></span><br><span class="line">- (<span class="type">BOOL</span>)all:(<span class="type">BOOL</span> (^)(ValueType _Nullable value))block;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">nullable</span> ValueType)objectPassingTest:(<span class="type">BOOL</span> (^)(ValueType _Nullable value))block;</span><br></pre></td></tr></table></figure>
+
+<h3 id="折叠函数"><a href="#折叠函数" class="headerlink" title="折叠函数"></a>折叠函数</h3><p>我们先看一下他的底层实现, 函数传入了一个初始值start，然后依次循环执行reduce( )，循环之后，最终的值作为返回值返回。第一个函数就是折叠函数，从左边折叠到右边; 第二个方向是从右往左</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">id</span>)foldLeftWithStart:(<span class="type">id</span>)start reduce:(<span class="type">id</span> (^)(<span class="type">id</span>, <span class="type">id</span>))reduce &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(reduce != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">self</span>.head == <span class="literal">nil</span>) <span class="keyword">return</span> start;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">id</span> value <span class="keyword">in</span> <span class="keyword">self</span>) &#123;</span><br><span class="line">		start = reduce(start, value);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> start;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="type">id</span>)foldRightWithStart:(<span class="type">id</span>)start reduce:(<span class="type">id</span> (^)(<span class="type">id</span>, RACSequence *))reduce &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(reduce != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">self</span>.head == <span class="literal">nil</span>) <span class="keyword">return</span> start;</span><br><span class="line">	</span><br><span class="line">	RACSequence *rest = [RACSequence sequenceWithHeadBlock:^&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">self</span>.tail) &#123;</span><br><span class="line">			<span class="keyword">return</span> [<span class="keyword">self</span>.tail foldRightWithStart:start reduce:reduce];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> start;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; tailBlock:<span class="literal">nil</span>];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> reduce(<span class="keyword">self</span>.head, rest);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>具体使用方法测试代码</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">void</span>)setSequenceAction &#123;</span><br><span class="line">    <span class="built_in">NSArray</span> *array = @[@<span class="number">5</span>, @<span class="number">3</span>, @<span class="number">9</span>, @<span class="number">4</span>];</span><br><span class="line">    RACSequence *sequence = [array rac_sequence];</span><br><span class="line">    <span class="type">id</span> leftData = [sequence foldLeftWithStart:<span class="string">@&quot;-&quot;</span> reduce:^<span class="type">id</span> _Nullable(<span class="type">id</span>  _Nullable accumulator, <span class="type">id</span>  _Nullable value) &#123;</span><br><span class="line">        <span class="keyword">return</span> [accumulator stringByAppendingString:[value stringValue]];</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    <span class="type">id</span> rightData = [sequence foldRightWithStart:<span class="string">@&quot;:&quot;</span> reduce:^<span class="type">id</span> _Nullable(<span class="type">id</span>  _Nullable first, RACSequence * _Nonnull rest) &#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@&quot;%@-%@&quot;</span>, rest.head, first];</span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;leftData = %@, rightData = %@&quot;</span>, leftData, rightData);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//输出: leftData = -5394, rightData = :-4-9-3-5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="objectPassingTest"><a href="#objectPassingTest" class="headerlink" title="objectPassingTest"></a><code>objectPassingTest</code></h3><p>函数里面会调用<code>RACStream</code>中的<code>filter:</code>函数, 如果<code>block(value)</code>为YES，就代表通过了Test，那么就会返回value的<code>sequence</code>, 取出head返回</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">id</span>)objectPassingTest:(<span class="type">BOOL</span> (^)(<span class="type">id</span>))block &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(block != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> [<span class="keyword">self</span> filter:block].head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码如下</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *array = @[@<span class="number">5</span>, @<span class="number">3</span>, @<span class="number">9</span>, @<span class="number">4</span>];</span><br><span class="line">RACSequence *sequence = [array rac_sequence];</span><br><span class="line"><span class="type">id</span> anyData = [sequence objectPassingTest:^<span class="type">BOOL</span>(<span class="type">id</span>  _Nullable value) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, value);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;%@&quot;</span>, anyData);</span><br><span class="line"></span><br><span class="line"><span class="comment">//输出: 5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="any-和-all"><a href="#any-和-all" class="headerlink" title="any: 和 all:"></a>any: 和 all:</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="type">BOOL</span>)any:(<span class="type">BOOL</span> (^)(<span class="type">id</span>))block &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(block != <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> [<span class="keyword">self</span> objectPassingTest:block] != <span class="literal">nil</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="type">BOOL</span>)all:(<span class="type">BOOL</span> (^)(<span class="type">id</span>))block &#123;</span><br><span class="line">	<span class="built_in">NSCParameterAssert</span>(block != <span class="literal">NULL</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">NSNumber</span> *result = [<span class="keyword">self</span> foldLeftWithStart:@YES reduce:^(<span class="built_in">NSNumber</span> *accumulator, <span class="type">id</span> value) &#123;</span><br><span class="line">		<span class="keyword">return</span> @(accumulator.boolValue &amp;&amp; block(value));</span><br><span class="line">	&#125;];</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> result.boolValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>any:</code> 会调用<code>objectPassingTest:</code>函数，如果不为nil就代表有value值通过了Test，有通过了value的就返回YES，反之返回NO</li>
+<li>all:会从左往右依次对每个值进行block( ) Test，然后每个值依次进行&amp;&amp;操作</li>
+<li>测试代码如下:</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSArray</span> *array = @[@<span class="number">5</span>, @<span class="number">3</span>, @<span class="number">9</span>, @<span class="number">4</span>];</span><br><span class="line">RACSequence *sequence = [array rac_sequence];</span><br><span class="line"></span><br><span class="line"><span class="comment">//all</span></span><br><span class="line"><span class="type">BOOL</span> anyBool = [sequence any:^<span class="type">BOOL</span>(<span class="type">id</span>  _Nullable value) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;];</span><br><span class="line"><span class="type">BOOL</span> allBool = [sequence all:^<span class="type">BOOL</span>(<span class="type">id</span>  _Nullable value) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@&quot;any = %d, all = %d&quot;</span>, anyBool, allBool);</span><br><span class="line"><span class="comment">//输出: any = 1, all = 1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="RACSequence的子类和扩展"><a href="#RACSequence的子类和扩展" class="headerlink" title="RACSequence的子类和扩展"></a>RACSequence的子类和扩展</h2><h3 id="子类"><a href="#子类" class="headerlink" title="子类"></a>子类</h3><ul>
+<li>关于<code>RACSequence</code>有以下9个子类</li>
+<li>其中<code>RACEagerSequence</code>是继承自<code>RACArraySequence</code>。</li>
+<li>这些子类看名字就知道<code>sequence</code>里面装的是什么类型的数据。</li>
+<li><code>RACUnarySequence</code>里面装的是单元<code>sequence</code>, 它只有head值，没有tail值</li>
+</ul>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-4ca3c41197e0fcca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="RACStream.png"></p>
+<p>下面列出了每一个子类里面的方法, 前面都已经介绍过这些方法, 这里也就不在赘述</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//RACArraySequence</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACArraySequence</span> : <span class="title">RACSequence</span></span></span><br><span class="line"></span><br><span class="line">+ (RACSequence *)sequenceWithArray:(<span class="built_in">NSArray</span> *)array offset:(<span class="built_in">NSUInteger</span>)offset;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//RACDynamicSequence</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACDynamicSequence</span> : <span class="title">RACSequence</span></span></span><br><span class="line"></span><br><span class="line">+ (RACSequence *)sequenceWithLazyDependency:(<span class="type">id</span> (^)(<span class="type">void</span>))dependencyBlock headBlock:(<span class="type">id</span> (^)(<span class="type">id</span> dependency))headBlock tailBlock:(RACSequence *(^)(<span class="type">id</span> dependency))tailBlock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//RACEmptySequence</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACEmptySequence</span> : <span class="title">RACSequence</span></span></span><br><span class="line"><span class="comment">//单例</span></span><br><span class="line">+ (RACEmptySequence *)empty;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//RACIndexSetSequence</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACIndexSetSequence</span> : <span class="title">RACSequence</span></span></span><br><span class="line"></span><br><span class="line">+ (RACSequence *)sequenceWithIndexSet:(<span class="built_in">NSIndexSet</span> *)indexSet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//RACSignalSequence</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACSignalSequence</span> : <span class="title">RACSequence</span></span></span><br><span class="line"></span><br><span class="line">+ (RACSequence *)sequenceWithSignal:(RACSignal *)signal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//RACStringSequence</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACStringSequence</span> : <span class="title">RACSequence</span></span></span><br><span class="line"></span><br><span class="line">+ (RACSequence *)sequenceWithString:(<span class="built_in">NSString</span> *)string offset:(<span class="built_in">NSUInteger</span>)offset;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//RACTupleSequence</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACTupleSequence</span> : <span class="title">RACSequence</span></span></span><br><span class="line"></span><br><span class="line">+ (RACSequence *)sequenceWithTupleBackingArray:(<span class="built_in">NSArray</span> *)backingArray offset:(<span class="built_in">NSUInteger</span>)offset;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//RACUnarySequence</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">RACUnarySequence</span> : <span class="title">RACSequence</span></span></span><br><span class="line"></span><br><span class="line">+ (RACUnarySequence *)<span class="keyword">return</span>:(<span class="type">id</span>)value;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p><code>RACSequenceAdditions</code> 总共有7个<code>Category</code>。这7个<code>Category</code>分别对iOS 里面的集合类进行了<code>RACSequence</code>的扩展，使我们能更加方便的使用<code>RACSequence</code></p>
+<p><img data-src="https://upload-images.jianshu.io/upload_images/4122543-aa6185bb24ec0073.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="RACSequenceAdditions.png"></p>
+<h4 id="NSArray-RACSequenceAdditions"><a href="#NSArray-RACSequenceAdditions" class="headerlink" title="NSArray+RACSequenceAdditions"></a><code>NSArray+RACSequenceAdditions</code></h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSArray</span>&lt;<span class="title">__covariant</span> <span class="title">ObjectType</span>&gt; (<span class="title">RACSequenceAdditions</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;ObjectType&gt; *rac_sequence;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>把任意一个<code>NSArray</code>数组转换成<code>RACSequence</code>, 底层是<code>RACArraySequence</code>调用 <code>sequenceWithArray</code>方法, 将<code>NSArray</code>对象转成<code>RACArraySequence</code>对象</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (RACSequence *)rac_sequence &#123;</span><br><span class="line">	<span class="keyword">return</span> [RACArraySequence sequenceWithArray:<span class="keyword">self</span> offset:<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="NSDictionary-RACSequenceAdditions"><a href="#NSDictionary-RACSequenceAdditions" class="headerlink" title="NSDictionary+RACSequenceAdditions"></a><code>NSDictionary+RACSequenceAdditions</code></h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSDictionary</span>&lt;<span class="title">__covariant</span> <span class="title">KeyType</span>, <span class="title">__covariant</span> <span class="title">ObjectType</span>&gt; (<span class="title">RACSequenceAdditions</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;RACTwoTuple&lt;KeyType, ObjectType&gt; *&gt; *rac_sequence;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;KeyType&gt; *rac_keySequence;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;ObjectType&gt; *rac_valueSequence;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+
+<p>把任意一个<code>NSDictionary</code>字典转换成<code>RACSequence</code></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">- (RACSequence *)rac_sequence &#123;</span><br><span class="line">	<span class="built_in">NSDictionary</span> *immutableDict = [<span class="keyword">self</span> <span class="keyword">copy</span>];</span><br><span class="line"></span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> First class support for dictionary sequences.</span></span><br><span class="line">	<span class="keyword">return</span> [immutableDict.allKeys.rac_sequence map:^(<span class="type">id</span> key) &#123;</span><br><span class="line">		<span class="type">id</span> value = immutableDict[key];</span><br><span class="line">		<span class="keyword">return</span> RACTuplePack(key, value);</span><br><span class="line">	&#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (RACSequence *)rac_keySequence &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">self</span>.allKeys.rac_sequence;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (RACSequence *)rac_valueSequence &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">self</span>.allValues.rac_sequence;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>rac_sequence</code>: 通过map映射<ul>
+<li>先将每一个键值对转成<code>RACTuple</code>元组对象, key对应元组的第一个, value对应第二个</li>
+<li>将每一个<code>RACTuple</code>元组放在一个数组里面</li>
+<li>最后把数组转成<code>RACSequence</code>对象</li>
+</ul>
+</li>
+<li><code>rac_keySequence</code>: 把所有的key值转成<code>RACSequence</code>对象</li>
+<li><code>rac_valueSequence</code>: 把所有的value值转成<code>RACSequence</code>对象</li>
+</ul>
+<h4 id="NSSet-RACSequenceAdditions"><a href="#NSSet-RACSequenceAdditions" class="headerlink" title="NSSet+RACSequenceAdditions"></a><code>NSSet+RACSequenceAdditions</code></h4><p>把任意一个<code>NSSet</code>对象转换成<code>RACSequence</code>对象</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSSet</span>&lt;<span class="title">__covariant</span> <span class="title">ObjectType</span>&gt; (<span class="title">RACSequenceAdditions</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;ObjectType&gt; *rac_sequence;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//属性的getter方法</span></span><br><span class="line">- (RACSequence *)rac_sequence &#123;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> First class support for set sequences.</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">self</span>.allObjects.rac_sequence;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="NSString-RACSequenceAdditions"><a href="#NSString-RACSequenceAdditions" class="headerlink" title="NSString+RACSequenceAdditions"></a><code>NSString+RACSequenceAdditions</code></h4><p>把任意一个<code>NSString</code>转换成包含该字符串, 所有字符的数组对应的<code>RACSequence</code></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSString</span> (<span class="title">RACSequenceAdditions</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;<span class="built_in">NSString</span> *&gt; *rac_sequence;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//属性的getter方法</span></span><br><span class="line">- (RACSequence *)rac_sequence &#123;</span><br><span class="line">	<span class="keyword">return</span> [RACStringSequence sequenceWithString:<span class="keyword">self</span> offset:<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="NSEnumerator-RACSequenceAdditions"><a href="#NSEnumerator-RACSequenceAdditions" class="headerlink" title="NSEnumerator+RACSequenceAdditions"></a><code>NSEnumerator+RACSequenceAdditions</code></h4><ul>
+<li>把任意一个<code>NSEnumerator</code>转换成<code>RACSequence</code><ul>
+<li>返回的<code>RACSequence</code>的head是当前的<code>sequence</code>的head</li>
+<li>返回的<code>RACSequence</code>的tail是当前的<code>sequence</code>本身</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSEnumerator</span>&lt;<span class="title">ObjectType</span>&gt; (<span class="title">RACSequenceAdditions</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;ObjectType&gt; *rac_sequence;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//底层实现</span></span><br><span class="line">- (RACSequence *)rac_sequence &#123;</span><br><span class="line">	<span class="keyword">return</span> [RACSequence sequenceWithHeadBlock:^&#123;</span><br><span class="line">		<span class="keyword">return</span> [<span class="keyword">self</span> nextObject];</span><br><span class="line">	&#125; tailBlock:^&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">self</span>.rac_sequence;</span><br><span class="line">	&#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="NSIndexSet-RACSequenceAdditions"><a href="#NSIndexSet-RACSequenceAdditions" class="headerlink" title="NSIndexSet+RACSequenceAdditions"></a><code>NSIndexSet+RACSequenceAdditions</code></h4><p>把任意一个<code>NSIndexSet</code>转换成<code>RACSequence</code></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSIndexSet</span> (<span class="title">RACSequenceAdditions</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;<span class="built_in">NSNumber</span> *&gt; *rac_sequence;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//底层实现</span></span><br><span class="line">- (RACSequence *)rac_sequence &#123;</span><br><span class="line">	<span class="keyword">return</span> [RACIndexSetSequence sequenceWithIndexSet:<span class="keyword">self</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="NSOrderedSet-RACSequenceAdditions"><a href="#NSOrderedSet-RACSequenceAdditions" class="headerlink" title="NSOrderedSet+RACSequenceAdditions"></a><code>NSOrderedSet+RACSequenceAdditions</code></h4><p>把任意一个<code>NSOrderedSet</code>中的数组转换成<code>RACSequence</code>对象</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSOrderedSet</span>&lt;<span class="title">__covariant</span> <span class="title">ObjectType</span>&gt; (<span class="title">RACSequenceAdditions</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>, <span class="keyword">readonly</span>) RACSequence&lt;ObjectType&gt; *rac_sequence;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//底层实现</span></span><br><span class="line">- (RACSequence *)rac_sequence &#123;</span><br><span class="line">	<span class="comment">// <span class="doctag">TODO:</span> First class support for ordered set sequences.</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">self</span>.array.rac_sequence;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>这篇文章篇幅比较长, 都是对源码的解, 文中如有不足之处还望多多指教</li>
+<li>下一篇将会着重介绍一下RAC中的一些高级用法, 敬请期待..</li>
+<li>参考文章:<ul>
+<li><a target="_blank" rel="noopener" href="http://cocoadocs.org/docsets/ReactiveCocoa/2.1/Classes/RACSequence.html">http://cocoadocs.org/docsets/ReactiveCocoa/2.1/Classes/RACSequence.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://williamzang.com/blog/2016/11/07/liao-yi-liao-ioskai-fa-zhong-de-duo-xing-ji-suan/">http://williamzang.com/blog/2016/11/07/liao-yi-liao-ioskai-fa-zhong-de-duo-xing-ji-suan/</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/qq_30513483/article/details/53924990">http://blog.csdn.net/qq_30513483/article/details/53924990</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/1a5a7051.html" title="ReactiveCocoa之集合使用详解02">https://titanjun.top/post/1a5a7051.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/reactivecocoa/" rel="tag"> <i class="fa fa-tag"></i> ReactiveCocoa</a>
+              <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag"> <i class="fa fa-tag"></i> 函数式</a>
+              <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag"> <i class="fa fa-tag"></i> 响应式</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/e1fe9ce0.html" rel="prev" title="ReactiveCocoa 的一些高级用法">
+                  <i class="fa fa-chevron-left"></i> ReactiveCocoa 的一些高级用法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/eac9a3e3.html" rel="next" title="ReactiveCocoa使用详解01">
+                  ReactiveCocoa使用详解01 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/1a5a7051.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

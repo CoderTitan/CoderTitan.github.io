@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Swift 5.0新特性更新">
+<meta property="og:url" content="https://titanjun.top/post/fecd5afa.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun">
+<meta property="article:published_time" content="2019-01-28T07:20:40.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.899Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Swift">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun">
+
+
+<link rel="canonical" href="https://titanjun.top/post/fecd5afa.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/fecd5afa.html","path":"post/fecd5afa.html","title":"Swift 5.0新特性更新"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Swift 5.0新特性更新 | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dynamicCallable"><span class="nav-number">1.1.</span> <span class="nav-text">dynamicCallable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WritableKeyPath"><span class="nav-number">1.2.</span> <span class="nav-text">WritableKeyPath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%80%89%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">可选参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Raw-Strings"><span class="nav-number">1.4.</span> <span class="nav-text">Raw Strings</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86"><span class="nav-number">1.4.1.</span> <span class="nav-text">\处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">#处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86-2"><span class="nav-number">1.4.3.</span> <span class="nav-text">##处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.4.4.</span> <span class="nav-text">多行字符串</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#try-%E5%B5%8C%E5%A5%97"><span class="nav-number">1.5.</span> <span class="nav-text">try?嵌套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isMultiple"><span class="nav-number">1.6.</span> <span class="nav-text">isMultiple</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count"><span class="nav-number">1.7.</span> <span class="nav-text">count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compactMapValues"><span class="nav-number">1.8.</span> <span class="nav-text">compactMapValues</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SubSequence"><span class="nav-number">1.9.</span> <span class="nav-text">SubSequence</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E6%9B%B4%E6%96%B0"><span class="nav-number">2.</span> <span class="nav-text">其他相关更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SE-0214"><span class="nav-number">2.1.</span> <span class="nav-text">SE-0214</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SE-0238"><span class="nav-number">2.2.</span> <span class="nav-text">SE-0238</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SE-0236"><span class="nav-number">2.3.</span> <span class="nav-text">SE- 0236</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR-695"><span class="nav-number">2.4.</span> <span class="nav-text">SR-695</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR-631"><span class="nav-number">2.5.</span> <span class="nav-text">SR-631</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR-7251"><span class="nav-number">2.6.</span> <span class="nav-text">SR-7251</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">2.7.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/fecd5afa.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Swift 5.0新特性更新 | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Swift 5.0新特性更新
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-01-28 15:20:40" itemprop="dateCreated datePublished" datetime="2019-01-28T15:20:40+08:00">2019-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/swift/" itemprop="url" rel="index"><span itemprop="name">Swift</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/ios/swift.jpg?x-oss-process=style/titanjun" alt="Swift"></p>
+<span id="more"></span>
+
+
+<ul>
+<li>期待已久的<code>Swift 5.0</code>终于来啦, <code>Swift 5.0</code>是<code>Swift</code>中最备受关注的一个版本, 传说中<code>ABI</code>稳定的版本</li>
+<li>随着<code>Xcode Bate 10.2</code>的发布, <code>Swift 5.0</code>也发布了测试版, 相信也带来了很多优化和改进</li>
+<li>下面运行环境都是在<code>Xcode Bate 10.2</code>环境中进行的</li>
+</ul>
+<h2 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h2><h3 id="dynamicCallable"><a href="#dynamicCallable" class="headerlink" title="dynamicCallable"></a>dynamicCallable</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/apple/swift-evolution/blob/master/proposals/0216-dynamic-callable.md">SE-0216</a></li>
+<li><code>@dynamicCallable</code>为<code>Swift</code>添加了一个新属性, 允许使用一个简单的语法糖调用函数一样调用命名类型</li>
+<li>如果需要添加<code>@dynamicCallable</code>属性, 就必须要实现以下方法中的一个或者两个</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> <span class="title function_">dynamicallyCall</span>(<span class="params">withArguments</span> <span class="params">args</span>: [<span class="type">Int</span>]) -&gt; <span class="type">Double</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">dynamicallyCall</span>(<span class="params">withKeywordArguments</span> <span class="params">args</span>: <span class="type">KeyValuePairs</span>&lt;<span class="type">String</span>, <span class="type">Int</span>&gt;) -&gt; <span class="type">Double</span></span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><p>注意点</p></div>
+
+<ul>
+<li>除了接受各种输入外，您还可以为各种输出提供多个重载, 自定义返回值, 可以是<code>String</code>, <code>Int</code>等等……</li>
+<li><code>KeyValuePairs</code>的使用和介绍, 没有使用过的<a target="_blank" rel="noopener" href="https://www.titanjun.top/2018/06/06/Swift%204.2%20%E6%96%B0%E7%89%B9%E6%80%A7%E6%9B%B4%E6%96%B0/#KeyValuePairs">可参考</a></li>
+</ul>
+<p>下面看一个例子, <code>RandomNumberGenerator</code>生成一个随机数</p>
+<div class="note info"><p>`Swift 5.0`之前的定义和调用方式</p></div>
+
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义方式</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">RandomNumberGenerator</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">generate</span>(<span class="params">numberOfZeroes</span>: <span class="type">Int</span>) -&gt; <span class="type">Double</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> maximum <span class="operator">=</span> pow(<span class="number">10</span>, <span class="type">Double</span>(numberOfZeroes))</span><br><span class="line">        <span class="keyword">return</span> <span class="type">Double</span>.random(in: <span class="number">0</span><span class="operator">...</span>maximum)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用方式</span></span><br><span class="line"><span class="keyword">let</span> random <span class="operator">=</span> <span class="type">RandomNumberGenerator</span>()</span><br><span class="line"><span class="keyword">let</span> num <span class="operator">=</span> random.generate(numberOfZeroes: <span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(num)</span><br></pre></td></tr></table></figure>
+
+<div class="note info"><p>在`Swift 5.0`使用`@dynamicCallable`属性</p></div>
+
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义方式</span></span><br><span class="line"><span class="keyword">@dynamicCallable</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">RandomNumberGenerator</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">dynamicallyCall</span>(<span class="params">withArguments</span> <span class="params">args</span>: [<span class="type">Int</span>]) -&gt; <span class="type">Double</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> numberOfZeroes <span class="operator">=</span> <span class="type">Double</span>(args.first <span class="operator">??</span> <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">let</span> maximum <span class="operator">=</span> pow(<span class="number">10</span>, numberOfZeroes)</span><br><span class="line">        <span class="keyword">return</span> <span class="type">Double</span>.random(in: <span class="number">0</span><span class="operator">...</span>maximum)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用方式</span></span><br><span class="line"><span class="keyword">let</span> random <span class="operator">=</span> <span class="type">RandomNumberGenerator</span>()</span><br><span class="line"><span class="keyword">let</span> num <span class="operator">=</span> random(<span class="number">2</span>)</span><br><span class="line"><span class="comment">// random(2)等同于random.dynamicallyCall(withArguments: [2])</span></span><br><span class="line"><span class="built_in">print</span>(num)</span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><p>`@dynamicCallable`使用注意事项</p></div>
+
+<ul>
+<li>可以将它应用于结构，枚举，类和协议。</li>
+<li>如果你实现<code>withKeywordArguments:</code>并且没有实现<code>withArguments:</code>，你仍然可以在没有参数标签的情况下调用</li>
+<li>如果你的实现<code>withKeywordArguments:</code>或<code>withArguments:</code>时标记为<code>throw</code>，则调用该类型也将被抛出<code>throw</code></li>
+<li>扩展名无法添加<code>@dynamicCallable</code>，只能添加到主要类型上</li>
+<li>仍然可以为你定义的类型添加其他方法和属性，并且能够正常使用</li>
+</ul>
+<h3 id="WritableKeyPath"><a href="#WritableKeyPath" class="headerlink" title="WritableKeyPath"></a><a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/swift/writablekeypath?language=objc">WritableKeyPath</a></h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/apple/swift-evolution/blob/master/proposals/0227-identity-keypath.md">SE-0227</a></li>
+<li>添加引用标识键路径的功能，该路径指的是应用它的整个输入值</li>
+<li><code>Swift</code>中的每个值都有一个特殊的伪属性.self，它指的是整个值</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let id = \Int.self  </span><br><span class="line">var x = 1</span><br><span class="line">print(id)   ////Swift.WritableKeyPath&lt;Swift.Int, Swift.Int&gt;</span><br><span class="line">x.self = 2</span><br><span class="line">print(x)   //2</span><br><span class="line">print(x.self)  //2</span><br><span class="line"></span><br><span class="line">print(x[keyPath: id])  //2</span><br><span class="line">x[keyPath: id] = 3</span><br><span class="line">print(x[keyPath: id])  //3</span><br></pre></td></tr></table></figure>
+
+<h3 id="可选参数"><a href="#可选参数" class="headerlink" title="可选参数"></a>可选参数</h3><p>在<code>Swift 5</code>之前，可以编写一个带有可变参数的枚举, 但是在<code>Swift 5</code>开始, 调用时会报错, 如下</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">X</span> &#123;</span><br><span class="line">    <span class="comment">// 此处定义切没有调用时不会报错</span></span><br><span class="line">    <span class="keyword">case</span> foo(bar: <span class="type">Int</span>...) </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">baz</span>() -&gt; <span class="type">X</span> &#123;</span><br><span class="line">    <span class="comment">// 此处调用时会报错</span></span><br><span class="line">    <span class="keyword">return</span> .foo(bar: <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>在<code>Swift 5</code>之后, 上述定义改成数组参数, 而不是可变参数, 如下</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">X</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> foo(bar: [<span class="type">Int</span>]) </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">func</span> <span class="title function_">baz</span>() -&gt; <span class="type">X</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> .foo(bar: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Raw-Strings"><a href="#Raw-Strings" class="headerlink" title="Raw Strings"></a>Raw Strings</h3><h4 id="处理"><a href="#处理" class="headerlink" title="\处理"></a><code>\</code>处理</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/apple/swift-evolution/blob/master/proposals/0200-raw-string-escaping.md">SE-0200</a>增加了创建原始字符串的功能，其中反斜杠和引号被解释为文字符号，而不是转义字符或字符串终止符</li>
+<li>单行字符串文字可以用反斜杠填充, 以保证原字符串, 否则会报错</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文字引用类型</span></span><br><span class="line"><span class="comment">// 错误写法</span></span><br><span class="line"><span class="keyword">let</span> quote <span class="operator">=</span> <span class="string">&quot;Alice: &quot;</span><span class="type">How</span> long <span class="keyword">is</span> forever<span class="operator">?</span><span class="string">&quot; White Rabbit: &quot;</span><span class="type">Sometimes</span>, just one second.<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="comment">// 正确写法</span></span><br><span class="line"><span class="keyword">let</span> quote1 <span class="operator">=</span> <span class="string">&quot;Alice: <span class="subst">\&quot;</span>How long is forever?<span class="subst">\&quot;</span> White Rabbit: <span class="subst">\&quot;</span>Sometimes, just one second.<span class="subst">\&quot;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 正则表法式类型</span></span><br><span class="line"><span class="comment">// 错误写法</span></span><br><span class="line"><span class="keyword">let</span> ucCaseCheck <span class="operator">=</span> <span class="string">&quot;enum\s+.+\&#123;.*case\s+[:upper:]&quot;</span></span><br><span class="line"><span class="comment">// 正确写法</span></span><br><span class="line"><span class="keyword">let</span> ucCaseCheck <span class="operator">=</span> <span class="string">&quot;enum<span class="subst">\\</span>s+.+<span class="subst">\\</span>&#123;.*case<span class="subst">\\</span>s+[:upper:]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="处理-1"><a href="#处理-1" class="headerlink" title="#处理"></a><code>#</code>处理</h4><ul>
+<li>要使用原始字符串, 可使用<code>#</code>将字符串包裹起来</li>
+<li><code>#</code>字符串开头和结尾的符号成为字符串分隔符的一部分，因此如下<code>Swift</code>理解<code>“rain”</code>和<code>“Spain”</code>周围的独立引号应该被视为文字引号而不是结束字符串</li>
+<li>原始字符串也允许使用反斜杠, 但是将反斜杠视为字符串中的文字字符，而不是转义字符</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> rain <span class="operator">=</span> <span class="string">#&quot;The &quot;rain&quot; in &quot;Spain&quot; falls mainly on the Spaniards.&quot;#</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> keypaths <span class="operator">=</span> <span class="string">#&quot;Swift keypaths such as \Person.name hold uninvoked references to properties.&quot;#</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> answer <span class="operator">=</span> <span class="number">42</span></span><br><span class="line"><span class="keyword">let</span> dontpanic <span class="operator">=</span> <span class="string">#&quot;The answer to life, the universe, and everything is <span class="subst">\#(answer)</span>.&quot;#</span></span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><p>注意</p></div>
+
+<ul>
+<li>上面使用<code>\#(answer)</code>引用变量而不是<code>\(answer)</code>, 因为在用<code>#</code>包裹的字符串中反斜杠将会被失败别为文字字符而不是转义字符, 所以必须额外的添加<code>#</code></li>
+</ul>
+<h4 id="处理-2"><a href="#处理-2" class="headerlink" title="##处理"></a><code>##</code>处理</h4><ul>
+<li>在字符串的开头和结尾使用<code>#</code>处理, 在字符串中可以使用反斜杠等特殊字符, 那如果字符串中需要使用<code>#</code>, 又该如何处理??</li>
+<li>使用<code>#</code>包裹字符串, 默认会以<code>#</code>为字符串的结束符号, <code>#</code>后面的文字将不再处理, 在这种情况下, 我们会使用<code>##</code>处理</li>
+<li>注意: 字符串的开头和结尾的标识必须一样</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str <span class="operator">=</span> <span class="string">##&quot;My dog said &quot;woof&quot;#gooddog&quot;##</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h4><p>原始字符串与<code>Swift</code>的多行字符串系统完全兼容 - 只需用于<code>#&quot;&quot;&quot;</code>启动，然后<code>&quot;&quot;&quot;#</code>结束</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> multiline <span class="operator">=</span> <span class="string">#&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    The answer to life,</span></span><br><span class="line"><span class="string">    the universe,</span></span><br><span class="line"><span class="string">    and everything is <span class="subst">\#(answer)</span>.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;#</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="try-嵌套"><a href="#try-嵌套" class="headerlink" title="try?嵌套"></a><code>try?</code>嵌套</h3><p>先看下面代码</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> id: <span class="type">Int</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">init?</span>(<span class="params">id</span>: <span class="type">Int</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> id <span class="operator">&lt;</span> <span class="number">1</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">self</span>.id <span class="operator">=</span> id</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">getMessages</span>() <span class="keyword">throws</span> -&gt; <span class="type">String</span> &#123;</span><br><span class="line">        <span class="comment">// complicated code here</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;No messages&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>Swift4.2</code>及其之前的版本中</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user <span class="operator">=</span> <span class="type">User</span>(id: <span class="number">1</span>)</span><br><span class="line"><span class="comment">// 这里得到的message的类型是: let messages: String??</span></span><br><span class="line"><span class="keyword">let</span> messages <span class="operator">=</span> <span class="keyword">try?</span> user<span class="operator">?</span>.getMessages()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果我们想得到非可选值就需要</span></span><br><span class="line"><span class="built_in">print</span>((messages <span class="operator">??</span> <span class="string">&quot;&quot;</span>) <span class="operator">??</span> <span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="comment">// 或者多次强解, 当然不建议强解写法</span></span><br><span class="line"><span class="built_in">print</span>(messages<span class="operator">!!</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在<code>Swift4.2</code>及其之前的版本中, 上面返回的是一个2层嵌套的可选值, 如果有多层嵌套处理起来也是相当更麻烦的</li>
+<li>在<code>Swift 5</code>中就完美的解决了这个问题, 如果当前值是可选的, 那么<code>try?</code>将不会将值包装在可选值中, 因此最终结果只是一个<code>String?</code></li>
+<li>因此在<code>Swift 5</code>中无论有多少可嵌套的可选最后, 返回值永远只是一个可选值</li>
+<li>同样，如果你使用了可选的链接<code>as?</code>，你仍然只有一个级别的可选性</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user <span class="operator">=</span> <span class="type">User</span>(id: <span class="number">1</span>)</span><br><span class="line"><span class="comment">// 类型: let messages: String?</span></span><br><span class="line"><span class="keyword">let</span> messages <span class="operator">=</span> <span class="keyword">try?</span> user<span class="operator">?</span>.getMessages()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(messages <span class="operator">??</span> <span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="isMultiple"><a href="#isMultiple" class="headerlink" title="isMultiple"></a><code>isMultiple</code></h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/apple/swift-evolution/blob/master/proposals/0225-binaryinteger-iseven-isodd-ismultiple.md">SE-0225</a>为整数类型添加了一个方法<code>isMultiple</code></li>
+<li>该方法可以检查一个证书是否为另一个整数的倍数</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> rowNumber <span class="operator">=</span> <span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> rowNumber.isMultiple(of: <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Even&quot;</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Odd&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 该方法等效于</span></span><br><span class="line"><span class="keyword">if</span> rowNumber <span class="operator">%</span> <span class="number">2</span> <span class="operator">==</span> <span class="number">0</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="count"><a href="#count" class="headerlink" title="count"></a><code>count</code></h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/apple/swift-evolution/blob/master/proposals/0220-count-where.md">SE-0220</a></li>
+<li>在<code>Swift</code>之前的版本中, 有一个函数<code>filter</code>可以过滤出数组中符合条件的的元素, 组成一个新的数组, 详细使用可参考<a target="_blank" rel="noopener" href="https://www.titanjun.top/2017/05/19/Swift%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/">Swift函数式编程之高级用法</a></li>
+<li>在<code>Swift 5</code>中新增了一个函数<code>count(where:)</code>, 可以获取数组中符合条件的元素的个数</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr <span class="operator">=</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">34</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">12</span>, <span class="number">45</span>, <span class="number">6</span>, <span class="number">9</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> filter <span class="operator">=</span> arr.filter(&#123; <span class="variable">$0</span> <span class="operator">&gt;</span> <span class="number">10</span> &#125;)</span><br><span class="line"><span class="built_in">print</span>(filter)  <span class="comment">//[34, 12, 45]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> count <span class="operator">=</span> arr.count(where: &#123; <span class="variable">$0</span> <span class="operator">&gt;</span> <span class="number">10</span> &#125;)</span><br><span class="line"><span class="built_in">print</span>(count)  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="compactMapValues"><a href="#compactMapValues" class="headerlink" title="compactMapValues"></a><code>compactMapValues</code></h3><ul>
+<li>在<code>Swift4.x</code>的版本有两个函数<code>compactMap</code>和<code>mapValues</code></li>
+<li><code>compactMap</code>: 返回一个操作后得到的新的数组, 类似<code>flatMap</code></li>
+<li><code>mapValues</code>: 字典中的函数, 对字典的<code>value</code>值执行操作, 返回改变<code>value</code>后的新的字典</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> times <span class="operator">=</span> [</span><br><span class="line">    <span class="string">&quot;first&quot;</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">&quot;second&quot;</span>: <span class="number">43</span>,</span><br><span class="line">    <span class="string">&quot;three&quot;</span>: <span class="number">12</span>,</span><br><span class="line">    <span class="string">&quot;four&quot;</span>: <span class="number">3</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> compact <span class="operator">=</span> times.compactMap(&#123; <span class="variable">$0</span>.value <span class="operator">&gt;</span> <span class="number">10</span> &#125;)</span><br><span class="line"><span class="built_in">print</span>(compact)</span><br><span class="line"><span class="comment">// [true, false, true, false]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mapValues <span class="operator">=</span> times.mapValues(&#123; <span class="variable">$0</span> <span class="operator">+</span> <span class="number">2</span> &#125;)</span><br><span class="line"><span class="built_in">print</span>(mapValues)</span><br><span class="line"><span class="comment">// [&quot;second&quot;: 45, &quot;first&quot;: 4, &quot;three&quot;: 14, &quot;four&quot;: 5]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/apple/swift-evolution/blob/master/proposals/0218-introduce-compact-map-values.md">SE-0218</a>在<code>Swift 5</code>中新增了一个函数<code>compactMapValues</code></li>
+<li><code>compactMapValues</code>是将上述两个方法的功能合并在一起, 返回一个对<code>value</code>操作后的新字典, 并且自动过滤不符合条件的键值对</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> times1 <span class="operator">=</span> [</span><br><span class="line">    <span class="string">&quot;Hudson&quot;</span>: <span class="string">&quot;38&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Clarke&quot;</span>: <span class="string">&quot;42&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Robinson&quot;</span>: <span class="string">&quot;35&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Hartis&quot;</span>: <span class="string">&quot;DNF&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> comMap2 <span class="operator">=</span> times1.compactMapValues(&#123; <span class="type">Int</span>(<span class="variable">$0</span>) &#125;)</span><br><span class="line"><span class="built_in">print</span>(comMap2)</span><br><span class="line"><span class="comment">// [&quot;Clarke&quot;: 42, &quot;Robinson&quot;: 35, &quot;Hudson&quot;: 38]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="SubSequence"><a href="#SubSequence" class="headerlink" title="SubSequence"></a><code>SubSequence</code></h3><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/swift/sequence?language=objc"><code>Sequence</code></a>协议不再具有<code>SubSequence</code>关联类型。先前返回<code>SubSequence</code>的<code>Sequence</code>方法现在会返回具体类型</li>
+<li>使用<code>SubSequence</code>的<code>Sequence</code>扩展应该修改为类似地使用具体类型，或者修改为<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/swift/collection?language=objc"><code>Collection</code></a>的扩展，在<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/swift/collection?language=objc"><code>Collection</code></a>中<code>SubSequence</code>仍然可用</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// swift 5不在支持</span></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">Sequence</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">dropTwo</span>() -&gt; <span class="type">SubSequence</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.dropFirst(<span class="number">2</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 建议改为</span></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">Sequence</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">dropTwo</span>() -&gt; <span class="type">DropFirstSequence</span>&lt;<span class="keyword">Self</span>&gt; &#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.dropFirst(<span class="number">2</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">Collection</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">dropTwo</span>() -&gt; <span class="type">SubSequence</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.dropFirst(<span class="number">2</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="其他相关更新"><a href="#其他相关更新" class="headerlink" title="其他相关更新"></a>其他相关更新</h2><h3 id="SE-0214"><a href="#SE-0214" class="headerlink" title="SE-0214"></a><a href="https://link.juejin.im/?target=https://github.com/apple/swift-evolution/blob/master/proposals/0214-DictionaryLiteral.md">SE-0214</a></h3><p><code>DictionaryLiteral</code>类型重命名为<code>KeyValuePairs</code></p>
+<h3 id="SE-0238"><a href="#SE-0238" class="headerlink" title="SE-0238"></a><a href="https://link.juejin.im/?target=https://github.com/apple/swift-evolution/blob/master/proposals/0238-package-manager-build-settings.md">SE-0238</a></h3><ul>
+<li>在使用<code>Swift 5</code>软件包管理器时，<code>Targets</code>可以声明一些常用的针对特定目标的<code>build settings</code>设置</li>
+<li>新设置也可以基于平台和构建配置进行条件化处理。包含的构建设置支持<code>Swift</code>和<code>C</code>语言定义，<code>C</code>语言头文件搜索路径，链接库和链接框架</li>
+</ul>
+<h3 id="SE-0236"><a href="#SE-0236" class="headerlink" title="SE- 0236"></a><a target="_blank" rel="noopener" href="https://github.com/apple/swift-evolution/blob/master/proposals/0236-package-manager-platform-deployment-settings.md">SE- 0236</a></h3><ul>
+<li>在使用<code>Swift 5</code>时, 可以自定义所支持的最低版本号, 如果该项目的依赖包所支持的最低版本大于项目的最低版本号, 则项目会报错</li>
+</ul>
+<h3 id="SR-695"><a href="#SR-695" class="headerlink" title="SR-695"></a><a href="https://link.juejin.im/?target=https://bugs.swift.org/browse/SR-695">SR-695</a></h3><p>在<code>Swift 5</code>中不再支持返回<code>Self</code>的类方法</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不在支持</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123; </span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">func</span> <span class="title class_">factory</span>() -&gt; <span class="title class_">Self</span> &#123; <span class="comment">/*...*/</span> &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h3 id="SR-631"><a href="#SR-631" class="headerlink" title="SR-631"></a><a target="_blank" rel="noopener" href="https://bugs.swift.org/browse/SR-631">SR-631</a></h3><p>不同文件中的扩展名无法相互识别</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FirstClass</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">FirstClass</span> &#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">SecondClass</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里将会报错: &quot;SecondClass is not a member type of FirstClass&quot;</span></span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">FirstClass</span>.<span class="title class_">SecondClass</span> &#123; </span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">ThirdClass</span> &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SR-7251"><a href="#SR-7251" class="headerlink" title="SR-7251"></a><a target="_blank" rel="noopener" href="https://bugs.swift.org/browse/SR-7251">SR-7251</a></h3><p>在<code>Swift 5</code>中, 在所声明的类里面, 所声明的变量名不能和类名一样</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">S</span> &#123;&#125;</span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">S</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">var</span> i: <span class="type">Int</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">i</span> &#123;&#125; <span class="comment">// error: “i”的声明无效</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面的方式是没有问题的</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">S1</span>&lt;<span class="title class_">T</span>&gt; &#123;&#125;</span><br><span class="line"><span class="keyword">extension</span> <span class="title class_">S1</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">var</span> i: <span class="type">Int</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">i</span> &#123;&#125; <span class="comment">// This is fine!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/xcode_release_notes/xcode_10_2_beta_release_notes/swift_5_release_notes_for_xcode_10_2_beta?language=objc">Swift 5官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.hackingwithswift.com/articles/126/whats-new-in-swift-5-0">What’s new in Swift 5.0</a></li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/fecd5afa.html" title="Swift 5.0新特性更新">https://titanjun.top/post/fecd5afa.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/swift/" rel="tag"> <i class="fa fa-tag"></i> Swift</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/8fbde7fa.html" rel="prev" title="Flutter的安装和配置">
+                  <i class="fa fa-chevron-left"></i> Flutter的安装和配置
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/8b290237.html" rel="next" title="ReactNative之基本组件02">
+                  ReactNative之基本组件02 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/fecd5afa.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

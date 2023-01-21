@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言 最近公司大佬考虑将项目代码规范化, 然而自Xcode9之后,Xcode的插件基本处于废弃的状态大部分插件都是在一年前就停止更新了; 于是在谷歌找到了一款强大的代码规范工具SwiftLint SwiftLint是 Realm 推出的一款 Swift 代码规范检查工具, SwiftLint 基于 Github 公布的 Swift 代码规范进行代码检查，并且能够很好的和 Xcode 整合 Gith">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xcode代码规范之SwiftLint配置">
+<meta property="og:url" content="https://titanjun.top/post/321bd392.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:description" content="前言 最近公司大佬考虑将项目代码规范化, 然而自Xcode9之后,Xcode的插件基本处于废弃的状态大部分插件都是在一年前就停止更新了; 于是在谷歌找到了一款强大的代码规范工具SwiftLint SwiftLint是 Realm 推出的一款 Swift 代码规范检查工具, SwiftLint 基于 Github 公布的 Swift 代码规范进行代码检查，并且能够很好的和 Xcode 整合 Gith">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-aaabe87320b6b9f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-a9eaa0ae5b92f67b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-9fcfc0ce421210db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-271410cb5d83bea3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-21790882f651fa95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4122543-6ba8e782746c0849.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2018-02-07T07:34:34.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.902Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="SwiftLint">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4122543-aaabe87320b6b9f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+<link rel="canonical" href="https://titanjun.top/post/321bd392.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/321bd392.html","path":"post/321bd392.html","title":"Xcode代码规范之SwiftLint配置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Xcode代码规范之SwiftLint配置 | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85SwiftLint"><span class="nav-number">2.</span> <span class="nav-text">安装SwiftLint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE-Homebrew-%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">安装全局配置(Homebrew 安装)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Homebrew"><span class="nav-number">2.1.1.</span> <span class="nav-text">Homebrew</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F-%E5%A6%82%E4%B8%8B%E5%9B%BE%E6%89%80%E7%A4%BA"><span class="nav-number">2.1.2.</span> <span class="nav-text">安装成功,如下图所示:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-CocoaPods-%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">使用 CocoaPods 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-number">2.3.</span> <span class="nav-text">使用安装包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BSwiftLint%E7%9A%84%E5%85%A8%E9%83%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">查看SwiftLint的全部命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SwiftLint%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">SwiftLint的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">自定义配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.1.</span> <span class="nav-text">创建配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E4%BB%A3%E7%A0%81%E4%B8%AD%E5%85%B3%E9%97%AD%E6%9F%90%E4%B8%AA%E8%A7%84%E5%88%99"><span class="nav-number">5.2.</span> <span class="nav-text">在代码中关闭某个规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%BD%E7%95%A5%E5%BC%95%E5%85%A5%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="nav-number">5.3.</span> <span class="nav-text">忽略引入的第三方库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E9%85%8D%E7%BD%AE"><span class="nav-number">5.4.</span> <span class="nav-text">嵌套配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%AD%A3"><span class="nav-number">5.5.</span> <span class="nav-text">自动更正</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E8%B4%B4%E4%B8%8A%E5%AE%98%E6%96%B9%E7%A4%BA%E4%BE%8B"><span class="nav-number">6.</span> <span class="nav-text">最后贴上官方示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-number">7.</span> <span class="nav-text">附录:</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/321bd392.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Xcode代码规范之SwiftLint配置 | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Xcode代码规范之SwiftLint配置
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-02-07 15:34:34" itemprop="dateCreated datePublished" datetime="2018-02-07T15:34:34+08:00">2018-02-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ios%E7%BB%84%E4%BB%B6%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">iOS组件库</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>最近公司大佬考虑将项目代码规范化, 然而自Xcode9之后,Xcode的插件基本处于废弃的状态大部分插件都是在一年前就停止更新了;</li>
+<li>于是在谷歌找到了一款强大的代码规范工具<a target="_blank" rel="noopener" href="https://github.com/realm/SwiftLint">SwiftLint</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/realm/SwiftLint">SwiftLint</a>是 <a target="_blank" rel="noopener" href="https://realm.io/">Realm</a> 推出的一款 Swift 代码规范检查工具, SwiftLint 基于 <a target="_blank" rel="noopener" href="https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md">Github 公布的 Swift 代码规范</a>进行代码检查，并且能够很好的和 Xcode 整合</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/github/swift-style-guide">Github 公布的 Swift 代码规范–原文</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md">Github 公布的 Swift 代码规范–中文</a></li>
+<li>配置好所有的设置之后，在 Xcode 中执行编译时，SwiftLint 会自动运行检查，不符合规范的代码会通过警告或者 红色错误 的形式指示出来</li>
+<li>支持自定义规则,可禁用或者开启某一些规则</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="安装SwiftLint"><a href="#安装SwiftLint" class="headerlink" title="安装SwiftLint"></a>安装SwiftLint</h2><ul>
+<li>SwiftLint目前有三种安装方式可供选择,可以根据自己的项目需要自行选择</li>
+</ul>
+<h3 id="安装全局配置-Homebrew-安装"><a href="#安装全局配置-Homebrew-安装" class="headerlink" title="安装全局配置(Homebrew 安装)"></a>安装全局配置(Homebrew 安装)</h3><h4 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h4><ul>
+<li>Homebrew, Mac系统的包管理器，用于安装NodeJS和一些其他必需的工具软件, 输入以下代码安装:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+<p>译注：在Max OS X 10.11（El Capitan)版本中，homebrew在安装软件时可能会碰到&#x2F;usr&#x2F;local目录不可写的权限问题。可以使用下面的命令修复：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R `whoami` /usr/local</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Homebrew 会自动安装最新版本</li>
+<li>打开终端输入以下代码:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install swiftlint</span><br></pre></td></tr></table></figure>
+<h4 id="安装成功-如下图所示"><a href="#安装成功-如下图所示" class="headerlink" title="安装成功,如下图所示:"></a>安装成功,如下图所示:</h4><p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-aaabe87320b6b9f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Homebrew 安装"></p>
+<h3 id="使用-CocoaPods-安装"><a href="#使用-CocoaPods-安装" class="headerlink" title="使用 CocoaPods 安装"></a>使用 CocoaPods 安装</h3><ul>
+<li>这种方式只能针对单个项目有效,如果你想要针对不同的项目使用不同的<code>SwiftLint</code> 版本，这是一种很好的解决方案</li>
+<li>需要注意的是使用这种方案会将整个<code>SwiftLint</code>以及他的依赖包的完整资源文件都安装到 Pods&#x2F; 目录中去，所以在使用版本管理工具比如 <code>git/svn</code> 时要注意设置忽略相关目录</li>
+<li>CocosPods安装和安装第三方框架一样</li>
+<li>在根目录创建<code>Podfile</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod &#x27;SwiftLint&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用安装包"><a href="#使用安装包" class="headerlink" title="使用安装包"></a>使用安装包</h3><p><code>SwiftLint</code> 还支持使用 <code>pkg</code> 安装包进行安装，在官方的 Github 页面可以找到最新发布的<a target="_blank" rel="noopener" href="https://github.com/realm/SwiftLint/releases/tag/0.17.0">安装包</a></p>
+<h2 id="查看SwiftLint的全部命令"><a href="#查看SwiftLint的全部命令" class="headerlink" title="查看SwiftLint的全部命令"></a>查看SwiftLint的全部命令</h2><ul>
+<li>等待安装完成，在终端输入 <code>swiftlint help</code> 可以查看所有可用的命令：</li>
+</ul>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-a9eaa0ae5b92f67b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SwiftLint的所有命令"></p>
+<p><strong>各个命令注释</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查看所有命令</span></span><br><span class="line">swiftlint help</span><br><span class="line"></span><br><span class="line"><span class="comment">//忽略空格导致的警告和错误</span></span><br><span class="line">swiftlint autocorrect</span><br><span class="line"></span><br><span class="line"><span class="comment">//输出所有的警告和错误</span></span><br><span class="line">swiftlint lint</span><br><span class="line"></span><br><span class="line"><span class="comment">//查看所有可获得的规则以及对应的 ID</span></span><br><span class="line">swiftlint rules</span><br><span class="line"></span><br><span class="line"><span class="comment">//产看当前版本号</span></span><br><span class="line">swiftlint version</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>我们将目录切换到工程的根目录之下，然后敲击如下命令:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swiftlint autocorrect</span><br></pre></td></tr></table></figure>
+<p>然后我们就会发现，所有的空格符Warning都消失了。这都得益于我们刚刚所进行的命令行操作，它会将已知的能够自动修复的Error和Warning都自动修复，大大的减轻了我们的工作量。</p>
+<h2 id="SwiftLint的使用"><a href="#SwiftLint的使用" class="headerlink" title="SwiftLint的使用"></a>SwiftLint的使用</h2><blockquote>
+<p>安装完成后,需要在Xcode中配置相关设置,才能使 SwiftLint 在 Xcode 中自动检测代码规范。配置也很简单，只需要在 Xcode 的 Build Phases 中新建一个 Run Script Phase 配置项，在里面添加相关代码后,编译即可!</p>
+</blockquote>
+<ul>
+<li>配置代码添加步骤</li>
+<li>需要将相关脚本添加到红色框内</li>
+</ul>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-9fcfc0ce421210db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="配置代码添加步骤"></p>
+<p><strong>1. 全局安装脚本添加方式</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if which swiftlint &gt;/dev/null; then</span><br><span class="line">  swiftlint</span><br><span class="line">else</span><br><span class="line">  echo &quot;warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. CocoaPods安装脚本添加</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;$&#123;PODS_ROOT&#125;/SwiftLint/swiftlint&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里其实是设置了一个自动编译脚本，每次运行编译都会自动执行这个脚本</li>
+<li>如果正确安装了 SwiftLint，就会执行 SwiftLint 中的代码规范检查，如果没有安装，脚本会抛出一个没有安装 SwiftLint 并提示下载的警告，方便提醒团队团队中没有安装的成员。</li>
+<li>当然，你也可以设置为强制要求安装，这时如果没有安装则无法通过编译。只需要在脚本中<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;warning: ...&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>之后添加一行代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit 1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这样一来，如果没有安装 SwiftLint，编译时会直接抛出一个编译错误而非警告，提示需要安装 SwiftLint。</li>
+</ul>
+<p><strong>3. 配置完成后,<code>command+B</code>编译</strong></p>
+<ul>
+<li><p>如果你的是正在开发中的项目, 你可能会发现你的项目提示999+的黄色警告和999+的红色错误</p>
+</li>
+<li><p>甚至你会发现甚至一些空格和一些系统的方法和注释也会报错或者警告</p>
+</li>
+<li><p><code>SwiftLint</code>默认方法名或者注释不得超过120个字符</p>
+</li>
+<li><p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-271410cb5d83bea3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="测试项目"></p>
+</li>
+<li><p>Swift Lint 在完成上述操作之后，便已经生效。但是，如果觉得默认的风格过于严格，或者项目组有另外的要求，Swift Lint 也可以定制相应的风格，或者禁用某些规则。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/realm/SwiftLint">SwiftLint</a> 的全部规则可以在：<a target="_blank" rel="noopener" href="https://github.com/realm/SwiftLint/tree/master/Source/SwiftLintFramework/Rules">Source&#x2F;SwiftLintFramework&#x2F;Rules</a> 目录内找到</p>
+</li>
+<li></li>
+</ul>
+<h2 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h2><ul>
+<li>当你编译过项目后,看到999+的警告和错误,是不是第一反应就是要放弃了,其实不然</li>
+<li>仔细看一下具体的错误，会发现好多都是第三方库的代码规范问题，而且好多问题的级别被设置成为了 error</li>
+<li>第三方库的代码规范问题,这个锅我们可不能背</li>
+<li>这里我们可以做一些配置，让 <code>SwiftLint</code> 在做代码规范检查的时候自动忽略 <code>CocoaPods</code>、<code>Carthage</code> 等包管理器引入的第三方库（当然，手动导入的第三方库也能设置忽略）</li>
+</ul>
+<h3 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h3><ul>
+<li>首先需要在项目的根目录下新建一个名为 .swiftlint.yml 的配置文件</li>
+<li>打开终端, cd 到项目根目录下</li>
+<li>输入: <code>touch .swiftlint.yml</code></li>
+<li>执行完该命令后, 在文件夹中你可能找不到该yml格式文件,那是因为文件被隐藏了</li>
+<li>关于隐藏&#x2F;显示隐藏文件(命令一样): <code>command + shift + .</code></li>
+<li>下面我们来认识一下主要的几个配置选项</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">disabled_rules: # 禁用指定的规则</span><br><span class="line">  - colon</span><br><span class="line">  - comma</span><br><span class="line">  - control_statement</span><br><span class="line">opt_in_rules: # 启用指定的规则</span><br><span class="line">  - empty_count</span><br><span class="line">  - missing_docs</span><br><span class="line">  # 可以通过执行如下指令来查找所有可用的规则:</span><br><span class="line">  <span class="meta"># swiftlint rules</span></span><br><span class="line">included: # 执行 linting 时包含的路径。如果出现这个 `--path` 会被忽略。</span><br><span class="line">  - Source</span><br><span class="line">excluded: # 执行 linting 时忽略的路径。 优先级比 `included` 更高。</span><br><span class="line">  - Carthage</span><br><span class="line">  - Pods</span><br><span class="line">  - Source/ExcludedFolder</span><br><span class="line">  - Source/ExcludedFile.swift</span><br></pre></td></tr></table></figure>
+
+<h3 id="在代码中关闭某个规则"><a href="#在代码中关闭某个规则" class="headerlink" title="在代码中关闭某个规则"></a>在代码中关闭某个规则</h3><p>可以通过在一个源文件中定义一个如下格式的注释来关闭某个规则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// swiftlint:disable &lt;rule&gt;</span><br></pre></td></tr></table></figure>
+<p>在该文件结束之前或者在定义如下格式的匹配注释之前，这条规则都会被禁用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// swiftlint:enable &lt;rule&gt;</span><br></pre></td></tr></table></figure>
+<p>例如:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// swiftlint:disable opening_brace</span><br><span class="line">func initTakeScreenshot(launchOptions: [AnyHashable: Any]?)&#123;</span><br><span class="line">    // swiftlint:enable opening_brace</span><br><span class="line">    if let options = launchOptions &#123;</span><br><span class="line">        let userInfo = options[UIApplicationLaunchOptionsKey.remoteNotification]</span><br><span class="line">        NotificationCenter.default.post(name: Notification.Name.UIApplicationUserDidTakeScreenshot, object: userInfo)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>规则关闭之前</p>
+<p><img data-src="http://upload-images.jianshu.io/upload_images/4122543-21790882f651fa95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Snip20180207_1.png"></p>
+<p>规则关闭之后<br><img data-src="http://upload-images.jianshu.io/upload_images/4122543-6ba8e782746c0849.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Snip20180207_2.png"></p>
+<p>也可以通过添加 :previous, :this 或者 :next 来使关闭或者打开某条规则的命令分别应用于前一行，当前或者后一行代码。</p>
+<p>例如:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// swiftlint:disable:next force_cast</span><br><span class="line">let noWarning = NSNumber() as! Int</span><br><span class="line">let hasWarning = NSNumber() as! Int</span><br><span class="line">let noWarning2 = NSNumber() as! Int // swiftlint:disable:this force_cast</span><br><span class="line">let noWarning3 = NSNumber() as! Int</span><br><span class="line">// swiftlint:disable:previous force_cast</span><br></pre></td></tr></table></figure>
+
+<h3 id="忽略引入的第三方库"><a href="#忽略引入的第三方库" class="headerlink" title="忽略引入的第三方库"></a>忽略引入的第三方库</h3><ul>
+<li>1). 忽略<code>CocoaPods</code>导入的第三方库</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">excluded: </span><br><span class="line">  - Pods</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2). excluded 配置项用来设置忽略代码规范检查的路径，可以指定整个文件夹</li>
+<li>比如如果你的项目使用 Carthage 管理第三方库的话，可以将 Carthage 目录添加到忽略列表：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">excluded: </span><br><span class="line">  - Pods</span><br><span class="line">  - Carthage</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3). 指定精确路径下的文件，通过 - xxxx 的形式列在下面就可以了</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">excluded: # 执行 linting 时忽略的路径。 优先级比 `included` 更高。</span><br><span class="line">  - Source/ExcludedFolder</span><br><span class="line">  - Source/ExcludedFile.swift</span><br></pre></td></tr></table></figure>
+
+<h3 id="嵌套配置"><a href="#嵌套配置" class="headerlink" title="嵌套配置"></a>嵌套配置</h3><p><code>SwiftLint</code> 支持通过嵌套配置文件的方式来对代码分析过程进行更加细致的控制。</p>
+<ul>
+<li>在你的根 <code>.swiftlint.yml</code> 文件里设置 <code>use_nested_configs: true</code> 值。</li>
+<li>在目录结构必要的地方引入额外的 <code>.swiftlint.yml</code> 文件。</li>
+<li>每个文件被检查时会使用在文件所在目录下的或者父目录的更深层目录下的配置文件。否则根配置文件将会生效。</li>
+<li><code>excluded</code>，<code>included</code>，和 <code>use_nested_configs</code> 在嵌套结构中会被忽略。</li>
+</ul>
+<h3 id="自动更正"><a href="#自动更正" class="headerlink" title="自动更正"></a>自动更正</h3><ul>
+<li><code>SwiftLint</code> 可以自动修正某些错误，磁盘上的文件会被一个修正后的版本覆盖。</li>
+<li>请确保在对文件执行 <code>swiftlint autocorrect</code> 之前有对它们做过备份，否则的话有可能导致重要数据的丢失。</li>
+<li>因为在执行自动更正修改某个文件后很有可能导致之前生成的代码检查信息无效或者不正确，所以当在执行代码更正时标准的检查是无法使用的。</li>
+</ul>
+<h2 id="最后贴上官方示例"><a href="#最后贴上官方示例" class="headerlink" title="最后贴上官方示例"></a>最后贴上官方示例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">disabled_rules: # 执行时排除掉的规则</span><br><span class="line">  - colon</span><br><span class="line">  - comma</span><br><span class="line">  - control_statement</span><br><span class="line">opt_in_rules: # 一些规则仅仅是可选的</span><br><span class="line">  - empty_count</span><br><span class="line">  - missing_docs</span><br><span class="line">  # 可以通过执行如下指令来查找所有可用的规则:</span><br><span class="line">  # swiftlint rules</span><br><span class="line">included: # 执行 linting 时包含的路径。如果出现这个 `--path` 会被忽略。</span><br><span class="line">  - Source</span><br><span class="line">excluded: # 执行 linting 时忽略的路径。 优先级比 `included` 更高。</span><br><span class="line">  - Carthage</span><br><span class="line">  - Pods</span><br><span class="line">  - Source/ExcludedFolder</span><br><span class="line">  - Source/ExcludedFile.swift</span><br><span class="line"></span><br><span class="line"># 可配置的规则可以通过这个配置文件来自定义</span><br><span class="line"># 二进制规则可以设置他们的严格程度</span><br><span class="line">force_cast: warning # 隐式</span><br><span class="line">force_try:</span><br><span class="line">  severity: warning # 显式</span><br><span class="line"># 同时有警告和错误等级的规则，可以只设置它的警告等级</span><br><span class="line"># 隐式</span><br><span class="line">line_length: 110</span><br><span class="line"># 可以通过一个数组同时进行隐式设置</span><br><span class="line">type_body_length:</span><br><span class="line">  - 300 # warning</span><br><span class="line">  - 400 # error</span><br><span class="line"># 或者也可以同时进行显式设置</span><br><span class="line">file_length:</span><br><span class="line">  warning: 500</span><br><span class="line">  error: 1200</span><br><span class="line"># 命名规则可以设置最小长度和最大程度的警告/错误</span><br><span class="line"># 此外它们也可以设置排除在外的名字</span><br><span class="line">type_name:</span><br><span class="line">  min_length: 4 # 只是警告</span><br><span class="line">  max_length: # 警告和错误</span><br><span class="line">    warning: 40</span><br><span class="line">    error: 50</span><br><span class="line">  excluded: iPhone # 排除某个名字</span><br><span class="line">variable_name:</span><br><span class="line">  min_length: # 只有最小长度</span><br><span class="line">    error: 4 # 只有错误</span><br><span class="line">  excluded: # 排除某些名字</span><br><span class="line">    - id</span><br><span class="line">    - URL</span><br><span class="line">    - GlobalAPIKey</span><br><span class="line">reporter: &quot;xcode&quot; # 报告类型 (xcode, json, csv, checkstyle)</span><br></pre></td></tr></table></figure>
+
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录:"></a>附录:</h2><blockquote>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://github.com/realm/SwiftLint/blob/master/README.md">https://github.com/realm/SwiftLint/blob/master/README.md</a><br>译文链接：<a target="_blank" rel="noopener" href="https://github.com/realm/SwiftLint/blob/master/README_CN.md">https://github.com/realm/SwiftLint/blob/master/README_CN.md</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/321bd392.html" title="Xcode代码规范之SwiftLint配置">https://titanjun.top/post/321bd392.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/swift/" rel="tag"> <i class="fa fa-tag"></i> Swift</a>
+              <a href="/tags/swiftlint/" rel="tag"> <i class="fa fa-tag"></i> SwiftLint</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/4a241a51.html" rel="prev" title="SwiftLint代码规范属性说明01">
+                  <i class="fa fa-chevron-left"></i> SwiftLint代码规范属性说明01
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/b2044ec2.html" rel="next" title="ReactNative之AsyncStorage本地存储">
+                  ReactNative之AsyncStorage本地存储 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/321bd392.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

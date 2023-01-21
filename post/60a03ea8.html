@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这段时间内一直学习Flutter, 自行设计完成了一个实战项目mahua_pet 项目中用到了flutter中的大部分的组件, 界面也涉及了很多功能(可能很多地方还有待完善) 项目目前也还是处在开发待完成阶段, 主要内容差不多已经完成 下面是一些UI界面展示, 后面推见一些比较好的开源项目 验证码登录和密码登录都可以登录, 账号: 123 密码: 123 GitHub项目地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter必备开源项目推荐">
+<meta property="og:url" content="https://titanjun.top/post/60a03ea8.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:description" content="这段时间内一直学习Flutter, 自行设计完成了一个实战项目mahua_pet 项目中用到了flutter中的大部分的组件, 界面也涉及了很多功能(可能很多地方还有待完善) 项目目前也还是处在开发待完成阶段, 主要内容差不多已经完成 下面是一些UI界面展示, 后面推见一些比较好的开源项目 验证码登录和密码登录都可以登录, 账号: 123 密码: 123 GitHub项目地址">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/home_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/calendar_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/find_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/detail_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/language_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/theme_0.png?x-oss-process=style/titanjun">
+<meta property="og:image" content="https://github.com/hnvn/flutter_shimmer/blob/master/screenshots/loading_list.gif?raw=true">
+<meta property="og:image" content="https://github.com/hnvn/flutter_shimmer/blob/master/screenshots/slide_to_unlock.gif?raw=true">
+<meta property="article:published_time" content="2020-11-20T12:16:40.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.890Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Flutter">
+<meta property="article:tag" content="Dart">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/home_0.png?x-oss-process=style/titanjun">
+
+
+<link rel="canonical" href="https://titanjun.top/post/60a03ea8.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/60a03ea8.html","path":"post/60a03ea8.html","title":"Flutter必备开源项目推荐"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Flutter必备开源项目推荐 | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-number">1.</span> <span class="nav-text">项目版本信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2020-04-10"><span class="nav-number">1.1.</span> <span class="nav-text">2020-04-10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">部分界面展示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A6%96%E9%A1%B5"><span class="nav-number">2.1.</span> <span class="nav-text">首页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%8E%86%E6%A8%A1%E5%9D%97"><span class="nav-number">2.2.</span> <span class="nav-text">日历模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E7%8E%B0"><span class="nav-number">2.3.</span> <span class="nav-text">发现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%AF%AD%E8%A8%80%E5%9B%BD%E9%99%85%E5%8C%96"><span class="nav-number">2.4.</span> <span class="nav-text">多语言国际化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E4%B8%BB%E9%A2%98%E5%92%8C%E6%9A%97%E9%BB%91%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.5.</span> <span class="nav-text">颜色主题和暗黑模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E5%88%B0%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">用到的插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dio"><span class="nav-number">3.1.</span> <span class="nav-text">dio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#provider"><span class="nav-number">3.2.</span> <span class="nav-text">provider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-redux"><span class="nav-number">3.3.</span> <span class="nav-text">flutter_redux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pull-to-refresh"><span class="nav-number">3.4.</span> <span class="nav-text">pull_to_refresh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-staggered-grid-view"><span class="nav-number">3.5.</span> <span class="nav-text">flutter_staggered_grid_view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-easyloading"><span class="nav-number">3.6.</span> <span class="nav-text">flutter_easyloading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#carousel-slider"><span class="nav-number">3.7.</span> <span class="nav-text">carousel_slider</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#table-calendar"><span class="nav-number">3.8.</span> <span class="nav-text">table_calendar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#photo-view"><span class="nav-number">3.9.</span> <span class="nav-text">photo_view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shimmer"><span class="nav-number">3.10.</span> <span class="nav-text">shimmer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cached-network-image"><span class="nav-number">3.11.</span> <span class="nav-text">cached_network_image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-picker"><span class="nav-number">3.12.</span> <span class="nav-text">image_picker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-gallery-saver"><span class="nav-number">3.13.</span> <span class="nav-text">image_gallery_saver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#video-player"><span class="nav-number">3.14.</span> <span class="nav-text">video_player</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#permission-handler"><span class="nav-number">3.15.</span> <span class="nav-text">permission_handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shared-preferences"><span class="nav-number">3.16.</span> <span class="nav-text">shared_preferences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#device-info"><span class="nav-number">3.17.</span> <span class="nav-text">device_info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#location"><span class="nav-number">3.18.</span> <span class="nav-text">location</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%BC%E5%BE%97%E6%8E%A8%E8%8D%90%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">值得推荐的插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E9%85%8D%E7%9B%B8%E5%85%B3"><span class="nav-number">4.1.</span> <span class="nav-text">适配相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#native-widgets"><span class="nav-number">4.1.1.</span> <span class="nav-text">native_widgets</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4"><span class="nav-number">4.2.</span> <span class="nav-text">日期时间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-picker"><span class="nav-number">4.2.1.</span> <span class="nav-text">flutter_picker</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MarkDown"><span class="nav-number">4.3.</span> <span class="nav-text">MarkDown</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#markdown"><span class="nav-number">4.3.1.</span> <span class="nav-text">markdown</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E9%80%89%E6%8B%A9"><span class="nav-number">4.4.</span> <span class="nav-text">颜色选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-colorpicker"><span class="nav-number">4.4.1.</span> <span class="nav-text">flutter_colorpicker</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="nav-number">4.5.</span> <span class="nav-text">加密算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#crypto"><span class="nav-number">4.5.1.</span> <span class="nav-text">crypto</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pointycastle"><span class="nav-number">4.5.2.</span> <span class="nav-text">pointycastle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="nav-number">4.6.</span> <span class="nav-text">解压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#archive"><span class="nav-number">4.6.1.</span> <span class="nav-text">archive</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.7.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sqflite"><span class="nav-number">4.7.1.</span> <span class="nav-text">sqflite</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E4%BA%AB%E7%BB%9F%E8%AE%A1%E6%94%AF%E4%BB%98"><span class="nav-number">4.8.</span> <span class="nav-text">分享统计支付</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#share"><span class="nav-number">4.8.1.</span> <span class="nav-text">share</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-umeng-analytics"><span class="nav-number">4.8.2.</span> <span class="nav-text">flutter_umeng_analytics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-qq"><span class="nav-number">4.8.3.</span> <span class="nav-text">flutter_qq</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-wechat"><span class="nav-number">4.8.4.</span> <span class="nav-text">flutter_wechat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flutter-alipay"><span class="nav-number">4.8.5.</span> <span class="nav-text">flutter_alipay</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E5%92%8C%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.</span> <span class="nav-text">学习资料和项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#awesome-flutter-cn"><span class="nav-number">5.1.</span> <span class="nav-text">awesome-flutter-cn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-go"><span class="nav-number">5.2.</span> <span class="nav-text">flutter-go</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Widget%E6%95%B4%E7%90%86"><span class="nav-number">5.3.</span> <span class="nav-text">Widget整理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Morec"><span class="nav-number">5.4.</span> <span class="nav-text">Morec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-hrlweibo"><span class="nav-number">5.5.</span> <span class="nav-text">flutter_hrlweibo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-netease-music"><span class="nav-number">5.6.</span> <span class="nav-text">flutter-netease-music</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flutter-shuqi"><span class="nav-number">5.7.</span> <span class="nav-text">flutter_shuqi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gsy-github-app-flutter"><span class="nav-number">5.8.</span> <span class="nav-text">gsy_github_app_flutter</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/60a03ea8.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Flutter必备开源项目推荐 | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter必备开源项目推荐
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-20 20:16:40" itemprop="dateCreated datePublished" datetime="2020-11-20T20:16:40+08:00">2020-11-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li>这段时间内一直学习<code>Flutter</code>, 自行设计完成了一个实战项目<code>mahua_pet</code></li>
+<li>项目中用到了<code>flutter</code>中的大部分的组件, 界面也涉及了很多功能(可能很多地方还有待完善)</li>
+<li>项目目前也还是处在开发待完成阶段, 主要内容差不多已经完成</li>
+<li>下面是一些UI界面展示, 后面推见一些比较好的开源项目</li>
+<li>验证码登录和密码登录都可以登录, 账号: 123 密码: 123</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/CoderTitan/mahuaPet">GitHub项目地址</a></li>
+</ul>
+<span id="more"></span>
+
+
+
+<h2 id="项目版本信息"><a href="#项目版本信息" class="headerlink" title="项目版本信息"></a>项目版本信息</h2><blockquote>
+<p>项目下载完成之后, 请先执行<code>flutter pub get</code>命令</p>
+</blockquote>
+<h3 id="2020-04-10"><a href="#2020-04-10" class="headerlink" title="2020-04-10"></a>2020-04-10</h3><ul>
+<li>项目代码和相关插件已经更新</li>
+<li>Flutter 2.0.0 • channel stable</li>
+<li>Engine • revision 40441def69</li>
+<li>Tools • Dart 2.12.0</li>
+</ul>
+<h2 id="部分界面展示"><a href="#部分界面展示" class="headerlink" title="部分界面展示"></a>部分界面展示</h2><h3 id="首页"><a href="#首页" class="headerlink" title="首页"></a>首页</h3><p>动态的展示导航栏的显示和隐藏</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/home_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<h3 id="日历模块"><a href="#日历模块" class="headerlink" title="日历模块"></a>日历模块</h3><p>展示日历的记录, 每日记录生成图片和保存图片</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/calendar_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<h3 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h3><p>类似朋友圈的内容展示, 图片浏览和保存图片</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/find_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<p>动态详情模块, 动态的评论和删除评论</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/detail_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<h3 id="多语言国际化"><a href="#多语言国际化" class="headerlink" title="多语言国际化"></a>多语言国际化</h3><p>部分页面适配了韩语和英语</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/language_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<h3 id="颜色主题和暗黑模式"><a href="#颜色主题和暗黑模式" class="headerlink" title="颜色主题和暗黑模式"></a>颜色主题和暗黑模式</h3><p>部分页面支持手动的修改项目主题色, 黑色主题(暗黑模式)适配</p>
+<p><img data-src="https://titanjun.oss-cn-hangzhou.aliyuncs.com/mahua/theme_0.png?x-oss-process=style/titanjun" alt="image"></p>
+<h2 id="用到的插件"><a href="#用到的插件" class="headerlink" title="用到的插件"></a>用到的插件</h2><h3 id="dio"><a href="#dio" class="headerlink" title="dio"></a>dio</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dartlang.org/packages/dio">https://pub.dartlang.org/packages/dio</a></p>
+</blockquote>
+<p>Dart社区提供的http请求库，不仅支持常见的网络请求，还支持Restful API、FormData、拦截器、请求取消、Cookie管理、文件上传&#x2F;下载、超时等操作</p>
+<h3 id="provider"><a href="#provider" class="headerlink" title="provider"></a>provider</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/provider">https://pub.dev/packages/provider</a></p>
+</blockquote>
+<p><code>Flutter</code>官方推荐的状态管理插件, <a target="_blank" rel="noopener" href="https://flutter.cn/docs/development/data-and-backend/state-mgmt/simple">简单的应用状态管理</a></p>
+<h3 id="flutter-redux"><a href="#flutter-redux" class="headerlink" title="flutter_redux"></a>flutter_redux</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_redux">https://pub.dev/packages/flutter_redux</a></p>
+</blockquote>
+<p><code>flutter</code>版的<code>redux</code></p>
+<h3 id="pull-to-refresh"><a href="#pull-to-refresh" class="headerlink" title="pull_to_refresh"></a>pull_to_refresh</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/pull_to_refresh">https://pub.dev/packages/pull_to_refresh</a></p>
+</blockquote>
+<p>一个提供上拉加载和下拉刷新的组件,同时支持<code>Android</code>和<code>ios</code></p>
+<h3 id="flutter-staggered-grid-view"><a href="#flutter-staggered-grid-view" class="headerlink" title="flutter_staggered_grid_view"></a>flutter_staggered_grid_view</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_staggered_grid_view">https://pub.dev/packages/flutter_staggered_grid_view</a></p>
+</blockquote>
+<p>一个支持瀑布流布局, 支持交错和可扩展的网格布局的组件</p>
+<h3 id="flutter-easyloading"><a href="#flutter-easyloading" class="headerlink" title="flutter_easyloading"></a>flutter_easyloading</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_easyloading">https://pub.dev/packages/flutter_easyloading</a></p>
+</blockquote>
+<p>支持多种样式的toast提示组件, 支持自定义</p>
+<h3 id="carousel-slider"><a href="#carousel-slider" class="headerlink" title="carousel_slider"></a>carousel_slider</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/carousel_slider">https://pub.dev/packages/carousel_slider</a></p>
+</blockquote>
+<p>轮播图组件, 支持缩放切换</p>
+<h3 id="table-calendar"><a href="#table-calendar" class="headerlink" title="table_calendar"></a>table_calendar</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/table_calendar">https://pub.dev/packages/table_calendar</a></p>
+</blockquote>
+<p>日历组件, 可定制性比较高, 支持语言国际化</p>
+<h3 id="photo-view"><a href="#photo-view" class="headerlink" title="photo_view"></a>photo_view</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/photo_view">https://pub.dev/packages/photo_view</a></p>
+</blockquote>
+<p>可定制的图片查看器, 支持手势缩放, 动画展示等</p>
+<h3 id="shimmer"><a href="#shimmer" class="headerlink" title="shimmer"></a>shimmer</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/shimmer">https://pub.dev/packages/shimmer</a></p>
+</blockquote>
+<p>提供闪光效果的组件, 表述不清晰, 看提供效果图</p>
+<p><img data-src="https://github.com/hnvn/flutter_shimmer/blob/master/screenshots/loading_list.gif?raw=true" alt="image"><br><img data-src="https://github.com/hnvn/flutter_shimmer/blob/master/screenshots/slide_to_unlock.gif?raw=true" alt="image"></p>
+<h3 id="cached-network-image"><a href="#cached-network-image" class="headerlink" title="cached_network_image"></a>cached_network_image</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/cached_network_image">https://pub.dev/packages/cached_network_image</a></p>
+</blockquote>
+<p>用来加载和缓存网络图像</p>
+<h3 id="image-picker"><a href="#image-picker" class="headerlink" title="image_picker"></a>image_picker</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/image_picker">https://pub.dev/packages/image_picker</a></p>
+</blockquote>
+<p>用于从Android和iOS图像库中选择图像的库，支持使用相机拍摄新照片。</p>
+<h3 id="image-gallery-saver"><a href="#image-gallery-saver" class="headerlink" title="image_gallery_saver"></a>image_gallery_saver</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/image_gallery_saver">https://pub.dev/packages/image_gallery_saver</a></p>
+</blockquote>
+<p>保存视频和图片到手机相册</p>
+<h3 id="video-player"><a href="#video-player" class="headerlink" title="video_player"></a>video_player</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/video_player">https://pub.dev/packages/video_player</a></p>
+</blockquote>
+<p>flutter官方推荐的视频播放组件</p>
+<h3 id="permission-handler"><a href="#permission-handler" class="headerlink" title="permission_handler"></a>permission_handler</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/permission_handler">https://pub.dev/packages/permission_handler</a></p>
+</blockquote>
+<p>用于Android和iOS的相关隐私权限判断</p>
+<h3 id="shared-preferences"><a href="#shared-preferences" class="headerlink" title="shared_preferences"></a>shared_preferences</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/shared_preferences">https://pub.dev/packages/shared_preferences</a></p>
+</blockquote>
+<p>用于基本数据的缓存处理</p>
+<h3 id="device-info"><a href="#device-info" class="headerlink" title="device_info"></a>device_info</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/device_info">https://pub.dev/packages/device_info</a></p>
+</blockquote>
+<p>用于获取用户设备信息</p>
+<h3 id="location"><a href="#location" class="headerlink" title="location"></a>location</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/location">https://pub.dev/packages/location</a></p>
+</blockquote>
+<p>获取定位信息, 可以获取位置更改时的回调</p>
+<h2 id="值得推荐的插件"><a href="#值得推荐的插件" class="headerlink" title="值得推荐的插件"></a>值得推荐的插件</h2><h3 id="适配相关"><a href="#适配相关" class="headerlink" title="适配相关"></a>适配相关</h3><h4 id="native-widgets"><a href="#native-widgets" class="headerlink" title="native_widgets"></a>native_widgets</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/native_widgets">https://pub.dev/packages/native_widgets</a></p>
+</blockquote>
+<p>支持自动根据平台自动使用对应风格组件，Android将使用Material风格，iOS将使用Cupertino风格</p>
+<h3 id="日期时间"><a href="#日期时间" class="headerlink" title="日期时间"></a>日期时间</h3><h4 id="flutter-picker"><a href="#flutter-picker" class="headerlink" title="flutter_picker"></a>flutter_picker</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_picker">https://pub.dev/packages/flutter_picker</a></p>
+</blockquote>
+<p>一个日期，时间，日期时间，icon，自定义数据的选择器，可以居中弹窗，也可以在底部弹出</p>
+<h3 id="MarkDown"><a href="#MarkDown" class="headerlink" title="MarkDown"></a>MarkDown</h3><h4 id="markdown"><a href="#markdown" class="headerlink" title="markdown"></a>markdown</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/markdown">https://pub.dev/packages/markdown</a></p>
+</blockquote>
+<p>用Dart编写的便携式Markdown库。它可以在客户端和服务器上将Markdown解析为HTML</p>
+<h3 id="颜色选择"><a href="#颜色选择" class="headerlink" title="颜色选择"></a>颜色选择</h3><h4 id="flutter-colorpicker"><a href="#flutter-colorpicker" class="headerlink" title="flutter_colorpicker"></a>flutter_colorpicker</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_colorpicker">https://pub.dev/packages/flutter_colorpicker</a></p>
+</blockquote>
+<p>一个HSV(HSB)&#x2F;HSL颜色选择器</p>
+<h3 id="加密算法"><a href="#加密算法" class="headerlink" title="加密算法"></a>加密算法</h3><h4 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/crypto">https://pub.dev/packages/crypto</a></p>
+</blockquote>
+<p>crypto算法库支持的算法: </p>
+<ul>
+<li>SHA-1</li>
+<li>SHA-224</li>
+<li>SHA-256</li>
+<li>SHA-384</li>
+<li>SHA-512</li>
+<li>MD5</li>
+<li>HMAC (i.e. HMAC-MD5, HMAC-SHA1, HMAC-SHA256)</li>
+</ul>
+<h4 id="pointycastle"><a href="#pointycastle" class="headerlink" title="pointycastle"></a>pointycastle</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/pointycastle">https://pub.dev/packages/pointycastle</a></p>
+</blockquote>
+<p>用于加密和解密的Dart库, 实现了AES RSA 公私钥加解密等加密算法</p>
+<h3 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h3><h4 id="archive"><a href="#archive" class="headerlink" title="archive"></a>archive</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/archive">https://pub.dev/packages/archive</a></p>
+</blockquote>
+<p>为各种存档和压缩格式提供编码器和解码器，如zip，tar，bzip2，gzip和zlib</p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><h4 id="sqflite"><a href="#sqflite" class="headerlink" title="sqflite"></a>sqflite</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/sqflite">https://pub.dev/packages/sqflite</a></p>
+</blockquote>
+<p>SQLite的Flutter插件，一个自包含的高可靠性嵌入式SQL数据库引擎</p>
+<h3 id="分享统计支付"><a href="#分享统计支付" class="headerlink" title="分享统计支付"></a>分享统计支付</h3><h4 id="share"><a href="#share" class="headerlink" title="share"></a>share</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/share">https://pub.dev/packages/share</a></p>
+</blockquote>
+<p>支持分享的flutter插件</p>
+<h4 id="flutter-umeng-analytics"><a href="#flutter-umeng-analytics" class="headerlink" title="flutter_umeng_analytics"></a>flutter_umeng_analytics</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_umeng_analytics">https://pub.dev/packages/flutter_umeng_analytics</a></p>
+</blockquote>
+<p>友盟的分享和统计库</p>
+<h4 id="flutter-qq"><a href="#flutter-qq" class="headerlink" title="flutter_qq"></a>flutter_qq</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_qq">https://pub.dev/packages/flutter_qq</a></p>
+</blockquote>
+<p>集成了QQ登录、QQ分享、QQ空间分享等功能的库</p>
+<h4 id="flutter-wechat"><a href="#flutter-wechat" class="headerlink" title="flutter_wechat"></a>flutter_wechat</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_wechat">https://pub.dev/packages/flutter_wechat</a></p>
+</blockquote>
+<p>集成了微信，支持微信登录、分享、支付等功能的库</p>
+<h4 id="flutter-alipay"><a href="#flutter-alipay" class="headerlink" title="flutter_alipay"></a>flutter_alipay</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="https://pub.dev/packages/flutter_alipay">https://pub.dev/packages/flutter_alipay</a></p>
+</blockquote>
+<p>支付宝支付的功能</p>
+<h2 id="学习资料和项目"><a href="#学习资料和项目" class="headerlink" title="学习资料和项目"></a>学习资料和项目</h2><p>推荐一些不错的学习网站和项目学习</p>
+<h3 id="awesome-flutter-cn"><a href="#awesome-flutter-cn" class="headerlink" title="awesome-flutter-cn"></a>awesome-flutter-cn</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/crazycodeboy/awesome-flutter-cn">https://github.com/crazycodeboy/awesome-flutter-cn</a></p>
+</blockquote>
+<p>一个Flutter的学习资料库, 里面提供了很多的学习资料</p>
+<h3 id="flutter-go"><a href="#flutter-go" class="headerlink" title="flutter-go"></a>flutter-go</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/flutter-go">https://github.com/alibaba/flutter-go</a></p>
+</blockquote>
+<p>由阿里巴巴前端技术团队开发的Flutter 开发者帮助 APP，包含 flutter 常用 140+ 组件的demo 演示与中文文档</p>
+<h3 id="Widget整理"><a href="#Widget整理" class="headerlink" title="Widget整理"></a>Widget整理</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="http://laomengit.com/flutter/widgets/widgets_structure.html">http://laomengit.com/flutter/widgets/widgets_structure.html</a></p>
+</blockquote>
+<p>整理的330+组件的详细用法，不仅包含UI组件，还包含了功能性的组件</p>
+<h3 id="Morec"><a href="#Morec" class="headerlink" title="Morec"></a>Morec</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Mayandev/morec">https://github.com/Mayandev/morec</a></p>
+</blockquote>
+<p>一个非常精美的 Flutter 版电影客户端，利用豆瓣现有的 Api，打造了一个完整的电影展示 App</p>
+<h3 id="flutter-hrlweibo"><a href="#flutter-hrlweibo" class="headerlink" title="flutter_hrlweibo"></a>flutter_hrlweibo</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/huangruiLearn/flutter_hrlweibo">https://github.com/huangruiLearn/flutter_hrlweibo</a></p>
+</blockquote>
+<p>仿微博最新版本,还原微博80%的界面,总共涉及到了几十个界面和接口,用到了flutter中的大部分组件</p>
+<h3 id="flutter-netease-music"><a href="#flutter-netease-music" class="headerlink" title="flutter-netease-music"></a>flutter-netease-music</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/boyan01/flutter-netease-music">https://github.com/boyan01/flutter-netease-music</a></p>
+</blockquote>
+<p>仿网易云音乐，完成大部分功能的APP</p>
+<h3 id="flutter-shuqi"><a href="#flutter-shuqi" class="headerlink" title="flutter_shuqi"></a>flutter_shuqi</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/huanxsd/flutter_shuqi">https://github.com/huanxsd/flutter_shuqi</a></p>
+</blockquote>
+<p>一个用Flutter写的书旗小说客户端, 所有功能都是用Dart写的，iOS和Android的代码复用率达到了100%</p>
+<h3 id="gsy-github-app-flutter"><a href="#gsy-github-app-flutter" class="headerlink" title="gsy_github_app_flutter"></a>gsy_github_app_flutter</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/CarGuo/GSYGithubAPP">https://github.com/CarGuo/GSYGithubAPP</a></p>
+</blockquote>
+<p>一款跨平台的开源Github客户端App，项目涉及各种常用控件、网络、数据库、设计模式、主题切换、多语言、Redux等</p>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/60a03ea8.html" title="Flutter必备开源项目推荐">https://titanjun.top/post/60a03ea8.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/flutter/" rel="tag"> <i class="fa fa-tag"></i> Flutter</a>
+              <a href="/tags/dart/" rel="tag"> <i class="fa fa-tag"></i> Dart</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/a192b018.html" rel="prev" title="使用Swift学习数据结构和算法">
+                  <i class="fa fa-chevron-left"></i> 使用Swift学习数据结构和算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/f26f2a71.html" rel="next" title="Flutter中Widget的生命周期和渲染原理">
+                  Flutter中Widget的生命周期和渲染原理 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/60a03ea8.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="mXGc57bzu6">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"titanjun.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这篇文章是继前两篇文章的继续更新  Xcode代码规范之SwiftLint配置–这篇文章对SwiftLint进行了简单介绍和针对Xcode的相关配置  SwiftLint代码规范属性说明01–这里介绍了上半部分的相关属性的介绍  SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性的介绍  下面来具体介绍一下SwiftLint的其他的代码规则的相关说明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SwiftLint代码规范属性说明03">
+<meta property="og:url" content="https://titanjun.top/post/a42a7b7d.html">
+<meta property="og:site_name" content="TitanKing">
+<meta property="og:description" content="这篇文章是继前两篇文章的继续更新  Xcode代码规范之SwiftLint配置–这篇文章对SwiftLint进行了简单介绍和针对Xcode的相关配置  SwiftLint代码规范属性说明01–这里介绍了上半部分的相关属性的介绍  SwiftLint代码规范属性说明02–这里介绍了上半部分的相关属性的介绍  下面来具体介绍一下SwiftLint的其他的代码规则的相关说明">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-03-10T12:04:54.000Z">
+<meta property="article:modified_time" content="2023-01-20T13:14:39.899Z">
+<meta property="article:author" content="TitanKing">
+<meta property="article:tag" content="Swift">
+<meta property="article:tag" content="SwiftLint">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://titanjun.top/post/a42a7b7d.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://titanjun.top/post/a42a7b7d.html","path":"post/a42a7b7d.html","title":"SwiftLint代码规范属性说明03"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SwiftLint代码规范属性说明03 | TitanKing</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9X3SQNQRQZ"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-9X3SQNQRQZ","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?bb0d06abde4ca5c3660fdcb01693e9a2"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="TitanKing" type="application/atom+xml">
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">TitanKing</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">技术博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>列表<span class="badge">104</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">17</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">50</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-navigation"><a href="/navigation/" rel="section"><i class="fa fa-globe fa-fw"></i>导航</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99101-switch-case-alignment"><span class="nav-number">1.</span> <span class="nav-text">规则101: switch_case_alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99102-switch-case-on-newline"><span class="nav-number">2.</span> <span class="nav-text">规则102: switch_case_on_newline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99103-syntactic-sugar"><span class="nav-number">3.</span> <span class="nav-text">规则103: syntactic_sugar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99104-todo"><span class="nav-number">4.</span> <span class="nav-text">规则104: todo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99105-trailing-closure"><span class="nav-number">5.</span> <span class="nav-text">规则105: trailing_closure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99106-trailing-comma"><span class="nav-number">6.</span> <span class="nav-text">规则106: trailing_comma</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99107-trailing-newline"><span class="nav-number">7.</span> <span class="nav-text">规则107: trailing_newline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99108-trailing-semicolon"><span class="nav-number">8.</span> <span class="nav-text">规则108: trailing_semicolon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99109-trailing-whitespace"><span class="nav-number">9.</span> <span class="nav-text">规则109: trailing_whitespace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99110-type-body-length"><span class="nav-number">10.</span> <span class="nav-text">规则110: type_body_length</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99111-type-name"><span class="nav-number">11.</span> <span class="nav-text">规则111: type_name</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99112-unneeded-break-in-switch"><span class="nav-number">12.</span> <span class="nav-text">规则112: unneeded_break_in_switch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99113-unneeded-parentheses-in-closure-argument"><span class="nav-number">13.</span> <span class="nav-text">规则113: unneeded_parentheses_in_closure_argument</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99114-unused-closure-parameter"><span class="nav-number">14.</span> <span class="nav-text">规则114: unused_closure_parameter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99115-unused-enumerated"><span class="nav-number">15.</span> <span class="nav-text">规则115: unused_enumerated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99116-unused-optional-binding"><span class="nav-number">16.</span> <span class="nav-text">规则116: unused_optional_binding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99117-valid-ibinspectable"><span class="nav-number">17.</span> <span class="nav-text">规则117: valid_ibinspectable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99118-vertical-parameter-alignment"><span class="nav-number">18.</span> <span class="nav-text">规则118: vertical_parameter_alignment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99119-vertical-parameter-alignment-on-call"><span class="nav-number">19.</span> <span class="nav-text">规则119: vertical_parameter_alignment_on_call</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99120-vertical-whitespace"><span class="nav-number">20.</span> <span class="nav-text">规则120: vertical_whitespace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99121-void-return"><span class="nav-number">21.</span> <span class="nav-text">规则121: void_return</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99122-weak-delegate"><span class="nav-number">22.</span> <span class="nav-text">规则122: weak_delegate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99123-xctfail-message"><span class="nav-number">23.</span> <span class="nav-text">规则123: xctfail_message</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99124-yoda-condition"><span class="nav-number">24.</span> <span class="nav-text">规则124: yoda_condition</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="TitanKing"
+        src="/images/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">TitanKing</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CoderTitan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CoderTitan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/ShmilyCoder" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;ShmilyCoder" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:titanking2014@163.com" title="E-Mail → mailto:titanking2014@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+
+
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+              <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/avfoundation/" rel="tag">AVFoundation</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/animated/" rel="tag">Animated</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/block/" rel="tag">Block</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cidetector/" rel="tag">CIDetector</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cifilter/" rel="tag">CIFilter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">CSS</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoapods/" rel="tag">CocoaPods</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreanimation/" rel="tag">CoreAnimation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coreimage/" rel="tag">CoreImage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dart/" rel="tag">Dart</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html5/" rel="tag">HTML5</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">Hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nsrunloop/" rel="tag">NSRunLoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/navigator/" rel="tag">Navigator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/next/" rel="tag">NexT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">Node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/objective-c/" rel="tag">Objective-C</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property/" rel="tag">Property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/r-swift/" rel="tag">R.Swift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactnative/" rel="tag">ReactNative</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reactivecocoa/" rel="tag">ReactiveCocoa</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/realm/" rel="tag">Realm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rxswift/" rel="tag">RxSwift</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">Socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/speech/" rel="tag">Speech</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swift/" rel="tag">Swift</a><span class="tag-list-count">34</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swiftlint/" rel="tag">SwiftLint</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/textfield/" rel="tag">TextField</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tkinter/" rel="tag">Tkinter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uistackview/" rel="tag">UIStackView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vision/" rel="tag">Vision</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webview/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">Widget</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastlane/" rel="tag">fastlane</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/" rel="tag">iOS</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/" rel="tag">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F/" rel="tag">函数式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E6%B3%95/" rel="tag">语法</a><span class="tag-list-count">4</span></li></ul>
+              </canvas>
+          </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CoderTitan" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://titanjun.top/post/a42a7b7d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="TitanKing">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SwiftLint代码规范属性说明03 | TitanKing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SwiftLint代码规范属性说明03
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-03-10 20:04:54" itemprop="dateCreated datePublished" datetime="2018-03-10T20:04:54+08:00">2018-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-01-20 21:14:39" itemprop="dateModified" datetime="2023-01-20T21:14:39+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ios%E7%BB%84%E4%BB%B6%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">iOS组件库</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li><p>这篇文章是继前两篇文章的继续更新</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.titanjun.top/2018/02/07/Xcode%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E4%B9%8BSwiftLint%E9%85%8D%E7%BD%AE/">Xcode代码规范之SwiftLint配置</a>–这篇文章对SwiftLint进行了简单介绍和针对Xcode的相关配置</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.titanjun.top/2018/03/03/SwiftLint%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E01/">SwiftLint代码规范属性说明01</a>–这里介绍了上半部分的相关属性的介绍</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://www.titanjun.top/2018/03/10/SwiftLint%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E02/">SwiftLint代码规范属性说明02</a>–这里介绍了上半部分的相关属性的介绍</p>
+</li>
+<li><p>下面来具体介绍一下SwiftLint的其他的代码规则的相关说明</p>
+</li>
+</ul>
+<span id="more"></span>
+
+
+
+<h3 id="规则101-switch-case-alignment"><a href="#规则101-switch-case-alignment" class="headerlink" title="规则101: switch_case_alignment"></a>规则101: switch_case_alignment</h3><p>switch-case语句中switch和case应该垂直对齐</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>switch_case_alignment</td>
+<td>启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//应该是这样</span></span><br><span class="line"><span class="keyword">switch</span> someBool &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="literal">true</span>: <span class="comment">// case 1</span></span><br><span class="line">    print(<span class="string">&#x27;red&#x27;</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="literal">false</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">case</span> let .someEnum(val) = someFunc() &#123;</span><br><span class="line">        print(<span class="string">&#x27;blue&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//而不是这样</span></span><br><span class="line"><span class="keyword">switch</span> someBool &#123;</span><br><span class="line">    ↓<span class="keyword">case</span> <span class="literal">true</span>:</span><br><span class="line">         print(<span class="string">&#x27;red&#x27;</span>)</span><br><span class="line">    ↓<span class="keyword">case</span> <span class="literal">false</span>:</span><br><span class="line">         print(<span class="string">&#x27;blue&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则102-switch-case-on-newline"><a href="#规则102-switch-case-on-newline" class="headerlink" title="规则102: switch_case_on_newline"></a>规则102: switch_case_on_newline</h3><p>在switch语法里， case应该总是在一个新行上面</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>switch_case_on_newline</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// swiftlint表示会触发warning</span></span><br><span class="line">    <span class="keyword">switch</span> type &#123;</span><br><span class="line">    <span class="keyword">case</span> .value1: print(<span class="string">&quot;1&quot;</span>)...................在同一行错</span><br><span class="line">    <span class="keyword">case</span> .value2: print(<span class="string">&quot;2&quot;</span>)...................在同一行错</span><br><span class="line">    <span class="keyword">default</span>: print(<span class="string">&quot;3&quot;</span>)...................在同一行错</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 不会触发warning</span></span><br><span class="line">    <span class="keyword">switch</span> type &#123;</span><br><span class="line">    <span class="keyword">case</span> .value1:</span><br><span class="line">        print(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> .value2:</span><br><span class="line">        print(<span class="string">&quot;2&quot;</span>)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        print(<span class="string">&quot;3&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则103-syntactic-sugar"><a href="#规则103-syntactic-sugar" class="headerlink" title="规则103: syntactic_sugar"></a>规则103: syntactic_sugar</h3><p>swiftlint推荐使用速记语法糖， 例如 [Int] 代替 Array, 强烈建议推荐使用</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>syntactic_sugar</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 触发warning</span></span><br><span class="line">    let myArray: Array&lt;Int&gt; = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">    print(myArray)</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 正确写法，不会触发warning</span></span><br><span class="line">    let myArray: [Int] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">    print(myArray)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则104-todo"><a href="#规则104-todo" class="headerlink" title="规则104: todo"></a>规则104: todo</h3><p>TODO 和 FIXME 应该避免使用， 使用“notaTODO 和 notaFIXME”代替。另外， 和 MARK 标记不同的是， “notaTODO 和 notaFIXME”没有空格要求</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>todo</td>
+<td>启用</td>
+<td>no</td>
+<td>lint</td>
+</tr>
+</tbody></table>
+<h3 id="规则105-trailing-closure"><a href="#规则105-trailing-closure" class="headerlink" title="规则105: trailing_closure"></a>规则105: trailing_closure</h3><p>关于闭包中{}的使用, 推荐使用尾随闭包的语法</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>trailing_closure</td>
+<td>未启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//推荐使用</span></span><br><span class="line">foo.map &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;</span><br><span class="line">foo.reduce(<span class="number">0</span>) &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不推荐使用</span></span><br><span class="line">foo.map(&#123; $<span class="number">0</span> + <span class="number">1</span> &#125;)</span><br><span class="line">↓foo.reduce(<span class="number">0</span>, combine: &#123; $<span class="number">0</span> + <span class="number">1</span> &#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则106-trailing-comma"><a href="#规则106-trailing-comma" class="headerlink" title="规则106: trailing_comma"></a>规则106: trailing_comma</h3><p>…<br>这个属性主要针对数组和字典最后一个元素, 不建议在最后一个元素会面加逗号</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>trailing_comma</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 数组这样写是没有任何问题的, 但是最后一个元素3后面加了一个逗号“,”尽管这样不会报错，但是这会让程序的可读性变差</span></span><br><span class="line">let ages = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,]</span><br><span class="line">let person = [<span class="string">&quot;XingYun&quot;</span>: <span class="number">98</span>, <span class="string">&quot;JinGang&quot;</span>: <span class="number">128</span>, <span class="string">&quot;LangKe&quot;</span>: <span class="number">18</span>,]</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 使用swiftlint的trailing_comma规则后，就会报warning， 所以正确的写法不应该加上这个“,”</span></span><br><span class="line">let ages = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">let person = [<span class="string">&quot;XingYun&quot;</span>: <span class="number">98</span>, <span class="string">&quot;JinGang&quot;</span>: <span class="number">128</span>, <span class="string">&quot;LangKe&quot;</span>: <span class="number">18</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则107-trailing-newline"><a href="#规则107-trailing-newline" class="headerlink" title="规则107: trailing_newline"></a>规则107: trailing_newline</h3><p>文件（属性、方法）结束的的时候（“}”之前）， 应该有一个空格新行，但这里要注意的是</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>trailing_newline</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 空一行，不会触发警告</span></span><br><span class="line">nonTriggeringExamples: [</span><br><span class="line">    <span class="string">&quot;let a = 0\n&quot;</span></span><br><span class="line">],</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 下面会触发警告</span></span><br><span class="line">triggeringExamples: [</span><br><span class="line">    <span class="string">&quot;let a = 0&quot;</span>,   <span class="comment">/// 不空行，会触发警告（实际上，我试过，不会触发警告）</span></span><br><span class="line">    <span class="string">&quot;let a = 0\n\n&quot;</span>   <span class="comment">/// 空两行， 会触发警告（实际上，我试过，会触发警告，但是触发的是vertical_whitespace警告而不是trailing_newline）</span></span><br><span class="line">],</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 说说这里，它要求改正为都空一行，虽然这样code看起来很轻松，但如果定义变量或常量太多，就太分散了（值得说的是，就算不空行也不会触发trailing_newline, 应该刚才也已经说了，这个属性只是说“应该”，而不是必须）</span></span><br><span class="line">corrections: [</span><br><span class="line">    <span class="string">&quot;let a = 0&quot;</span>: <span class="string">&quot;let a = 0\n&quot;</span>,</span><br><span class="line">    <span class="string">&quot;let b = 0\n\n&quot;</span>: <span class="string">&quot;let b = 0\n&quot;</span>,</span><br><span class="line">    <span class="string">&quot;let c = 0\n\n\n\n&quot;</span>: <span class="string">&quot;let c = 0\n&quot;</span></span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则108-trailing-semicolon"><a href="#规则108-trailing-semicolon" class="headerlink" title="规则108: trailing_semicolon"></a>规则108: trailing_semicolon</h3><p>尽管在变量或常量赋值之后加不加分号在swift中没有硬性的要求，但是为了使code style更swift化，所以尽量或者绝对不要加“;”</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>trailing_semicolon</td>
+<td>启用</td>
+<td>yes</td>
+<td>idiomatic</td>
+</tr>
+</tbody></table>
+<h3 id="规则109-trailing-whitespace"><a href="#规则109-trailing-whitespace" class="headerlink" title="规则109: trailing_whitespace"></a>规则109: trailing_whitespace</h3><p>函数方法结束后,不建议添加空格行, 和vertical_whitespace貌似有冲突</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>trailing_whitespace</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 下面这个例子不会触发警告，但是一旦其中有一个空行就会触发警告trailing_whitespace, 这和vertical_whitespace实质上有些冲突，vertical_whitespace要求两行code之间不超过1行，要么没有空行，要么只有1行，而trailing_whitespace要求没有空行！！！</span></span><br><span class="line"><span class="keyword">class</span> ViewController: <span class="built_in">UIViewController</span> &#123;</span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="variable language_">super</span>.viewDidLoad()</span><br><span class="line">    let a = <span class="number">0</span></span><br><span class="line">    let b = <span class="number">1</span></span><br><span class="line">    let c = <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line">func chenlong() -&gt; Void &#123;</span><br><span class="line">    let a = <span class="number">0</span></span><br><span class="line">    print(a)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则110-type-body-length"><a href="#规则110-type-body-length" class="headerlink" title="规则110: type_body_length"></a>规则110: type_body_length</h3><p>类型体长度。类型体长度不应该跨越太多行， 超过200行给warning，超过350行给error。一般是大括号或者括号内, 比如定义一个enum或struct</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type_body_length</td>
+<td>启用</td>
+<td>no</td>
+<td>metrics</td>
+</tr>
+</tbody></table>
+<h3 id="规则111-type-name"><a href="#规则111-type-name" class="headerlink" title="规则111: type_name"></a>规则111: type_name</h3><p>…<br>类型名， 类型名应该只包含字母数字字符， 并且以大写字母开头，长度在3-40个字符</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type_name</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody></table>
+<h3 id="规则112-unneeded-break-in-switch"><a href="#规则112-unneeded-break-in-switch" class="headerlink" title="规则112: unneeded_break_in_switch"></a>规则112: unneeded_break_in_switch</h3><p>在switch-case语句中, 有方法调用或操作时,避免使用break语句</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unneeded_break_in_switch</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line"><span class="keyword">case</span> .bar:</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line"><span class="keyword">case</span> .bar:</span><br><span class="line">    something()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line"><span class="keyword">switch</span> foo &#123;</span><br><span class="line"><span class="keyword">case</span> .bar:</span><br><span class="line"><span class="comment">//这里已经有方法调用了</span></span><br><span class="line">    something()</span><br><span class="line">    ↓<span class="keyword">break</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则113-unneeded-parentheses-in-closure-argument"><a href="#规则113-unneeded-parentheses-in-closure-argument" class="headerlink" title="规则113: unneeded_parentheses_in_closure_argument"></a>规则113: unneeded_parentheses_in_closure_argument</h3><p>…<br>在定义或使用闭包时,闭包参数不建议使用括号()</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unneeded_parentheses_in_closure_argument</td>
+<td>未启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//建议</span></span><br><span class="line">let foo = &#123; (bar: Int) <span class="keyword">in</span> &#125;</span><br><span class="line">let foo = &#123; bar, _  <span class="keyword">in</span> &#125;</span><br><span class="line">let foo = &#123; bar <span class="keyword">in</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不建议</span></span><br><span class="line">call(arg: &#123; ↓(bar) <span class="keyword">in</span> &#125;)</span><br><span class="line">call(arg: &#123; ↓(bar, _) <span class="keyword">in</span> &#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则114-unused-closure-parameter"><a href="#规则114-unused-closure-parameter" class="headerlink" title="规则114: unused_closure_parameter"></a>规则114: unused_closure_parameter</h3><p>swiftlint建议最好把不使用的闭包参数使用 “_”代替</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unused_closure_parameter</td>
+<td>启用</td>
+<td>yes</td>
+<td>lint</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; number <span class="keyword">in</span></span><br><span class="line"> number + <span class="number">1</span> </span><br><span class="line">&#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; _ <span class="keyword">in</span></span><br><span class="line"> <span class="number">3</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; ↓number <span class="keyword">in</span></span><br><span class="line"> <span class="keyword">return</span> <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>].map &#123; ↓number <span class="keyword">in</span></span><br><span class="line"> <span class="keyword">return</span> numberWithSuffix</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则115-unused-enumerated"><a href="#规则115-unused-enumerated" class="headerlink" title="规则115: unused_enumerated"></a>规则115: unused_enumerated</h3><p>在for遍历数组时, 如有未使用的索引,不建议使用.enumerated()</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unused_enumerated</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line"><span class="keyword">for</span> (idx, foo) <span class="keyword">in</span> bar.enumerated() &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> (_, foo) <span class="keyword">in</span> bar.enumerated().something() &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> (_, foo) <span class="keyword">in</span> bar.something() &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line"><span class="keyword">for</span> (↓_, foo) <span class="keyword">in</span> bar.enumerated() &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> (↓_, foo) <span class="keyword">in</span> abc.bar.enumerated() &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> (↓_, foo) <span class="keyword">in</span> abc.something().enumerated() &#123; &#125;</span><br><span class="line"><span class="keyword">for</span> (idx, ↓_) <span class="keyword">in</span> bar.enumerated() &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则116-unused-optional-binding"><a href="#规则116-unused-optional-binding" class="headerlink" title="规则116: unused_optional_binding"></a>规则116: unused_optional_binding</h3><p>在使用if判断某变量是否为nil的时候, 不建议使用下划线(_)</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unused_optional_binding</td>
+<td>启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line"><span class="keyword">if</span> let bar = Foo.optionalValue &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line"><span class="keyword">if</span> let ↓_ = Foo.optionalValue &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> let a = Foo.optionalValue, let ↓_ = Foo.optionalValue2 &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则117-valid-ibinspectable"><a href="#规则117-valid-ibinspectable" class="headerlink" title="规则117: valid_ibinspectable"></a>规则117: valid_ibinspectable</h3><p>@IBInspectable在swiftlint中的使用需要注意， 第一必须是变量， 第二必须要有指定的类型，如果指定的类型是可选类型或者隐式类型，则目前官方只支持以下几种类型：</p>
+<p>String, NSString, UIColor, NSColor, UIImage, NSImage.</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>valid_ibinspectable</td>
+<td>启用</td>
+<td>no</td>
+<td>lint</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 指定为变量var， 类型为String？和String！</span></span><br><span class="line">@IBInspectable private var yyy: String?</span><br><span class="line">@IBInspectable private var zzz: String!</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 如果写成这样，编译能通过，但是会触发警告, 因为swiftlint暂不支持Int可选和隐式类型:</span></span><br><span class="line">@IBInspectable private var dddl: Int!</span><br><span class="line">@IBInspectable private var eeel: Int?</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 如果指定的类型不是可选类型， 就应该初始化，否则系统不允许，会报错所在的类没有初始化</span></span><br><span class="line">对：</span><br><span class="line">@IBInspectable private var counts: Int = <span class="number">0</span></span><br><span class="line">系统报错：</span><br><span class="line">@IBInspectable private var counts: Int </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则118-vertical-parameter-alignment"><a href="#规则118-vertical-parameter-alignment" class="headerlink" title="规则118: vertical_parameter_alignment"></a>规则118: vertical_parameter_alignment</h3><p>垂直方向上的参数对齐。当函数参数有多行的时候， 函数参数在垂直方向上应该对齐（参数换行的时候左边对齐）</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vertical_parameter_alignment</td>
+<td>启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line">func validateFunction(_ file: File, kind: SwiftDeclarationKind,</span><br><span class="line">                      dictionary: [String: SourceKitRepresentable]) &#123; &#125;</span><br><span class="line">                      </span><br><span class="line">func validateFunction(_ file: File, kind: SwiftDeclarationKind,</span><br><span class="line">                      dictionary: [String: SourceKitRepresentable])</span><br><span class="line">                      -&gt; [StyleViolation]</span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">func validateFunction(_ file: File, kind: SwiftDeclarationKind,</span><br><span class="line">                  ↓dictionary: [String: SourceKitRepresentable]) &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则119-vertical-parameter-alignment-on-call"><a href="#规则119-vertical-parameter-alignment-on-call" class="headerlink" title="规则119: vertical_parameter_alignment_on_call"></a>规则119: vertical_parameter_alignment_on_call</h3><p>当调用多个参数的函数时,如果参数多行显示,则应该垂直对齐</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vertical_parameter_alignment_on_call</td>
+<td>未启用</td>
+<td>no</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar</span><br><span class="line">    param3: <span class="literal">false</span>, param4: <span class="literal">true</span>)</span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar)</span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar</span><br><span class="line">    param3: <span class="literal">false</span>,</span><br><span class="line">    param4: <span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar</span><br><span class="line">                ↓param3: <span class="literal">false</span>, param4: <span class="literal">true</span>)</span><br><span class="line">                </span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar</span><br><span class="line"> ↓param3: <span class="literal">false</span>, param4: <span class="literal">true</span>)</span><br><span class="line"> </span><br><span class="line">foo(param1: <span class="number">1</span>, param2: bar</span><br><span class="line">       ↓param3: <span class="literal">false</span>,</span><br><span class="line">       ↓param4: <span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则120-vertical-whitespace"><a href="#规则120-vertical-whitespace" class="headerlink" title="规则120: vertical_whitespace"></a>规则120: vertical_whitespace</h3><p>垂直方向上的空格行，限制为一行（注释除外）</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vertical_whitespace</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 没有空格， nonTriggerWarning</span></span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="variable language_">super</span>.viewDidLoad()</span><br><span class="line">    let aaa = <span class="number">0</span></span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line"><span class="comment">/// 有一行空格, nonTriggerWarning</span></span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="variable language_">super</span>.viewDidLoad()</span><br><span class="line">    let aaa = <span class="number">0</span></span><br><span class="line">    ...........................<span class="number">.1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// &gt;=2行，就会触发警告</span></span><br><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    <span class="variable language_">super</span>.viewDidLoad()</span><br><span class="line">    let aaa = <span class="number">0</span></span><br><span class="line">   ............................<span class="number">.1</span></span><br><span class="line">   ............................<span class="number">.2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则121-void-return"><a href="#规则121-void-return" class="headerlink" title="规则121: void_return"></a>规则121: void_return</h3><p>多余的返回值为空， 在函数声明的时候，返回值为空是多余的。定义常量或者变量的时候可以</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void_return</td>
+<td>启用</td>
+<td>yes</td>
+<td>style</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 这个属性要求这样写， 返回值为空省略</span></span><br><span class="line">func XingYun() &#123;</span><br><span class="line">    print(<span class="string">&quot;titan&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 这个属性要求别这样写，否则会有warning（但是我在swift 3.0上测试并没有触发warning）</span></span><br><span class="line">func XingYun() -&gt; Void &#123;</span><br><span class="line">    print(<span class="string">&quot;titan&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则122-weak-delegate"><a href="#规则122-weak-delegate" class="headerlink" title="规则122: weak_delegate"></a>规则122: weak_delegate</h3><p>代理应该写成weak类型（弱代理）来避免循环引用</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>weak_delegate</td>
+<td>启用</td>
+<td>no</td>
+<td>lint</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 1.1 编译通过</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    var chenlong: <span class="built_in">NSObjectProtocol</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 1.2 编译通过，但是触发swiftlint的 weak_delegate警告， 原因是变量名 myDelegate 中有 delegate 关键字，这属于名字滥用</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    var myDelegate: <span class="built_in">NSObjectProtocol</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 1.3 编译通过， 不会触发警告， 原因是在 var 关键字前面加了 weak</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    <span class="keyword">weak</span> var myDelegate: <span class="built_in">NSObjectProtocol</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 2.1 编译通过，但是触发 weak_delegate 警告，原因是 scrollDelegate 中 Delegate 放在了最后， 被理解成了代理</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    var scrollDelegate: <span class="built_in">UIScrollViewDelegate</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 2.2 编译通过， 既然变量名被理解成了代理， 那为了类似防止循环引用， 应该加关键字 weak</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    <span class="keyword">weak</span> var scrollDelegate: <span class="built_in">UIScrollViewDelegate</span>?</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 编译通过， 不会触发警告， 因为delegate放在了前面， 没有被理解成代理</span></span><br><span class="line"><span class="keyword">class</span> Langke &#123;</span><br><span class="line">    var delegateScroll: <span class="built_in">UIScrollViewDelegate</span>?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="规则123-xctfail-message"><a href="#规则123-xctfail-message" class="headerlink" title="规则123: xctfail_message"></a>规则123: xctfail_message</h3><p>单元测试中,XCTFail调用应该包括声明描述</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>xctfail_message</td>
+<td>启用</td>
+<td>no</td>
+<td>idiomatic</td>
+</tr>
+</tbody></table>
+<h3 id="规则124-yoda-condition"><a href="#规则124-yoda-condition" class="headerlink" title="规则124: yoda_condition"></a>规则124: yoda_condition</h3><p>执行判断语句时, 变量名应该放在运算符的左边</p>
+<table>
+<thead>
+<tr>
+<th>识别码</th>
+<th>默认是否启用</th>
+<th>是否支持自动更正</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yoda_condition</td>
+<td>未启用</td>
+<td>no</td>
+<td>lint</td>
+</tr>
+</tbody></table>
+<p>代码示例:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//不会触发warning</span></span><br><span class="line"><span class="keyword">if</span> foo == <span class="number">42</span> &#123;&#125;</span><br><span class="line"><span class="keyword">if</span> foo &lt;= <span class="number">42.42</span> &#123;&#125;</span><br><span class="line">guard foo &gt;= <span class="number">42</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">guard foo != <span class="string">&quot;str str&quot;</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//会触发warning</span></span><br><span class="line">↓<span class="keyword">if</span> <span class="number">42</span> == foo &#123;&#125;</span><br><span class="line">↓<span class="keyword">if</span> <span class="number">42.42</span> &gt;= foo &#123;&#125;</span><br><span class="line">↓guard <span class="number">42</span> &lt;= foo <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">↓guard <span class="string">&quot;str str&quot;</span> != foo <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">↓<span class="keyword">while</span> <span class="number">10</span> &gt; foo &#123; &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>文中如有不足之处请多指教</p>
+</blockquote>
+<blockquote>
+<p>持续更新中…..</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+<div>
+  <div style="text-align:center;color: #ccc;font-size:18px;">---------------  本文结束啦 <i class="fa fa-paw"></i> 感谢您的阅读  ---------------</div>	
+</div>
+
+          <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/pay-wechat.jpg" alt="TitanKing 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/pay-ali.jpg" alt="TitanKing 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>TitanKing
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://titanjun.top/post/a42a7b7d.html" title="SwiftLint代码规范属性说明03">https://titanjun.top/post/a42a7b7d.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat-qcode.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/swift/" rel="tag"> <i class="fa fa-tag"></i> Swift</a>
+              <a href="/tags/swiftlint/" rel="tag"> <i class="fa fa-tag"></i> SwiftLint</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wpac-rating-container">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/632f54a6.html" rel="prev" title="iOS神技之动态更换APP的Icon图">
+                  <i class="fa fa-chevron-left"></i> iOS神技之动态更换APP的Icon图
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/d32d4beb.html" rel="next" title="SwiftLint代码规范属性说明02">
+                  SwiftLint代码规范属性说明02 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TitanKing</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">885k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        本站访客数: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        本站总访问量: <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2016 09:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "+hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()",250);
+</script>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+  <script src="https://embed.widgetpack.com/widget.js" async></script>
+  <script class="next-config" data-name="rating" type="application/json">{"enable":true,"id":10998,"color":null}</script>
+  <script src="/js/third-party/rating.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js","integrity":"sha256-tu9j5pBilBQrWSDePOOajCUdz6hWsid/lBNzK4KgEPM="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"https://titanjun.top/post/a42a7b7d.html"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: '32px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+
+  <!-- 页面点击效果 -->
+  
+
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+</body>
+</html>
